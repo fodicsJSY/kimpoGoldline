@@ -27,18 +27,18 @@
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
+            min-height: 90vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
             justify-content: center;
         }
 
 
         header{
-            height:10%;
+            height: 5vh;
         }
 
 
         footer{
-            height:10%;
+            height: 5vh;
         }
 
 
@@ -84,8 +84,11 @@
 <body>
     
     <header>
-        <div>
-            123456
+        <div style="height: 100%;  display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
+            <div>
+                123456
+            </div>
+            <div></div>
         </div>
     </header>
 
@@ -111,7 +114,7 @@
 
 
     <footer>
-        <div style="display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="height: 100%; display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
             <div>(주)포딕스시스템</div>
             <div>포딕스로고</div>
         </div>
