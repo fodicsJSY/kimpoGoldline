@@ -90,7 +90,7 @@
                             <div class="throngChartTitle">
                                 플랫폼1
                             </div>
-                            <div class="throngChartContainer" id="gochon1">
+                            <div class="throngChartContainer" id="gochonPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                             <div class="throngChartTitle">
                                 플랫폼2
                             </div>
-                            <div class="throngChartContainer" id="gochon2">
+                            <div class="throngChartContainer" id="gochonPlatform2">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                             <div class="throngChartTitle">
                                 플랫폼1
                             </div>
-                            <div class="throngChartContainer" id="pungmu1">
+                            <div class="throngChartContainer" id="pungmuPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                             <div class="throngChartTitle">
                                 플랫폼2
                             </div>
-                            <div class="throngChartContainer" id="pungmu2">
+                            <div class="throngChartContainer" id="pungmuPlatform2">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>

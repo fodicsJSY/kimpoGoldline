@@ -1,4 +1,4 @@
-    var gochonNormal1 = echarts.init(document.getElementById("gochonNormal1"));
+    var gochonPlatformNormal1 = echarts.init(document.getElementById("gochonPlatformNormal1"));
 
     option = {
         series: [
@@ -94,9 +94,9 @@
     };
 
         //  차트 옵션 설정하기
-        gochonNormal1.setOption(option)
+        gochonPlatformNormal1.setOption(option)
     
-    var gochonNormal2 = echarts.init(document.getElementById("gochonNormal2"));
+    var gochonPlatformNormal2 = echarts.init(document.getElementById("gochonPlatformNormal2"));
 
     option = {
         series: [
@@ -192,9 +192,9 @@
     };
 
         //  차트 옵션 설정하기
-        gochonNormal2.setOption(option)
+        gochonPlatformNormal2.setOption(option)
     
-    var pungmuNormal1 = echarts.init(document.getElementById("pungmuNormal1"));
+    var pungmuPlatformNormal1 = echarts.init(document.getElementById("pungmuPlatformNormal1"));
 
     option = {
         series: [
@@ -290,9 +290,9 @@
     };
 
         //  차트 옵션 설정하기
-        pungmuNormal1.setOption(option)
+        pungmuPlatformNormal1.setOption(option)
     
-    var pungmuNormal2 = echarts.init(document.getElementById("pungmuNormal2"));
+    var pungmuPlatformNormal2 = echarts.init(document.getElementById("pungmuPlatformNormal2"));
 
      option = {
         series: [
@@ -388,12 +388,12 @@
     };
 
         //  차트 옵션 설정하기
-        pungmuNormal2.setOption(option)
+        pungmuPlatformNormal2.setOption(option)
 
 
 window.addEventListener('resize', function() {
-    gochonNormal1.resize();
-    gochonNormal2.resize();
-    pungmuNormal1.resize();
-    pungmuNormal2.resize();
+    gochonPlatformNormal1.resize();
+    gochonPlatformNormal2.resize();
+    pungmuPlatformNormal1.resize();
+    pungmuPlatformNormal2.resize();
 });
