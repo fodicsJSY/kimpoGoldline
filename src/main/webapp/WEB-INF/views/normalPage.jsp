@@ -23,7 +23,7 @@
         input[type='date']::-webkit-calendar-picker-indicator {
             
         padding: 10px;
-        background: url(/resources/img/combo_drop.png) no-repeat;
+        background: url(/resources/img/combo_drop.png) center no-repeat;
         border-radius: 8px;
         text-align: center;
         font-size: 100%;
