@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper">
+
+
+	<resultMap type="fodics.jsy.dashboard.main.model.dto.Main" id="_main">
+      	<result property="occuTime" column="occu_time" />
+      	<result property="roleCode" column="role_code" />
+      	<result property="eventType" column="event_type" />
+      	<result property="eventStatus" column="event_status" />
+      	<result property="occuHour" column="OCCU_HOUR" />
+      	<result property="gimpoIn24" column="GIMPO_IN_24" />
+      	<result property="gimpoOut24" column="GIMPO_OUT_24" />
+      	<result property="gochon24" column="GOCHON24" />
+      	<result property="pungmu24" column="PUNGMU24" />
+      	<result property="gimpoIn24Count" column="GIMPO_IN_24COUNT" />
+      	<result property="gimpoOut24Count" column="GIMPO_OUT_24COUNT" />
+      	<result property="gochon24Count" column="GOCHON24COUNT" />
+      	<result property="gochon1_24Count" column="GOCHON1_24COUNT" />
+      	<result property="gochon2_24Count" column="GOCHON2_24COUNT" />
+      	<result property="pungmu24Count" column="PUNGMU24COUNT" />
+	</resultMap> 
+  
+  <resultMap id="_int" type="java.lang.Integer"/>
+  
+  
+  
+  <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 수 -->
+  <select id="normal24CountList" resultMap="_main">
+  	SELECT
+	    SUBSTRING(H.OCCU_TIME, 9, 2) AS OCCU_HOUR,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24,
+	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24
+	FROM
+	    TB_EVENT_HIST_DL H
+	JOIN
+	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE
+	    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+	GROUP BY
+	    SUBSTRING(H.OCCU_TIME, 9, 2)
+  </select>
+  
+  
+  
+  
+  <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수 -->
+  <select id="total24Count" resultMap="_main">
+  	SELECT
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24COUNT
+	FROM
+	    TB_EVENT_HIST_DL H
+	JOIN
+	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE
+	    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+  </select>
+
+
+</mapper>

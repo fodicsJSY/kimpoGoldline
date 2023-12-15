@@ -1,0 +1,429 @@
+*{ 
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color:white;
+    font-family: NanumSquareEB;
+}
+
+button:hover, a:hover{
+    cursor: pointer;
+}
+
+
+/* 다 만들고 삭제예정 */
+/* div, main, section, header, footer, article, nav, aside, form ,body
+{ border: 1px solid yellow; }   */
+
+
+body {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    width: 1920px;
+    height: 1080px;
+    background-color: #2E313C;
+    
+}
+
+
+
+main{
+    width: 100%;
+    height: 100%;
+    padding: 0 1% 1% 1%;
+    /* min-height: 요소의 최소 높이  
+                    -> 내부 요소 없어도 최소 높이 유지
+                    -> 내부 요소가 지정된 크기를 초과하면 
+                        그에 맞게 늘어남
+    */
+    
+}
+
+
+section{
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr);  */
+    /* grid-auto-rows: 200px; */
+    /* padding: 5px 5px 5px 10px ; */
+    gap: 10px;
+    grid-template-areas:
+        "a a a"
+        "b b c"
+        "b b c"
+        "d d d"
+        "e e e"
+    ;
+}
+
+/* .gridBox{
+    border: 1px solid white;
+} */
+
+
+
+.gridBox1{
+    grid-area: a;
+    /* min-height: 200px; */
+    max-width: 100%;
+    padding: 0 10px 10px 10px;
+}
+.gridBox2{
+    grid-area: b;
+    /* min-height: 900px; */
+    height: 780px;
+    width: 1120px;
+    /* margin: 20px 0 0 40px; */
+    border: 1px solid #5B616C;
+    border-radius: 20px;
+    background-color: #1B1D24;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridBox3{
+    grid-area: c;
+    height: 780px;
+    max-width: 740px;
+    margin: 0 0 0 15px;
+}
+
+.gridBox4{
+    width: 100%;
+    height: 120px;
+    grid-area: d;
+}
+.gridBox5{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    grid-area: e;
+}
+
+
+
+.headContainer{
+    max-width: 100%;
+    /* max-height: 100%;  */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+.modeContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.modeBtn{
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #585D6E;
+    color: #999999;
+    font-size: 32px;
+    margin: 5px;
+}
+
+.modeBtn:hover{
+    background-color: #00B7EE;
+    color: white;
+}
+
+#normalBtn{
+    background-color: #00B7EE;
+    color: white;
+}
+
+.clockContainer{
+    width: 540px;
+    height: 60px;
+    text-align: center;
+    background-color: #0B0D13;
+    font-size: 24px;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.time{
+    background-color: none;
+}
+
+.searchBtn{
+    position: relative;
+    right: -100px;
+    background-color: #303A46;
+    width: 100px;
+    height: 64px;
+    border: 4px solid 666666;
+    border-radius: 10px;
+    font-size: 24px;
+}
+
+.dateInput{
+    background-color: #1B1D24;
+    border: 4px solid #666666;
+    width: 380px;
+    height: 64px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    padding-left: 15%;
+}
+
+
+
+
+
+/* ************************** */
+
+
+
+
+.cameraBox1, .cameraBox2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #1B1D24;
+    border-radius: 20px;
+}
+
+.rushHourChartTitleContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1040px;
+    height: 62px;
+    align-items: end;
+    border-bottom: 1px solid #5B616C;
+    height: 10%;
+    margin: 1% 0 2% 0;
+}
+
+
+.rushHourTitleBox{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.lineName{
+    color: #FFFFFF;
+    font-size: 36px;
+}
+
+.chartName{
+    color: #B9B7B8;
+    font-size: 24px;
+}
+
+#rushHourChart>div{
+    width: 100% !important;
+    height: 100% ;
+}
+
+#rushHourChart>div:nth-child(2){
+    height: 0px !important;
+}
+
+
+
+
+
+/* ************************** */
+
+.cameraContainer{
+    width:100%;
+    height:100%;
+    display: grid;
+    gap: 20px;
+    grid-template-areas:
+        "a "
+        "b"
+    ;
+}
+
+
+
+.cameraBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #5B616C;
+}
+
+
+
+.cameraBox1{
+    grid-area: a;
+    width: 740px;
+    height: 380px;
+}
+.cameraBox2{
+    grid-area: b;
+    width: 740px;
+    height: 380px;
+}
+
+
+.throngChartTitleBox{
+    height: 20%;
+    width: 90%;
+    border-bottom : 1px solid #6F7486;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.throngChartContents{
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.throngChartBox{
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid salmon; */
+}
+
+.throngChartTitle{
+    height: 20%;
+    /* border: 1px solid salmon; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    padding: 10px 0 0 0;
+}
+
+.throngChartContainer{
+    height: 80%;
+    width: 100%;
+}
+#gochonNormal1>div{
+    width: 100% !important;
+}
+#gochonNormal2>div{
+    width: 100% !important;
+}
+#pungmuNormal1>div{
+    width: 100% !important;
+}
+#pungmuNormal2>div{
+    width: 100% !important;
+}
+
+
+
+
+/* ************************** */
+.peopleCountContainer{
+    position: relative;
+    top: -120px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 0 0 ;
+    
+}
+
+
+
+.peopleCountBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.countTitleBox{
+    position: relative;
+    right: -50px;
+    border: 4px solid #B38E01;
+    background-color: #023979;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 60px;
+    font-size: 36px;
+    
+}
+
+.peopleCount{
+    width: 280px;
+    height: 100px;
+    background-color: #010102;
+    border: 4px solid #B38E01;
+    font-size: 48px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.inCount{
+    color: #FF5444;
+}
+
+.outCount{
+    color: #00A2FF;
+}
+
+
+
+.peopleCount2{
+    width: 120px;
+    height: 100px;
+    background-color: #010102;
+    border: 4px solid #B38E01;
+    font-size: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 15px;
+}
+
+.lineBox{
+    width: 100%;
+    height: 100%;
+}
+
+.line{
+    width: 100%;
+    height: 50%;
+    /* border-bottom: 4px solid #B38E01; */
+    
+}
+
+.lineBox>:nth-child(2){
+    border-top: 4px solid #B38E01;
+}
+
+
+.updateText{
+    color: #B38E01;
+}
