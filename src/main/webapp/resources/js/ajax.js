@@ -3,74 +3,32 @@ $(function(){
         url: "/rushHourChartData", 
         type: "GET",
         success: function(response){
-            // console.log('성공 : ', response.rushHour7List);
-
-            
-            //==================7시=========================
-            var rushHour7List = response.rushHour7List;
-
-            for (var i = 0; i < rushHour7List.length; i++) {
-                var currentItem = rushHour7List[i];
-                //console.log(currentItem);
+            console.log('성공 : ', response.rushHourCountList);
 
 
-                var gimpoIn7 = currentItem.gimpoIn7 || 0;
-                var gimpoOut7 = currentItem.gimpoOut7 || 0;
-                var gochon7 = currentItem.gochon7 || 0;
-                var pungmu7 = currentItem.pungmu7 || 0;
-                
-                
+            var rushHourCountList = response.rushHourCountList;
+
+            let gimpoInRushHour=[];
+            let gimpoOutRushHour=[];
+            let gochonRushHour=[];
+            let pungmuRushHour=[];
+
+
+            for(var i = 0; i < rushHourCountList.length; i++){
+                var currentItem = rushHourCountList[i];
+
+                gimpoInRushHour.push(currentItem.gimpoInRushHour);
+                gimpoOutRushHour.push(currentItem.gimpoOutRushHour);
+                gochonRushHour.push(currentItem.gochonRushHour);
+                pungmuRushHour.push(currentItem.pungmuRushHour);
+
                 // currentItem의 속성에 접근 확인
-                // console.log(currentItem.gimpoIn7);
-            }
-            //==================7시=========================
+                console.log(gimpoInRushHour);
+                console.log(gochonRushHour);
+                console.log(pungmuRushHour);
 
-
-            //==================8시=========================
-            var rushHour8List = response.rushHour8List;
-            
-            for (var i = 0; i < rushHour8List.length; i++) {
-                var currentItem = rushHour8List[i];
-                //console.log(currentItem);
-                
-                
-                var gimpoIn8 = currentItem.gimpoIn8 || 0;
-                var gimpoOut8 = currentItem.gimpoOut8 || 0;
-                var gochon8 = currentItem.gochon8 || 0;
-                var pungmu8 = currentItem.pungmu8 || 0;
-                
-                
-                // currentItem의 속성에 접근 확인
-                // console.log(currentItem.gimpoIn8);
-            }
-            //==================8시=========================
-
-
-            //==================9시=========================
-            var rushHour9List = response.rushHour9List;
-            
-            for (var i = 0; i < rushHour9List.length; i++) {
-                var currentItem = rushHour9List[i];
-                //console.log(currentItem);
-                
-                
-                var gimpoIn9 = currentItem.gimpoIn9 || 0;
-                var gimpoOut9 = currentItem.gimpoOut9 || 0;
-                var gochon9 = currentItem.gochon9 || 0;
-                var pungmu9 = currentItem.pungmu9 || 0;
-                
-                
-                // currentItem의 속성에 접근 확인
-                // console.log(currentItem.gimpoIn9);
-            }
-            //==================9시=========================
-
-            rushHourChart1();
-
-             // 인파계수 실시간 누적 집계도 
-            function rushHourChart1() {
-                
-                var rushHourChart1 = echarts.init(document.getElementById("rushHourChart"));
+                // 인파계수 실시간 누적 집계도 
+                var rushHourChart = echarts.init(document.getElementById("rushHourChart"));
             
                 const colors = ['#5470C6', '#91CC75', '#EE6666'];
                 option = {
@@ -192,7 +150,7 @@ $(function(){
                     {
                     name: '김포공항역(하차)',
                     type: 'bar',
-                    data: [gimpoIn7, gimpoIn8, gimpoIn9],
+                    data: gimpoInRushHour,
                             label: {
                                 show: true,
                                 position: 'top',
@@ -203,7 +161,7 @@ $(function(){
                     name: '고촌역(승차)',
                     type: 'bar',
                     yAxisIndex: 0,
-                    data: [gochon7, gochon8, gochon9],
+                    data: gochonRushHour,
                             label: {
                                 show: true,
                                 position: 'top',
@@ -214,7 +172,7 @@ $(function(){
                     name: '풍무역(승차)',
                     type: 'bar',
                     yAxisIndex: 0,
-                    data: [pungmu7, pungmu8, pungmu9],
+                    data: pungmuRushHour,
                         label: {
                                 show: true,
                                 position: 'top',
@@ -224,13 +182,17 @@ $(function(){
                 ]
                 };
                 //  차트 옵션 설정하기
-                rushHourChart1.setOption(option)
-
-
-
+                rushHourChart.setOption(option)
+    
+    
+    
                 //정각이 되면 차트 리프레쉬 시작
                 refreshAtTopOfHour()
+
+
             }
+            
+
 
         },
         error: function(xhr, status, error) {

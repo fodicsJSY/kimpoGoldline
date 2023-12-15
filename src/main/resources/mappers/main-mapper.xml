@@ -7,18 +7,10 @@
       	<result property="roleCode" column="role_code" />
       	<result property="eventType" column="event_type" />
       	<result property="eventStatus" column="event_status" />
-      	<result property="gimpoIn7" column="GIMPO_IN7" />
-      	<result property="gimpoOut7" column="GIMPO_OUT7" />
-      	<result property="gochon7" column="GOCHON7" />
-      	<result property="pungmu7" column="PUNGMU7" />
-      	<result property="gimpoIn8" column="GIMPO_IN8" />
-      	<result property="gimpoOut8" column="GIMPO_OUT8" />
-      	<result property="gochon8" column="GOCHON8" />
-      	<result property="pungmu8" column="PUNGMU8" />
-      	<result property="gimpoIn9" column="GIMPO_IN9" />
-      	<result property="gimpoOut9" column="GIMPO_OUT9" />
-      	<result property="gochon9" column="GOCHON9" />
-      	<result property="pungmu9" column="PUNGMU9" />
+      	<result property="gimpoInRushHour" column="GIMPO_IN_RUSH_HOUR" />
+      	<result property="gimpoOutRushHour" column="GIMPO_OUT_RUSH_HOUR" />
+      	<result property="gochonRushHour" column="GOCHON_RUSH_HOUR" />
+      	<result property="pungmuRushHour" column="PUNGMU_RUSH_HOUR" />
       	<result property="gimpoInCount" column="GIMPO_IN_COUNT" />
       	<result property="gimpoOutCount" column="GIMPO_OUT_COUNT" />
       	<result property="gochonCount" column="GOCHON_COUNT" />
@@ -42,63 +34,25 @@
   <resultMap id="_int" type="java.lang.Integer"/>
   
   
-	
-	
-	<!-- 김포공항 & 풍무역 & 고산역 7시 승하차 수 -->
-	<select id="rushHour7CountList" resultMap="_main">
-		SELECT COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN7,
-				COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT7,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON7,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU7
+	<!-- 김포공항 & 풍무역 & 고산역 출근대 승하차 수 -->
+	<select id="rushHourCountList" resultMap="_main">
+		SELECT
+		    SUBSTRING(H.OCCU_TIME, 9, 2) AS HOUR,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_RUSH_HOUR,
+		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_RUSH_HOUR,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON_RUSH_HOUR,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU_RUSH_HOUR
 		FROM
 		    TB_EVENT_HIST_DL H
 		JOIN
 		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 		WHERE
 		    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND
-			SUBSTRING(H.OCCU_TIME, 9, 2) = 7
+		    AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
 		GROUP BY
 		    SUBSTRING(H.OCCU_TIME, 9, 2)
 	</select>
-	
-	
-	<!-- 김포공항 & 풍무역 & 고산역 8시 승하차 수 -->
-	<select id="rushHour8CountList" resultMap="_main">
-		SELECT COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN8,
-				COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT8,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON8,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU8
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND
-			SUBSTRING(H.OCCU_TIME, 9, 2) = 8
-		GROUP BY
-		    SUBSTRING(H.OCCU_TIME, 9, 2)
-	</select>
-	
-	
-	<!-- 김포공항 & 풍무역 & 고산역 9시 승하차 수 -->
-	<select id="rushHour9CountList" resultMap="_main">
-		SELECT COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN9,
-				COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT9,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON9,
-			    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU9
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND
-			SUBSTRING(H.OCCU_TIME, 9, 2) = 9
-		GROUP BY
-		    SUBSTRING(H.OCCU_TIME, 9, 2)
-	</select>
+
 	
 	
 	<!-- 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수 -->

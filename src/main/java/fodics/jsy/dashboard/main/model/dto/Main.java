@@ -35,6 +35,12 @@ public class Main {
 	private int gimpoOut9;
 	private int gochon9;
 	private int pungmu9;
+
+	// 출근길 차트
+	private int gimpoInRushHour;
+	private int gimpoOutRushHour;
+	private int gochonRushHour;
+	private int pungmuRushHour;
 	
 	
 	

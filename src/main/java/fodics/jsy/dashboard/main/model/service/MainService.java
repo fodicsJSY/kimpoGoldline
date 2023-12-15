@@ -7,16 +7,9 @@ import fodics.jsy.dashboard.main.model.dto.Main;
 public interface MainService {
 
 	
-
 	
-	//김포공항 & 풍무역 & 고산역 7시 승하차 수
-	List<Main> rushHour7CountList();
-	
-	// 김포공항 & 풍무역 & 고산역 8시 승하차 수
-	List<Main> rushHour8CountList();
-	
-	// 김포공항 & 풍무역 & 고산역 9시 승하차 수
-	List<Main> rushHour9CountList();
+	// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
+	List<Main> rushHourCountList();
 	
 	// 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	List<Main> rushHourTotalCount();
@@ -40,6 +33,8 @@ public interface MainService {
 
 	// 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
 	List<Main> normalDateChangeCount(String occuDate);
+
+
 
 
 

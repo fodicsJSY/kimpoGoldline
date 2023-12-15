@@ -43,17 +43,10 @@ public class MainController {
 		 Map<String, Object> map = new HashMap<>();
 		 
 		
-		 //김포공항 & 풍무역 & 고산역 7시 승하차 수
-		List<Main> rushHour7List = service.rushHour7CountList();
-		map.put("rushHour7List", rushHour7List);
-		
-		//김포공항 & 풍무역 & 고산역 8시 승하차 수
-		List<Main> rushHour8List = service.rushHour8CountList();
-		map.put("rushHour8List", rushHour8List);
-		
-		//김포공항 & 풍무역 & 고산역 9시 승하차 수
-		List<Main> rushHour9List = service.rushHour9CountList();
-		map.put("rushHour9List", rushHour9List);
+
+		// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
+		List<Main> rushHourCountList = service.rushHourCountList();
+		map.put("rushHourCountList", rushHourCountList);
 		
 		 
 		 

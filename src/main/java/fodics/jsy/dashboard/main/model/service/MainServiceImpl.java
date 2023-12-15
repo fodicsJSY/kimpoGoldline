@@ -14,27 +14,11 @@ public class MainServiceImpl implements MainService{
 	private MainDAO dao;
 	
 	/**
-	 * 김포공항 & 풍무역 & 고산역 7시 승하차 수
+	 * 김포공항 & 풍무역 & 고산역 출근대 승하차 수
 	 */
 	@Override
-	public List<Main> rushHour7CountList() {
-		return dao.rushHour7CountList();
-	}
-	
-	/**
-	 * 김포공항 & 풍무역 & 고산역 8시 승하차 수
-	 */
-	@Override
-	public List<Main> rushHour8CountList() {
-		return dao.rushHour8CountList();
-	}
-	
-	/**
-	 * 김포공항 & 풍무역 & 고산역 9시 승하차 수
-	 */
-	@Override
-	public List<Main> rushHour9CountList() {
-		return dao.rushHour9CountList();
+	public List<Main> rushHourCountList() {
+		return dao.rushHourCountList();
 	}
 	
 	

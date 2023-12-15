@@ -25,29 +25,17 @@ public class MainDAO {
 
 	
 	
-	/**  김포공항 & 풍무역 & 고산역 7시 승하차 수
-	 * @return list
-	 */
-	public List<Main> rushHour7CountList() {
-		return sql2.selectList("mainMapper.rushHour7CountList");
-	}
-
-	/** 김포공항 & 풍무역 & 고산역 8시 승하차 수
-	 * @return list
-	 */
-	public List<Main> rushHour8CountList() {
-		return sql2.selectList("mainMapper.rushHour8CountList");
-	}
-
-	/** 김포공항 & 풍무역 & 고산역 9시 승하차 수
-	 * @return list
-	 */
-	public List<Main> rushHour9CountList() {
-		return sql2.selectList("mainMapper.rushHour9CountList");
-	}
-	
 	
 
+	/** 김포공항 & 풍무역 & 고산역 출근대 승하차 
+	 * @return list
+	 */
+	public List<Main> rushHourCountList() {
+		return sql2.selectList("mainMapper.rushHourCountList");
+	}
+
+
+	
 	/** 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	 * @return list
 	 */
@@ -108,6 +96,7 @@ public class MainDAO {
 	public List<Main> normalDateChangeCount(String occuDate) {
 		return sql2.selectList("normalMapper.normalDateChangeCount", occuDate);
 	}
+
 
 
 
