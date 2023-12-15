@@ -51,8 +51,8 @@
                     <h1><p id="time_title" class="time">2021-00-00 10:00:00</p></h1>
                 </div>
                 <div class="searchBox" style="display: flex; justify-content: space-around;">
-                    <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
-                    <div><input type="date" class="dateInput" id="mainDateSearch" aria-label="Date-Time"></div>
+                    <div><button type="button" class="searchBtn" id="normalModeSearchBtn">검색</button></div>
+                    <div><input type="date" class="dateInput" id="normalDateSearch" aria-label="Date-Time"></div>
                 </div>
                     <%-- <div><button id="csvBtn">csv</button></div> --%>
                     <%-- <div class="modeBox" style="display: flex; ">
@@ -230,7 +230,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script src="../../resources/js/clock.js"></script>
-    <script src="../../resources/js/mainSearch.js"></script>
     <script src="../../resources/js/normalMode/normalChart.js"></script>
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>

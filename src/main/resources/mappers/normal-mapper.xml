@@ -19,6 +19,16 @@
       	<result property="gochon1_24Count" column="GOCHON1_24COUNT" />
       	<result property="gochon2_24Count" column="GOCHON2_24COUNT" />
       	<result property="pungmu24Count" column="PUNGMU24COUNT" />
+      	<result property="gimpoIn24Change" column="GIMPO_IN_24CHANGE" />
+      	<result property="gimpoOut24Change" column="GIMPO_OUT_24CHANGE" />
+      	<result property="gochon24Change" column="GOCHON24CHANGE" />
+      	<result property="pungmu24Change" column="PUNGMU24CHANGE" />
+      	<result property="gimpoIn24ChangeCount" column="GIMPO_IN_24_CHANGE_COUNT" />
+      	<result property="gimpoOut24ChangeCount" column="GIMPO_OUT_24_CHANGE_COUNT" />
+      	<result property="gochon24ChangeCount" column="GOCHON24_CHANGE_COUNT" />
+      	<result property="gochon1_24ChangeCount" column="GOCHON1_24_CHANGE_COUNT" />
+      	<result property="gochon2_24ChangeCount" column="GOCHON2_24_CHANGE_COUNT" />
+      	<result property="pungmu24ChangeCount" column="PUNGMU24_CHANGE_COUNT" />
 	</resultMap> 
   
   <resultMap id="_int" type="java.lang.Integer"/>
@@ -61,6 +71,44 @@
 	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 	WHERE
 	    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+  </select>
+  
+  
+  
+    <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 수(날짜변경 시) -->
+  <select id="normalDateChangeList" resultMap="_main">
+  	SELECT
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24CHANGE
+	FROM
+	    TB_EVENT_HIST_DL H
+	JOIN
+	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE
+	    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+	GROUP BY
+	    SUBSTRING(H.OCCU_TIME, 9, 2)
+  </select>
+  
+  
+  
+  <!-- 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시) -->
+  <select id="normalDateChangeCount" resultMap="_main">
+  	   SELECT
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24_CHANGE_COUNT
+		FROM
+		    TB_EVENT_HIST_DL H
+		JOIN
+		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE
+		    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
   </select>
 
 

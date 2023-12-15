@@ -1,14 +1,9 @@
 $(function(){
     $.ajax({
-        url: "/rushHourChartData", // Replace with your actual endpoint
+        url: "/rushHourChartData", 
         type: "GET",
         success: function(response){
-            // Assuming 'chartData' is the data needed for your chart
-            // Initialize and render the chart using the loaded data
-            // console.log('성공 : ', chartData.rushHour7List);
-            // console.log('성공 : ', chartData.gimpoIn7);
-            // console.log('성공 : ', chartData.rushHour8List);
-            // console.log('성공 : ', chartData.rushHour9List);
+            // console.log('성공 : ', response.rushHour7List);
 
             
             //==================7시=========================
@@ -27,9 +22,6 @@ $(function(){
                 
                 // currentItem의 속성에 접근 확인
                 // console.log(currentItem.gimpoIn7);
-                // console.log(currentItem.gimpoOut7);
-                // console.log(currentItem.gochon7);
-                // console.log(currentItem.pungmu7);
             }
             //==================7시=========================
 
@@ -50,9 +42,6 @@ $(function(){
                 
                 // currentItem의 속성에 접근 확인
                 // console.log(currentItem.gimpoIn8);
-                // console.log(currentItem.gimpoOut8);
-                // console.log(currentItem.gochon8);
-                // console.log(currentItem.pungmu8);
             }
             //==================8시=========================
 
@@ -73,19 +62,15 @@ $(function(){
                 
                 // currentItem의 속성에 접근 확인
                 // console.log(currentItem.gimpoIn9);
-                // console.log(currentItem.gimpoOut9);
-                // console.log(currentItem.gochon9);
-                // console.log(currentItem.pungmu9);
             }
             //==================9시=========================
 
-            rushHourChart();
-
+            rushHourChart1();
 
              // 인파계수 실시간 누적 집계도 
-            function rushHourChart() {
+            function rushHourChart1() {
                 
-                var rushHourChart = echarts.init(document.getElementById("rushHourChart"));
+                var rushHourChart1 = echarts.init(document.getElementById("rushHourChart"));
             
                 const colors = ['#5470C6', '#91CC75', '#EE6666'];
                 option = {
@@ -239,7 +224,7 @@ $(function(){
                 ]
                 };
                 //  차트 옵션 설정하기
-                rushHourChart.setOption(option)
+                rushHourChart1.setOption(option)
 
 
 

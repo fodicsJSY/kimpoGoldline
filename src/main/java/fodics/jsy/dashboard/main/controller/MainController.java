@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fodics.jsy.dashboard.main.model.dto.Main;
@@ -28,7 +29,7 @@ public class MainController {
 		List<Main> rushHourTotalList = service.rushHourTotalCount();
 		model.addAttribute("rushHourTotalList", rushHourTotalList);
 		
-		System.out.println("rushHourTotalList : " + rushHourTotalList);
+//		System.out.println("rushHourTotalList : " + rushHourTotalList);
 		
 		return "rushHourPage";
 	}
@@ -62,17 +63,40 @@ public class MainController {
 	 }
 	
 	
+	 
+	 
+	// 차트데이터 ajax(날짜 변경)
+	 @GetMapping("/rushHourDateChange")
+	 @ResponseBody
+	 public Map<String, Object> rushHourDataChange(
+			 @RequestParam(value="occuDate") String occuDate
+			 ){
+		 Map<String, Object> map = new HashMap<>();
 	
+		 // 김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜검색 시)
+		 List<Main> rushHourDateChangeList = service.rushHourDateChangeList(occuDate);
+		 map.put("rushHourDateChangeList", rushHourDateChangeList);
+
+		 // 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜검색 시)
+		 List<Main> rushHourChangeTotalCount = service.rushHourChangeTotalCount(occuDate);
+		 map.put("rushHourChangeTotalCount", rushHourChangeTotalCount);
+		 
+		 System.out.println("map : "+ map);
+		 
+		 return map;
+	 }
+
+	 
 	@GetMapping("/normalPage")
 	public String normalModeForward(
 			Model model
 			) {
 		
-		//24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수
+		//24시간 김포공항역, 고촌역, 풍무역 승하차 v
 		List<Main> total24CountList = service.total24Count();
 		model.addAttribute("total24CountList", total24CountList);
 		
-		System.out.println("total24CountList : " + total24CountList);
+//		System.out.println("total24CountList : " + total24CountList);
 		
 		return "normalPage";
 	}
@@ -94,6 +118,30 @@ public class MainController {
 		 
 		 return map;
 	 }
+	
+	 
+	 
+		// 차트데이터 ajax(날짜 변경)
+	 @GetMapping("/normalDateChange")
+	 @ResponseBody
+	 public Map<String, Object> normalDataChange(
+			 @RequestParam(value="occuDate") String occuDate
+			 ){
+		 Map<String, Object> map = new HashMap<>();
+	
+		 // 김포공항 & 풍무역 & 고산역 24시 승하차 수(날짜변경 시)
+		 List<Main> normalDateChangeList = service.normalDateChangeList(occuDate);
+		 map.put("normalDateChangeList", normalDateChangeList);
+		 
+		 // 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
+		 List<Main> normalDateChangeCount = service.normalDateChangeCount(occuDate);
+		 map.put("normalDateChangeCount", normalDateChangeCount);
+		 
+		 System.out.println("map : "+ map);
+		 
+		 return map;
+	 }
+	 
 	
 	
 	

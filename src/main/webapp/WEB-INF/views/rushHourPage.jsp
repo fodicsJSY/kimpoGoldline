@@ -131,7 +131,6 @@
                         </div>
                     </div>
                 </div>
-                   
             </div>
         </div>
         <div class="gridBox gridBox4" >
@@ -239,7 +238,7 @@
 
 
     <script src="../../resources/js/clock.js"></script>
-    <script src="../../resources/js/mainSearch.js"></script>
+    <script src="../../resources/js/rushHourSearch.js"></script>
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>

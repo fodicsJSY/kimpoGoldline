@@ -1,14 +1,9 @@
 $(function(){
     $.ajax({
-        url: "/normalChartData", // Replace with your actual endpoint
+        url: "/normalChartData", 
         type: "GET",
         success: function(response){
-            // Assuming 'chartData' is the data needed for your chart
-            // Initialize and render the chart using the loaded data
-            console.log('성공 : ', response);
-            // console.log('성공 : ', chartData.gimpoIn7);
-            // console.log('성공 : ', chartData.rushHour8List);
-            // console.log('성공 : ', chartData.rushHour9List);
+            // console.log('성공 : ', response);
 
             
             //==================24=========================
@@ -32,14 +27,9 @@ $(function(){
                 
                 
                 // currentItem의 속성에 접근 확인
-                console.log('occuHour1 : ', occuHourList);
+                // console.log('occuHour1 : ', occuHourList);
                 // console.log('gimpoIn24 : ', gimpoIn24);
-                // console.log('gimpoOut24 : ', gimpoOut24);
-                // console.log('gochon24 : ', gochon24);
-                // console.log('pungmu24 : ', pungmu24);
-                // console.log(currentItem.gimpoOut7);
-                // console.log(currentItem.gochon7);
-                // console.log(currentItem.pungmu7);
+    
                 
                 normalChart()
                 
@@ -47,7 +37,7 @@ $(function(){
                 function normalChart() {
                 
                     var normalChart = echarts.init(document.getElementById("normalChart"));
-                    console.log('occuHour2 : ', occuHourList);
+                    // console.log('occuHour2 : ', occuHourList);
             
                 
     

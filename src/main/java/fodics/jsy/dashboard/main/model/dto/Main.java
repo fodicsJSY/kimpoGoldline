@@ -64,5 +64,40 @@ public class Main {
 	private int pungmu24Count;
 	
 	
+	// 출근길 날짜변경 막대차트
+	private String  hour;
+	private int gimpoInChange;
+	private int gimpoOutChange;
+	private int gochonChange;
+	private int pungmuChange;
+
+	// 기본모드 날짜변경 막대차트
+	private int gimpoIn24Change;
+	private int gimpoOut24Change;
+	private int gochon24Change;
+	private int pungmu24Change;
+	
+	
+	
+	//출근길 COUNT
+	private int gimpoInChangeCount;
+	private int gimpoOutChangeCount;
+	private int gochonChangeCount;
+	private int gochon1_ChangeCount;
+	private int gochon2_ChangeCount;
+	private int pungmuChangeCount;
+	
+	
+	// 기본모드 날짜변경 count
+	private int gimpoIn24ChangeCount;
+	private int gimpoOut24ChangeCount;
+	private int gochon24ChangeCount;
+	private int gochon1_24ChangeCount;
+	private int gochon2_24ChangeCount;
+	private int pungmu24ChangeCount;
+	
+
+	
+	
 
 }
