@@ -5,7 +5,7 @@ $(function(){
         success: function(response){
             console.log('성공 : ', response.rushHourCountList);
 
-
+            /*********************막대차트****************************/
             var rushHourCountList = response.rushHourCountList;
 
             let gimpoInRushHour=[];
@@ -191,7 +191,13 @@ $(function(){
 
 
             }
-            
+            /*********************막대차트****************************/
+
+
+
+
+
+
 
 
         },

@@ -221,6 +221,19 @@ function sendToServer() {
             console.log('pungmu24ChangeCount', pungmu24ChangeCount);
 
 
+
+            var pungmu24Count = document.getElementById('pungmu24Count');
+            pungmu24Count.innerText = formatNumber(pungmu24ChangeCount);
+            var gochon24Count = document.getElementById('gochon24Count');
+            gochon24Count.innerText = formatNumber(gochon24ChangeCount);
+            var gochon1_24Count = document.getElementById('gochon1_24Count');
+            gochon1_24Count.innerText = formatNumber(gochon1_24ChangeCount);
+            var gochon2_24Count = document.getElementById('gochon2_24Count');
+            gochon2_24Count.innerText = formatNumber(gochon2_24ChangeCount);
+            var gimpo24Count = document.getElementById('gimpo24Count');
+            gimpo24Count.innerText = formatNumber(gimpoIn24ChangeCount);
+
+
  
 
             // 숫자를 천 단위로 포맷팅하는 함수

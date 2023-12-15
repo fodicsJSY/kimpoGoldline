@@ -143,7 +143,7 @@
                         <div>풍무</div>
                     </div>
                     <div class="peopleCount">
-                        <div class="inCount">
+                        <div class="inCount" id="pungmu24Count">
                             <fmt:formatNumber value="${total24CountList[0].pungmu24Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                         <div>고촌</div>
                     </div>
                     <div class="peopleCount">
-                        <div class="inCount">
+                        <div class="inCount" id="gochon24Count">
                             <fmt:formatNumber value="${total24CountList[0].gochon24Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         <div>
                             입구1
                         </div>
-                        <div class="inCount">
+                        <div class="inCount" id="gochon1_24Count">
                             <fmt:formatNumber value="${total24CountList[0].gochon1_24Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                         <div>
                             입구2
                         </div>
-                        <div class="inCount">
+                        <div class="inCount" id="gochon2_24Count">
                             <fmt:formatNumber value="${total24CountList[0].gochon2_24Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                         </div>
                     </div>
                     <div class="peopleCount">
-                        <div class="outCount">
+                        <div class="outCount" id="gimpo24Count">
                             <fmt:formatNumber value="${total24CountList[0].gimpoIn24Count}" pattern="#,###" />
                         </div>
                     </div>

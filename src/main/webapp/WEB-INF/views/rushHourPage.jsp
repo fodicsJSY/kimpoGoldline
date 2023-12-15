@@ -146,7 +146,7 @@
                         <div>풍무</div>
                     </div>
                     <div class="peopleCount">
-                        <div class="inCount">
+                        <div class="inCount" id="pungmuInCount">
                             <fmt:formatNumber value="${rushHourTotalList[0].pungmuCount}" pattern="#,###" />
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                         <div>고촌</div>
                     </div>
                     <div class="peopleCount">
-                        <div class="inCount">
+                        <div class="inCount" id="gochonInCount">
                             <fmt:formatNumber value="${rushHourTotalList[0].gochonCount}" pattern="#,###" />
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                         <div>
                             입구1
                         </div>
-                        <div class="inCount">
+                        <div class="inCount" id="gochon1Count">
                             <fmt:formatNumber value="${rushHourTotalList[0].gochon1_Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                         <div>
                             입구2
                         </div>
-                        <div class="inCount">
+                        <div class="inCount" id="gochon2Count">
                             <fmt:formatNumber value="${rushHourTotalList[0].gochon2_Count}" pattern="#,###" />
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                     <div class="peopleCount">
-                        <div class="outCount">
+                        <div class="outCount" id="gimpoOutCount">
                             <fmt:formatNumber value="${rushHourTotalList[0].gimpoInCount}" pattern="#,###" />
                         </div>
                     </div>
