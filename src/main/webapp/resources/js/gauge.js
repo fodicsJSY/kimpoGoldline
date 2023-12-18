@@ -10,16 +10,16 @@
             center: ['50%', '75%'],
             radius: '100%',
             min: 0,
-            max: 1,
+            max: 3,
             splitNumber: 10,
             axisLine: {
                 lineStyle: {
                     width: 40,
                     color: [
-                    [0.29, '#32B16C'],
-                    [0.39, '#FFFF00'],
-                    [0.49, '#F39800'],
-                    [1, '#E5004F']
+                        [0.25, '#32B16C'],
+                        [0.5, '#FFFF00'],
+                        [0.75, '#F39800'],
+                        [1, '#E5004F']
                     ],
                 },
                 roundCap: false
@@ -64,16 +64,16 @@
                 distance: -40,
                 rotate: 'tangential',
                 formatter: function (value) {
-                    if (value === 0.7) {
-                    return '위험';
-                    } else if (value === 0.4) {
-                    return '경고';
-                    } else if (value === 0.3) {
-                    return '주의';
-                    } else if (value === 0.2) {
-                    return '안전';
-                    }
-                    return '';
+                    if (value === 3) {
+                        return '위험';
+                        } else if (value === 2) {
+                        return '경고';
+                        } else if (value === 1) {
+                        return '주의';
+                        } else if (value === 0) {
+                        return '안전';
+                        }
+                        return '';
                 }
             },
             detail: {
@@ -81,13 +81,22 @@
             offsetCenter: [0, '-10%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value * 10) + '명/㎡';
+                if (value === 3) {
+                    return '위험';
+                    } else if (value === 2) {
+                    return '경고';
+                    } else if (value === 1) {
+                    return '주의';
+                    } else if (value === 0) {
+                    return '안전';
+                    }
+                    return '';
             },
             color: 'inherit'
             },
             data: [
             {
-                value: 0.5,
+                value: 0,
             }
             ]
         }
@@ -114,16 +123,16 @@
             center: ['50%', '75%'],
             radius: '100%',
             min: 0,
-            max: 1,
+            max: 3,
             splitNumber: 10,
             axisLine: {
                 lineStyle: {
                     width: 40,
                     color: [
-                    [0.29, '#32B16C'],
-                    [0.39, '#FFFF00'],
-                    [0.49, '#F39800'],
-                    [1, '#E5004F']
+                        [0.25, '#32B16C'],
+                        [0.5, '#FFFF00'],
+                        [0.75, '#F39800'],
+                        [1, '#E5004F']
                     ],
                 },
                 roundCap: false
@@ -168,16 +177,16 @@
                 distance: -40,
                 rotate: 'tangential',
                 formatter: function (value) {
-                    if (value === 0.7) {
-                    return '위험';
-                    } else if (value === 0.4) {
-                    return '경고';
-                    } else if (value === 0.3) {
-                    return '주의';
-                    } else if (value === 0.2) {
-                    return '안전';
-                    }
-                    return '';
+                    if (value === 3) {
+                        return '위험';
+                        } else if (value === 2) {
+                        return '경고';
+                        } else if (value === 1) {
+                        return '주의';
+                        } else if (value === 0) {
+                        return '안전';
+                        }
+                        return '';
                 }
             },
             detail: {
@@ -185,13 +194,22 @@
             offsetCenter: [0, '-10%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value * 10) + '명/㎡';
+                if (value === 3) {
+                    return '위험';
+                    } else if (value === 2) {
+                    return '경고';
+                    } else if (value === 1) {
+                    return '주의';
+                    } else if (value === 0) {
+                    return '안전';
+                    }
+                    return '';
             },
             color: 'inherit'
             },
             data: [
             {
-                value: 0.5,
+                value: 1,
             }
             ]
         }
@@ -215,16 +233,16 @@
             center: ['50%', '75%'],
             radius: '100%',
             min: 0,
-            max: 1,
+            max: 3,
             splitNumber: 10,
             axisLine: {
                 lineStyle: {
                     width: 40,
                     color: [
-                    [0.29, '#32B16C'],
-                    [0.39, '#FFFF00'],
-                    [0.49, '#F39800'],
-                    [1, '#E5004F']
+                        [0.25, '#32B16C'],
+                        [0.5, '#FFFF00'],
+                        [0.75, '#F39800'],
+                        [1, '#E5004F']
                     ],
                 },
                 roundCap: false
@@ -270,16 +288,16 @@
                 distance: -40,
                 rotate: 'tangential',
                 formatter: function (value) {
-                    if (value === 0.7) {
-                    return '위험';
-                    } else if (value === 0.4) {
-                    return '경고';
-                    } else if (value === 0.3) {
-                    return '주의';
-                    } else if (value === 0.2) {
-                    return '안전';
-                    }
-                    return '';
+                    if (value === 3) {
+                        return '위험';
+                        } else if (value === 2) {
+                        return '경고';
+                        } else if (value === 1) {
+                        return '주의';
+                        } else if (value === 0) {
+                        return '안전';
+                        }
+                        return '';
                 }
             },
             detail: {
@@ -287,13 +305,22 @@
             offsetCenter: [0, '-10%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value * 10) + '명/㎡';
+                if (value === 3) {
+                    return '위험';
+                    } else if (value === 2) {
+                    return '경고';
+                    } else if (value === 1) {
+                    return '주의';
+                    } else if (value === 0) {
+                    return '안전';
+                    }
+                    return '';
             },
             color: 'inherit'
             },
             data: [
             {
-                value: 0.5,
+                value: 2,
             }
             ]
         }
@@ -316,16 +343,16 @@
             center: ['50%', '75%'],
             radius: '100%',
             min: 0,
-            max: 1,
+            max: 3,
             splitNumber: 10,
             axisLine: {
                 lineStyle: {
                     width: 40,
                     color: [
-                    [0.29, '#32B16C'],
-                    [0.39, '#FFFF00'],
-                    [0.49, '#F39800'],
-                    [1, '#E5004F']
+                        [0.25, '#32B16C'],
+                        [0.5, '#FFFF00'],
+                        [0.75, '#F39800'],
+                        [1, '#E5004F']
                     ],
                 },
                 roundCap: false
@@ -370,16 +397,16 @@
                 distance: -40,
                 rotate: 'tangential',
                 formatter: function (value) {
-                    if (value === 0.7) {
-                    return '위험';
-                    } else if (value === 0.4) {
-                    return '경고';
-                    } else if (value === 0.3) {
-                    return '주의';
-                    } else if (value === 0.2) {
-                    return '안전';
-                    }
-                    return '';
+                    if (value === 3) {
+                        return '위험';
+                        } else if (value === 2) {
+                        return '경고';
+                        } else if (value === 1) {
+                        return '주의';
+                        } else if (value === 0) {
+                        return '안전';
+                        }
+                        return '';
                 }
             },
             detail: {
@@ -387,13 +414,22 @@
             offsetCenter: [0, '-10%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value * 10) + '명/㎡';
+                if (value === 3) {
+                    return '위험';
+                    } else if (value === 2) {
+                    return '경고';
+                    } else if (value === 1) {
+                    return '주의';
+                    } else if (value === 0) {
+                    return '안전';
+                    }
+                    return '';
             },
             color: 'inherit'
             },
             data: [
             {
-                value: 0.5,
+                value: 3,
             }
             ]
         }
