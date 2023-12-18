@@ -62,9 +62,6 @@ WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GE
 
 
 
-SELECT *
-FROM "TB_EVENT_ROLE_DL"; 
-
 
  
  ---------------------------------------------------------------------------------------------------------
@@ -103,4 +100,73 @@ FROM TB_EVENT_HIST_DL
 WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
 AND role_code = 'DL20231125_000285' ;
  
- 
+
+
+
+
+
+
+
+
+-- 고촌 역 - Crowd1
+SELECT 
+    COUNT(*) AS headcount
+FROM 
+    FdcVmsDB.dbo.TB_EVENT_HIST_DL AS e
+WHERE 
+    e.event_type = 'DE20230104_000023'
+    AND e.object_class IN (0, 1, 2)
+    AND e.camera_code LIKE 'Gochon-Crowd1';
+
+-- 고촌 역 - Crowd2
+SELECT 
+    COUNT(*) AS headcount
+FROM 
+    FdcVmsDB.dbo.TB_EVENT_HIST_DL AS e
+WHERE 
+    e.event_type = 'DE20230104_000023'
+    AND e.object_class IN (0, 1, 2)
+    AND e.camera_code LIKE 'Gochon-Crowd2';
+
+-- 풍무 역 - Crowd1
+SELECT 
+    COUNT(*) AS headcount
+FROM 
+    FdcVmsDB.dbo.TB_EVENT_HIST_DL AS e
+WHERE 
+    e.event_type = 'DE20230104_000023'
+    AND e.object_class IN (0, 1, 2)
+    AND e.camera_code LIKE 'Pungmu-Crowd1';
+
+-- 풍무 역 - Crowd2
+SELECT 
+    COUNT(*) AS headcount
+FROM 
+    FdcVmsDB.dbo.TB_EVENT_HIST_DL AS e
+WHERE 
+    e.event_type = 'DE20230104_000023'
+    AND e.object_class IN (0, 1, 2)
+    AND e.camera_code LIKE 'Pungmu-Crowd2';
+
+
+
+
+SELECT *
+FROM "TB_EVENT_ROLE_DL";
+WHERE
+    SUBSTRING(OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112);
+AND
+	SUBSTRING(OCCU_TIME, 9, 2) = 8; 
+
+
+SELECT *
+FROM "TB_EVENT_HIST_DL "
+WHERE
+    SUBSTRING(OCCU_TIME, 1, 8) = '20231215';
+   
+FROM "TB_EVENT_HIST_DL "
+WHERE
+    SUBSTRING(OCCU_TIME, 1, 8) = '20231215'
+;
+
+   CONVERT(varchar, GETDATE(), 112);

@@ -324,7 +324,9 @@ GROUP BY
  
  
  SELECT *
- FROM TB_EVENT_HIST_DL ;
+ FROM TB_EVENT_HIST_DL 
+WHERE
+    SUBSTRING(OCCU_TIME, 1, 8) = '20231215';
 
 
 ----------출근 시간대 막대 그래프-----------
@@ -703,4 +705,22 @@ SELECT
 		    SUBSTRING(H.OCCU_TIME, 1, 8) = 20231205;
 		    #{occuDate}
 	   
+		    
+		    
+		    
+		    
+		    
+	--------------------------------------------------------------------------------------
+	
+		  SELECT  
+		    
+		    FROM
+		    TB_EVENT_HIST_DL H
+		JOIN
+		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		   WHERE  H.role_code = 'DL20231125_000289';
+		    
+		    
+		    
+		    
    

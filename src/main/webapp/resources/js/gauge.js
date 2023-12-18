@@ -96,7 +96,13 @@
 
         //  차트 옵션 설정하기
         gochonPlatform1.setOption(option)
+
+
+
+    /***************************************************************/
     
+
+
     var gochonPlatform2 = echarts.init(document.getElementById("gochonPlatform2"));
 
     option = {
@@ -194,6 +200,9 @@
 
         //  차트 옵션 설정하기
         gochonPlatform2.setOption(option)
+
+
+    /***************************************************************/    
     
     var pungmuPlatform1 = echarts.init(document.getElementById("pungmuPlatform1"));
 
@@ -293,6 +302,8 @@
 
         //  차트 옵션 설정하기
         pungmuPlatform1.setOption(option)
+
+    /***************************************************************/
     
     var pungmuPlatform2 = echarts.init(document.getElementById("pungmuPlatform2"));
 
@@ -392,6 +403,8 @@
         //  차트 옵션 설정하기
         pungmuPlatform2.setOption(option)
 
+
+/***************************************************************/
 
 window.addEventListener('resize', function() {
     gochonPlatform1.resize();

@@ -150,7 +150,7 @@ $(function(){
                     {
                     name: '김포공항역(하차)',
                     type: 'bar',
-                    data: gimpoInRushHour,
+                    data: gimpoOutRushHour,
                             label: {
                                 show: true,
                                 position: 'top',

@@ -189,7 +189,7 @@
                     </div>
                     <div class="peopleCount">
                         <div class="outCount" id="gimpoOutCount">
-                            <fmt:formatNumber value="${rushHourTotalList[0].gimpoInCount}" pattern="#,###" />
+                            <fmt:formatNumber value="${rushHourTotalList[0].gimpoOutCount}" pattern="#,###" />
                         </div>
                     </div>
                 </div>
