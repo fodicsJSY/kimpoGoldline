@@ -202,3 +202,5 @@ rushHourChart.setOption(option)
 window.addEventListener('resize', function() {
     rushHourChart.resize();
 });
+
+

@@ -54,6 +54,7 @@
                 <div class="clockContainer">
                     <h1><p id="time_title" class="time">2021-00-00 10:00:00</p></h1>
                 </div>
+                <%--<button type="button" id="scvBtn">scv</button>--%>
                 <div class="searchBox" style="display: flex; justify-content: space-around;">
                     <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
                     <div><input type="date" class="dateInput" id="mainDateSearch" aria-label="Date-Time"></div>
@@ -189,7 +190,7 @@
                     </div>
                     <div class="peopleCount">
                         <div class="outCount" id="gimpoOutCount">
-                            <fmt:formatNumber value="${rushHourTotalList[0].gimpoOutCount}" pattern="#,###" />
+                            <fmt:formatNumber value="${rushHourTotalList[0].gimpoInCount}" pattern="#,###" />
                         </div>
                     </div>
                 </div>
@@ -236,6 +237,7 @@
     <script src="../../resources/js/ajax.js"></script>
     <script src="../../resources/js/dialog.js"></script>
     <script src="../../resources/js/rushHour_csv.js"></script>
+    <script src="../../resources/js/scv_prod.js"></script> 
     <%-- <script src="../../resources/js/refresh.js"></script> --%>
 </body>
 </html>

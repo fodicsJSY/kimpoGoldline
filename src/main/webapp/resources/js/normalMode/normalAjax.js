@@ -145,7 +145,7 @@ $(function(){
                     {
                     name: '김포공항역',
                     type: 'bar',
-                    data: gimpoOut24List,
+                    data: gimpoIn24List,
                     connectNulls: true  // 이 부분을 추가하여 꼭지점을 이어서 보도록 설정
                     },
                     {

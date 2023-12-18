@@ -177,7 +177,7 @@ function sendToServer() {
                     {
                     name: '김포공항역',
                     type: 'bar',
-                    data: gimpoOut24Change
+                    data: gimpoIn24Change
                     ,
                     },
                     {
@@ -231,7 +231,7 @@ function sendToServer() {
             var gochon2_24Count = document.getElementById('gochon2_24Count');
             gochon2_24Count.innerText = formatNumber(gochon2_24ChangeCount);
             var gimpo24Count = document.getElementById('gimpo24Count');
-            gimpo24Count.innerText = formatNumber(gimpoOut24ChangeCount);
+            gimpo24Count.innerText = formatNumber(gimpoIn24ChangeCount);
 
 
  

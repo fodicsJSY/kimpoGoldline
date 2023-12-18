@@ -186,7 +186,7 @@
                     </div>
                     <div class="peopleCount">
                         <div class="outCount" id="gimpo24Count">
-                            <fmt:formatNumber value="${total24CountList[0].gimpoOut24Count}" pattern="#,###" />
+                            <fmt:formatNumber value="${total24CountList[0].gimpoIn24Count}" pattern="#,###" />
                         </div>
                     </div>
                 </div>

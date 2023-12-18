@@ -8,10 +8,10 @@ $(function(){
             /*********************막대차트****************************/
             var rushHourCountList = response.rushHourCountList;
 
-            let gimpoInRushHour=[];
-            let gimpoOutRushHour=[];
-            let gochonRushHour=[];
-            let pungmuRushHour=[];
+            var gimpoInRushHour=[];
+            var gimpoOutRushHour=[];
+            var gochonRushHour=[];
+            var pungmuRushHour=[];
 
 
             for(var i = 0; i < rushHourCountList.length; i++){
@@ -150,7 +150,7 @@ $(function(){
                     {
                     name: '김포공항역(하차)',
                     type: 'bar',
-                    data: gimpoOutRushHour,
+                    data: gimpoInRushHour,
                             label: {
                                 show: true,
                                 position: 'top',
@@ -266,3 +266,11 @@ function refreshAtTopOfHour() {
         location.reload(true); // true 파라미터는 캐시를 무시하고 새로고침
     }, millisTillNextHour);
 }
+
+
+
+
+
+
+
+
