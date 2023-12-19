@@ -28,6 +28,7 @@
       	<result property="gochon1_ChangeCount" column="GOCHON1_CHANGE_COUNT" />
       	<result property="gochon2_ChangeCount" column="GOCHON2_CHANGE_COUNT" />
       	<result property="pungmuChangeCount" column="PUNGMU_CHANGE_COUNT" />
+      	<result property="objectClass" column="object_class" />
       	
 	</resultMap> 
   
@@ -111,6 +112,46 @@
 		    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
 		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7 OR SUBSTRING(OCCU_TIME, 9, 2) = 8 OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
 	  </select>
+  
+  
+  
+    <!-- 풍무역 플랫폼1 군중밀집도 -->
+	  <select id="selectPungmuPlatform1" resultMap="_main">
+	  	SELECT object_class 
+		FROM TB_EVENT_HIST_DL 
+		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_code = 'DL20231125_000289'
+	  </select>
+  
+    <!-- 풍무역 플랫폼2 군중밀집도 -->
+	  <select id="selectPungmuPlatform2" resultMap="_main">
+	  	SELECT object_class 
+		FROM TB_EVENT_HIST_DL 
+		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_code = 'DL20231125_000290' 
+	  </select>
+  
+    <!-- 고촌역 플랫폼1 군중밀집도 -->
+	  <select id="selectGochonPlatform1" resultMap="_main">
+	  	SELECT object_class 
+		FROM TB_EVENT_HIST_DL 
+		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_code = 'DL20231125_000284'
+	  </select>
+  
+    <!-- 고촌역 플랫폼2 군중밀집도 -->
+	  <select id="selectGochonPlatform2" resultMap="_main">
+	  	SELECT object_class 
+		FROM TB_EVENT_HIST_DL 
+		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_code = 'DL20231125_000285'
+	  </select>
+  
+  
+  
+  
+  
+  
   
   
   

@@ -99,6 +99,42 @@ public class MainDAO {
 
 
 
+	/** 풍무역 플랫폼1 군중밀집도 
+	 * @return 
+	 */
+	public List<Main> selectPungmuPlatform1() {
+		return sql.selectOne("mainMapper.selectPungmuPlatform1");
+	}
+
+
+
+	/** 풍무역 플랫폼2 군중밀집도
+	 * @return
+	 */
+	public List<Main> selectPungmuPlatform2() {
+		return sql.selectOne("mainMapper.selectPungmuPlatform2");
+	}
+
+
+
+	/** 고촌역 플랫폼1 군중밀집도
+	 * @return
+	 */
+	public List<Main> selectGochonPlatform1() {
+		return sql.selectOne("mainMapper.selectGochonPlatform1");
+	}
+
+
+
+	/** 고촌역 플랫폼2 군중밀집도 
+	 * @return
+	 */
+	public List<Main> selectGochonPlatform2() {
+		return sql.selectOne("mainMapper.selectGochonPlatform2");
+	}
+
+
+
 
 
 }

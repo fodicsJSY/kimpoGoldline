@@ -29,6 +29,25 @@ public class MainController {
 		List<Main> rushHourTotalList = service.rushHourTotalCount();
 		model.addAttribute("rushHourTotalList", rushHourTotalList);
 		
+		
+		
+		
+		// 풍무역 플랫폼1 군중밀집도
+		List<Main> selectPungmuPlatform1 = service.selectPungmuPlatform1();
+		model.addAttribute("selectPungmuPlatform1", selectPungmuPlatform1);
+
+		// 풍무역 플랫폼2 군중밀집도
+		List<Main> selectPungmuPlatform2 = service.selectPungmuPlatform2();
+		model.addAttribute("selectPungmuPlatform2", selectPungmuPlatform2);
+		
+		// 고촌역 플랫폼1 군중밀집도
+		List<Main> selectGochonPlatform1 = service.selectGochonPlatform1();
+		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
+		
+		// 고촌역 플랫폼2 군중밀집도
+		List<Main> selectGochonPlatform2 = service.selectGochonPlatform2();
+		model.addAttribute("selectGochonPlatform2", selectGochonPlatform2);
+		
 //		System.out.println("rushHourTotalList : " + rushHourTotalList);
 		
 		return "rushHourPage";
@@ -47,6 +66,22 @@ public class MainController {
 		// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
 		List<Main> rushHourCountList = service.rushHourCountList();
 		map.put("rushHourCountList", rushHourCountList);
+		
+		// 풍무역 플랫폼1 군중밀집도
+		List<Main> selectPungmuPlatform1 = service.selectPungmuPlatform1();
+		map.put("selectPungmuPlatform1", selectPungmuPlatform1);
+
+		// 풍무역 플랫폼2 군중밀집도
+		List<Main> selectPungmuPlatform2 = service.selectPungmuPlatform2();
+		map.put("selectPungmuPlatform2", selectPungmuPlatform2);
+		
+		// 고촌역 플랫폼1 군중밀집도
+		List<Main> selectGochonPlatform1 = service.selectGochonPlatform1();
+		map.put("selectGochonPlatform1", selectGochonPlatform1);
+		
+		// 고촌역 플랫폼2 군중밀집도
+		List<Main> selectGochonPlatform2 = service.selectGochonPlatform2();
+		map.put("selectGochonPlatform2", selectGochonPlatform2);
 		
 		 
 		 
@@ -74,7 +109,7 @@ public class MainController {
 		 List<Main> rushHourChangeTotalCount = service.rushHourChangeTotalCount(occuDate);
 		 map.put("rushHourChangeTotalCount", rushHourChangeTotalCount);
 		 
-		 System.out.println("map : "+ map);
+//		 System.out.println("map : "+ map);
 		 
 		 return map;
 	 }
@@ -107,6 +142,23 @@ public class MainController {
 		 List<Main> normal24List = service.normal24CountList();
 		 map.put("normal24List", normal24List);
 		 
+		 
+		// 풍무역 플랫폼1 군중밀집도
+		List<Main> selectPungmuPlatform1 = service.selectPungmuPlatform1();
+		map.put("selectPungmuPlatform1", selectPungmuPlatform1);
+
+		// 풍무역 플랫폼2 군중밀집도
+		List<Main> selectPungmuPlatform2 = service.selectPungmuPlatform2();
+		map.put("selectPungmuPlatform2", selectPungmuPlatform2);
+		
+		// 고촌역 플랫폼1 군중밀집도
+		List<Main> selectGochonPlatform1 = service.selectGochonPlatform1();
+		map.put("selectGochonPlatform1", selectGochonPlatform1);
+		
+		// 고촌역 플랫폼2 군중밀집도
+		List<Main> selectGochonPlatform2 = service.selectGochonPlatform2();
+		map.put("selectGochonPlatform2", selectGochonPlatform2);
+		 
 //		 System.out.println("map : "+ map);
 		 
 		 return map;
@@ -130,7 +182,7 @@ public class MainController {
 		 List<Main> normalDateChangeCount = service.normalDateChangeCount(occuDate);
 		 map.put("normalDateChangeCount", normalDateChangeCount);
 		 
-		 System.out.println("map : "+ map);
+//		 System.out.println("map : "+ map);
 		 
 		 return map;
 	 }

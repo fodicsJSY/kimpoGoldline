@@ -34,6 +34,18 @@ public interface MainService {
 	// 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
 	List<Main> normalDateChangeCount(String occuDate);
 
+	// 풍무역 플랫폼1 군중밀집도
+	List<Main> selectPungmuPlatform1();
+
+	// 풍무역 플랫폼2 군중밀집도
+	List<Main> selectPungmuPlatform2();
+
+	// 고촌역 플랫폼1 군중밀집도
+	List<Main> selectGochonPlatform1();
+
+	// 고촌역 플랫폼2 군중밀집도
+	List<Main> selectGochonPlatform2();
+
 
 
 

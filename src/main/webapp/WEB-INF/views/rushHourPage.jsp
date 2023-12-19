@@ -43,6 +43,10 @@
 </head>
 <body>
 <c:set var="rushHourTotalList" value="${rushHourTotalList}"/>
+<c:set var="selectPungmuPlatform1" value="${selectPungmuPlatform1}"/>
+<c:set var="selectPungmuPlatform2" value="${selectPungmuPlatform2}"/>
+<c:set var="selectGochonPlatform1" value="${selectGochonPlatform1}"/>
+<c:set var="selectGochonPlatform2" value="${selectGochonPlatform2}"/>
     <main>
     <section>
         <div class="gridBox gridBox1">
@@ -54,10 +58,17 @@
                 <div class="clockContainer">
                     <h1><p id="time_title" class="time">2021-00-00 10:00:00</p></h1>
                 </div>
-                <%--<button type="button" id="scvBtn">scv</button>--%>
-                <div class="searchBox" style="display: flex; justify-content: space-around;">
-                    <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
-                    <div><input type="date" class="dateInput" id="mainDateSearch" aria-label="Date-Time"></div>
+                <div class="btnContainer">
+                    <div>
+                        <button type="button" class="scvButton" id="scvBtn">
+                            <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
+                            <span>CSV</span>
+                        </button>
+                    </div>
+                    <div class="searchBox" style="display: flex; justify-content: space-around;">
+                        <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
+                        <div><input type="date" class="dateInput" id="mainDateSearch" aria-label="Date-Time"></div>
+                    </div>
                 </div>
                     <%-- <div><button id="csvBtn">csv</button></div> --%>
                     <%-- <div class="modeBox" style="display: flex; ">
@@ -139,7 +150,6 @@
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-
             <div class="peopleCountContainer">
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
@@ -203,28 +213,13 @@
     </section>
     </main>
 
-    <%-- CSV 대화상자 --%>
-    <dialog open id="csv_dialog" style = "display:none; background-color: rgba(30,30,30,1); color:rgba(192,192,192,1); width: 336px; padding: 0px; top:80px; left:980px;">		
-        <div style = "font-size: 14px; width: 330px; background-color: rgba(45,45,45,1); color:rgba(255,255,255,1); padding: 16px; ">
-            <p>.csv 파일로 내려받기를 원하시는 항목을 선택</p>						
-            <p style = "margin-top: 6px">하여 체크한 후 [확인] 버튼을 누르세요.</p>
-        </div>
-        <div style = "width: 330px;  border: 1px solid gray;"></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_rushHourChart" type="checkbox"> <label for="chk_csv_rushHourChart"> 누적집계차트</label></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_gochon1" type="checkbox">  <label for="chk_csv_gochon1">고촌1군중밀집</label></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_gochon2" type="checkbox"> <label for="chk_csv_gochon2">고촌2군중밀집</label></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_pungmu1" type="checkbox"> <label for="chk_csv_pungmu1"> 풍무1군중밀집</label></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_pungmu2" type="checkbox">  <label for="chk_csv_pungmu2">풍무2군중밀집</label></div>
-        <div style = "margin : 15px;"><input name="round" id="chk_csv_rushHourDaliyTotal" type="checkbox"> <label for="chk_csv_rushHourDaliyTotal">일일누계</label></div>
-        <div style = "margin : 10px; float: right;">
-            <a class="rollover" alt="확인" OnClick="OnCSV_OK()"><img  src="../../resources/img/btn_popConfirm.png"> <img src="../../resources/img/btn_popConfirm_hover.png" class="over"></a>
-            <a class="rollover" alt="취소" OnClick="OnCSV_Cancel()"><img src="../../resources/img/btn_popCancel.png"> <img src="../../resources/img/btn_popCancel_hover.png" class="over"></a>
-        </div>
-    </dialog>
-
+    
     <%-- 전역변수 시작 --%>
     <script>
-
+        var selectPungmuPlatform1 = ${selectPungmuPlatform1 != null ? selectPungmuPlatform1: 0 };
+        var selectPungmuPlatform2 = ${selectPungmuPlatform2 != null ? selectPungmuPlatform2: 0 };
+        var selectGochonPlatform1 = ${selectGochonPlatform1 != null ? selectGochonPlatform1: 0 };
+        var selectGochonPlatform2 = ${selectGochonPlatform2 != null ? selectGochonPlatform2: 0 };
     </script>
     <%-- 전역변수 끝 --%>
 
@@ -235,8 +230,9 @@
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
-    <script src="../../resources/js/dialog.js"></script>
-    <script src="../../resources/js/rushHour_csv.js"></script>
+    <script src="../../resources/js/refresh.js"></script>
+    <%-- <script src="../../resources/js/dialog.js"></script> --%>
+    <%-- <script src="../../resources/js/rushHour_csv.js"></script> --%>
     <script src="../../resources/js/scv_prod.js"></script> 
     <%-- <script src="../../resources/js/refresh.js"></script> --%>
 </body>

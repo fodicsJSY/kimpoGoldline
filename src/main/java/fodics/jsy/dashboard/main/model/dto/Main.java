@@ -103,7 +103,7 @@ public class Main {
 	private int pungmu24ChangeCount;
 	
 
-	
+	private int objectClass;
 	
 
 }

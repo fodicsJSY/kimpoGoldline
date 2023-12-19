@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     color:white;
-    font-family: NanumSquareEB;
+    font-family: NanumSquare;
 }
 
 button:hover, a:hover{
@@ -46,7 +46,7 @@ section{
     /* grid-template-columns: repeat(2, 1fr);  */
     /* grid-auto-rows: 200px; */
     /* padding: 5px 5px 5px 10px ; */
-    gap: 10px;
+    gap: 15px;
     grid-template-areas:
         "a a a"
         "b b c"
@@ -66,7 +66,7 @@ section{
     grid-area: a;
     /* min-height: 200px; */
     max-width: 100%;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 5px 10px;
 }
 .gridBox2{
     grid-area: b;
@@ -87,7 +87,6 @@ section{
     grid-area: c;
     height: 780px;
     max-width: 740px;
-    margin: 0 0 0 15px;
 }
 
 .gridBox4{
@@ -119,6 +118,7 @@ section{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin: 15px 0 0 0;
 }
 
 
@@ -143,6 +143,8 @@ section{
 }
 
 .clockContainer{
+    position: relative;
+    right: -90px;
     width: 540px;
     height: 60px;
     text-align: center;
@@ -156,13 +158,42 @@ section{
     background-color: none;
 }
 
+
+.btnContainer{
+    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.scvButton{
+    position: relative;
+    right: -90px;
+    width: 120px;
+    height: 64px;
+    font-size: 24px;
+    text-align: center;
+    background-color: #202020;
+    border: 4px solid #666666;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.excelImg{
+    margin: 0 5px 0 0; 
+}
+
+
 .searchBtn{
     position: relative;
     right: -100px;
     background-color: #303A46;
+    border: 4px solid #666666;
     width: 100px;
     height: 64px;
-    border: 4px solid 666666;
     border-radius: 10px;
     font-size: 24px;
 }
@@ -244,7 +275,7 @@ section{
     width:100%;
     height:100%;
     display: grid;
-    gap: 20px;
+    gap: 15px;
     grid-template-areas:
         "a "
         "b"
@@ -283,7 +314,7 @@ section{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
+    margin: 10px 0 0 0;
 }
 
 .throngChartContents{

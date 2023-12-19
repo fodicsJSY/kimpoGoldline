@@ -84,4 +84,47 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	
+	
+	/**
+	 * 풍무역 플랫폼1 군중밀집도
+	 */
+	@Override
+	public List<Main> selectPungmuPlatform1() {
+		return dao.selectPungmuPlatform1();
+	}
+	
+	
+	/** 
+	 * 풍무역 플랫폼2 군중밀집도
+	 */
+	@Override
+	public List<Main> selectPungmuPlatform2() {
+		return dao.selectPungmuPlatform2();
+	}
+	
+	
+	/**
+	 *  고촌역 플랫폼1 군중밀집도
+	 */
+	@Override
+	public List<Main> selectGochonPlatform1() {
+		return dao.selectGochonPlatform1();
+	}
+	
+	
+	/**
+	 * 고촌역 플랫폼2 군중밀집도
+	 */
+	@Override
+	public List<Main> selectGochonPlatform2() {
+		return dao.selectGochonPlatform2();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

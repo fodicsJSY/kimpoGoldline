@@ -29,6 +29,7 @@
       	<result property="gochon1_24ChangeCount" column="GOCHON1_24_CHANGE_COUNT" />
       	<result property="gochon2_24ChangeCount" column="GOCHON2_24_CHANGE_COUNT" />
       	<result property="pungmu24ChangeCount" column="PUNGMU24_CHANGE_COUNT" />
+      	<result property="objectClass" column="object_class" />
 	</resultMap> 
   
   <resultMap id="_int" type="java.lang.Integer"/>
