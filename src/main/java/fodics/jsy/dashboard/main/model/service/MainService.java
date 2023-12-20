@@ -2,6 +2,7 @@ package fodics.jsy.dashboard.main.model.service;
 
 import java.util.List;
 
+import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Main;
 
 public interface MainService {
@@ -35,16 +36,28 @@ public interface MainService {
 	List<Main> normalDateChangeCount(String occuDate);
 
 	// 풍무역 플랫폼1 군중밀집도
-	List<Main> selectPungmuPlatform1();
+	int selectPungmuPlatform1();
 
 	// 풍무역 플랫폼2 군중밀집도
-	List<Main> selectPungmuPlatform2();
+	int selectPungmuPlatform2();
 
 	// 고촌역 플랫폼1 군중밀집도
-	List<Main> selectGochonPlatform1();
+	int selectGochonPlatform1();
 
 	// 고촌역 플랫폼2 군중밀집도
-	List<Main> selectGochonPlatform2();
+	int selectGochonPlatform2();
+
+	//csv파일1
+	List<CSV> goToGimpoCSV(String occuDate);
+
+	//csv파일2
+	List<CSV> getOffGimpoCSV(String occuDate);
+
+	// csv파일3
+	List<CSV> goToPungmuCSV(String occuDate);
+
+	// csv파일4
+	List<CSV> goToGochonCSV(String occuDate);
 
 
 

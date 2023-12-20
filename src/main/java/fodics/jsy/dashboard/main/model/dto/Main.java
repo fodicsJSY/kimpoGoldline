@@ -102,8 +102,18 @@ public class Main {
 	private int gochon2_24ChangeCount;
 	private int pungmu24ChangeCount;
 	
-
+	// 군중밀집도
 	private int objectClass;
 	
-
+	// csv파일 생성
+	private int goToGimpoST;
+	private int goToGimpoEV;
+	private int goToGimpoEC;
+	private int getOffGimpoST;
+	private int getOffGimpoEV;
+	private int getOffGimpoEC;
+	private int goToPungmu;
+	private int goToGochon;
+	
+	
 }

@@ -60,10 +60,12 @@
                 </div>
                 <div class="btnContainer">
                     <div>
-                        <button type="button" class="scvButton" id="scvBtn">
-                            <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
-                            <span>CSV</span>
-                        </button>
+                        <%-- <a href="gimpoCSV://" id="exec"> --%>
+                            <button type="button" class="scvButton" id="scvBtn">
+                                <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
+                                <span>CSV</span>
+                            </button>
+                        <%-- </a> --%>
                     </div>
                     <div class="searchBox" style="display: flex; justify-content: space-around;">
                         <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
@@ -230,10 +232,8 @@
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
-    <script src="../../resources/js/refresh.js"></script>
-    <%-- <script src="../../resources/js/dialog.js"></script> --%>
-    <%-- <script src="../../resources/js/rushHour_csv.js"></script> --%>
-    <script src="../../resources/js/scv_prod.js"></script> 
     <%-- <script src="../../resources/js/refresh.js"></script> --%>
+    <%-- <script src="../../resources/js/scvBtn.js"></script>  --%>
+    <script src="../../resources/js/scv.js"></script> 
 </body>
 </html>

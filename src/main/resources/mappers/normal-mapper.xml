@@ -40,18 +40,14 @@
   <select id="normal24CountList" resultMap="_main">
   	SELECT
 	    SUBSTRING(H.OCCU_TIME, 9, 2) AS OCCU_HOUR,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24,
-	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24
-	FROM
-	    TB_EVENT_HIST_DL H
-	JOIN
-	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	WHERE
-	    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-	GROUP BY
-	    SUBSTRING(H.OCCU_TIME, 9, 2)
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoIn24,
+	    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoOut24,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS gochon24,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS pungmu24
+	FROM TB_EVENT_HIST_DL H
+	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+	GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
   </select>
   
   
@@ -60,37 +56,30 @@
   <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수 -->
   <select id="total24Count" resultMap="_main">
   	SELECT
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24COUNT,
-	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24COUNT,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24COUNT,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_24COUNT,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_24COUNT,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24COUNT
-	FROM
-	    TB_EVENT_HIST_DL H
-	JOIN
-	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	WHERE
-	    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_24COUNT,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24COUNT
+	FROM TB_EVENT_HIST_DL H
+	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
   </select>
   
   
   
     <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 수(날짜변경 시) -->
   <select id="normalDateChangeList" resultMap="_main">
-  	SELECT
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24CHANGE,
-	    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24CHANGE,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24CHANGE,
-	    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24CHANGE
-	FROM
-	    TB_EVENT_HIST_DL H
-	JOIN
-	    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	WHERE
-	    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-	GROUP BY
-	    SUBSTRING(H.OCCU_TIME, 9, 2)
+	SELECT
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON24CHANGE,
+	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24CHANGE
+	FROM TB_EVENT_HIST_DL H
+	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+	GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
   </select>
   
   
@@ -98,18 +87,15 @@
   <!-- 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시) -->
   <select id="normalDateChangeCount" resultMap="_main">
   	   SELECT
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_24_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_24_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON24_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_24_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_24_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU24_CHANGE_COUNT
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근' ) THEN 1 END) AS GIMPO_IN_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_24_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24_CHANGE_COUNT
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
   </select>
 
 

@@ -29,8 +29,24 @@
       	<result property="gochon2_ChangeCount" column="GOCHON2_CHANGE_COUNT" />
       	<result property="pungmuChangeCount" column="PUNGMU_CHANGE_COUNT" />
       	<result property="objectClass" column="object_class" />
-      	
 	</resultMap> 
+	
+	
+	<resultMap type="CSV" id="_csv">
+      	<result property="goToGimpoST" column="GO_TO_GIMPO_ST" />
+      	<result property="goToGimpoEV" column="GO_TO_GIMPO_EV" />
+      	<result property="goToGimpoEC" column="GO_TO_GIMPO_EC" />
+      	
+      	<result property="getOffGimpoST" column="GET_OFF_GIMPO_ST" />
+      	<result property="getOffGimpoEV" column="GET_OFF_GIMPO_EV" />
+      	<result property="getOffGimpoEC" column="GET_OFF_GIMPO_EC" />
+      	
+      	<result property="goToPungmu" column="GO_TO_PUNGMU" />
+      	<result property="getOffPungmu" column="GET_OFF_PUNGMU" />
+      	
+      	<result property="goToGochon" column="GO_TO_GOCHON" />
+      	<result property="getOffGochon" column="GET_OFF_GOCHON" />
+	</resultMap>
   
   <resultMap id="_int" type="java.lang.Integer"/>
   
@@ -39,19 +55,15 @@
 	<select id="rushHourCountList" resultMap="_main">
 		SELECT
 		    SUBSTRING(H.OCCU_TIME, 9, 2) AS HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_RUSH_HOUR,
-		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_RUSH_HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON_RUSH_HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU_RUSH_HOUR
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		    AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
-		GROUP BY
-		    SUBSTRING(H.OCCU_TIME, 9, 2)
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_RUSH_HOUR,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_RUSH_HOUR,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_RUSH_HOUR
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+		AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
+		GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
+
 	</select>
 
 	
@@ -59,100 +71,180 @@
 	<!-- 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수 -->
 	  <select id="rushHourTotalCount" resultMap="_main">
 	  	SELECT
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_COUNT,
-		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU_COUNT
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7 OR SUBSTRING(OCCU_TIME, 9, 2) = 8 OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_COUNT
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7
+		OR  SUBSTRING(OCCU_TIME, 9, 2) = 8
+		OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
 	  </select>
   
   
   
 	  <!-- 김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜변경 시) -->
 	<select id="rushHourDateChangeList" resultMap="_main">
-	    SELECT
+	   SELECT
 	        SUBSTRING(H.OCCU_TIME, 9, 2) AS HOUR,
-	        COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU_CHANGE
-	    FROM
-	        TB_EVENT_HIST_DL H
-	    JOIN
-	        TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	    WHERE
-	        SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-	        AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
-	    GROUP BY
-	        SUBSTRING(H.OCCU_TIME, 9, 2)
+	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근' ) THEN 1 END) AS GIMPO_IN_CHANGE,
+	        COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_CHANGE,
+	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_CHANGE,
+	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_CHANGE
+	    FROM TB_EVENT_HIST_DL H
+	    JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+	    WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+	    AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
+	    GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
 	</select>
   
   <!-- 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜변경 시) -->
 	  <select id="rushHourChangeTotalCount" resultMap="_main">
 	  	SELECT
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_IN_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '-1' AND H.role_code IN ('DL20231125_000280', 'DL20231125_000281', 'DL20231125_000282', 'DL20231204_000303') THEN 1 END) AS GIMPO_OUT_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000284', 'DL20231125_000285', 'DL20231125_000286', 'DL20231125_000287', 'DL20231204_000304') THEN 1 END) AS GOCHON_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000288') THEN 1 END) AS GOCHON1_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000293') THEN 1 END) AS GOCHON2_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND H.role_code IN ('DL20231125_000289', 'DL20231125_000290', 'DL20231125_000291', 'DL20231125_000292', 'DL20231206_000305') THEN 1 END) AS PUNGMU_CHANGE_COUNT
-		FROM
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE
-		    SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_CHANGE_COUNT,
+		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_CHANGE_COUNT
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
 		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7 OR SUBSTRING(OCCU_TIME, 9, 2) = 8 OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
 	  </select>
   
   
   
     <!-- 풍무역 플랫폼1 군중밀집도 -->
-	  <select id="selectPungmuPlatform1" resultMap="_main">
-	  	SELECT object_class 
-		FROM TB_EVENT_HIST_DL 
-		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND role_code = 'DL20231125_000289'
+	  <select id="selectPungmuPlatform1" resultMap="_int">
+	  	<![CDATA[  
+			SELECT TOP 1 object_class
+			FROM TB_EVENT_HIST_DL H
+			JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+			WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+			AND role_name LIKE '%풍무%'
+			AND(role_name LIKE '%군중%'
+			OR role_name LIKE '%밀집%'
+			OR role_name LIKE '%crowd%')
+			AND role_name LIKE '%1'
+			ORDER BY occu_time DESC
+		]]>
 	  </select>
   
     <!-- 풍무역 플랫폼2 군중밀집도 -->
-	  <select id="selectPungmuPlatform2" resultMap="_main">
-	  	SELECT object_class 
-		FROM TB_EVENT_HIST_DL 
-		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND role_code = 'DL20231125_000290' 
+	  <select id="selectPungmuPlatform2" resultMap="_int">
+	  <![CDATA[  
+		 SELECT TOP 1 object_class
+		  FROM TB_EVENT_HIST_DL H
+		  JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		  WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		  AND role_name LIKE '%풍무%'
+		AND(role_name LIKE '%군중%'
+		OR role_name LIKE '%밀집%'
+		OR role_name LIKE '%crowd%')
+		AND role_name LIKE '%2'
+		  ORDER BY occu_time DESC
+		   ]]>
 	  </select>
   
     <!-- 고촌역 플랫폼1 군중밀집도 -->
-	  <select id="selectGochonPlatform1" resultMap="_main">
-	  	SELECT object_class 
-		FROM TB_EVENT_HIST_DL 
-		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND role_code = 'DL20231125_000284'
+	  <select id="selectGochonPlatform1" resultMap="_int">
+	  <![CDATA[ 
+		 SELECT TOP 1 object_class
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_name LIKE '%고촌%'
+		AND(role_name LIKE '%군중%'
+		OR role_name LIKE '%밀집%'
+		OR role_name LIKE '%crowd%')
+		AND role_name LIKE '%1'
+		ORDER BY occu_time DESC
+		   ]]>
 	  </select>
   
     <!-- 고촌역 플랫폼2 군중밀집도 -->
-	  <select id="selectGochonPlatform2" resultMap="_main">
-	  	SELECT object_class 
-		FROM TB_EVENT_HIST_DL 
-		WHERE OCCU_TIME = CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND role_code = 'DL20231125_000285'
+	   <select id="selectGochonPlatform2" resultMap="_int">
+	  <![CDATA[ 
+		 SELECT TOP 1 object_class
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
+		AND role_name LIKE '%고촌%'
+		AND(role_name LIKE '%군중%' OR role_name LIKE '%밀집%' OR role_name LIKE '%crowd%')
+		AND role_name LIKE '%2'
+		ORDER BY occu_time DESC
+		  ]]>
+	  </select>
+	  
+	  
+    <!-- csv파일1 -->
+	   <select id="goToGimpoCSV" resultMap="_main">
+	   	SELECT 
+		    occu_time, 
+		    COUNT(CASE WHEN R.role_name IN ('김포-ST-출근') THEN 1 END) AS GO_TO_GIMPO_ST,
+		    COUNT(CASE WHEN R.role_name IN ('김포-EV-출근') THEN 1 END) AS GO_TO_GIMPO_EV,
+		    COUNT(CASE WHEN R.role_name IN ('김포-EC-출근') THEN 1 END) AS GO_TO_GIMPO_EC
+		FROM 
+		    TB_EVENT_HIST_DL H
+		JOIN
+		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE H.event_type = 'DE20200605_000002'   
+		AND R.role_name = '김포-buzzer-출근'
+		AND SUBSTRING(H.OCCU_TIME, 1, 8) =  #{occuDate}
+		GROUP BY occu_time
+	  </select>
+
+  
+  	  
+    <!-- csv파일2 -->
+	   <select id="getOffGimpoCSV" resultMap="_main">
+	   	SELECT 
+		    occu_time,
+		    COUNT(CASE WHEN R.role_name IN ('김포-ST-퇴근') THEN 1 END) AS GET_OFF_GIMPO_ST,
+		    COUNT(CASE WHEN R.role_name IN ('김포-EV-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EV,
+		    COUNT(CASE WHEN R.role_name IN ('김포-EC-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EC
+		FROM TB_EVENT_HIST_DL H
+		JOIN
+		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		AND CAST(SUBSTRING(H.OCCU_TIME, 11, 2) AS INT) % 5 = 0
+		AND SUBSTRING(H.OCCU_TIME, 13, 2) = 0
+		GROUP BY occu_time
 	  </select>
   
   
-  
-  
-  
-  
-  
+  	  
+    <!-- csv파일3 -->
+	   <select id="goToPungmuCSV" resultMap="_main">
+		SELECT occu_time,
+			COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS GO_TO_PUNGMU,
+			COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS GET_OFF_PUNGMU
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE  SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		AND  H.event_type = 'DE20200605_000002'   
+		AND R.role_name = '풍무-buzzer-출근'
+		GROUP BY occu_time
+	  </select>
+	  
+	  
+	  	  
+    <!-- csv파일4 -->
+	   <select id="goToGochonCSV" resultMap="_main">
+	   	SELECT occu_time,
+			COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GO_TO_GOCHON,
+			COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GET_OFF_GOCHON
+		FROM TB_EVENT_HIST_DL H
+		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+		WHERE  SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		AND H.event_type = 'DE20200605_000002'   
+		AND R.role_name = '고촌-buzzer-출근'
+		GROUP BY occu_time
+	  </select>
   
   
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fodics.jsy.dashboard.main.model.dao.MainDAO;
+import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Main;
 
 @Service
@@ -89,7 +90,7 @@ public class MainServiceImpl implements MainService{
 	 * 풍무역 플랫폼1 군중밀집도
 	 */
 	@Override
-	public List<Main> selectPungmuPlatform1() {
+	public int selectPungmuPlatform1() {
 		return dao.selectPungmuPlatform1();
 	}
 	
@@ -98,7 +99,7 @@ public class MainServiceImpl implements MainService{
 	 * 풍무역 플랫폼2 군중밀집도
 	 */
 	@Override
-	public List<Main> selectPungmuPlatform2() {
+	public int selectPungmuPlatform2() {
 		return dao.selectPungmuPlatform2();
 	}
 	
@@ -107,7 +108,7 @@ public class MainServiceImpl implements MainService{
 	 *  고촌역 플랫폼1 군중밀집도
 	 */
 	@Override
-	public List<Main> selectGochonPlatform1() {
+	public int selectGochonPlatform1() {
 		return dao.selectGochonPlatform1();
 	}
 	
@@ -116,13 +117,44 @@ public class MainServiceImpl implements MainService{
 	 * 고촌역 플랫폼2 군중밀집도
 	 */
 	@Override
-	public List<Main> selectGochonPlatform2() {
+	public int selectGochonPlatform2() {
 		return dao.selectGochonPlatform2();
 	}
 	
 	
 	
+	/**
+	 *csv파일1
+	 */
+	@Override
+	public List<CSV> goToGimpoCSV(String occuDate) {
+		return dao.goToGimpoCSV(occuDate);
+	}
 	
+	
+	/**
+	 * csv파일2
+	 */
+	@Override
+	public List<CSV> getOffGimpoCSV(String occuDate) {
+		return dao.getOffGimpoCSV(occuDate);
+	}
+	
+	/**
+	 *csv파일3
+	 */
+	@Override
+	public List<CSV> goToPungmuCSV(String occuDate) {
+		return dao.goToPungmuCSV(occuDate);
+	}
+	
+	/**
+	 *csv파일4
+	 */
+	@Override
+	public List<CSV> goToGochonCSV(String occuDate) {
+		return dao.goToGochonCSV(occuDate);
+	}
 	
 	
 	

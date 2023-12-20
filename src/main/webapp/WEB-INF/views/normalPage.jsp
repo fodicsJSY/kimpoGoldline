@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>normalPage</title>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
 
@@ -217,7 +219,7 @@
     <%-- echarts --%>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
 
     <script src="../../resources/js/clock.js"></script>
     <script src="../../resources/js/normalMode/normalChart.js"></script>
@@ -225,7 +227,6 @@
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
     <script src="../../resources/js/refresh.js"></script>
-    <%-- <script src="../../resources/js/dialog.js"></script> --%>
-    <%-- <script src="../../resources/js/refresh.js"></script> --%>
+    <script src="../../resources/js/scv.js"></script> 
 </body>
 </html>

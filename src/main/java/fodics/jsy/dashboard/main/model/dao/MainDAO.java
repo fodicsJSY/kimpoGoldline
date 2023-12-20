@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Main;
 
 @Repository
@@ -102,7 +103,7 @@ public class MainDAO {
 	/** 풍무역 플랫폼1 군중밀집도 
 	 * @return 
 	 */
-	public List<Main> selectPungmuPlatform1() {
+	public int selectPungmuPlatform1() {
 		return sql.selectOne("mainMapper.selectPungmuPlatform1");
 	}
 
@@ -111,7 +112,7 @@ public class MainDAO {
 	/** 풍무역 플랫폼2 군중밀집도
 	 * @return
 	 */
-	public List<Main> selectPungmuPlatform2() {
+	public int selectPungmuPlatform2() {
 		return sql.selectOne("mainMapper.selectPungmuPlatform2");
 	}
 
@@ -120,7 +121,7 @@ public class MainDAO {
 	/** 고촌역 플랫폼1 군중밀집도
 	 * @return
 	 */
-	public List<Main> selectGochonPlatform1() {
+	public int selectGochonPlatform1() {
 		return sql.selectOne("mainMapper.selectGochonPlatform1");
 	}
 
@@ -129,8 +130,32 @@ public class MainDAO {
 	/** 고촌역 플랫폼2 군중밀집도 
 	 * @return
 	 */
-	public List<Main> selectGochonPlatform2() {
+	public int selectGochonPlatform2() {
 		return sql.selectOne("mainMapper.selectGochonPlatform2");
+	}
+
+
+
+	public List<CSV> goToGimpoCSV(String occuDate) {
+		return sql2.selectList("mainMapper.goToGimpoCSV", occuDate);
+	}
+
+
+
+	public List<CSV> getOffGimpoCSV(String occuDate) {
+		return sql2.selectList("mainMapper.getOffGimpoCSV", occuDate);
+	}
+
+
+
+	public List<CSV> goToPungmuCSV(String occuDate) {
+		return sql2.selectList("mainMapper.goToPungmuCSV", occuDate);
+	}
+
+
+
+	public List<CSV> goToGochonCSV(String occuDate) {
+		return sql2.selectList("mainMapper.goToGochonCSV", occuDate);
 	}
 
 
