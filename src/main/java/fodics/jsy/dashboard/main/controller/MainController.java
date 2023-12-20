@@ -40,9 +40,9 @@ public class MainController {
 		model.addAttribute("selectPungmuPlatform2", selectPungmuPlatform2);
 		
 		// 고촌역 플랫폼1 군중밀집도
-//		int selectGochonPlatform1 = service.selectGochonPlatform1();
-//		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
-//		
+		int selectGochonPlatform1 = service.selectGochonPlatform1();
+		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
+		
 		// 고촌역 플랫폼2 군중밀집도
 		int selectGochonPlatform2 = service.selectGochonPlatform2();
 		model.addAttribute("selectGochonPlatform2", selectGochonPlatform2);
@@ -115,9 +115,9 @@ public class MainController {
 		model.addAttribute("selectPungmuPlatform2", selectPungmuPlatform2);
 		
 		// 고촌역 플랫폼1 군중밀집도
-//				int selectGochonPlatform1 = service.selectGochonPlatform1();
-//				model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
-//				
+		int selectGochonPlatform1 = service.selectGochonPlatform1();
+		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
+				
 		// 고촌역 플랫폼2 군중밀집도
 		int selectGochonPlatform2 = service.selectGochonPlatform2();
 		model.addAttribute("selectGochonPlatform2", selectGochonPlatform2);

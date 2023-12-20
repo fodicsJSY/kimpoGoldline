@@ -226,7 +226,7 @@
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
+    <script src="../../resources/js/normalMode/normal_csv.js"></script> 
     <script src="../../resources/js/refresh.js"></script>
-    <script src="../../resources/js/scv.js"></script> 
 </body>
 </html>

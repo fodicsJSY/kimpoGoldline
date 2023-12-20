@@ -29,6 +29,19 @@
       	<result property="gochon2_ChangeCount" column="GOCHON2_CHANGE_COUNT" />
       	<result property="pungmuChangeCount" column="PUNGMU_CHANGE_COUNT" />
       	<result property="objectClass" column="object_class" />
+      		<result property="goToGimpoST" column="GO_TO_GIMPO_ST" />
+      	<result property="goToGimpoEV" column="GO_TO_GIMPO_EV" />
+      	<result property="goToGimpoEC" column="GO_TO_GIMPO_EC" />
+      	
+      	<result property="getOffGimpoST" column="GET_OFF_GIMPO_ST" />
+      	<result property="getOffGimpoEV" column="GET_OFF_GIMPO_EV" />
+      	<result property="getOffGimpoEC" column="GET_OFF_GIMPO_EC" />
+      	
+      	<result property="goToPungmu" column="GO_TO_PUNGMU" />
+      	<result property="getOffPungmu" column="GET_OFF_PUNGMU" />
+      	
+      	<result property="goToGochon" column="GO_TO_GOCHON" />
+      	<result property="getOffGochon" column="GET_OFF_GOCHON" />
 	</resultMap> 
 	
 	

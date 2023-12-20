@@ -113,7 +113,10 @@ public class Main {
 	private int getOffGimpoEV;
 	private int getOffGimpoEC;
 	private int goToPungmu;
+	private int getOffPungmu;
 	private int goToGochon;
+	private int getOffGochon;
+	
 	
 	
 }
