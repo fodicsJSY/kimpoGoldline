@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>normalPage</title>
 
+    <%-- echarts --%>
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <%-- css --%>
@@ -146,7 +149,7 @@
             <div class="peopleCountContainer">
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_inflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_inflow.png" alt=""></div>
                         <div>풍무</div>
                     </div>
                     <div class="peopleCount">
@@ -157,7 +160,7 @@
                 </div>
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_inflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_inflow.png" alt=""></div>
                         <div>고촌</div>
                     </div>
                     <div class="peopleCount">
@@ -185,7 +188,7 @@
                 </div>
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_outflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_outflow.png" alt=""></div>
                         <div>
                             <div>김포</div>
                             <div>공항</div>
@@ -216,10 +219,6 @@
     </script>
     <%-- 전역변수 끝 --%>
 
-    <%-- echarts --%>
-	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-
-    
 
     <script src="../../resources/js/clock.js"></script>
     <script src="../../resources/js/normalMode/normalChart.js"></script>

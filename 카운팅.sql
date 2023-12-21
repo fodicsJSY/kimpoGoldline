@@ -454,12 +454,9 @@ SELECT
     COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_COUNT,
     COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_COUNT,
     COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_COUNT
-FROM
-    TB_EVENT_HIST_DL H
-JOIN
-    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-WHERE
-    SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+FROM TB_EVENT_HIST_DL H
+JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
 AND (SUBSTRING(OCCU_TIME, 9, 2) = 7
 OR  SUBSTRING(OCCU_TIME, 9, 2) = 8
 OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
@@ -732,8 +729,25 @@ SELECT
 	        SUBSTRING(H.OCCU_TIME, 9, 2);
 		  
 	      
+SELECT 
+  COUNT(CASE WHEN R.role_name IN ('김포-ST-출근') THEN 1 END) AS GO_TO_GIMPO_ST
+FROM TB_EVENT_HIST_DL H
+JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+GROUP BY
+    occu_time;
+   
+   
+SELECT 
+    DATEADD(MINUTE, DATEDIFF(MINUTE, 0, CONVERT(datetime, STUFF(STUFF(STUFF(STUFF(LEFT(H.occu_time, 12), 9, 0, ':'), 7, 0, ':'), 5, 0, ' '), 13, 0, ':')), 0) AS interval_start,
+    COUNT(CASE WHEN R.role_name = '김포-ST-출근' THEN 1 END) AS GO_TO_GIMPO_ST
+FROM TB_EVENT_HIST_DL H
+JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+WHERE CONVERT(datetime, STUFF(STUFF(STUFF(STUFF(LEFT(H.occu_time, 12), 9, 0, ':'), 7, 0, ':'), 5, 0, ' '), 13, 0, ':')) >= DATEADD(MINUTE, -5, GETDATE()) -- 현재 시간에서 5분 전까지의 데이터만 조회
+GROUP BY DATEADD(MINUTE, DATEDIFF(MINUTE, 0, CONVERT(datetime, STUFF(STUFF(STUFF(STUFF(LEFT(H.occu_time, 12), 9, 0, ':'), 7, 0, ':'), 5, 0, ' '), 13, 0, ':')), 0)
+ORDER BY interval_start DESC;
 
-	       
+
+
 	       
 	--파일 1(김포출근)       
 SELECT 
@@ -748,12 +762,11 @@ AND R.role_name = '김포-buzzer-출근'
 AND SUBSTRING(H.OCCU_TIME, 1, 8) = '20231206'
 GROUP BY
     occu_time;
---${occu_time}
    
    --파일 2(김포퇴근) occu_time 5분 단위로 계산       
 SELECT 
     occu_time,
-    COUNT(CASE WHEN R.role_name IN ('김포-ST-퇴근') THEN 1 END) AS GET_OFF_GIMPO_ST,
+    COUNT(CASE WHEN R.role_name IN ('김포-ST-퇴근') AND  THEN 1 END) AS GET_OFF_GIMPO_ST,
     COUNT(CASE WHEN R.role_name IN ('김포-EV-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EV,
     COUNT(CASE WHEN R.role_name IN ('김포-EC-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EC
 FROM TB_EVENT_HIST_DL H
@@ -762,6 +775,8 @@ WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = '20231206'
 AND CAST(SUBSTRING(H.OCCU_TIME, 11, 2) AS INT) % 5 = 0
 AND SUBSTRING(H.OCCU_TIME, 13, 2) = 0
 GROUP BY occu_time ;
+
+
 
 
    

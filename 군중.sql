@@ -132,7 +132,7 @@ AND role_code = 'DL20231125_000285';
 
 
 
-SELECT TOP 1 object_class
+SELECT TOP 1 object_class, role_name --풍무1
 FROM TB_EVENT_HIST_DL H
 JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
@@ -140,12 +140,13 @@ AND role_name LIKE '%풍무%'
 AND(role_name LIKE '%군중%'
 OR role_name LIKE '%밀집%'
 OR role_name LIKE '%crowd%')
+AND role_name LIKE '%1'
 ORDER BY occu_time DESC;
 
 
 		
 		
-SELECT TOP 1 object_class --풍무2
+SELECT TOP 1 object_class, role_name --풍무2
   FROM TB_EVENT_HIST_DL H
   JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
   WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
@@ -153,23 +154,35 @@ SELECT TOP 1 object_class --풍무2
 AND(role_name LIKE '%군중%'
 OR role_name LIKE '%밀집%'
 OR role_name LIKE '%crowd%')
-
+AND role_name LIKE '%2'
   ORDER BY occu_time DESC;
 		  
 		 
- SELECT TOP 1 object_class --고촌1
+ SELECT TOP 1 object_class, role_name --고촌1
 FROM TB_EVENT_HIST_DL H
 JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-AND role_name LIKE '%풍무%'
+AND role_name LIKE '%고촌%'
 AND(role_name LIKE '%군중%'
 OR role_name LIKE '%밀집%'
 OR role_name LIKE '%crowd%')
+AND role_name LIKE '%1'
 ORDER BY occu_time DESC;
 
- SELECT TOP 1 object_class --고촌2
-FROM TB_EVENT_HIST_DL 
+ SELECT TOP 1 object_class, role_name --고촌2
+FROM TB_EVENT_HIST_DL H
 JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-AND role_code = 'DL20231124_000135' 
+AND role_name LIKE '%고촌%'
+AND(role_name LIKE '%군중%'
+OR role_name LIKE '%밀집%'
+OR role_name LIKE '%crowd%')
+AND role_name LIKE '%2'
 ORDER BY occu_time DESC;
+
+
+
+
+
+
+

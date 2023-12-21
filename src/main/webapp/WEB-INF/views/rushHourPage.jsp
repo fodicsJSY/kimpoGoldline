@@ -12,7 +12,7 @@
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/rushHourMode-style.css">
 
-        <%-- echarts --%>
+    <%-- echarts --%>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -59,6 +59,9 @@
                     <h1><p id="time_title" class="time">2021-00-00 10:00:00</p></h1>
                 </div>
                 <div class="btnContainer">
+                    <%-- <div>
+                        <button type="button" class="settingButton" id="openModalBtn">설정</button>
+                    </div> --%>
                     <div>
                         <%-- <a href="gimpoCSV://" id="exec"> --%>
                             <button type="button" class="scvButton" id="scvBtn">
@@ -102,7 +105,7 @@
                     <div class="throngChartContents">
                         <div class="throngChartBox">
                             <div class="throngChartTitle">
-                                플랫폼1
+                                플랫폼2
                             </div>
                             <div class="throngChartContainer" id="gochonPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
@@ -155,7 +158,7 @@
             <div class="peopleCountContainer">
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_inflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_inflow.png" alt=""></div>
                         <div>풍무</div>
                     </div>
                     <div class="peopleCount">
@@ -166,7 +169,7 @@
                 </div>
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_inflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_inflow.png" alt=""></div>
                         <div>고촌</div>
                     </div>
                     <div class="peopleCount">
@@ -194,7 +197,7 @@
                 </div>
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
-                        <div><img src="/resources/img/icon_outflow.png" alt=""></div>
+                        <div class="imgBox"><img src="/resources/img/icon_outflow.png" alt=""></div>
                         <div>
                             <div>김포</div>
                             <div>공항</div>
@@ -214,6 +217,60 @@
         </div>
     </section>
     </main>
+    <%-- 모달창 사용 안함 --%>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <p>
+                <form action="">
+                    고촌 플랫폼1
+                    <select name="플랫폼1" class="selectBox" id="selectGochon1" >
+                        <option value="">고촌-밀집-1</option>
+                        <option value="">고촌-밀집-2</option>
+                        <option value="">풍무-밀집-1</option>
+                        <option value="">풍무-밀집-2</option>
+                    </select>
+
+                    <br><br>
+
+                    고촌 플랫폼2
+                    <select name="플랫폼2" class="selectBox" id="selectGochon2" >
+                        <option value="">고촌-밀집-1</option>
+                        <option value="">고촌-밀집-2</option>
+                        <option value="">풍무-밀집-1</option>
+                        <option value="">풍무-밀집-2</option>
+                    </select>
+
+                    <br><br>
+
+                    풍무 플랫폼1
+                    <select name="플랫폼1" class="selectBox" id="selectPungmu1" >
+                        <option value="">고촌-밀집-1</option>
+                        <option value="">고촌-밀집-2</option>
+                        <option value="">풍무-밀집-1</option>
+                        <option value="">풍무-밀집-2</option>
+                    </select>
+
+                    <br><br>
+
+                    풍무 플랫폼2
+                    <select name="플랫폼2" class="selectBox" id="selectPungmu2" >
+                        <option value="">고촌-밀집-1</option>
+                        <option value="">고촌-밀집-2</option>
+                        <option value="">풍무-밀집-1</option>
+                        <option value="">풍무-밀집-2</option>
+                    </select>
+
+                    <br><br>
+                    
+                    <button class="btn" id="confrim">확인</button>
+                    <button class="btn" id="cancel">취소</button>
+                </form>
+            
+            </p>
+        </div>
+    <%-- 모달창 사용 안함 --%>
+</div>
 
     
     <%-- 전역변수 시작 --%>
@@ -234,5 +291,6 @@
     <script src="../../resources/js/ajax.js"></script>
     <script src="../../resources/js/refresh.js"></script>
     <script src="../../resources/js/scv.js"></script> 
+    <%-- <script src="../../resources/js/modal.js"></script>  --%>
 </body>
 </html>

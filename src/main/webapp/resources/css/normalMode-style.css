@@ -385,6 +385,8 @@ section{
     align-items: center;
 }
 
+
+
 .countTitleBox{
     position: relative;
     right: -50px;
@@ -394,12 +396,21 @@ section{
     height: 120px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     border-radius: 60px;
     font-size: 36px;
     
 }
+
+.imgBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 0;
+}
+
 
 .peopleCount{
     width: 280px;

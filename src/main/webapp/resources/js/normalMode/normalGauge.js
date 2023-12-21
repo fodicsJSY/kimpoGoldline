@@ -30,7 +30,7 @@
             pointer: {
             icon: 'path://M 0 -20 Q 5 -25, 10 -20 Q 5 -19, 0 -20 Z',
             length: '35%',
-            width: 32,
+            width: 20,
             offsetCenter: [0, '-38%'],
             itemStyle: {
                 color: 'auto',
@@ -133,7 +133,7 @@
             pointer: {
             icon: 'path://M 0 -20 Q 5 -25, 10 -20 Q 5 -19, 0 -20 Z',
             length: '35%',
-            width: 32,
+            width: 20,
             offsetCenter: [0, '-38%'],
             itemStyle: {
                 color: 'auto',
@@ -236,7 +236,7 @@
             pointer: {
             icon: 'path://M 0 -20 Q 5 -25, 10 -20 Q 5 -19, 0 -20 Z',
             length: '35%',
-            width: 32,
+            width: 20,
             offsetCenter: [0, '-38%'],
             itemStyle: {
                 color: 'auto',
@@ -339,7 +339,7 @@
             pointer: {
             icon: 'path://M 0 -20 Q 5 -25, 10 -20 Q 5 -19, 0 -20 Z',
             length: '35%',
-            width: 32,
+            width: 20,
             offsetCenter: [0, '-38%'],
             itemStyle: {
                 color: 'auto',

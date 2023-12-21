@@ -253,7 +253,7 @@
 			COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GET_OFF_GOCHON
 		FROM TB_EVENT_HIST_DL H
 		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE  SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
+		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
 		AND H.event_type = 'DE20200605_000002'   
 		AND R.role_name = '고촌-buzzer-출근'
 		GROUP BY occu_time
