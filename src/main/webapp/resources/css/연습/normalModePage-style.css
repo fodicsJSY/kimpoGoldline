@@ -1,0 +1,87 @@
+
+/* .gridBox1{
+    max-width: 100%;
+    display:flex;
+    justify-content: space-around; 
+    align-items: center;
+} */
+
+
+.headContainer{
+    max-width: 100%;
+    /* max-height: 100%;  */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+
+.modeContainer{
+    min-width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.clockContainer{
+    min-width: 50%;
+    text-align: center;
+}
+
+.cameraBox1, .cameraBox2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#NormalModeChart>div{
+    width: 100% !important;
+}
+
+
+
+.throngChartTitleBox{
+    height: 10%;
+    width: 100%;
+    border: 1px solid salmon;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.throngChartBox{
+    height: 45%;
+    width: 100%;
+    border: 1px solid salmon;
+}
+
+.throngChartTitle{
+    height: 10%;
+    border: 1px solid salmon;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.throngChartContainer{
+    height: 90%;
+    width: 100%;
+}
+#gochonNormal1>div{
+    width: 100% !important;
+}
+#gochonNormal2>div{
+    width: 100% !important;
+}
+#pungmuNormal1>div{
+    width: 100% !important;
+}
+#pungmuNormal2>div{
+    width: 100% !important;
+}
