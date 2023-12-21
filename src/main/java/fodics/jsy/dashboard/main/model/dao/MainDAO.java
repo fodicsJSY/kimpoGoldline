@@ -2,6 +2,7 @@ package fodics.jsy.dashboard.main.model.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -136,28 +137,32 @@ public class MainDAO {
 
 
 
-	public List<CSV> goToGimpoCSV(String occuDate) {
-		return sql2.selectList("mainMapper.goToGimpoCSV", occuDate);
+	public List<CSV> goToGimpoCSV(Map<String, Object> map) {
+		return sql2.selectList("mainMapper.goToGimpoCSV", map);
 	}
 
 
 
-	public List<CSV> getOffGimpoCSV(String occuDate) {
-		return sql2.selectList("mainMapper.getOffGimpoCSV", occuDate);
+	public List<CSV> getOffGimpoCSV(Map<String, Object> map) {
+		return sql2.selectList("mainMapper.getOffGimpoCSV", map);
 	}
 
 
 
-	public List<CSV> goToPungmuCSV(String occuDate) {
-		return sql2.selectList("mainMapper.goToPungmuCSV", occuDate);
+	public List<CSV> goToPungmuCSV(Map<String, Object> map) {
+		return sql2.selectList("mainMapper.goToPungmuCSV", map);
 	}
 
 
 
-	public List<CSV> goToGochonCSV(String occuDate) {
-		return sql2.selectList("mainMapper.goToGochonCSV", occuDate);
+	public List<CSV> goToGochonCSV(Map<String, Object> map) {
+		return sql2.selectList("mainMapper.goToGochonCSV", map);
 	}
 
+
+
+	
+	
 
 
 

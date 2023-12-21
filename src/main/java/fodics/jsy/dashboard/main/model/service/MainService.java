@@ -1,6 +1,7 @@
 package fodics.jsy.dashboard.main.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Main;
@@ -48,16 +49,18 @@ public interface MainService {
 	int selectGochonPlatform2();
 
 	//csv파일1
-	List<CSV> goToGimpoCSV(String occuDate);
+	List<CSV> goToGimpoCSV(Map<String, Object>  map);
 
 	//csv파일2
-	List<CSV> getOffGimpoCSV(String occuDate);
+	List<CSV> getOffGimpoCSV(Map<String, Object>  map);
 
 	// csv파일3
-	List<CSV> goToPungmuCSV(String occuDate);
+	List<CSV> goToPungmuCSV(Map<String, Object>  map);
 
 	// csv파일4
-	List<CSV> goToGochonCSV(String occuDate);
+	List<CSV> goToGochonCSV(Map<String, Object>  map);
+
+
 
 
 

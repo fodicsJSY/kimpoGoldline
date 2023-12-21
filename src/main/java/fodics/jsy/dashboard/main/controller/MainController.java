@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,11 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
+	
+	@Autowired
+	@Resource(name="sqlSessionTemplate2")
+	private SqlSessionTemplate sql2;
+
 	
 	@GetMapping("/")
 	public String mainForward(
@@ -172,31 +180,58 @@ public class MainController {
 	 @PostMapping("/loadRushHourCSV")
 	 @ResponseBody
 	 public Map<String, Object> loadRushHourCSV(
-			 @RequestParam(value="occuDate") String occuDate
+			 @RequestParam(value="occuDate") String occuDate,
+			 Model model
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
+
+		 	
+		 	// csv파일1 프로시저 호출
+		 	map.put("parameter", occuDate);
+		 	
+		 	sql2.selectList("mainMapper.callSP_GIMPO_OUT", map);
+		 	
 		 
 		 	// csv파일1
-		 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(occuDate);
+		 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(map);
 		 	map.put("goToGimpoCSV", goToGimpoCSV);
 		 	
-		 	// csv파일2
-		 	List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(occuDate);
+		 	
+		 	
+		 	// csv파일2 프로시저 호출
+//		 	map.put("parameter", occuDate);
+		 	sql2.selectList("mainMapper.callSP_GIMPO_IN", map);
+	        
+			 // csv파일2
+			 List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(map);
 			 map.put("getOffGimpoCSV", getOffGimpoCSV);
 			 
+		 	
+		 	// csv파일3 프로시저 호출
+//		 	map.put("parameter", occuDate);
+		 	sql2.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
+		 	
 			 
 			 // csv파일3
-			 List<CSV> goToPungmuCSV = service.goToPungmuCSV(occuDate);
+			 List<CSV> goToPungmuCSV = service.goToPungmuCSV(map);
 			 map.put("goToPungmuCSV", goToPungmuCSV);
 			 
-			 // csv파일4
-			 List<CSV> goToGochonCSV = service.goToGochonCSV(occuDate);
-			 map.put("goToGochonCSV", goToGochonCSV);
 			 
-//		 System.out.println("map : "+ map);
+			 
+			// csv파일4 프로시저 호출
+//		 	map.put("parameter", occuDate);
+		 	sql2.selectList("mainMapper.callSP_GOCHON_INOUT", map);
+			 
+			// csv파일4
+			List<CSV> goToGochonCSV = service.goToGochonCSV(map);
+			map.put("goToGochonCSV", goToGochonCSV);
+			 
+		 System.out.println("map : "+ map);
 		 
 	
 		 return map;
 	 }
+
+
 
 }

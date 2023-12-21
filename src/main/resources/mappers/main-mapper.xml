@@ -53,12 +53,33 @@
       	<result property="getOffGimpoST" column="GET_OFF_GIMPO_ST" />
       	<result property="getOffGimpoEV" column="GET_OFF_GIMPO_EV" />
       	<result property="getOffGimpoEC" column="GET_OFF_GIMPO_EC" />
+
+      	<result property="gimpo_st_out" column="GIMPO_ST_OUT" />
+      	<result property="gimpo_ev_out" column="GIMPO_EV_OUT" />
+      	<result property="gimpo_ec_out" column="GIMPO_EC_OUT" />
+      	<result property="gimpo_total_out" column="GIMPO_TOTAL_OUT" />
+
       	
       	<result property="goToPungmu" column="GO_TO_PUNGMU" />
       	<result property="getOffPungmu" column="GET_OFF_PUNGMU" />
       	
       	<result property="goToGochon" column="GO_TO_GOCHON" />
       	<result property="getOffGochon" column="GET_OFF_GOCHON" />
+	</resultMap>
+	
+	<resultMap type="File" id="_file">
+      	<result property="date_time" column="DATE_TIME" />
+      	<result property="gimpo_st_out" column="GIMPO_ST_OUT" />
+      	<result property="gimpo_ev_out" column="GIMPO_EV_OUT" />
+      	<result property="gimpo_ec_out" column="GIMPO_EC_OUT" />
+      	<result property="gimpo_total_out" column="GIMPO_TOTAL_OUT" />
+      	<result property="gimpo_st_in" column="GIMPO_ST_IN" />
+      	<result property="gimpo_ev_in" column="GIMPO_EV_IN" />
+      	<result property="gimpo_ec_in" column="GIMPO_EC_IN" />
+      	<result property="pungmu_in" column="PUNGMU_IN" />
+      	<result property="pungmu_out" column="PUNGMU_OUT" />
+      	<result property="gochon_in" column="GOCHON_IN" />
+      	<result property="gochon_out" column="GOCHON_OUT" />
 	</resultMap>
   
   <resultMap id="_int" type="java.lang.Integer"/>
@@ -193,71 +214,63 @@
 		  ]]>
 	  </select>
 	  
+  	  
+	<!-- csv파일1프로시저 -->
+	<select id="callSP_GIMPO_OUT" statementType="CALLABLE" resultMap="_file">
+	    {call SP_GIMPO_OUT(
+	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	    )}
+	</select>
 	  
     <!-- csv파일1 -->
-	   <select id="goToGimpoCSV" resultMap="_main">
-	   	SELECT 
-		    occu_time, 
-		    COUNT(CASE WHEN R.role_name IN ('김포-ST-출근') THEN 1 END) AS GO_TO_GIMPO_ST,
-		    COUNT(CASE WHEN R.role_name IN ('김포-EV-출근') THEN 1 END) AS GO_TO_GIMPO_EV,
-		    COUNT(CASE WHEN R.role_name IN ('김포-EC-출근') THEN 1 END) AS GO_TO_GIMPO_EC
-		FROM 
-		    TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE H.event_type = 'DE20200605_000002'   
-		AND R.role_name = '김포-buzzer-출근'
-		AND SUBSTRING(H.OCCU_TIME, 1, 8) =  #{occuDate}
-		GROUP BY occu_time
+	   <select id="goToGimpoCSV" resultMap="_file">
+		   	SELECT * FROM TB_TEMP_GIMPO_OUT
 	  </select>
 
   
   	  
+	<!-- csv파일2프로시저 -->
+	<select id="callSP_GIMPO_IN" statementType="CALLABLE" resultMap="_file">
+	    {call SP_GIMPO_IN(
+	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	    )}
+	</select>
+
     <!-- csv파일2 -->
-	   <select id="getOffGimpoCSV" resultMap="_main">
-	   	SELECT 
-		    occu_time,
-		    COUNT(CASE WHEN R.role_name IN ('김포-ST-퇴근') THEN 1 END) AS GET_OFF_GIMPO_ST,
-		    COUNT(CASE WHEN R.role_name IN ('김포-EV-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EV,
-		    COUNT(CASE WHEN R.role_name IN ('김포-EC-퇴근') THEN 1 END) AS GET_OFF_GIMPO_EC
-		FROM TB_EVENT_HIST_DL H
-		JOIN
-		    TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-		AND CAST(SUBSTRING(H.OCCU_TIME, 11, 2) AS INT) % 5 = 0
-		AND SUBSTRING(H.OCCU_TIME, 13, 2) = 0
-		GROUP BY occu_time
+	   <select id="getOffGimpoCSV" resultMap="_file">
+	   	SELECT * FROM TB_TEMP_GIMPO_IN;
 	  </select>
   
+  	
   
   	  
+     	  
+	<!-- csv파일3프로시저 -->
+	<select id="callSP_PUNGMU_INOUT" statementType="CALLABLE" resultMap="_file">
+	    {call SP_PUNGMU_INOUT(
+	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	    )}
+	</select>
+	
+	
     <!-- csv파일3 -->
-	   <select id="goToPungmuCSV" resultMap="_main">
-		SELECT occu_time,
-			COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS GO_TO_PUNGMU,
-			COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS GET_OFF_PUNGMU
-		FROM TB_EVENT_HIST_DL H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE  SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-		AND  H.event_type = 'DE20200605_000002'   
-		AND R.role_name = '풍무-buzzer-출근'
-		GROUP BY occu_time
+	   <select id="goToPungmuCSV" resultMap="_file">
+	   		SELECT * FROM TB_TEMP_PUNGMU_INOUT;
 	  </select>
 	  
 	  
 	  	  
     <!-- csv파일4 -->
-	   <select id="goToGochonCSV" resultMap="_main">
-	   	SELECT occu_time,
-			COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GO_TO_GOCHON,
-			COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GET_OFF_GOCHON
-		FROM TB_EVENT_HIST_DL H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-		AND H.event_type = 'DE20200605_000002'   
-		AND R.role_name = '고촌-buzzer-출근'
-		GROUP BY occu_time
-	  </select>
+	<select id="callSP_GOCHON_INOUT" resultMap="_file">
+		{call SP_GOCHON_INOUT(
+	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	    )}
+	</select>
+  
+    <!-- csv파일4 -->
+	<select id="goToGochonCSV" resultMap="_file">
+	 	SELECT * FROM TB_TEMP_GOCHON_INOUT;
+	</select>
   
   
 

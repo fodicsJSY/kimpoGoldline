@@ -289,7 +289,7 @@
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
-    <script src="../../resources/js/refresh.js"></script>
+    <%-- <script src="../../resources/js/refresh.js"></script> --%>
     <script src="../../resources/js/scv.js"></script> 
     <%-- <script src="../../resources/js/modal.js"></script>  --%>
 </body>

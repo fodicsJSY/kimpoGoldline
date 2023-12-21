@@ -15,6 +15,7 @@
 	<typeAliases>
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.Main" alias="Main" /> 
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.CSV" alias="CSV" /> 
+		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.File" alias="File" /> 
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->

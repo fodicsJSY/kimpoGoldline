@@ -1,6 +1,7 @@
 package fodics.jsy.dashboard.main.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,8 +128,8 @@ public class MainServiceImpl implements MainService{
 	 *csv파일1
 	 */
 	@Override
-	public List<CSV> goToGimpoCSV(String occuDate) {
-		return dao.goToGimpoCSV(occuDate);
+	public List<CSV> goToGimpoCSV(Map<String, Object> map) {
+		return dao.goToGimpoCSV(map);
 	}
 	
 	
@@ -136,27 +137,27 @@ public class MainServiceImpl implements MainService{
 	 * csv파일2
 	 */
 	@Override
-	public List<CSV> getOffGimpoCSV(String occuDate) {
-		return dao.getOffGimpoCSV(occuDate);
+	public List<CSV> getOffGimpoCSV(Map<String, Object> map) {
+		return dao.getOffGimpoCSV(map);
 	}
 	
 	/**
 	 *csv파일3
 	 */
 	@Override
-	public List<CSV> goToPungmuCSV(String occuDate) {
-		return dao.goToPungmuCSV(occuDate);
+	public List<CSV> goToPungmuCSV(Map<String, Object>  map) {
+		return dao.goToPungmuCSV(map);
 	}
 	
 	/**
 	 *csv파일4
 	 */
 	@Override
-	public List<CSV> goToGochonCSV(String occuDate) {
-		return dao.goToGochonCSV(occuDate);
+	public List<CSV> goToGochonCSV(Map<String, Object>  map) {
+		return dao.goToGochonCSV(map);
 	}
 	
 	
-	
+
 	
 }
