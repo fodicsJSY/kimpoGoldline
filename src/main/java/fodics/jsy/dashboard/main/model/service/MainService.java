@@ -4,37 +4,37 @@ import java.util.List;
 import java.util.Map;
 
 import fodics.jsy.dashboard.main.model.dto.CSV;
-import fodics.jsy.dashboard.main.model.dto.Main;
+import fodics.jsy.dashboard.main.model.dto.Data;
 
 public interface MainService {
 
 	
 	
 	// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
-	List<Main> rushHourCountList();
+	List<Data> rushHourCountList();
 	
 	// 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
-	List<Main> rushHourTotalCount();
+	List<Data> rushHourTotalCount();
 	
 	// 김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜검색 시) 
-	List<Main> rushHourDateChangeList(String occuDate);
+	List<Data> rushHourDateChangeList(String occuDate);
 	
 	// 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜변경 시)
-	List<Main> rushHourChangeTotalCount(String occuDate);
+	List<Data> rushHourChangeTotalCount(String occuDate);
 
 	
 	// 24시간 김포공항역, 고촌역, 풍무역 승하차 수
-	List<Main> normal24CountList();
+	List<Data> normal24CountList();
 
 
 	// 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수
-	List<Main> total24Count();
+	List<Data> total24Count();
 
 	// 24시간 김포공항역, 고촌역, 풍무역 승하차 수(날짜변경 시)
-	List<Main> normalDateChangeList(String occuDate);
+	List<Data> normalDateChangeList(String occuDate);
 
 	// 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
-	List<Main> normalDateChangeCount(String occuDate);
+	List<Data> normalDateChangeCount(String occuDate);
 
 	// 풍무역 플랫폼1 군중밀집도
 	int selectPungmuPlatform1();

@@ -6,29 +6,17 @@ const colors = ['#5470C6', '#91CC75', '#EE6666'];
 option = {
 // responsive: true,
 color: colors,
-tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-    type: 'cross'
-    }
-},
-grid: {
-    // top: '0%',
-    // left: '10%'
-},
-toolbox: {
-    feature: {
-    dataView: { show: true, readOnly: false },
-    restore: { show: true },
-    saveAsImage: { show: true }
-    }
-},
 legend: {
     data: ['김포공항역(하차)', '고촌역(승차)', '풍무역(승차)'],
     textStyle: {
         color: '#fff',
         fontSize: 30
         }
+},
+grid: {
+    tooltip: {
+        show: false
+    }
 },
 xAxis: [
     {
@@ -161,7 +149,7 @@ series: [
     {
     name: '김포공항역(하차)',
     type: 'bar',
-    data: [1234, 1234, 1234],
+    data: [0, 0, 0],
     label: {
         show: true,
         position: 'top',
@@ -172,7 +160,7 @@ series: [
     name: '고촌역(승차)',
     type: 'bar',
     yAxisIndex: 0,
-    data: [1234, 1234, 1234],
+    data: [0, 0, 0],
     label: {
         show: true,
         position: 'top',
@@ -183,7 +171,7 @@ series: [
     name: '풍무역(승차)',
     type: 'bar',
     yAxisIndex: 0,
-    data: [1234, 1234, 1234],
+    data: [0, 0, 0],
     label: {
         show: true,
         position: 'top',

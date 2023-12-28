@@ -1,6 +1,5 @@
 package fodics.jsy.dashboard.main.model.dto;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,8 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Main {
-	
+public class Data {
 	private String occuTime;
 	private String roleCode;
 	private String eventType;
@@ -116,7 +114,6 @@ public class Main {
 	private int getOffPungmu;
 	private int goToGochon;
 	private int getOffGochon;
-	
-	
-	
+
+
 }

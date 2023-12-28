@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fodics.jsy.dashboard.main.model.dao.MainDAO;
 import fodics.jsy.dashboard.main.model.dto.CSV;
-import fodics.jsy.dashboard.main.model.dto.Main;
+import fodics.jsy.dashboard.main.model.dto.Data;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -19,7 +19,7 @@ public class MainServiceImpl implements MainService{
 	 * 김포공항 & 풍무역 & 고산역 출근대 승하차 수
 	 */
 	@Override
-	public List<Main> rushHourCountList() {
+	public List<Data> rushHourCountList() {
 		return dao.rushHourCountList();
 	}
 	
@@ -28,7 +28,7 @@ public class MainServiceImpl implements MainService{
 	 * 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	 */
 	@Override
-	public List<Main> rushHourTotalCount() {
+	public List<Data> rushHourTotalCount() {
 		return dao.rushHourTotalCount();
 	}
 	
@@ -37,7 +37,7 @@ public class MainServiceImpl implements MainService{
 	 *  김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜검색 시) 
 	 */
 	@Override
-	public List<Main> rushHourDateChangeList(String occuDate) {
+	public List<Data> rushHourDateChangeList(String occuDate) {
 		return dao.rushHourDateChangeList(occuDate);
 	}
 	
@@ -45,7 +45,7 @@ public class MainServiceImpl implements MainService{
 	 * 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜변경 시)
 	 */
 	@Override
-	public List<Main> rushHourChangeTotalCount(String occuDate) {
+	public List<Data> rushHourChangeTotalCount(String occuDate) {
 		return dao.rushHourChangeTotalCount(occuDate);
 	}
 	
@@ -54,7 +54,7 @@ public class MainServiceImpl implements MainService{
 	 * 24시간 김포공항역, 고촌역, 풍무역 승하차 수
 	 */
 	@Override
-	public List<Main> normal24CountList() {
+	public List<Data> normal24CountList() {
 		return dao.normal24CountList();
 	}
 	
@@ -63,7 +63,7 @@ public class MainServiceImpl implements MainService{
 	 * 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	 */
 	@Override
-	public List<Main> total24Count() {
+	public List<Data> total24Count() {
 		return dao.total24Count();
 	}
 	
@@ -72,7 +72,7 @@ public class MainServiceImpl implements MainService{
 	 * 24시간 김포공항역, 고촌역, 풍무역 승하차 수(날짜변경 시)
 	 */
 	@Override
-	public List<Main> normalDateChangeList(String occuDate) {
+	public List<Data> normalDateChangeList(String occuDate) {
 		return dao.normalDateChangeList(occuDate);
 	}
 	
@@ -81,7 +81,7 @@ public class MainServiceImpl implements MainService{
 	 * 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
 	 */
 	@Override
-	public List<Main> normalDateChangeCount(String occuDate) {
+	public List<Data> normalDateChangeCount(String occuDate) {
 		return dao.normalDateChangeCount(occuDate);
 	}
 	

@@ -57,7 +57,7 @@
                 </div>
                 <div class="btnContainer">
                     <div>
-                        <button type="button" class="scvButton" id="scvBtn">
+                        <button type="button" class="scvButton" id="normalCSVBtn">
                             <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
                             <span>CSV</span>
                         </button>
@@ -225,7 +225,7 @@
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
-    <script src="../../resources/js/normalMode/normal_csv.js"></script> 
+    <script src="../../resources/js/normalMode/normalCSV.js"></script> 
     <script src="../../resources/js/refresh.js"></script>
 </body>
 </html>

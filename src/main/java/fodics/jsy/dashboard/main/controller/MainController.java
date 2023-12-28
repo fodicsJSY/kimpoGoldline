@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fodics.jsy.dashboard.main.model.dto.CSV;
-import fodics.jsy.dashboard.main.model.dto.Main;
+import fodics.jsy.dashboard.main.model.dto.Data;
 import fodics.jsy.dashboard.main.model.service.MainService;
 
 @Controller
@@ -36,7 +36,7 @@ public class MainController {
 			) {
 		
 		//출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
-		List<Main> rushHourTotalList = service.rushHourTotalCount();
+		List<Data> rushHourTotalList = service.rushHourTotalCount();
 		model.addAttribute("rushHourTotalList", rushHourTotalList);
 		
 		// 풍무역 플랫폼1 군중밀집도
@@ -71,7 +71,7 @@ public class MainController {
 		
 
 		// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
-		List<Main> rushHourCountList = service.rushHourCountList();
+		List<Data> rushHourCountList = service.rushHourCountList();
 		map.put("rushHourCountList", rushHourCountList);
 		 
 		 
@@ -92,11 +92,11 @@ public class MainController {
 		 Map<String, Object> map = new HashMap<>();
 	
 		 // 김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜검색 시)
-		 List<Main> rushHourDateChangeList = service.rushHourDateChangeList(occuDate);
+		 List<Data> rushHourDateChangeList = service.rushHourDateChangeList(occuDate);
 		 map.put("rushHourDateChangeList", rushHourDateChangeList);
 
 		 // 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜검색 시)
-		 List<Main> rushHourChangeTotalCount = service.rushHourChangeTotalCount(occuDate);
+		 List<Data> rushHourChangeTotalCount = service.rushHourChangeTotalCount(occuDate);
 		 map.put("rushHourChangeTotalCount", rushHourChangeTotalCount);
 		 
 //		 System.out.println("map : "+ map);
@@ -110,8 +110,8 @@ public class MainController {
 			Model model
 			) {
 		
-		//24시간 김포공항역, 고촌역, 풍무역 승하차 v
-		List<Main> total24CountList = service.total24Count();
+		//24시간 김포공항역, 고촌역, 풍무역 승하차 
+		List<Data> total24CountList = service.total24Count();
 		model.addAttribute("total24CountList", total24CountList);
 		
 		// 풍무역 플랫폼1 군중밀집도
@@ -145,7 +145,7 @@ public class MainController {
 		 
 		
 		//24시간 김포공항역, 고촌역, 풍무역 승하차 수
-		 List<Main> normal24List = service.normal24CountList();
+		 List<Data> normal24List = service.normal24CountList();
 		 map.put("normal24List", normal24List);
 		 
 		 
@@ -163,11 +163,11 @@ public class MainController {
 		 Map<String, Object> map = new HashMap<>();
 	
 		 // 김포공항 & 풍무역 & 고산역 24시 승하차 수(날짜변경 시)
-		 List<Main> normalDateChangeList = service.normalDateChangeList(occuDate);
+		 List<Data> normalDateChangeList = service.normalDateChangeList(occuDate);
 		 map.put("normalDateChangeList", normalDateChangeList);
 		 
 		 // 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
-		 List<Main> normalDateChangeCount = service.normalDateChangeCount(occuDate);
+		 List<Data> normalDateChangeCount = service.normalDateChangeCount(occuDate);
 		 map.put("normalDateChangeCount", normalDateChangeCount);
 		 
 //		 System.out.println("map : "+ map);
@@ -233,5 +233,6 @@ public class MainController {
 	 }
 
 
+	
 
 }

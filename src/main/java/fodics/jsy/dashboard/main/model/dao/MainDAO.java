@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fodics.jsy.dashboard.main.model.dto.CSV;
-import fodics.jsy.dashboard.main.model.dto.Main;
+import fodics.jsy.dashboard.main.model.dto.Data;
 
 @Repository
 public class MainDAO {
@@ -32,7 +32,7 @@ public class MainDAO {
 	/** 김포공항 & 풍무역 & 고산역 출근대 승하차 
 	 * @return list
 	 */
-	public List<Main> rushHourCountList() {
+	public List<Data> rushHourCountList() {
 		return sql2.selectList("mainMapper.rushHourCountList");
 	}
 
@@ -41,7 +41,7 @@ public class MainDAO {
 	/** 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	 * @return list
 	 */
-	public List<Main> rushHourTotalCount() {
+	public List<Data> rushHourTotalCount() {
 		return sql2.selectList("mainMapper.rushHourTotalCount");
 	}
 	
@@ -51,7 +51,7 @@ public class MainDAO {
 	 *  * @param occuDate
 	 * @return list
 	 */
-	public List<Main> rushHourDateChangeList(String occuDate) {
+	public List<Data> rushHourDateChangeList(String occuDate) {
 		return sql2.selectList("mainMapper.rushHourDateChangeList", occuDate);
 	}
 	
@@ -60,7 +60,7 @@ public class MainDAO {
 	 * @param occuDate
 	 * @return list
 	 */
-	public List<Main> rushHourChangeTotalCount(String occuDate) {
+	public List<Data> rushHourChangeTotalCount(String occuDate) {
 		return sql2.selectList("mainMapper.rushHourChangeTotalCount", occuDate);
 	}
 
@@ -70,14 +70,14 @@ public class MainDAO {
 	/** 24시간 김포공항역, 고촌역, 풍무역 승하차 수
 	 * @return list
 	 */
-	public List<Main> normal24CountList() {
+	public List<Data> normal24CountList() {
 		return sql2.selectList("normalMapper.normal24CountList");
 	}
 
 	/** 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수
 	 * @return list
 	 */
-	public List<Main> total24Count() {
+	public List<Data> total24Count() {
 		return  sql2.selectList("normalMapper.total24Count");
 	}
 
@@ -87,7 +87,7 @@ public class MainDAO {
 	 * @param occuDate
 	 * @return list
 	 */
-	public List<Main> normalDateChangeList(String occuDate) {
+	public List<Data> normalDateChangeList(String occuDate) {
 		return  sql2.selectList("normalMapper.normalDateChangeList", occuDate);
 	}
 
@@ -95,7 +95,7 @@ public class MainDAO {
 	 * @param occuDate
 	 * @return list
 	 */
-	public List<Main> normalDateChangeCount(String occuDate) {
+	public List<Data> normalDateChangeCount(String occuDate) {
 		return sql2.selectList("normalMapper.normalDateChangeCount", occuDate);
 	}
 

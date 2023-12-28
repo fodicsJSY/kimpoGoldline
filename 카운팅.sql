@@ -324,9 +324,8 @@ GROUP BY
  
  
  SELECT *
- FROM  TB_EVENT_ROLE_DL;
-WHERE
-   SUBSTRING(OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112);
+ FROM  TB_EVENT_HIST_DL
+WHERE SUBSTRING(OCCU_TIME, 1, 8) = '20231221';--CONVERT(varchar, GETDATE(), 112);
 
 
 ----------출근 시간대 막대 그래프-----------
@@ -811,4 +810,8 @@ AND H.event_type = 'DE20200605_000002'
 AND R.role_name = '고촌-buzzer-출근'
 GROUP BY occu_time;
 	       
+
+
+
+
    

@@ -1,4 +1,4 @@
-document.getElementById("scvBtn").addEventListener("click", ()=>{
+document.getElementById("normalCSVBtn").addEventListener("click", ()=>{
     occuDate = formatToYYYYMMDD(document.getElementById('normalDateSearch').value);
     // const date = occuDate; 
     // const ipaddress = "172.16.111.45";
@@ -26,45 +26,41 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                 
 
                 // CSV파일 생성 함수 실행
-                flie_goToGimpoCSV(goToGimpoCSV);
-                flie_getOffGimpoCSV(getOffGimpoCSV);
-                flie_goToPungmuCSV(goToPungmuCSV);
-                flie_goToGochonCSV(goToGochonCSV);
+                flie_goToGimpoCSV(goToGimpoCSV, occuDate);
+                flie_getOffGimpoCSV(getOffGimpoCSV, occuDate);
+                flie_goToPungmuCSV(goToPungmuCSV, occuDate);
+                flie_goToGochonCSV(goToGochonCSV, occuDate);
 
 
 
                 // CSV파일1 생성 시작-----------------------------------------------
-                function flie_goToGimpoCSV(goToGimpoCSV) {
+                function flie_goToGimpoCSV(goToGimpoCSV, occuDate) {
                     // CSV 헤더 생성
-                    let csvContent = "data:text/csv;charset=utf-8,";
-                    csvContent += "Date/Time,st,ev,ec\n";
-
+                    let csvContent = "일시,계단,엘리베이터,에스컬레이터\n";
+                    
 
                     //CSV 데이터 추가
                     for (let i = 0; i < goToGimpoCSV.length; i++) {
                         var currentItem = goToGimpoCSV[i];
-
-                        // console.log('occuTime : ', currentItem.occuTime);
-                        // console.log('goToGimpoST : ', currentItem.goToGimpoST);
-                        // console.log('goToGimpoEV : ', currentItem.goToGimpoEV);
-                        // console.log('goToGimpoEC : ', currentItem.goToGimpoEC);
-
-                        // occuTime을 8자리와 6자리로 분할하여 / 기호 삽입
-                        let formattedOccuTime = currentItem.occuTime.substring(0, 8) + ' / ' +
-                                                currentItem.occuTime.substring(8, 10) + ':' +
-                                                currentItem.occuTime.substring(10, 12) + ':' +
-                                                currentItem.occuTime.substring(12);
-
-                        let row = `${formattedOccuTime},${currentItem.goToGimpoST},${currentItem.goToGimpoEV},${currentItem.goToGimpoEC}\n`;
+                        
+                        // console.log('occuTime : ', currentItem.date_time);
+                        // console.log('goToGimpoST : ', currentItem.gimpo_st_out);
+                        // console.log('goToGimpoEV : ', currentItem.gimpo_ev_out);
+                        // console.log('goToGimpoEC : ', currentItem.gimpo_ec_out);
+                        
+                        
+                        let row = `${currentItem.date_time},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}\n`;
                         csvContent += row;
                     }
-                
-                
-                    // CSV 파일 생성
+                    
+                    // Blob 생성
                     const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
+
+                    // CSV 파일 생성
                     const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "go_to_work_gimpo.csv");
+                    link.href = URL.createObjectURL(blob);
+                    link.setAttribute("download", `김포출근길${occuDate}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -73,49 +69,43 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
 
 
                 // CSV파일2 생성 시작-----------------------------------------------
-                function flie_getOffGimpoCSV(getOffGimpoCSV) {
+                function flie_getOffGimpoCSV(getOffGimpoCSV, occuDate) {
                     // CSV 헤더 생성
-                    let csvContent = "data:text/csv;charset=utf-8,";
-                    csvContent += "Date/Time,st,ev,ec\n";
+                    let csvContent = "일시,계단,엘리베이터,에스컬레이터\n";
 
 
                     //CSV 데이터 추가
                     for (let i = 0; i < getOffGimpoCSV.length; i++) {
                         var currentItem = getOffGimpoCSV[i];
 
-                        // console.log('occuTime : ', currentItem.occuTime);
-                        // console.log('getOffGimpoST : ', currentItem.getOffGimpoST);
-                        // console.log('getOffGimpoEV : ', currentItem.getOffGimpoEV);
-                        // console.log('getOffGimpoEC : ', currentItem.getOffGimpoEC);
-
-                        // occuTime을 8자리와 6자리로 분할하여 / 기호 삽입
-                        let formattedOccuTime = currentItem.occuTime.substring(0, 8) + ' / ' +
-                        currentItem.occuTime.substring(8, 10) + ':' +
-                        currentItem.occuTime.substring(10, 12) + ':' +
-                        currentItem.occuTime.substring(12);
 
 
-                        let row = `${formattedOccuTime},${currentItem.getOffGimpoST},${currentItem.getOffGimpoEV},${currentItem.getOffGimpoEC}\n`;
+
+                        let row = `${currentItem.date_time},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}\n`;
                         csvContent += row;
                     }
                 
+                    // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
+
                 
                     // CSV 파일 생성
-                    const encodedUri = encodeURI(csvContent);
                     const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "get_off_work_gimpo.csv");
+                    link.href = URL.createObjectURL(blob);
+                    link.setAttribute("download", `김포퇴근길${occuDate}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                 }
                 // CSV파일2 생성 끝-----------------------------------------------
 
+
+
                 // CSV파일3 생성 시작-----------------------------------------------
-                function flie_goToPungmuCSV(goToPungmuCSV) {
+                function flie_goToPungmuCSV(goToPungmuCSV, occuDate) {
                     // CSV 헤더 생성
-                    let csvContent = "data:text/csv;charset=utf-8,";
-                    csvContent += "Date/Time,Boarding,get off,\n";
+                    let csvContent = "일시,승차,하차\n";
 
 
                     //CSV 데이터 추가
@@ -126,22 +116,20 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                         // console.log('goToPungmu : ', currentItem.goToPungmu);
                         // console.log('getOffPungmu : ', currentItem.getOffPungmu);
 
-                        // occuTime을 8자리와 6자리로 분할하여 / 기호 삽입
-                        let formattedOccuTime = currentItem.occuTime.substring(0, 8) + ' / ' +
-                                                currentItem.occuTime.substring(8, 10) + ':' +
-                                                currentItem.occuTime.substring(10, 12) + ':' +
-                                                currentItem.occuTime.substring(12);
 
-                        let row = `${formattedOccuTime},${currentItem.goToPungmu},${currentItem.getOffPungmu}\n`;
+                        let row = `${currentItem.date_time},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
                         csvContent += row;
                     }
                 
+                     // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
+ 
                 
                     // CSV 파일 생성
-                    const encodedUri = encodeURI(csvContent);
                     const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "pungmu.csv");
+                    link.href = URL.createObjectURL(blob);
+                    link.setAttribute("download", `풍무${occuDate}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -150,10 +138,9 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
 
 
                 // CSV파일4 생성 시작-----------------------------------------------
-                function flie_goToGochonCSV(goToGochonCSV) {
+                function flie_goToGochonCSV(goToGochonCSV, occuDate) {
                     // CSV 헤더 생성
-                    let csvContent = "data:text/csv;charset=utf-8,";
-                    csvContent += "Date/Time,Boarding,get off,\n";
+                    let csvContent = "일시,승차,하차\n";
 
 
                     //CSV 데이터 추가
@@ -164,24 +151,19 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                         // console.log('goToPungmu : ', currentItem.goToGochon);
                         // console.log('getOffGochon : ', currentItem.getOffGochon);
 
-
-                         // occuTime을 8자리와 6자리로 분할하여 / 기호 삽입
-                        let formattedOccuTime = currentItem.occuTime.substring(0, 8) + ' / ' +
-                                                currentItem.occuTime.substring(8, 10) + ':' +
-                                                currentItem.occuTime.substring(10, 12) + ':' +
-                                                currentItem.occuTime.substring(12);
-
-                        let row = `${formattedOccuTime},${currentItem.goToGochon},${currentItem.getOffPungmu}\n`;
+                        let row = `${currentItem.date_time},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
                         csvContent += row;
                     }
                 
+                    // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
                 
                 
                     // CSV 파일 생성
-                    const encodedUri = encodeURI(csvContent);
                     const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "gochon.csv");
+                    link.href = URL.createObjectURL(blob);
+                    link.setAttribute("download", `고촌${occuDate}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);

@@ -27,8 +27,11 @@ $(function(){
                 
                 
                 // currentItem의 속성에 접근 확인
-                // console.log('occuHour1 : ', occuHourList);
-                // console.log('gimpoIn24 : ', gimpoIn24);
+                console.log('occuHour1 : ', occuHourList);
+                console.log('gimpoIn24List : ', gimpoIn24List);
+                console.log('gimpoOut24List : ', gimpoOut24List);
+                console.log('gochon24List : ', gochon24List);
+                console.log('pungmu24List : ', pungmu24List);
     
                 
                 normalChart()
@@ -51,7 +54,9 @@ $(function(){
                     }
                 },
                 grid: {
-                    // right: '5%'
+                    tooltip: {
+                        show: false
+                    }
                 },
                 toolbox: {
                     feature: {
@@ -172,8 +177,6 @@ $(function(){
                 //  차트 옵션 설정하기
                 normalChart.setOption(option)
 
-                //정각이 되면 차트 리프레쉬 시작
-                refreshAtTopOfHour()
             }
             }
             //==================24=========================

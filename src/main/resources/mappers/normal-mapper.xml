@@ -3,7 +3,7 @@
 <mapper namespace="normalMapper">
 
 
-	<resultMap type="fodics.jsy.dashboard.main.model.dto.Main" id="_main">
+	<resultMap type="Data" id="_main">
       	<result property="occuTime" column="occu_time" />
       	<result property="roleCode" column="role_code" />
       	<result property="eventType" column="event_type" />
@@ -38,16 +38,48 @@
   
   <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 수 -->
   <select id="normal24CountList" resultMap="_main">
-  	SELECT
-	    SUBSTRING(H.OCCU_TIME, 9, 2) AS OCCU_HOUR,
-	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoIn24,
-	    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoOut24,
-	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS gochon24,
-	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS pungmu24
-	FROM TB_EVENT_HIST_DL H
-	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-	GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
+	  SELECT
+		DATA.OCCU_HOUR
+		, SUM(GIMPO_IN_24) AS GIMPO_IN_24
+		, SUM(GIMPO_OUT_24) AS GIMPO_OUT_24
+		, SUM(GOCHON24) AS GOCHON24
+		, SUM(PUNGMU24) AS PUNGMU24
+		FROM
+		(SELECT '00' AS OCCU_HOUR, 0 AS GIMPO_IN_24, 0 AS GIMPO_OUT_24, 0 AS GOCHON24, 0 AS PUNGMU24	UNION ALL
+		SELECT '01', 0, 0, 0, 0	UNION ALL
+		SELECT '02', 0, 0, 0, 0	UNION ALL
+		SELECT '03', 0, 0, 0, 0	UNION ALL
+		SELECT '04', 0, 0, 0, 0	UNION ALL
+		SELECT '05', 0, 0, 0, 0	UNION ALL
+		SELECT '06', 0, 0, 0, 0	UNION ALL
+		SELECT '07', 0, 0, 0, 0	UNION ALL
+		SELECT '08', 0, 0, 0, 0	UNION ALL
+		SELECT '09', 0, 0, 0, 0	UNION ALL
+		SELECT '10', 0, 0, 0, 0	UNION ALL
+		SELECT '11', 0, 0, 0, 0	UNION ALL
+		SELECT '12', 0, 0, 0, 0	UNION ALL
+		SELECT '13', 0, 0, 0, 0	UNION ALL
+		SELECT '14', 0, 0, 0, 0	UNION ALL
+		SELECT '15', 0, 0, 0, 0	UNION ALL
+		SELECT '16', 0, 0, 0, 0	UNION ALL
+		SELECT '17', 0, 0, 0, 0	UNION ALL
+		SELECT '18', 0, 0, 0, 0	UNION ALL
+		SELECT '19', 0, 0, 0, 0	UNION ALL
+		SELECT '20', 0, 0, 0, 0	UNION ALL
+		SELECT '21', 0, 0, 0, 0	UNION ALL
+		SELECT '22', 0, 0, 0, 0	UNION ALL
+		SELECT '23', 0, 0, 0, 0	UNION ALL
+		SELECT
+			    SUBSTRING(H.OCCU_TIME, 9, 2) AS OCCU_HOUR,
+			    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoIn24,
+			    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS kimpoOut24,
+			    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS gochon24,
+			    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS pungmu24
+			FROM TB_CROWD_DASHBOARD_SUMMARY H
+			JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
+			WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+			GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)) DATA
+		GROUP BY DATA.OCCU_HOUR
   </select>
   
   
@@ -62,7 +94,7 @@
 	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_24COUNT,
 	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_24COUNT,
 	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24COUNT
-	FROM TB_EVENT_HIST_DL H
+	FROM TB_CROWD_DASHBOARD_SUMMARY H
 	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
   </select>
@@ -76,7 +108,7 @@
 	    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_24CHANGE,
 	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON24CHANGE,
 	    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24CHANGE
-	FROM TB_EVENT_HIST_DL H
+	FROM TB_CROWD_DASHBOARD_SUMMARY H
 	JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 	WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
 	GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
@@ -93,10 +125,13 @@
 		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_24_CHANGE_COUNT,
 		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_24_CHANGE_COUNT,
 		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU24_CHANGE_COUNT
-		FROM TB_EVENT_HIST_DL H
+		FROM TB_CROWD_DASHBOARD_SUMMARY H
 		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
 		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
   </select>
+  
+  
+  
 
 
 </mapper>

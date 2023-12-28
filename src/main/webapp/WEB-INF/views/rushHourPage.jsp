@@ -290,7 +290,6 @@
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
     <%-- <script src="../../resources/js/refresh.js"></script> --%>
-    <script src="../../resources/js/scv.js"></script> 
-    <%-- <script src="../../resources/js/modal.js"></script>  --%>
+    <script src="../../resources/js/csv.js"></script> 
 </body>
 </html>
