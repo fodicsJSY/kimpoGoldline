@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="../../resources/css/rushHourMode-style.css">
 
     <%-- echarts --%>
-	<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+	<script src="../../resources/js/echart/echart.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <%-- jquery --%>
+    <script src="../../resources/js/jquery/jquery.min.js"></script>
 
     <style>
         input[type='date'] {
