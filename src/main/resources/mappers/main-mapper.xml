@@ -29,7 +29,7 @@
       	<result property="gochon2_ChangeCount" column="GOCHON2_CHANGE_COUNT" />
       	<result property="pungmuChangeCount" column="PUNGMU_CHANGE_COUNT" />
       	<result property="objectClass" column="object_class" />
-      		<result property="goToGimpoST" column="GO_TO_GIMPO_ST" />
+      	<result property="goToGimpoST" column="GO_TO_GIMPO_ST" />
       	<result property="goToGimpoEV" column="GO_TO_GIMPO_EV" />
       	<result property="goToGimpoEC" column="GO_TO_GIMPO_EC" />
       	
@@ -88,66 +88,237 @@
 	<!-- 김포공항 & 풍무역 & 고산역 출근대 승하차 수 -->
 	<select id="rushHourCountList" resultMap="_main">
 		SELECT
-		    SUBSTRING(H.OCCU_TIME, 9, 2) AS HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_RUSH_HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_RUSH_HOUR,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_RUSH_HOUR
-		FROM TB_CROWD_DASHBOARD_SUMMARY H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
-		GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
-
+		LAST.HOUR
+		, SUM(LAST.GIMPO_IN_RUSH_HOUR)	AS GIMPO_IN_RUSH_HOUR
+		, SUM(LAST.GOCHON_RUSH_HOUR)		AS GOCHON_RUSH_HOUR
+		, SUM(LAST.PUNGMU_RUSH_HOUR)		AS PUNGMU_RUSH_HOUR
+		FROM
+		(
+			SELECT
+			STAT.hour	AS HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS GIMPO_IN_RUSH_HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS GOCHON_RUSH_HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS PUNGMU_RUSH_HOUR
+			FROM 
+			(
+				SELECT
+				DATA.HOUR				AS hour
+				, R.role_name			AS role_name
+				, DATA.EVENT_STATUS	AS event_status
+				, DATA.DATA_CNT		AS data_cnt
+				FROM
+				(
+					SELECT
+					SUBSTRING(occu_time, 9, 2)		AS HOUR
+					, role_code							AS ROLE_CODE
+					, event_status						AS EVENT_STATUS
+					, SUM(event_cnt)				AS DATA_CNT
+					FROM TB_CROWD_DASHBOARD_SUMMARY H
+					WHERE SUBSTRING(occu_time, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+					AND SUBSTRING(occu_time, 9, 2) IN (7, 8, 9)
+					GROUP BY SUBSTRING(occu_time, 9, 2)
+					, role_code
+					, event_status
+				) DATA
+				LEFT OUTER JOIN TB_EVENT_ROLE_DL R ON DATA.ROLE_CODE = r.role_code
+				WHERE R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근', '고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근', '풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			) STAT
+			GROUP BY STAT.hour
+			, STAT.role_name
+			, STAT.event_status
+		) LAST
+		GROUP BY LAST.HOUR
+		ORDER BY LAST.HOUR
 	</select>
 
 	
 	
 	<!-- 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수 -->
 	  <select id="rushHourTotalCount" resultMap="_main">
-	  	SELECT
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_COUNT
-		FROM TB_CROWD_DASHBOARD_SUMMARY H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = CONVERT(varchar, GETDATE(), 112)
-		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7
-		OR  SUBSTRING(OCCU_TIME, 9, 2) = 8
-		OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
+		SELECT
+		SUM(LAST.GIMPO_IN_24COUNT)			AS GIMPO_IN_COUNT
+		, SUM(LAST.GIMPO_OUT_24COUNT)		AS GIMPO_OUT_COUNT
+		, SUM(LAST.GOCHON24COUNT)			AS GOCHON_COUNT
+		, SUM(LAST.GOCHON1_24COUNT)		AS GOCHON1_COUNT
+		, SUM(LAST.GOCHON2_24COUNT)		AS GOCHON2_COUNT
+		, SUM(LAST.PUNGMU24COUNT)			AS PUNGMU_COUNT
+		FROM
+		(
+			SELECT
+			STAT.hour	AS HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END AS GIMPO_IN_24COUNT
+			, CASE WHEN STAT.event_status = '-1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END AS GIMPO_OUT_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-역사입구1')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON1_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-역사입구2')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON2_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END AS PUNGMU24COUNT
+			FROM 
+			(
+				SELECT
+				DATA.HOUR				AS hour
+				, R.role_name			AS role_name
+				, DATA.EVENT_STATUS	AS event_status
+				, DATA.DATA_CNT		AS data_cnt
+				FROM
+				(
+					SELECT
+					SUBSTRING(occu_time, 9, 2)		AS HOUR
+					, role_code							AS ROLE_CODE
+					, event_status						AS EVENT_STATUS
+					, SUM(event_cnt)				AS DATA_CNT
+					FROM TB_CROWD_DASHBOARD_SUMMARY H
+					WHERE SUBSTRING(occu_time, 1, 8) = CONVERT(varchar, GETDATE(), 112)
+					AND SUBSTRING(occu_time, 9, 2) IN (7, 8, 9)	
+					GROUP BY SUBSTRING(occu_time, 9, 2)
+					, role_code
+					, event_status
+				) DATA
+				LEFT OUTER JOIN TB_EVENT_ROLE_DL R ON DATA.ROLE_CODE = r.role_code
+			) STAT
+			GROUP BY STAT.hour
+			, STAT.role_name
+			, STAT.event_status
+		) LAST
 	  </select>
   
   
   
 	  <!-- 김포공항 & 풍무역 & 고산역 7~9시 승하차 수(날짜변경 시) -->
 	<select id="rushHourDateChangeList" resultMap="_main">
-	   SELECT
-	        SUBSTRING(H.OCCU_TIME, 9, 2) AS HOUR,
-	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근' ) THEN 1 END) AS GIMPO_IN_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_CHANGE,
-	        COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_CHANGE
-	    FROM TB_CROWD_DASHBOARD_SUMMARY H
-	    JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-	    WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-	    AND SUBSTRING(H.OCCU_TIME, 9, 2) IN (7, 8, 9)
-	    GROUP BY SUBSTRING(H.OCCU_TIME, 9, 2)
+		SELECT
+		LAST.HOUR
+		, SUM(LAST.GIMPO_IN_RUSH_HOUR)	AS GIMPO_IN_CHANGE
+		, SUM(LAST.GOCHON_RUSH_HOUR)		AS GOCHON_CHANGE
+		, SUM(LAST.PUNGMU_RUSH_HOUR)		AS PUNGMU_CHANGE
+		FROM
+		(
+			SELECT
+			STAT.hour	AS HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS GIMPO_IN_RUSH_HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS GOCHON_RUSH_HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END
+			 AS PUNGMU_RUSH_HOUR
+			FROM 
+			(
+				SELECT
+				DATA.HOUR				AS hour
+				, R.role_name			AS role_name
+				, DATA.EVENT_STATUS	AS event_status
+				, DATA.DATA_CNT		AS data_cnt
+				FROM
+				(
+					SELECT
+					SUBSTRING(occu_time, 9, 2)		AS HOUR
+					, role_code							AS ROLE_CODE
+					, event_status						AS EVENT_STATUS
+					, SUM(event_cnt)				AS DATA_CNT
+					FROM TB_CROWD_DASHBOARD_SUMMARY H
+					WHERE SUBSTRING(occu_time, 1, 8) = '20240108'
+					AND SUBSTRING(occu_time, 9, 2) IN (7, 8, 9)
+					GROUP BY SUBSTRING(occu_time, 9, 2)
+					, role_code
+					, event_status
+				) DATA
+				LEFT OUTER JOIN TB_EVENT_ROLE_DL R ON DATA.ROLE_CODE = r.role_code
+				WHERE R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근', '고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근', '풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			) STAT
+			GROUP BY STAT.hour
+			, STAT.role_name
+			, STAT.event_status
+		) LAST
+		GROUP BY LAST.HOUR
+		ORDER BY LAST.HOUR
 	</select>
+	
   
   <!-- 출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수(날짜변경 시) -->
 	  <select id="rushHourChangeTotalCount" resultMap="_main">
-	  	SELECT
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_IN_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '-1' AND R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근') THEN 1 END) AS GIMPO_OUT_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근') THEN 1 END) AS GOCHON_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구1') THEN 1 END) AS GOCHON1_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('고촌-역사입구2') THEN 1 END) AS GOCHON2_CHANGE_COUNT,
-		    COUNT(CASE WHEN H.event_status = '1' AND R.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근') THEN 1 END) AS PUNGMU_CHANGE_COUNT
-		FROM TB_CROWD_DASHBOARD_SUMMARY H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE SUBSTRING(H.OCCU_TIME, 1, 8) = #{occuDate}
-		AND (SUBSTRING(OCCU_TIME, 9, 2) = 7 OR SUBSTRING(OCCU_TIME, 9, 2) = 8 OR SUBSTRING(OCCU_TIME, 9, 2) = 9)
+		SELECT
+		SUM(LAST.GIMPO_IN_24COUNT)			AS GIMPO_IN_CHANGE_COUNT
+		, SUM(LAST.GIMPO_OUT_24COUNT)		AS GIMPO_OUT_CHANGE_COUNT
+		, SUM(LAST.GOCHON24COUNT)			AS GOCHON_CHANGE_COUNT
+		, SUM(LAST.GOCHON1_24COUNT)		AS GOCHON1_CHANGE_COUNT
+		, SUM(LAST.GOCHON2_24COUNT)		AS GOCHON2_CHANGE_COUNT
+		, SUM(LAST.PUNGMU24COUNT)			AS PUNGMU_CHANGE_COUNT
+		FROM
+		(
+			SELECT
+			STAT.hour	AS HOUR
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END AS GIMPO_IN_24COUNT
+			, CASE WHEN STAT.event_status = '-1'
+			 AND STAT.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근')
+			 THEN SUM(STAT.data_cnt) END AS GIMPO_OUT_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-역사입구1')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON1_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('고촌-역사입구2')
+			 THEN SUM(STAT.data_cnt) END AS GOCHON2_24COUNT
+			, CASE WHEN STAT.event_status = '1'
+			 AND STAT.role_name IN ('풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			 THEN SUM(STAT.data_cnt) END AS PUNGMU24COUNT
+			FROM 
+			(
+				SELECT
+				DATA.HOUR				AS hour
+				, R.role_name			AS role_name
+				, DATA.EVENT_STATUS	AS event_status
+				, DATA.DATA_CNT		AS data_cnt
+				FROM
+				(
+					SELECT
+					SUBSTRING(occu_time, 9, 2)		AS HOUR
+					, role_code							AS ROLE_CODE
+					, event_status						AS EVENT_STATUS
+					, SUM(event_cnt)				AS DATA_CNT
+					FROM TB_CROWD_DASHBOARD_SUMMARY H
+					WHERE SUBSTRING(occu_time, 1, 8) = #{occuDate}
+					AND SUBSTRING(occu_time, 9, 2) IN (7, 8, 9)	
+					GROUP BY SUBSTRING(occu_time, 9, 2)
+					, role_code
+					, event_status
+				) DATA
+				LEFT OUTER JOIN TB_EVENT_ROLE_DL R ON DATA.ROLE_CODE = r.role_code
+		--		WHERE R.role_name IN ('김포-EC-출근', '김포-ST-출근', '김포-EV-출근', '고촌-플랫폼1-출근', '고촌-플랫폼2-출근', '고촌-플랫폼3-출근', '고촌-플랫폼4-출근', '풍무-플랫폼1-출근', '풍무-플랫폼2-출근', '풍무-플랫폼3-출근', '풍무-플랫폼4-출근')
+			) STAT
+			GROUP BY STAT.hour
+			, STAT.role_name
+			, STAT.event_status
+		) LAST
 	  </select>
   
   

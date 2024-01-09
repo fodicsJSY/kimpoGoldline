@@ -1,4 +1,3 @@
-
 /* 전역변수 시작 */
 var forDate = document.getElementById('mainDateSearch').value
 /* 전역변수 끝 */
@@ -15,10 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
 /* 날짜 input값 바뀔때마다 서버로 보내기 */
 document.getElementById('rushHourModeSearchBtn').addEventListener('click', function () {
     sendToServer();
@@ -32,7 +27,6 @@ function sendToServer() {
     occuDate = formatToYYYYMMDD(document.getElementById('mainDateSearch').value);
     console.log('Sending occuDate to server:', occuDate); // 콘솔에 occuDate 값 로그 출력
 
-
     $.ajax({
         url: '/rushHourDateChange',
         type: 'GET',
@@ -45,7 +39,6 @@ function sendToServer() {
             var rushHourDateChangeList = response.rushHourDateChangeList;
             let hour = [];
             let gimpoInChange = [];
-            let gimpoOutChange = [];
             let gochonChange = [];
             let pungmuChange = [];
 
@@ -56,7 +49,6 @@ function sendToServer() {
 
                 hour.push(currentItem.hour);
                 gimpoInChange.push(currentItem.gimpoInChange);
-                gimpoOutChange.push(currentItem.gimpoOutChange);
                 gochonChange.push(currentItem.gochonChange);
                 pungmuChange.push(currentItem.pungmuChange);
                 
@@ -67,7 +59,7 @@ function sendToServer() {
                 console.log(pungmuChange);
 
 
-                 // 인파계수 실시간 누적 집계도 
+                    // 인파계수 실시간 누적 집계도 
                     var rushHourChangeChart = echarts.init(document.getElementById("rushHourChart"));
                 
                     const colors = ['#5470C6', '#91CC75', '#EE6666'];
@@ -168,7 +160,6 @@ function sendToServer() {
                         axisLabel: {
                             formatter: '{value} 명'
                         }
-
                         },
                         {
                         type: 'value',
@@ -187,7 +178,6 @@ function sendToServer() {
                         }
                         },
                     ],
-
                     series: [
                         {
                         name: '김포공항역(하차)',
@@ -225,11 +215,10 @@ function sendToServer() {
                     };
                     //  차트 옵션 설정하기
                     rushHourChangeChart.setOption(option)
-
             }
 
 
-             /*************인파계수 실시간 누적 count시작************ */
+        /*************인파계수 실시간 누적 count시작*************/
             var rushHourChangeTotalCount = response.rushHourChangeTotalCount;
             console.log('rushHourChangeTotalCount', rushHourChangeTotalCount);
 
@@ -267,29 +256,10 @@ function sendToServer() {
                 return new Intl.NumberFormat().format(number);
             }
 
-             /*************인파계수 실시간 누적 count끝************ */
+        /*************인파계수 실시간 누적 count끝*************/
 
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

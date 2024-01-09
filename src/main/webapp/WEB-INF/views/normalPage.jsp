@@ -22,18 +22,16 @@
     <style>
         input[type='date'] {
             font-size: 23px;
-            
         }
 
         /* 달력 이미지 변경 시작*/
         input[type='date']::-webkit-calendar-picker-indicator {
-            
-        padding: 10px;
-        background: url(/resources/img/combo_drop.png) center no-repeat;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 100%;
-        margin: 10px;
+            padding: 10px;
+            background: url(/resources/img/combo_drop.png) center no-repeat;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 100%;
+            margin: 10px;
         }
 
         input[type='date']::-webkit-calendar-picker-indicator:hover{
@@ -146,7 +144,6 @@
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-
             <div class="peopleCountContainer">
                 <div class="peopleCountBox">
                     <div class="countTitleBox">
@@ -185,7 +182,6 @@
                             <fmt:formatNumber value="${total24CountList[0].gochon2_24Count}" pattern="#,###" />
                         </div>
                     </div>
-
                 </div>
                 <div class="peopleCountBox">
                     <div class="countTitleBox">

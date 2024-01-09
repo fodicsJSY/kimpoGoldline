@@ -234,7 +234,7 @@ function sendToServer() {
             gimpo24Count.innerText = formatNumber(gimpoIn24ChangeCount);
 
 
- 
+
 
             // 숫자를 천 단위로 포맷팅하는 함수
             function formatNumber(number) {

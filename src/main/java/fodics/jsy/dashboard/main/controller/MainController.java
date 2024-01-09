@@ -148,7 +148,7 @@ public class MainController {
 		 List<Data> normal24List = service.normal24CountList();
 		 map.put("normal24List", normal24List);
 		 
-		 
+
 		 return map;
 	 }
 	
@@ -226,7 +226,7 @@ public class MainController {
 			List<CSV> goToGochonCSV = service.goToGochonCSV(map);
 			map.put("goToGochonCSV", goToGochonCSV);
 			 
-		 System.out.println("map : "+ map);
+//		 System.out.println("map : "+ map);
 		 
 	
 		 return map;

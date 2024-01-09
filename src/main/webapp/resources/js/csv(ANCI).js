@@ -35,22 +35,26 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                 function flie_goToGimpoCSV(goToGimpoCSV, occuDate) {
                     // CSV 헤더 생성
                     let csvContent = "일시,계단,엘리베이터,에스컬레이터\n";
-                
-                    // CSV 데이터 추가
+                    
+
+                    //CSV 데이터 추가
                     for (let i = 0; i < goToGimpoCSV.length; i++) {
                         var currentItem = goToGimpoCSV[i];
-                
+                        
+                        // console.log('occuTime : ', currentItem.date_time);
+                        // console.log('goToGimpoST : ', currentItem.gimpo_st_out);
+                        // console.log('goToGimpoEV : ', currentItem.gimpo_ev_out);
+                        // console.log('goToGimpoEC : ', currentItem.gimpo_ec_out);
+                        
+                        
                         let row = `${currentItem.date_time},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}\n`;
                         csvContent += row;
                     }
-                
-                    // UTF-8로 변환
-                    const encoder = new TextEncoder();
-                    const utf8Array = encoder.encode(csvContent);
-                
+                    
                     // Blob 생성
-                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), utf8Array], { type: 'text/csv;charset=utf-8;' });
-                
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
+
                     // CSV 파일 생성
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
@@ -72,16 +76,16 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                     for (let i = 0; i < getOffGimpoCSV.length; i++) {
                         var currentItem = getOffGimpoCSV[i];
 
+
+
+
                         let row = `${currentItem.date_time},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}\n`;
                         csvContent += row;
                     }
                 
-                     // UTF-8로 변환
-                    const encoder = new TextEncoder();
-                    const utf8Array = encoder.encode(csvContent);
-        
-                     // Blob 생성
-                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), utf8Array], { type: 'text/csv;charset=utf-8;' });
+                    // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
 
                 
                     // CSV 파일 생성
@@ -115,13 +119,10 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                         csvContent += row;
                     }
                 
-                     // UTF-8로 변환
-                    const encoder = new TextEncoder();
-                    const utf8Array = encoder.encode(csvContent);
-
-                      // Blob 생성
-                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), utf8Array], { type: 'text/csv;charset=utf-8;' });
-
+                     // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
+ 
                 
                     // CSV 파일 생성
                     const link = document.createElement("a");
@@ -152,12 +153,9 @@ document.getElementById("scvBtn").addEventListener("click", ()=>{
                         csvContent += row;
                     }
                 
-                     // UTF-8로 변환
-                    const encoder = new TextEncoder();
-                    const utf8Array = encoder.encode(csvContent);
-    
-                      // Blob 생성
-                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), utf8Array], { type: 'text/csv;charset=utf-8;' });
+                    // Blob 생성
+                    const encodedUri = encodeURI(csvContent);
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=euc-kr;' });
                 
                 
                     // CSV 파일 생성
