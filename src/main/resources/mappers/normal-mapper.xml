@@ -186,11 +186,11 @@ GROUP BY DATA_1.HOUR
   
     <!-- 24시간 김포공항역, 고촌역, 풍무역 승하차 수(날짜변경 시) -->
   <select id="normalDateChangeList" resultMap="_main">
-SELECT
+  SELECT
 DATA_1.HOUR
-, SUM(GIMPO_IN_RUSH_HOUR) AS gimpoIn24Change
-, SUM(GOCHON_RUSH_HOUR) AS gochon24Change
-, SUM(PUNGMU_RUSH_HOUR) AS pungmu24Change
+, SUM(GIMPO_IN_RUSH_HOUR) AS GIMPO_IN_24CHANGE
+, SUM(GOCHON_RUSH_HOUR) AS GOCHON24CHANGE
+, SUM(PUNGMU_RUSH_HOUR) AS PUNGMU24CHANGE
 FROM
 (SELECT '00' AS HOUR, 0 AS GIMPO_IN_RUSH_HOUR, 0 AS GOCHON_RUSH_HOUR, 0 AS PUNGMU_RUSH_HOUR	UNION ALL
 SELECT '01', 0, 0, 0	UNION ALL
@@ -252,7 +252,7 @@ FROM
 			, event_status						AS EVENT_STATUS
 			, SUM(event_cnt)				AS DATA_CNT
 			FROM TB_CROWD_DASHBOARD_SUMMARY H
-			WHERE SUBSTRING(occu_time, 1, 8) = #{occuDate}
+			WHERE SUBSTRING(occu_time, 1, 8) =  #{occuDate}
 			GROUP BY SUBSTRING(occu_time, 9, 2)
 			, role_code
 			, event_status
