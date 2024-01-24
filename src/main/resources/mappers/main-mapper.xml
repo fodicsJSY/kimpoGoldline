@@ -242,7 +242,7 @@
 					, event_status						AS EVENT_STATUS
 					, SUM(event_cnt)				AS DATA_CNT
 					FROM TB_CROWD_DASHBOARD_SUMMARY H
-					WHERE SUBSTRING(occu_time, 1, 8) = '20240108'
+					WHERE SUBSTRING(occu_time, 1, 8) = #{occuDate}
 					AND SUBSTRING(occu_time, 9, 2) IN (7, 8, 9)
 					GROUP BY SUBSTRING(occu_time, 9, 2)
 					, role_code
