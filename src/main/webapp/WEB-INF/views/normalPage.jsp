@@ -20,12 +20,12 @@
     <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
 
     <style>
-        input[type='date'] {
+        .dateInput{
             font-size: 23px;
         }
 
         /* 달력 이미지 변경 시작*/
-        input[type='date']::-webkit-calendar-picker-indicator {
+        .dateInput::-webkit-calendar-picker-indicator {
             padding: 10px;
             background: url(/resources/img/combo_drop.png) center no-repeat;
             border-radius: 8px;
@@ -34,7 +34,7 @@
             margin: 10px;
         }
 
-        input[type='date']::-webkit-calendar-picker-indicator:hover{
+        .dateInput::-webkit-calendar-picker-indicator:hover{
             cursor: pointer;
         }
         /* 달력 이미지 변경 끝*/
@@ -57,8 +57,8 @@
                 <div class="btnContainer">
                     <div>
                         <button type="button" class="scvButton" id="normalCSVBtn">
-                            <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
-                            <span>CSV</span>
+                            <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
+                            <span>통계</span>
                         </button>
                     </div>
                     <div class="searchBox" style="display: flex; justify-content: space-around;">

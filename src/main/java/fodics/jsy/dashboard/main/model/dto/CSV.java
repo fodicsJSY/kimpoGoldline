@@ -26,6 +26,7 @@ public class CSV {
 	
 	private int goToGochon;
 	private int getOffGochon;
-	
+	private String occuTime;
+	private String occuDate;
 
 }

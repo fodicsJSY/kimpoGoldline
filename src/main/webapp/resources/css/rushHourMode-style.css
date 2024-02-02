@@ -117,6 +117,8 @@ a{
 }
 
 
+
+
 .modeContainer{
     display: flex;
     flex-direction: row;
@@ -495,52 +497,3 @@ a{
 }
 
 
-
-/* 모달 스타일 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-  }
-  
-  .modal-content {
-    background-color: #303A46;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-    height: 50%;
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-
-  .btn{
-    position: relative;
-    right: -80px;
-    width: 120px;
-    height: 64px;
-    font-size: 24px;
-    text-align: center;
-    background-color: #202020;
-    border: 4px solid #666666;
-    border-radius: 10px;
-  }

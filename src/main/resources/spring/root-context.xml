@@ -56,7 +56,7 @@
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<!-- 김포골드라인 DB -->
 		<!-- <property name="url" value="jdbc:sqlserver://10.20.10.204:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" /> -->
-		<property name="url" value="jdbc:sqlserver://172.17.111.50:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
+		<property name="url" value="jdbc:sqlserver://172.16.111.50:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
 		<!-- <property name="databaseName" value="FdcVmsDB" /> -->
 		<property name="username" value="sa" />
 		<property name="password" value="j$b!c&amp;1" />

@@ -1,0 +1,109 @@
+*{ 
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color:white;
+    font-family: NanumSquare;
+}
+
+button:hover, a:hover{
+    cursor: pointer;
+}
+
+
+body {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정합니다. */
+    background-color: #2E313C;
+}
+
+
+
+main{
+    margin: auto;
+    min-width: 100vh;
+    min-height: 100vh;
+    /* min-height: 요소의 최소 높이  
+                    -> 내부 요소 없어도 최소 높이 유지
+                    -> 내부 요소가 지정된 크기를 초과하면 
+                        그에 맞게 늘어남
+    */
+    
+}
+
+
+section{
+    width:100%;
+    height:100%;
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr);  */
+    /* grid-auto-rows: 200px; */
+    gap: 15px;
+    grid-template-areas:
+        "a a a"
+        "b b b"
+        "c c c"
+    ;
+}
+
+
+
+.headContainer{
+    max-width: 100%;
+    /* max-height: 100%;  */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.calenderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+select{
+    background-color: #1B1D24;
+}
+
+
+
+.searchBtn{
+    /* position: relative;
+    right: -100px; */
+    background-color: #303A46;
+    border: 4px solid #666666;
+    width: 100px;
+    height: 64px;
+    border-radius: 10px;
+    font-size: 24px;
+    
+    /* font-family: NanumSquare; */
+}
+
+.dateInput{
+    background-color: #1B1D24;
+    border: 4px solid #666666;
+    width: 200px;
+    height: 64px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    padding-left: 15%;
+}
+
+
+.titleContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.tableContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

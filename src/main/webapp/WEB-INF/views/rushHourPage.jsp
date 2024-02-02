@@ -11,6 +11,7 @@
 
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/rushHourMode-style.css">
+    <link rel="stylesheet" href="../../resources/css/modal.css">
 
     <%-- echarts --%>
 	<script src="../../resources/js/echart/echart.min.js"></script>
@@ -18,13 +19,14 @@
     <%-- jquery --%>
     <script src="../../resources/js/jquery/jquery.min.js"></script>
 
-
     <style>
-        input[type='date'] {
+        .dateInput{
+            font-size: 23px;
         }
 
         /* 달력 이미지 변경 시작*/
-        input[type='date']::-webkit-calendar-picker-indicator {
+        /*input[type='date']::-webkit-calendar-picker-indicator {*/
+        .dateInput::-webkit-calendar-picker-indicator {
             
         padding: 10px;
         background: url(/resources/img/combo_drop.png) center no-repeat;
@@ -35,7 +37,7 @@
         margin: 10px;
         }
 
-        input[type='date']::-webkit-calendar-picker-indicator:hover{
+        .dateInput::-webkit-calendar-picker-indicator:hover{
             cursor: pointer;
         }
         /* 달력 이미지 변경 끝*/
@@ -66,8 +68,8 @@
                     <div>
                         <%-- <a href="gimpoCSV://" id="exec"> --%>
                             <button type="button" class="scvButton" id="scvBtn">
-                                <img src="/resources/img/icon_excel.png" class="excelImg" alt="">
-                                <span>CSV</span>
+                                <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
+                                <span>통계</span>
                             </button>
                         <%-- </a> --%>
                     </div>
@@ -219,59 +221,98 @@
     </section>
     </main>
     <%-- 모달창 사용 안함 --%>
+    <%--  --%>
+    <%-- 모달창 시작 --%>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeModalBtn">&times;</span>
-            <p>
-                <form action="">
-                    고촌 플랫폼1
-                    <select name="플랫폼1" class="selectBox" id="selectGochon1" >
-                        <option value="">고촌-밀집-1</option>
-                        <option value="">고촌-밀집-2</option>
-                        <option value="">풍무-밀집-1</option>
-                        <option value="">풍무-밀집-2</option>
-                    </select>
-
-                    <br><br>
-
-                    고촌 플랫폼2
-                    <select name="플랫폼2" class="selectBox" id="selectGochon2" >
-                        <option value="">고촌-밀집-1</option>
-                        <option value="">고촌-밀집-2</option>
-                        <option value="">풍무-밀집-1</option>
-                        <option value="">풍무-밀집-2</option>
-                    </select>
-
-                    <br><br>
-
-                    풍무 플랫폼1
-                    <select name="플랫폼1" class="selectBox" id="selectPungmu1" >
-                        <option value="">고촌-밀집-1</option>
-                        <option value="">고촌-밀집-2</option>
-                        <option value="">풍무-밀집-1</option>
-                        <option value="">풍무-밀집-2</option>
-                    </select>
-
-                    <br><br>
-
-                    풍무 플랫폼2
-                    <select name="플랫폼2" class="selectBox" id="selectPungmu2" >
-                        <option value="">고촌-밀집-1</option>
-                        <option value="">고촌-밀집-2</option>
-                        <option value="">풍무-밀집-1</option>
-                        <option value="">풍무-밀집-2</option>
-                    </select>
-
-                    <br><br>
-                    
-                    <button class="btn" id="confrim">확인</button>
-                    <button class="btn" id="cancel">취소</button>
-                </form>
-            
-            </p>
+            <div class="section1">
+                <div class="madalGrid">
+                    <div class="modalHeader">
+                        <div class="statsImgBox">
+                            <div><img src="/resources/img/icon_stats.png" alt="" class="icon_statsImg"></div>
+                            <div class="modalName">통계</div>
+                        </div>
+                        <div><img src="/resources/img/popup_winClose.png" alt="" class="close" id="closeBtn"></div>
+                    </div>
+                </div>
+                <div class="madalGrid">
+                    <%-- <form action=""> --%>
+                        <div class="contentGrid">
+                            <div class="selectOptionBox">
+                                <div class="comboBoxContainer">
+                                    <select name="플랫폼1" class="selectBox" id="selectCombo" >
+                                        <option class="selectOption" value="GimOut">김포공항역 승차</option>
+                                        <option class="selectOption" value="GimIn">김포공항역 하차</option>
+                                        <option class="selectOption" value="PungInOut">풍무역 승/하차</option>
+                                        <option class="selectOption" value="GoInOut">고촌역 승/하차</option>
+                                    </select>
+                                </div>
+                                <div class="selectDate"><input type="radio" name="selectDate" id="selectMonth" checked> <label for="selectMonth">월별</label></div>
+                                <div class="selectDate"><input type="radio" name="selectDate" id="selectDay"> <label for="selectDay">일별</label></div>
+                                <div class="customBox">
+                                    <div class="selectDate"><input type="radio" name="selectDate" id="selectCustom"> <label for="selectCustom">기간별</label></div>
+                                    <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" ><label for="daySumCheckbox"> 일합계</label></div>
+                                    <%-- <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" disabled><label for="daySum"> 일합계</label></div> --%>
+                                </div>
+                            </div>
+                            <div class="selectOptionBox">
+                                <div class="calenderContainer" id="CalendarBox">
+                                    <%-- <div><input type="month" class="calender" id="monthSearch" aria-label="Date-Time"></div> --%>
+                                </div>
+                                <div><button class="btn" id="modalDataBtn">조회</button></div>
+                            </div>
+                        </div>
+                    <%-- </form> --%>
+                    <div class="contentGrid">
+                        <div class="titleBox">
+                            <div class="tableTitle">김포공항역 승차</div>
+                            <div><button class="btn" id="dataSaveBtn">저장</button></div>
+                        </div>
+                        <div class="dataContainer">
+                        <div>
+                            <table class="dataTable">
+                                <thead class="dataThead">
+                                    <tr>
+                                        <th>순번</th>
+                                        <th>날짜</th>
+                                        <th>시간</th>
+                                        <th>계단</th>
+                                        <th>엘리베이터</th>
+                                        <th>에스컬레이터</th>
+                                        <th>합계</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>    
+                        <div>
+                            <table class="dataTable">
+                                <tbody class="dataTbody">
+                                <tr>
+                                    <td>123</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>123</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    <%-- 모달창 사용 안함 --%>
-</div>
+    </div>
+    <%-- 모달창 끝 --%>
 
     
     <%-- 전역변수 시작 --%>
@@ -291,6 +332,7 @@
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
     <%-- <script src="../../resources/js/refresh.js"></script> --%>
-    <script src="../../resources/js/csv.js"></script> 
+    <script src="../../resources/js/modal.js"></script> 
+    <script src="../../resources/js/modalData.js"></script> 
 </body>
 </html>
