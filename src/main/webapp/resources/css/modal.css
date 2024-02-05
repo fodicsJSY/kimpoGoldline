@@ -14,12 +14,16 @@
 
 .modal-content {
     background-color: #1B1D24;
-    margin: auto auto;
+    margin: auto;
     padding: 5px;
     border: 1px solid #959595;
     width: 900px;
     min-height: 280px;
     max-height: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* 완성 후 삭제 */
@@ -475,6 +479,12 @@ section{
 /* 풍무고촌 일합계 체크안함 끝 */
 
 
+/* nodata 시작*/
+.noData{
+    width: 826px;
+    text-align: center;
+}
+/* nodata 끝*/
 
 
 

@@ -252,9 +252,9 @@ public class MainController {
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
 		 	
-		 	System.out.println("comboValue"+ comboValue);
-		 	System.out.println("from_date"+ from_date);
-		 	System.out.println("bSum"+ bSum);
+//		 	System.out.println("comboValue"+ comboValue);
+//		 	System.out.println("from_date"+ from_date);
+//		 	System.out.println("bSum"+ bSum);
 		 	
 		 	map.put("parameter1", from_date);
 		 	map.put("parameter2", to_date);
@@ -326,9 +326,10 @@ public class MainController {
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
 		 	
-		 	System.out.println("comboValue"+ comboValue);
-		 	System.out.println("from_date"+ from_date);
-		 	System.out.println("bSum"+ bSum);
+//		 	System.out.println("comboValue"+ comboValue);
+//		 	System.out.println("to_date"+ to_date);
+//		 	System.out.println("from_date"+ from_date);
+//		 	System.out.println("bSum"+ bSum);
 		 	
 		 	map.put("parameter1", from_date);
 		 	map.put("parameter2", to_date);
@@ -399,9 +400,9 @@ public class MainController {
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
 		 	
-		 	System.out.println("comboValue"+ comboValue);
-		 	System.out.println("from_date"+ from_date);
-		 	System.out.println("bSum"+ bSum);
+//		 	System.out.println("comboValue"+ comboValue);
+//		 	System.out.println("from_date"+ from_date);
+//		 	System.out.println("bSum"+ bSum);
 		 	
 		 	map.put("parameter1", from_date);
 		 	map.put("parameter2", to_date);
