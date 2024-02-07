@@ -24,6 +24,23 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<!-- DispatcherServlet 의 Multipart 설정 -->
+	<servlet>
+	    <servlet-name>appServlet</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet
+	    </servlet-class>
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>classpath:spring/appServlet/servlet-context.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	    
+	    <multipart-config>
+	        <max-file-size>31457280</max-file-size>   <!-- 30mb-->
+	        <max-request-size>1004857600</max-request-size>  <!-- 100mb -->
+	    </multipart-config> 
+	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
@@ -46,6 +63,17 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<multipart-config>
+	     <location>C:\\upload</location>
+	     <!-- 업로드 되는 파일 저장 공간 -->
+	     <max-file-size>20971520</max-file-size>
+	     <!-- 업로드 되는 파일의 최대 크기 -->
+	     <max-request-size>41943040</max-request-size>
+	    <!--  한번에 올릴 수 있는 최대 크기 -->
+	     <file-size-threshold>20971520</file-size-threshold>
+	     <!-- 특정 사이즈의 메모리 사용 -->
+     </multipart-config>
 	
 
 </web-app>

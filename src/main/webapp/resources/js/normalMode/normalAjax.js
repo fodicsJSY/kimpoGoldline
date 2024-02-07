@@ -27,11 +27,11 @@ $(function(){
                 
                 
                 // currentItem의 속성에 접근 확인
-                console.log('occuHour1 : ', occuHourList);
-                console.log('gimpoIn24List : ', gimpoIn24List);
-                console.log('gimpoOut24List : ', gimpoOut24List);
-                console.log('gochon24List : ', gochon24List);
-                console.log('pungmu24List : ', pungmu24List);
+                // console.log('occuHour1 : ', occuHourList);
+                // console.log('gimpoIn24List : ', gimpoIn24List);
+                // console.log('gimpoOut24List : ', gimpoOut24List);
+                // console.log('gochon24List : ', gochon24List);
+                // console.log('pungmu24List : ', pungmu24List);
     
                 
                 normalChart()

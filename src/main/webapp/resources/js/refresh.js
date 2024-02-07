@@ -26,3 +26,11 @@ function refreshEveryMinute() {
 
 // 1분 간격으로 페이지 리프레쉬 시작
 refreshEveryMinute();
+
+
+//모달창이 열려있을 시 새로고침 강제로 막음
+window.onbeforeunload = function() {
+    if (modal.style.display === "block") {
+      return; // 강제로 새로고침을 막습니다.
+    }
+};

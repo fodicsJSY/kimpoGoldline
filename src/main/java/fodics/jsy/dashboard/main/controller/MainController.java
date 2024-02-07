@@ -1,5 +1,12 @@
 package fodics.jsy.dashboard.main.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Data;
@@ -139,7 +147,7 @@ public class MainController {
 	// 차트데이터 ajax(금일)
 	 @GetMapping("/normalChartData")
 	 @ResponseBody
-	 public Map<String, Object> noemalDaliyData(
+	 public Map<String, Object> normalDaliyData(
 			 ){
 		 Map<String, Object> map = new HashMap<>();
 		 
@@ -453,9 +461,17 @@ public class MainController {
 				List<CSV> goToGochonCSV = service.goToGochonCSV(map);
 				map.put("goToGochonCSV", goToGochonCSV);
 		 	}
-		 	
-		 	
 		 	return map;
 	 }
+	 
+	 
+	 
+	 
+	 
+ 
+	 
+	 
+	 
+	 
 
 }
