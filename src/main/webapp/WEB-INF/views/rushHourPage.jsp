@@ -66,12 +66,10 @@
                         <button type="button" class="settingButton" id="openModalBtn">설정</button>
                     </div> --%>
                     <div>
-                        <%-- <a href="gimpoCSV://" id="exec"> --%>
-                            <button type="button" class="scvButton" id="scvBtn">
-                                <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
-                                <span>통계</span>
-                            </button>
-                        <%-- </a> --%>
+                        <button type="button" class="scvButton" id="scvBtn">
+                            <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
+                            <span>통계</span>
+                        </button>
                     </div>
                     <div class="searchBox" style="display: flex; justify-content: space-around;">
                         <div><button type="button" class="searchBtn" id="rushHourModeSearchBtn">검색</button></div>
@@ -261,8 +259,8 @@
                     </div>
                     <div class="contentGrid">
                         <div class="titleBox">
-                            <div class="tableTitle">김포공항역 승차</div>
-                            <div><button class="btn" id="dataSaveBtn">저장</button></div>
+                            <div class="tableTitle" id="table_title"></div>
+                                <div><button class="btn" id="dataSaveBtn">저장</button></div>
                         </div>
                         <div class="dataContainer">
                         <div>

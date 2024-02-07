@@ -2,30 +2,30 @@ var selectCombo = document.getElementById('selectCombo');
 let daySumCheckbox = document.getElementById("daySumCheckbox");
 
 let bSum;
+let tableTitle = document.getElementById("table_title");
 
-var tableTitle = document.getElementsByClassName("tableTitle");
 
 document.getElementById("modalDataBtn").addEventListener("click", ()=>{
+  
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
-    //tableTitle.innerHTML = "김포공항 승차";
+    tableTitle.innerHTML = "김포공항 승차";
     selectRadio(comboValue);
   }
   if(comboValue==="GimIn"){
-    //tableTitle.innerHTML = "김포공항 김포공항";
+    tableTitle.innerHTML = "김포공항 하차";
     selectRadio(comboValue);
   }
   if(comboValue==="PungInOut"){
-    //tableTitle.innerHTML = "풍무역 승/하차";
+    tableTitle.innerHTML = "풍무역 승/하차";
     selectRadio(comboValue);
   }
   if(comboValue==="GoInOut"){
-    //tableTitle.innerHTML = "고촌역 승/하차";
+    tableTitle.innerHTML = "고촌역 승/하차";
     selectRadio(comboValue);
   }
 
   console.log("클릭");
-  
 });
 
 
@@ -836,7 +836,7 @@ function selectRadio(comboValue){
             occuTime.push(currentItem.occuTime);
             occu_Date.push(currentItem.occuDate);
             pungmu_in.push(currentItem.pungmu_in);
-            pungmu_out.push(currentItem.gimpo_ev_out);
+            pungmu_out.push(currentItem.pungmu_out);
             
             
             // currentItem의 속성에 접근 확인
@@ -1127,8 +1127,8 @@ function selectRadio(comboValue){
             
             occuTime.push(currentItem.occuTime);
             occu_Date.push(currentItem.occuDate);
-            gochon_in.push(currentItem.pungmu_in);
-            gochon_out.push(currentItem.gimpo_ev_out);
+            gochon_in.push(currentItem.gochon_in);
+            gochon_out.push(currentItem.gochon_out);
             
             
             // currentItem의 속성에 접근 확인
@@ -1228,7 +1228,7 @@ function selectRadio(comboValue){
             }
           
             if(occuTime[0] != null){
-                console.log("occu_Date", 1);
+                //console.log("occu_Date", 1);
 
                 var dataContainer = document.querySelector(".dataContainer");
                 while (dataContainer.firstChild) {
@@ -1335,8 +1335,6 @@ function selectRadio(comboValue){
             }
           }
         }
-
-
       }
     });
   }
@@ -1476,7 +1474,7 @@ function selectRadio(comboValue){
               
               
               // currentItem의 속성에 접근 확인
-              console.log("i", i);
+              //console.log("i", i);
               // console.log("no", no);
               // console.log("occuTime", occuTime);
               // console.log("occu_Date", occu_Date);
@@ -2146,7 +2144,7 @@ function selectRadio(comboValue){
               occuTime.push(currentItem.occuTime);
               occu_Date.push(currentItem.occuDate);
               pungmu_in.push(currentItem.pungmu_in);
-              pungmu_out.push(currentItem.gimpo_ev_out);
+              pungmu_out.push(currentItem.pungmu_out);
               
               
               // currentItem의 속성에 접근 확인
@@ -2437,8 +2435,8 @@ function selectRadio(comboValue){
               
               occuTime.push(currentItem.occuTime);
               occu_Date.push(currentItem.occuDate);
-              gochon_in.push(currentItem.pungmu_in);
-              gochon_out.push(currentItem.gimpo_ev_out);
+              gochon_in.push(currentItem.gochon_in);
+              gochon_out.push(currentItem.gochon_out);
               
               
               // currentItem의 속성에 접근 확인
@@ -3451,7 +3449,7 @@ function selectRadio(comboValue){
             occuTime.push(currentItem.occuTime);
             occu_Date.push(currentItem.occuDate);
             pungmu_in.push(currentItem.pungmu_in);
-            pungmu_out.push(currentItem.gimpo_ev_out);
+            pungmu_out.push(currentItem.pungmu_out);
             
             
             // currentItem의 속성에 접근 확인
@@ -3742,8 +3740,8 @@ function selectRadio(comboValue){
             
             occuTime.push(currentItem.occuTime);
             occu_Date.push(currentItem.occuDate);
-            gochon_in.push(currentItem.pungmu_in);
-            gochon_out.push(currentItem.gimpo_ev_out);
+            gochon_in.push(currentItem.gochon_in);
+            gochon_out.push(currentItem.gochon_out);
             
             
             // currentItem의 속성에 접근 확인

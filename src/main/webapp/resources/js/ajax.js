@@ -3,7 +3,7 @@ $(function(){
         url: "/rushHourChartData", 
         type: "GET",
         success: function(response){
-            console.log('성공 : ', response.rushHourCountList);
+            // console.log('성공 : ', response.rushHourCountList);
 
             /*********************막대차트****************************/
             var rushHourCountList = response.rushHourCountList;
@@ -23,9 +23,9 @@ $(function(){
                 pungmuRushHour.push(currentItem.pungmuRushHour);
 
                 // currentItem의 속성에 접근 확인
-                console.log(gimpoInRushHour);
-                console.log(gochonRushHour);
-                console.log(pungmuRushHour);
+                // console.log(gimpoInRushHour);
+                // console.log(gochonRushHour);
+                // console.log(pungmuRushHour);
 
                 // 인파계수 실시간 누적 집계도 
                 var rushHourChart = echarts.init(document.getElementById("rushHourChart"));

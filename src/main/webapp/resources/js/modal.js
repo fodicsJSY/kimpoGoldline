@@ -6,13 +6,14 @@ var closeBtn = document.getElementById('closeBtn');
 var modal = document.getElementById('myModal');
 var dimmedLayer = document.getElementById('dimmedLayer');
 
-
+let isModalOpen = false;
 // 모달 열기 버튼에 이벤트 리스너 추가
 scvBtn.addEventListener('click', function() {
 
   //모달창 열림
   modal.style.display = 'block';
-
+  document.getElementById('selectMonth').checked = true;
+  isModalOpen = true;
   // 월 input창 생성
   monthClickEvent();
   var monthSearch = document.getElementById("monthSearch");
@@ -20,8 +21,11 @@ scvBtn.addEventListener('click', function() {
   var occuMonth = formatToYYYYMM(monthSearch.value);
   var from_date = occuMonth + "01";
   var to_date = occuMonth + "31";
-    console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+    //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
 
+  tableTitle.innerHTML = "김포공항 승차";
+
+    /*
   $.ajax({
     url: "/monthUrl", 
     type: "POST",
@@ -373,7 +377,7 @@ scvBtn.addEventListener('click', function() {
       }
 
     }
-  });
+  }); */
 });
 
 
@@ -382,6 +386,7 @@ scvBtn.addEventListener('click', function() {
 // 모달 닫기 버튼에 이벤트 리스너 추가
 closeBtn.addEventListener('click', function() {
   modal.style.display = 'none';
+  isModalOpen = false;
 });
 
 
@@ -391,9 +396,9 @@ closeBtn.addEventListener('click', function() {
 window.addEventListener('click', function(event) {
   if (event.target === modal) {
     modal.style.display = 'none';
+    isModalOpen = false;
   }
 });
-
 
 
 
@@ -546,3 +551,14 @@ function formatToYYYYMM(dateString) {
 }
 
 
+// 모달이 열려 있는 경우에만 초기화
+function initializeOnModalClose() {
+  if (isModalOpen) {
+      // 모달이 닫힐 때의 초기화 작업을 수행
+      // 예: 입력 필드 초기화, 상태 초기화 등
+      selectMonth.checked=true;
+      selectDay.checked=false;
+      selectCustom.checked=false;
+      daySumCheckbox.checked=false;
+  }
+}

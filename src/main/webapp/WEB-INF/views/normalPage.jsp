@@ -18,6 +18,7 @@
 
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
+    <link rel="stylesheet" href="../../resources/css/modal.css">
 
     <style>
         .dateInput{
@@ -56,9 +57,9 @@
                 </div>
                 <div class="btnContainer">
                     <div>
-                        <button type="button" class="scvButton" id="normalCSVBtn">
-                            <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
-                            <span>통계</span>
+                        <button type="button" class="scvButton" id="scvBtn">
+                                <img src="/resources/img/icon_stats.png" class="excelImg" alt="">
+                                <span>통계</span>
                         </button>
                     </div>
                     <div class="searchBox" style="display: flex; justify-content: space-around;">
@@ -205,6 +206,82 @@
         </div>
     </section>
     </main>
+    <%-- 모달창 시작 --%>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="section1">
+                <div class="madalGrid">
+                    <div class="modalHeader">
+                        <div class="statsImgBox">
+                            <div><img src="/resources/img/icon_stats.png" alt="" class="icon_statsImg"></div>
+                            <div class="modalName">통계</div>
+                        </div>
+                        <div><img src="/resources/img/popup_winClose.png" alt="" class="close" id="closeBtn"></div>
+                    </div>
+                </div>
+                <div class="madalGrid">
+                    <div class="contentGrid">
+                        <div class="selectOptionBox">
+                            <div class="comboBoxContainer">
+                                <select name="플랫폼1" class="selectBox" id="selectCombo" >
+                                    <option class="selectOption" value="GimOut">김포공항역 승차</option>
+                                    <option class="selectOption" value="GimIn">김포공항역 하차</option>
+                                    <option class="selectOption" value="PungInOut">풍무역 승/하차</option>
+                                    <option class="selectOption" value="GoInOut">고촌역 승/하차</option>
+                                </select>
+                            </div>
+                            <div class="selectDate"><input type="radio" name="selectDate" id="selectMonth" checked> <label for="selectMonth">월별</label></div>
+                            <div class="selectDate"><input type="radio" name="selectDate" id="selectDay"> <label for="selectDay">일별</label></div>
+                            <div class="customBox">
+                                <div class="selectDate"><input type="radio" name="selectDate" id="selectCustom"> <label for="selectCustom">기간별</label></div>
+                                <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" ><label for="daySumCheckbox"> 일합계</label></div>
+                                <%-- <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" disabled><label for="daySum"> 일합계</label></div> --%>
+                            </div>
+                        </div>
+                        <div class="selectOptionBox">
+                            <div class="calenderContainer" id="CalendarBox">
+                                <%-- <div><input type="month" class="calender" id="monthSearch" aria-label="Date-Time"></div> --%>
+                            </div>
+                            <div><button class="btn" id="modalDataBtn">조회</button></div>
+                        </div>
+                    </div>
+                    <div class="contentGrid">
+                        <div class="titleBox">
+                            <div class="tableTitle" id="table_title"></div>
+                            <div><button class="btn" id="dataSaveBtn">저장</button></div>
+                        </div>
+                        <div class="dataContainer">
+                        <div>
+                            <table class="dataTable">
+                                <thead class="dataThead">
+                                    <tr>
+                                        <th>순번</th>
+                                        <th>날짜</th>
+                                        <th>시간</th>
+                                        <th>계단</th>
+                                        <th>엘리베이터</th>
+                                        <th>에스컬레이터</th>
+                                        <th>합계</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>    
+                        <div>
+                            <table class="dataTable">
+                                <tbody class="dataTbody">
+                                <tr>
+                                    <td style="text-align: center;">데이터를 불러오고 있습니다.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-- 모달창 끝 --%>
 
 
     <%-- 전역변수 시작 --%>
@@ -222,7 +299,9 @@
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
-    <script src="../../resources/js/normalMode/normalCSV.js"></script> 
-    <script src="../../resources/js/refresh.js"></script>
+    <%-- <script src="../../resources/js/refresh.js"></script> --%>
+    <script src="../../resources/js/modal.js"></script> 
+    <script src="../../resources/js/modalData.js"></script> 
+    <script src="../../resources/js/modalSave.js"></script> 
 </body>
 </html>
