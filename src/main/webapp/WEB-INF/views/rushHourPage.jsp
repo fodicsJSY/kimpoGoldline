@@ -19,6 +19,9 @@
     <%-- jquery --%>
     <script src="../../resources/js/jquery/jquery.min.js"></script>
 
+    <%-- sweetalert2 --%>
+    <script src="../../resources/js/sweetalert2.js"></script>
+
     <style>
         .dateInput{
             font-size: 23px;
@@ -312,7 +315,7 @@
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/ajax.js"></script>
-    <script src="../../resources/js/refresh.js"></script>
+    <%-- <script src="../../resources/js/refresh.js"></script> --%>
     <script src="../../resources/js/modal.js"></script> 
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 

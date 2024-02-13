@@ -469,9 +469,19 @@ public class MainController {
 	 
 	 
  
+	 // 파일명 데이터
+	 @PostMapping("/fnameUrl")
+	 @ResponseBody
+	 public Map<String, Object> fname(
+			 @RequestParam(value="fname") String fname
+			 ){
+		 	Map<String, Object> map = new HashMap<>();
+		 	map.put("fname", fname);
+		 	return map;
+	 }
 	 
 	 
 	 
 	 
-
+	 
 }
