@@ -9,6 +9,8 @@ var dimmedLayer = document.getElementById('dimmedLayer');
 let isModalOpen = false;
 // 모달 열기 버튼에 이벤트 리스너 추가
 scvBtn.addEventListener('click', function() {
+   // 새로고침 타이머를 멈추기
+  clearInterval(refreshTimer);
 
   //모달창 열림
   modal.style.display = 'block';
@@ -387,6 +389,7 @@ scvBtn.addEventListener('click', function() {
 closeBtn.addEventListener('click', function() {
   modal.style.display = 'none';
   isModalOpen = false;
+  refreshEveryMinute();
 });
 
 
@@ -397,6 +400,7 @@ window.addEventListener('click', function(event) {
   if (event.target === modal) {
     modal.style.display = 'none';
     isModalOpen = false;
+    refreshEveryMinute();
   }
 });
 

@@ -1,4 +1,5 @@
-
+// 페이지 새로고침 타이머를 위한 전역 변수
+let refreshTimer;
 /* 1분 간격으로 페이지 리프레쉬 시작 */
 function refreshEveryMinute() {
     // 현재 시간 정보 가져오기
@@ -19,7 +20,7 @@ function refreshEveryMinute() {
     }
     
     // 타이머 설정하여 매 1분마다 새로 고침
-    setInterval(function () {
+    refreshTimer =setInterval(function () {
         location.reload(true); // true 파라미터는 캐시를 무시하고 새로고침
     }, millisTillNextMinute);
 }
@@ -28,9 +29,3 @@ function refreshEveryMinute() {
 refreshEveryMinute();
 
 
-//모달창이 열려있을 시 새로고침 강제로 막음
-window.onbeforeunload = function() {
-    if (modal.style.display === "block") {
-      return; // 강제로 새로고침을 막습니다.
-    }
-};
