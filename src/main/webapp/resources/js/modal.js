@@ -7,6 +7,7 @@ var modal = document.getElementById('myModal');
 var dimmedLayer = document.getElementById('dimmedLayer');
 
 let isModalOpen = false;
+
 // 모달 열기 버튼에 이벤트 리스너 추가
 scvBtn.addEventListener('click', function() {
    // 새로고침 타이머를 멈추기
@@ -14,32 +15,9 @@ scvBtn.addEventListener('click', function() {
 
   //모달창 열림
   modal.style.display = 'block';
-  document.getElementById('selectMonth').checked = true;
   isModalOpen = true;
-  // 월 input창 생성
-  monthClickEvent();
-  var monthSearch = document.getElementById("monthSearch");
-  // console.log("monthSearch", monthSearch.value);
-  var occuMonth = formatToYYYYMM(monthSearch.value);
-  var from_date = occuMonth + "01";
-  var to_date = occuMonth + "31";
-    //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
-
-  tableTitle.innerHTML = "김포공항 승차";
-
-    
-  $.ajax({
-    url: "/monthUrl",
-    type: "POST",
-    data: { from_date: from_date, to_date: to_date, comboValue: "GimOut", bSum: 0 },
-    success: function (response) {
-        if (response.goToGimpoCSV && response.goToGimpoCSV.length > 0) {
-          // GoGimpoTableNotDaySum(response.goToGimpoCSV);
-        } else {
-          // renderNoDataMessage();
-        }
-    }
-  });
+  initializeOnModalClose()
+  
 });
 
 
@@ -679,7 +657,6 @@ function customClickEvent() {
 
 
 
-
 // formatToYYYYMM 함수 정의
 function formatToYYYYMM(dateString) {
   var year = dateString.substring(0, 4);
@@ -688,14 +665,83 @@ function formatToYYYYMM(dateString) {
 }
 
 
-// 모달이 열려 있는 경우에만 초기화
+
+//모달이 열려 있는 경우에만 초기화
 function initializeOnModalClose() {
   if (isModalOpen) {
       // 모달이 닫힐 때의 초기화 작업을 수행
       // 예: 입력 필드 초기화, 상태 초기화 등
+
+      // selectCombo 요소 가져오기
+      var selectCombo = document.getElementById("selectCombo");
+
+      // "김포공항역 승차" 옵션 선택하기
+      for (var i = 0; i < selectCombo.options.length; i++) {
+          if (selectCombo.options[i].value === "GimOut") {
+              selectCombo.options[i].selected = true;
+              break;
+          }
+      }
+
       selectMonth.checked=true;
-      selectDay.checked=false;
-      selectCustom.checked=false;
       daySumCheckbox.checked=false;
+
+      // 월 input창 생성
+      monthClickEvent();
+
+      var monthSearch = document.getElementById("monthSearch");
+      // console.log("monthSearch", monthSearch.value);
+      var occuMonth = formatToYYYYMM(monthSearch.value);
+      var from_date = occuMonth + "01";
+      var to_date = occuMonth + "31";
+        //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+
+      tableTitle.innerHTML = "김포공항 승차";
+      fristTible();
+
+      // 데이터 가져오기
+      $.ajax({
+        url: "/monthUrl",
+        type: "POST",
+        data: { from_date: from_date, to_date: to_date, comboValue: "GimOut", bSum: 0 },
+        success: function (response) {
+            if (response.goToGimpoCSV && response.goToGimpoCSV.length > 0) {
+              goGimpoTableNotDaySum(response.goToGimpoCSV);
+            } else {
+              renderNoDataMessage();
+            }
+        }
+      });
   }
+}
+
+
+//테이블 초기화
+function fristTible() {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+  
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+  
+  var tr = document.createElement("tr");
+  dataTbody.appendChild(tr);
+  
+  var td = document.createElement("td");
+  td.className = "noData";
+  tr.appendChild(td);
+  td.innerHTML = "데이터를 불러오고 있습니다.";
 }

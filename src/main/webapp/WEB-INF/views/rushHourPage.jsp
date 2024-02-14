@@ -248,7 +248,6 @@
                             <div class="customBox">
                                 <div class="selectDate"><input type="radio" name="selectDate" id="selectCustom"> <label for="selectCustom">기간별</label></div>
                                 <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" ><label for="daySumCheckbox"> 일합계</label></div>
-                                <%-- <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" disabled><label for="daySum"> 일합계</label></div> --%>
                             </div>
                         </div>
                         <div class="selectOptionBox">
@@ -264,30 +263,6 @@
                                 <div><button class="btn" id="dataSaveBtn">저장</button></div>
                         </div>
                         <div class="dataContainer">
-                        <div>
-                            <table class="dataTable">
-                                <thead class="dataThead">
-                                    <tr>
-                                        <th>순번</th>
-                                        <th>날짜</th>
-                                        <th>시간</th>
-                                        <th>계단</th>
-                                        <th>엘리베이터</th>
-                                        <th>에스컬레이터</th>
-                                        <th>합계</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>    
-                        <div>
-                            <table class="dataTable">
-                                <tbody class="dataTbody">
-                                <tr>
-                                    <td style="text-align: center;">데이터를 불러오고 있습니다.</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </div>
                         </div>
                     </div>
                 </div>
