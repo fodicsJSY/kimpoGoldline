@@ -30,14 +30,12 @@
         /* 달력 이미지 변경 시작*/
         /*input[type='date']::-webkit-calendar-picker-indicator {*/
         .dateInput::-webkit-calendar-picker-indicator {
-            
-        padding: 10px;
-        background: url(/resources/img/combo_drop.png) center no-repeat;
-
-        border-radius: 8px;
-        text-align: center;
-        /* font-size: 100%; */
-        margin: 10px;
+            padding: 10px;
+            background: url(/resources/img/combo_drop.png) center no-repeat;
+            border-radius: 8px;
+            text-align: center;
+            /* font-size: 100%; */
+            margin: 10px;
         }
 
         .dateInput::-webkit-calendar-picker-indicator:hover{

@@ -10,15 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>normalPage</title>
 
+    <%-- css --%>
+    <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
+    <link rel="stylesheet" href="../../resources/css/modal.css">
+
     <%-- echarts --%>
 	<script src="../../resources/js/echart/echart.min.js"></script>
 
     <%-- jquery --%>
     <script src="../../resources/js/jquery/jquery.min.js"></script>
 
-    <%-- css --%>
-    <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
-    <link rel="stylesheet" href="../../resources/css/modal.css">
+    <%-- sweetalert2 --%>
+    <script src="../../resources/js/sweetalert2.js"></script>
 
     <style>
         .dateInput{
@@ -299,7 +302,7 @@
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
-    <%-- <script src="../../resources/js/refresh.js"></script> --%>
+    <script src="../../resources/js/refresh.js"></script> 
     <script src="../../resources/js/modal.js"></script> 
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 

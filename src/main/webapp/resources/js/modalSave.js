@@ -11,20 +11,19 @@ document.getElementById("dataSaveBtn").addEventListener("click", ()=>{
             inputLabel: "파일명을 입력해주세요.",
             showCancelButton: true,
             inputValidator: (value) => {
-                console.log("value : ", value);
+                //console.log("value : ", value);
                 if (!value) {
                     return "파일명이 입력되지 않았습니다!";
                 }
             }
         });
-    
         if (fname) {
             $.ajax({
                 url: "/fnameUrl", 
                 type: "POST",
                 data: { fname:fname},
                 success: function(response){
-                    console.log("서버로부터 받은 결과: ", response);
+                    //console.log("서버로부터 받은 결과: ", response);
                     let filename = response.fname;
 
                     let comboValue = selectCombo.value;
@@ -40,21 +39,11 @@ document.getElementById("dataSaveBtn").addEventListener("click", ()=>{
                     if(comboValue==="GoInOut"){
                         saveData(comboValue, filename);
                     }
-                    Swal.fire(`파일명은 ${fname}`);
                 }
             });
         }
     }
-    
-    
-
-    
-
     console.log("저장");
-
-
-
-
 });
 
 
@@ -150,7 +139,7 @@ function saveData(comboValue, filename){
             type: "POST",
             data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
             success: function(response){
-                console.log("response", response);
+                //console.log("response", response);
                 let p3 = response.parameter3;
                 
                 if(response.goToGimpoCSV){
@@ -193,8 +182,6 @@ function saveData(comboValue, filename){
                 }
             }
         });
-    
-
     }
 
     if(selectCustom.checked){
@@ -264,8 +251,6 @@ function saveData(comboValue, filename){
                 }
             }
         });
-
-
     }
 
 
@@ -278,20 +263,15 @@ function saveData(comboValue, filename){
         // CSV 데이터 추가
         for (let i = 0; i < goToGimpoCSV.length-1; i++) {
             var currentItem = goToGimpoCSV[i];
-
             let row = `${i+1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
             csvContent += row;
         }
-
-
 
         const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8;' });
     
         // CSV 파일 생성
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-
-
 
         /*
         // UTF-8로 변환
@@ -318,9 +298,6 @@ function saveData(comboValue, filename){
     // CSV 데이터 추가
     for (let i = 0; i < goToGimpoCSV.length-1; i++) {
         var currentItem = goToGimpoCSV[i];
-        
-
-
         let row = `${i+1},${currentItem.occuDate},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
         csvContent += row;
     }
@@ -353,7 +330,6 @@ function flie_getOffGimpoDataSave(getOffGimpoCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < getOffGimpoCSV.length - 1; i++) {
         var currentItem = getOffGimpoCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
         csvContent += row;
     }
@@ -386,7 +362,6 @@ function flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < getOffGimpoCSV.length - 1; i++) {
         var currentItem = getOffGimpoCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
         csvContent += row;
     }
@@ -420,7 +395,6 @@ function flie_goToGochonDataSave(goToGochonCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < goToGochonCSV.length - 1; i++) {
         var currentItem = goToGochonCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
         csvContent += row;
     }
@@ -454,7 +428,6 @@ function flie_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < goToGochonCSV.length - 1; i++) {
         var currentItem = goToGochonCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
         csvContent += row;
     }
@@ -488,7 +461,6 @@ function flie_goToPungmuDataSave(goToPungmuCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < goToPungmuCSV.length - 1; i++) {
         var currentItem = goToPungmuCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
         csvContent += row;
     }
@@ -523,7 +495,6 @@ function flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename) {
     // CSV 데이터 추가
     for (let i = 0; i < goToPungmuCSV.length - 1; i++) {
         var currentItem = goToPungmuCSV[i];
-
         let row = `${i + 1},${currentItem.occuDate},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
         csvContent += row;
     }

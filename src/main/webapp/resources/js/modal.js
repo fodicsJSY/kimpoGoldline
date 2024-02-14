@@ -27,361 +27,494 @@ scvBtn.addEventListener('click', function() {
 
   tableTitle.innerHTML = "김포공항 승차";
 
-    /*
-  $.ajax({
-    url: "/monthUrl", 
-    type: "POST",
-    data: { from_date:from_date, to_date:to_date, comboValue:"GimOut", bSum:0},
-    success: function(response){
-
-      console.log("response", response);
-
-
-      if(response.goToGimpoCSV){
-      
-        var goToGimpoCSV = response.goToGimpoCSV;
-
-        if(goToGimpoCSV.length == 0){
-          console.log("length : 0")
-          var dataContainer = document.querySelector(".dataContainer");
-          while (dataContainer.firstChild) {
-            dataContainer.removeChild(dataContainer.firstChild);
-          }
-          let div1 = document.createElement("div");
-          dataContainer.appendChild(div1);
-          
-          let dataTable1 = document.createElement("table");
-          dataTable1.className = "dataTable";
-          div1.appendChild(dataTable1);
-          
-          let dataThead = document.createElement("thead");
-          dataThead.className = "dataThead";
-          dataTable1.appendChild(dataThead);
-  
-          let tr1 = document.createElement("tr");
-          dataThead.appendChild(tr1);
-
-          let th1 = document.createElement("th");
-          th1.className = "th1";
-          th1.innerHTML = "순번"
-          let th2 = document.createElement("th");
-          th2.className = "th2";
-          th2.innerHTML = "날짜"
-          let th7 = document.createElement("th");
-          th7.className = "th7";
-          th7.innerHTML = "시간"
-          let th3 = document.createElement("th");
-          th3.className = "th3";
-          th3.innerHTML = "계단"
-          let th4 = document.createElement("th");
-          th4.className = "th4";
-          th4.innerHTML = "엘리베이터"
-          let th5 = document.createElement("th");
-          th5.className = "th5";
-          th5.innerHTML = "에스컬레이터"
-          let th6 = document.createElement("th");
-          th6.className = "th6";
-          th6.innerHTML = "합계"
-
-          tr1.appendChild(th1);
-          tr1.appendChild(th2);
-          tr1.appendChild(th7);
-          tr1.appendChild(th3);
-          tr1.appendChild(th4);
-          tr1.appendChild(th5);
-          tr1.appendChild(th6);
-
-          let div2 = document.createElement("div");
-          dataContainer.appendChild(div2);
-        
-          let dataTable2 = document.createElement("table");
-          dataTable2.className = "dataTable";
-          div2.appendChild(dataTable2);
-          let dataTbody = document.createElement("tbody");
-          dataTbody.className = "dataTbody";
-          dataTable2.appendChild(dataTbody);
-          let tr2;
-          let td_data1;
-
-          tr2 = document.createElement("tr");
-          dataTbody.appendChild(tr2);
-
-          td_data1 = document.createElement("td");
-          td_data1.className = "noData";
-          td_data1.innerHTML = "데이터를 찾을 수 없습니다.";
-          tr2.appendChild(td_data1);
-        }
-
-        let no;
-        let occuTime=[];
-        let occu_Date=[];
-        let gimpo_st_out = [];
-        let gimpo_ev_out = [];
-        let gimpo_ec_out = [];
-        
-        
-        for (var i = 0; i < goToGimpoCSV.length-1; i++) {
-          var currentItem = goToGimpoCSV[i];
-          //console.log(currentItem);
-
-          
-          occuTime.push(currentItem.occuTime);
-          occu_Date.push(currentItem.occuDate);
-          gimpo_st_out.push(currentItem.gimpo_st_out);
-          gimpo_ev_out.push(currentItem.gimpo_ev_out);
-          gimpo_ec_out.push(currentItem.gimpo_ec_out);
-          
-          
-          // currentItem의 속성에 접근 확인
-          //console.log("i", i);
-          // console.log("no", no);
-          // console.log("occuTime", occuTime);
-          // console.log("occu_Date", occu_Date);
-          // console.log("gimpo_st_out", gimpo_st_out);
-          // console.log("gimpo_ev_out", gimpo_ev_out);
-          // console.log("gimpo_ec_out", gimpo_ec_out);
-
-          if(occuTime[i] == null){
-            //console.log("occu_Date", 0);
-            
-            var dataContainer = document.querySelector(".dataContainer");
-            while (dataContainer.firstChild) {
-              dataContainer.removeChild(dataContainer.firstChild);
-            }
-            
-            let div1 = document.createElement("div");
-            dataContainer.appendChild(div1);
-            
-            let dataTable1 = document.createElement("table");
-            dataTable1.className = "dataTable";
-            div1.appendChild(dataTable1);
-            
-            let dataThead = document.createElement("thead");
-            dataThead.className = "dataThead";
-            dataTable1.appendChild(dataThead);
     
-            let tr1 = document.createElement("tr");
-            dataThead.appendChild(tr1);
-
-            let th1 = document.createElement("th");
-            th1.className = "th1";
-            th1.innerHTML = "순번"
-            let th2 = document.createElement("th");
-            th2.className = "th2";
-            th2.innerHTML = "날짜"
-            let th3 = document.createElement("th");
-            th3.className = "th3";
-            th3.innerHTML = "계단"
-            let th4 = document.createElement("th");
-            th4.className = "th4";
-            th4.innerHTML = "엘리베이터"
-            let th5 = document.createElement("th");
-            th5.className = "th5";
-            th5.innerHTML = "에스컬레이터"
-            let th6 = document.createElement("th");
-            th6.className = "th6";
-            th6.innerHTML = "합계"
-
-            tr1.appendChild(th1);
-            tr1.appendChild(th2);
-            tr1.appendChild(th3);
-            tr1.appendChild(th4);
-            tr1.appendChild(th5);
-            tr1.appendChild(th6);
-
-            let div2 = document.createElement("div");
-            dataContainer.appendChild(div2);
-          
-            let dataTable2 = document.createElement("table");
-            dataTable2.className = "dataTable";
-            div2.appendChild(dataTable2);
-            let dataTbody = document.createElement("tbody");
-            dataTbody.className = "dataTbody";
-            dataTable2.appendChild(dataTbody);
-            let tr2;
-            let td_data1;
-            let td_data2;
-            let td_data3;
-            let td_data4;
-            let td_data5;
-            let td_data6;
-            let td_data7;
-
-            
-
-
-
-            for(var j = 0; j < goToGimpoCSV.length-1; j++){
-              let no1 = j+1;
-              no = no1++ ;
-//              console.log("j", j);
-//              console.log("no", no);
-//              console.log("occuTime", occuTime);
-//              console.log("occu_Date", occu_Date);
-//              console.log("gimpo_st_out", gimpo_st_out);
-//              console.log("gimpo_ev_out", gimpo_ev_out);
-//              console.log("gimpo_ec_out", gimpo_ec_out);
-
-              tr2 = document.createElement("tr");
-              dataTbody.appendChild(tr2);
-
-              td_data1 = document.createElement("td");
-              td_data1.className = "td_data1";
-              td_data1.innerHTML = no;
-              td_data2 = document.createElement("td");
-              td_data2.className = "td_data2";
-              td_data2.innerHTML = occu_Date[j];
-              td_data3 = document.createElement("td");
-              td_data3.className = "td_data3";
-              td_data3.innerHTML = gimpo_st_out[j];
-              td_data4 = document.createElement("td");
-              td_data4.className = "td_data4";
-              td_data4.innerHTML = gimpo_ev_out[j];
-              td_data5 = document.createElement("td");
-              td_data5.className = "td_data5";
-              td_data5.innerHTML = gimpo_ec_out[j];
-              td_data6 = document.createElement("td");
-              td_data6.className = "td_data6";
-              td_data6.innerHTML = gimpo_st_out[j]+gimpo_ev_out[j]+gimpo_ec_out[j];
-              tr2.appendChild(td_data1);
-              tr2.appendChild(td_data2);
-              tr2.appendChild(td_data3);
-              tr2.appendChild(td_data4);
-              tr2.appendChild(td_data5);
-              tr2.appendChild(td_data6);
-            }
-          }
-        
-          if(occuTime[0] != null){
-              //console.log("occu_Date", 1);
-
-              var dataContainer = document.querySelector(".dataContainer");
-              while (dataContainer.firstChild) {
-                dataContainer.removeChild(dataContainer.firstChild);
-              }
-              
-              let div1 = document.createElement("div");
-              dataContainer.appendChild(div1);
-              
-              let dataTable1 = document.createElement("table");
-              dataTable1.className = "dataTable";
-              div1.appendChild(dataTable1);
-              
-              let dataThead = document.createElement("thead");
-              dataThead.className = "dataThead";
-              dataTable1.appendChild(dataThead);
-      
-              let tr1 = document.createElement("tr");
-              dataThead.appendChild(tr1);
-  
-              let th1 = document.createElement("th");
-              th1.className = "th1";
-              th1.innerHTML = "순번"
-              let th2 = document.createElement("th");
-              th2.className = "th2";
-              th2.innerHTML = "날짜"
-              let th7 = document.createElement("th");
-              th7.className = "th7";
-              th7.innerHTML = "시간"
-              let th3 = document.createElement("th");
-              th3.className = "th3";
-              th3.innerHTML = "계단"
-              let th4 = document.createElement("th");
-              th4.className = "th4";
-              th4.innerHTML = "엘리베이터"
-              let th5 = document.createElement("th");
-              th5.className = "th5";
-              th5.innerHTML = "에스컬레이터"
-              let th6 = document.createElement("th");
-              th6.className = "th6";
-              th6.innerHTML = "합계"
-  
-              tr1.appendChild(th1);
-              tr1.appendChild(th2);
-              tr1.appendChild(th7);
-              tr1.appendChild(th3);
-              tr1.appendChild(th4);
-              tr1.appendChild(th5);
-              tr1.appendChild(th6);
-  
-              let div2 = document.createElement("div");
-              dataContainer.appendChild(div2);
-            
-              let dataTable2 = document.createElement("table");
-              dataTable2.className = "dataTable";
-              div2.appendChild(dataTable2);
-              let dataTbody = document.createElement("tbody");
-              dataTbody.className = "dataTbody";
-              dataTable2.appendChild(dataTbody);
-              let tr2;
-              let td_data1;
-              let td_data2;
-              let td_data3;
-              let td_data4;
-              let td_data5;
-              let td_data6;
-              let td_data7;
-  
-  
-  
-              for(var j = 0; j < goToGimpoCSV.length-1; j++){
-                let no1 = j+1;
-                no = no1++ ;
-//                console.log("j", j);
-//                console.log("no", no);
-//                console.log("occuTime", occuTime);
-//                console.log("occu_Date", occu_Date);
-//                console.log("gimpo_st_out", gimpo_st_out);
-//                console.log("gimpo_ev_out", gimpo_ev_out);
-//                console.log("gimpo_ec_out", gimpo_ec_out);
-//                console.log("+", gimpo_ec_out[0]+gimpo_ev_out[0]+gimpo_ec_out[0]);
-  
-                tr2 = document.createElement("tr");
-                dataTbody.appendChild(tr2);
-  
-                td_data1 = document.createElement("td");
-                td_data1.className = "td_data1";
-                td_data1.innerHTML = no;
-                td_data2 = document.createElement("td");
-                td_data2.className = "td_data2";
-                td_data2.innerHTML = occu_Date[j];
-                td_data7 = document.createElement("td");
-                td_data7.className = "td_data7";
-                td_data7.innerHTML = occuTime[j];
-                td_data3 = document.createElement("td");
-                td_data3.className = "td_data3";
-                td_data3.innerHTML = gimpo_st_out[j];
-                td_data4 = document.createElement("td");
-                td_data4.className = "td_data4";
-                td_data4.innerHTML = gimpo_ev_out[j];
-                td_data5 = document.createElement("td");
-                td_data5.className = "td_data5";
-                td_data5.innerHTML = gimpo_ec_out[j];
-                td_data6 = document.createElement("td");
-                td_data6.className = "td_data6";
-                td_data6.innerHTML = gimpo_st_out[j]+gimpo_ev_out[j]+gimpo_ec_out[j];
-                tr2.appendChild(td_data1);
-                tr2.appendChild(td_data2);
-                tr2.appendChild(td_data7);
-                tr2.appendChild(td_data3);
-                tr2.appendChild(td_data4);
-                tr2.appendChild(td_data5);
-                tr2.appendChild(td_data6);
-              }
-                // console.log("no", no);
-                // console.log("occu_Date", occu_Date);
-                // console.log("gimpo_st_out", gimpo_st_out);
-                // console.log("gimpo_ev_out", gimpo_ev_out);
-                // console.log("gimpo_ec_out", no);
-
-          }
+  $.ajax({
+    url: "/monthUrl",
+    type: "POST",
+    data: { from_date: from_date, to_date: to_date, comboValue: "GimOut", bSum: 0 },
+    success: function (response) {
+        if (response.goToGimpoCSV && response.goToGimpoCSV.length > 0) {
+          // GoGimpoTableNotDaySum(response.goToGimpoCSV);
+        } else {
+          // renderNoDataMessage();
         }
-      }
-
     }
-  }); */
+  });
 });
 
+
+/* 김포 승차 시작 */
+// tbody 
+function goGimpoTableNotDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "td_data1", no);
+    createCell(tr, "td", "td_data2", item.occuDate);
+    createCell(tr, "td", "td_data7", item.occuTime);
+    createCell(tr, "td", "td_data3", item.gimpo_st_out);
+    createCell(tr, "td", "td_data4", item.gimpo_ev_out);
+    createCell(tr, "td", "td_data5", item.gimpo_ec_out);
+    createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
+  });
+}
+
+
+// tbody + 일합계
+function goGimpoTableDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "td_data1", no);
+    createCell(tr, "td", "td_data2", item.occuDate);
+    createCell(tr, "td", "td_data3", item.gimpo_st_out);
+    createCell(tr, "td", "td_data4", item.gimpo_ev_out);
+    createCell(tr, "td", "td_data5", item.gimpo_ec_out);
+    createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
+  });
+}
+/* 김포 승차 끝 */
+
+
+
+/* 김포 하차 시작 */
+// tbody 
+function getGimpoTableNotDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "td_data1", no);
+    createCell(tr, "td", "td_data2", item.occuDate);
+    createCell(tr, "td", "td_data7", item.occuTime);
+    createCell(tr, "td", "td_data3", item.gimpo_st_in);
+    createCell(tr, "td", "td_data4", item.gimpo_ev_in);
+    createCell(tr, "td", "td_data5", item.gimpo_ec_in);
+    createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
+  });
+}
+
+
+// tbody + 일합계
+function getGimpoTableDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "td_data1", no);
+    createCell(tr, "td", "td_data2", item.occuDate);
+    createCell(tr, "td", "td_data3", item.gimpo_st_in);
+    createCell(tr, "td", "td_data4", item.gimpo_ev_in);
+    createCell(tr, "td", "td_data5", item.gimpo_ec_in);
+    createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
+  });
+}
+/* 김포 하차 끝 */
+
+
+
+
+
+/* 풍무 승하차 시작 */
+// tbody 
+function pungmoTableNotDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGoPungTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "goPung_td_data1", no);
+    createCell(tr, "td", "goPung_td_data2", item.occuDate);
+    createCell(tr, "td", "goPung_td_data5", item.occuTime);
+    createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
+    createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
+  });
+}
+
+
+// tbody + 일합계
+function pungmoTableDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGoPungTableDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "goPung_td_data1", no);
+    createCell(tr, "td", "goPung_td_data2", item.occuDate);
+    createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
+    createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
+  });
+}
+/* 풍무 승하차 끝 */
+
+
+
+/* 고촌 승하차 시작 */
+// tbody 
+function gochonTableNotDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGoPungTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "goPung_td_data1", no);
+    createCell(tr, "td", "goPung_td_data2", item.occuDate);
+    createCell(tr, "td", "goPung_td_data5", item.occuTime);
+    createCell(tr, "td", "goPung_td_data3", item.gochon_in);
+    createCell(tr, "td", "goPung_td_data4", item.gochon_out);
+  });
+}
+
+
+// tbody + 일합계
+function gochonTableDaySum(data) {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGoPungTableDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+
+  data.forEach(function (item, index) {
+    var no = index + 1;
+
+    var tr = document.createElement("tr");
+    dataTbody.appendChild(tr);
+
+    createCell(tr, "td", "goPung_td_data1", no);
+    createCell(tr, "td", "goPung_td_data2", item.occuDate);
+    createCell(tr, "td", "goPung_td_data3", item.gochon_in);
+    createCell(tr, "td", "goPung_td_data4", item.gochon_out);
+  });
+}
+/* 고촌 승하차 끝 */
+
+
+
+
+
+
+/* 김포 테이블헤드 시작*/
+// thead
+function createGimpoTableNotDaySum() {
+  var table = document.createElement("table");
+  table.className = "dataTable";
+  var thead = document.createElement("thead");
+  thead.className = "dataThead";
+  table.appendChild(thead);
+  var tr = document.createElement("tr");
+  thead.appendChild(tr);
+  
+  ["순번", "날짜", "시간", "계단", "엘리베이터", "에스컬레이터", "합계"].forEach(function (title) {
+    var th = document.createElement("th");
+    th.innerHTML = title;
+    if (title === "순번") {
+      th.classList.add("th1");
+    }else if(title === "날짜") {
+      th.classList.add("th2");
+    }else if(title === "시간") {
+      th.classList.add("th7");
+    }else if(title === "계단") {
+      th.classList.add("th3");
+    }else if(title === "엘리베이터") {
+      th.classList.add("th4");
+    }else if(title === "에스컬레이터") {
+      th.classList.add("th5");
+    }else{
+      th.classList.add("th6");
+    }
+    tr.appendChild(th);
+  });
+  return table;
+}
+
+// thead + 일합계
+function createGimpoTableDaySum() {
+  var table = document.createElement("table");
+  table.className = "dataTable";
+  var thead = document.createElement("thead");
+  thead.className = "dataThead";
+  table.appendChild(thead);
+  var tr = document.createElement("tr");
+  thead.appendChild(tr);
+  
+  ["순번", "날짜", "계단", "엘리베이터", "에스컬레이터", "합계"].forEach(function (title) {
+    var th = document.createElement("th");
+    th.innerHTML = title;
+    if (title === "순번") {
+      th.classList.add("th1");
+    }else if(title === "날짜") {
+      th.classList.add("th2");
+    }else if(title === "계단") {
+      th.classList.add("th3");
+    }else if(title === "엘리베이터") {
+      th.classList.add("th4");
+    }else if(title === "에스컬레이터") {
+      th.classList.add("th5");
+    }else{
+      th.classList.add("th6");
+    }
+    tr.appendChild(th);
+  });
+  return table;
+}
+/* 김포 테이블헤드 끝*/
+
+
+/* 풍무&고촌 테이블헤드 시작*/
+// thead
+function createGoPungTableNotDaySum() {
+  var table = document.createElement("table");
+  table.className = "dataTable";
+  var thead = document.createElement("thead");
+  thead.className = "dataThead";
+  table.appendChild(thead);
+  var tr = document.createElement("tr");
+  thead.appendChild(tr);
+  
+  ["순번", "날짜", "시간", "승차", "하차"].forEach(function (title) {
+    var th = document.createElement("th");
+    th.innerHTML = title;
+    if (title === "순번") {
+      th.classList.add("goPung_th1");
+    }else if(title === "날짜") {
+      th.classList.add("goPung_th2");
+    }else if(title === "시간") {
+      th.classList.add("goPung_th5");
+    }else if(title === "승차") {
+      th.classList.add("goPung_th3");
+    }else{
+      th.classList.add("goPung_th4");
+    }
+    tr.appendChild(th);
+  });
+  return table;
+}
+
+// thead + 일합계
+function createGoPungTableDaySum() {
+  var table = document.createElement("table");
+  table.className = "dataTable";
+  var thead = document.createElement("thead");
+  thead.className = "dataThead";
+  table.appendChild(thead);
+  var tr = document.createElement("tr");
+  thead.appendChild(tr);
+  
+  ["순번", "날짜", "승차", "하차"].forEach(function (title) {
+    var th = document.createElement("th");
+    th.innerHTML = title;
+    if (title === "순번") {
+      th.classList.add("th1");
+    }else if(title === "날짜") {
+      th.classList.add("th2");
+    }else if(title === "승차") {
+      th.classList.add("th3");
+    }else{
+      th.classList.add("th4");
+    }
+    tr.appendChild(th);
+  });
+  return table;
+}
+/* 풍무&고촌 테이블헤드 끝*/
+
+
+
+
+function createCell(row, elementType, className, content) {
+    var cell = document.createElement(elementType);
+    cell.className = className;
+    cell.innerHTML = content;
+    row.appendChild(cell);
+}
+
+function renderNoDataMessage() {
+  var dataContainer = document.querySelector(".dataContainer");
+  dataContainer.innerHTML = ""; // Clear previous data
+  let div01 = document.createElement("div");
+  dataContainer.appendChild(div01);
+  let div02 = document.createElement("div");
+  dataContainer.appendChild(div02);
+
+  var dataTable1 = createGimpoTableNotDaySum();
+  dataTable1.className = "dataTable";
+  div01.appendChild(dataTable1);
+  
+  var dataTable2 = document.createElement("table");
+  dataTable2.className = "dataTable";
+  div02.appendChild(dataTable2);
+  
+  var dataTbody = document.createElement("tbody");
+  dataTbody.className = "dataTbody";
+  dataTable2.appendChild(dataTbody);
+  
+  var tr = document.createElement("tr");
+  dataTbody.appendChild(tr);
+  
+  var td = document.createElement("td");
+  td.className = "noData";
+  tr.appendChild(td);
+  td.innerHTML = "데이터를 찾을 수 없습니다.";
+}
 
 
 
