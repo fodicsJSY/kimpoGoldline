@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -185,8 +186,8 @@ public class MainController {
 	 
 	
 	 // 출근길 csv
-	 @PostMapping("/loadRushHourCSV")
-	 @ResponseBody
+	 //@PostMapping("/loadRushHourCSV")
+	 //@ResponseBody
 	 public Map<String, Object> loadRushHourCSV(
 			 @RequestParam(value="occuDate") String occuDate,
 			 Model model
@@ -473,11 +474,12 @@ public class MainController {
 	 @PostMapping("/fnameUrl")
 	 @ResponseBody
 	 public Map<String, Object> fname(
-			 @RequestParam(value="fname") String fname
+			 @RequestBody Map<String, Object> paramMap
 			 ){
-		 	Map<String, Object> map = new HashMap<>();
-		 	map.put("fname", fname);
-		 	return map;
+		 	
+//		 	System.out.println("paramMap : " + paramMap);
+		 	
+		 	return paramMap;
 	 }
 	 
 	 

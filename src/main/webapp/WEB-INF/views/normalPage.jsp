@@ -254,30 +254,6 @@
                             <div><button class="btn" id="dataSaveBtn">저장</button></div>
                         </div>
                         <div class="dataContainer">
-                        <div>
-                            <table class="dataTable">
-                                <thead class="dataThead">
-                                    <tr>
-                                        <th>순번</th>
-                                        <th>날짜</th>
-                                        <th>시간</th>
-                                        <th>계단</th>
-                                        <th>엘리베이터</th>
-                                        <th>에스컬레이터</th>
-                                        <th>합계</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>    
-                        <div>
-                            <table class="dataTable">
-                                <tbody class="dataTbody">
-                                <tr>
-                                    <td style="text-align: center;">데이터를 불러오고 있습니다.</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -304,6 +280,7 @@
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
     <script src="../../resources/js/refresh.js"></script> 
     <script src="../../resources/js/modal.js"></script> 
+    <script src="../../resources/js/modalTable.js"></script> 
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 
 </body>

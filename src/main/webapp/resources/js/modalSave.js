@@ -2,52 +2,71 @@
 
 document.getElementById("dataSaveBtn").addEventListener("click", ()=>{
 
-    fetchData()
-    async function fetchData() {
-        // 사용자로부터 파일명을 입력 받음
-        const { value: fname } = await Swal.fire({
-            title: "파일명을 입력해주세요.",
-            input: "text",
-            inputLabel: "파일명을 입력해주세요.",
-            showCancelButton: true,
-            inputValidator: (value) => {
-                //console.log("value : ", value);
-                if (!value) {
-                    return "파일명이 입력되지 않았습니다!";
-                }
-            }
-        });
-        if (fname) {
-            $.ajax({
-                url: "/fnameUrl", 
-                type: "POST",
-                data: { fname:fname},
-                success: function(response){
-                    //console.log("서버로부터 받은 결과: ", response);
-                    let filename = response.fname;
-
-                    let comboValue = selectCombo.value;
-                    if(comboValue==="GimOut"){
-                        saveData(comboValue, filename);
-                    }
-                    if(comboValue==="GimIn"){
-                        saveData(comboValue, filename);
-                    }
-                    if(comboValue==="PungInOut"){
-                        saveData(comboValue, filename);
-                    }
-                    if(comboValue==="GoInOut"){
-                        saveData(comboValue, filename);
-                    }
-                }
-            });
-        }
-    }
-    console.log("저장");
+    fetchData();
+    
 });
 
+// 파일명 받기
+async function getFileName() {
+    const { value: fname } = await Swal.fire({
+        title: "파일명을 입력해주세요.",
+        input: "text",
+        inputLabel: "파일명을 입력해주세요.",
+        showCancelButton: true,
+        inputValidator: (value) => {
+            console.log("value : ", value);
+            if (!value) {
+                return getFileName();
+            }
+        }
+    });
+    return fname;
+}
+
+// 비동기로 이름 받아오기
+async function fetchData() {
+
+    // 파일명 가져오기
+    const fname = await getFileName();
+
+    if (fname) {
+        fetch("fnameUrl", { 
+            method : "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            body : JSON.stringify( {"fname":fname} ) 
+        })
+        .then(resp => resp.json()) // 요청에 대한 응답 객체(response)를 필요한 형태로 파싱
+        .then((result) => {
+            // console.log("result : ", result);
+
+            let filename = result.fname;
+
+            let comboValue = selectCombo.value;
+            if(comboValue==="GimOut"){
+                saveData(comboValue, filename);
+            }
+            if(comboValue==="GimIn"){
+                saveData(comboValue, filename);
+            }
+            if(comboValue==="PungInOut"){
+                saveData(comboValue, filename);
+            }
+            if(comboValue==="GoInOut"){
+                saveData(comboValue, filename);
+            }
+
+        }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
+        .catch( err => {
+            // console.log("err : ", err);
+            Swal.fire("파일을 다운로드 할 수 없습니다.");
+        }); // 예외 발생 시 처리할 내용을 작성
+    }
+}
 
 
+
+
+// 파일데이터 가져오기
 function saveData(comboValue, filename){
 
     if(selectMonth.checked){
@@ -56,7 +75,7 @@ function saveData(comboValue, filename){
         var occuMonth = formatToYYYYMM(monthSearch.value);
         var from_date = occuMonth + "01";
         var to_date = occuMonth + "31";
-        console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
 
         if(daySumCheckbox.checked === false ){
         bSum = 0;
@@ -64,15 +83,15 @@ function saveData(comboValue, filename){
         if(daySumCheckbox.checked === true){
         bSum = 1;
         }
-        console.log("bSum", bSum);
+        // console.log("bSum", bSum);
 
         $.ajax({
             url: "/monthUrl", 
             type: "POST",
             data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
             success: function(response){
-                console.log("response", response);
-                console.log("p3", response.parameter3);
+                // console.log("response", response);
+                // console.log("p3", response.parameter3);
 
                 let p3 = response.parameter3;
                 
@@ -125,7 +144,7 @@ function saveData(comboValue, filename){
         var from_date = occuDay;
         var to_date = occuDay;
     
-          console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+        //console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
     
         if(daySumCheckbox.checked === false ){
             bSum = 0;
@@ -208,7 +227,7 @@ function saveData(comboValue, filename){
             type: "POST",
             data: {from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
             success: function(response){
-                console.log("response", response);
+                // console.log("response", response);
                 let p3 = response.parameter3;
 
                 if(response.goToGimpoCSV){
@@ -261,7 +280,7 @@ function saveData(comboValue, filename){
         let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
     
         // CSV 데이터 추가
-        for (let i = 0; i < goToGimpoCSV.length-1; i++) {
+        for (let i = 0; i < goToGimpoCSV.length; i++) {
             var currentItem = goToGimpoCSV[i];
             let row = `${i+1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
             csvContent += row;
@@ -286,6 +305,7 @@ function saveData(comboValue, filename){
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        Swal.fire(`${filename}가 다운로드 되었습니다.`);
     }
     // CSV파일1 생성 끝-----------------------------------------------
 
@@ -296,7 +316,7 @@ function saveData(comboValue, filename){
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGimpoCSV.length-1; i++) {
+    for (let i = 0; i < goToGimpoCSV.length; i++) {
         var currentItem = goToGimpoCSV[i];
         let row = `${i+1},${currentItem.occuDate},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
         csvContent += row;
@@ -318,6 +338,7 @@ function saveData(comboValue, filename){
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일2 생성 끝-----------------------------------------------
 
@@ -328,7 +349,7 @@ function flie_getOffGimpoDataSave(getOffGimpoCSV, filename) {
     let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < getOffGimpoCSV.length - 1; i++) {
+    for (let i = 0; i < getOffGimpoCSV.length; i++) {
         var currentItem = getOffGimpoCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
         csvContent += row;
@@ -350,6 +371,7 @@ function flie_getOffGimpoDataSave(getOffGimpoCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일3 생성 끝-----------------------------------------------
 
@@ -360,7 +382,7 @@ function flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < getOffGimpoCSV.length - 1; i++) {
+    for (let i = 0; i < getOffGimpoCSV.length; i++) {
         var currentItem = getOffGimpoCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
         csvContent += row;
@@ -383,6 +405,7 @@ function flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일4 생성 끝-----------------------------------------------
 
@@ -393,7 +416,7 @@ function flie_goToGochonDataSave(goToGochonCSV, filename) {
     let csvContent = "순번,날짜,시간,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGochonCSV.length - 1; i++) {
+    for (let i = 0; i < goToGochonCSV.length; i++) {
         var currentItem = goToGochonCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
         csvContent += row;
@@ -416,6 +439,7 @@ function flie_goToGochonDataSave(goToGochonCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일5 생성 끝-----------------------------------------------
 
@@ -426,7 +450,7 @@ function flie_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
     let csvContent = "순번,날짜,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGochonCSV.length - 1; i++) {
+    for (let i = 0; i < goToGochonCSV.length; i++) {
         var currentItem = goToGochonCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
         csvContent += row;
@@ -449,6 +473,7 @@ function flie_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일6 생성 끝-----------------------------------------------
 
@@ -459,7 +484,7 @@ function flie_goToPungmuDataSave(goToPungmuCSV, filename) {
     let csvContent = "순번,날짜,시간,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToPungmuCSV.length - 1; i++) {
+    for (let i = 0; i < goToPungmuCSV.length; i++) {
         var currentItem = goToPungmuCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
         csvContent += row;
@@ -483,6 +508,7 @@ function flie_goToPungmuDataSave(goToPungmuCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일7 생성 끝-----------------------------------------------
 
@@ -493,7 +519,7 @@ function flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename) {
     let csvContent = "순번,날짜,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToPungmuCSV.length - 1; i++) {
+    for (let i = 0; i < goToPungmuCSV.length; i++) {
         var currentItem = goToPungmuCSV[i];
         let row = `${i + 1},${currentItem.occuDate},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
         csvContent += row;
@@ -516,6 +542,7 @@ function flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    Swal.fire(`${filename}가 다운로드 되었습니다.`);
 }
 // CSV파일8 생성 끝-----------------------------------------------
 

@@ -25,15 +25,15 @@ document.getElementById('rushHourModeSearchBtn').addEventListener('click', funct
 /* 전역변수 보내기 시작???? */
 function sendToServer() {
     occuDate = formatToYYYYMMDD(document.getElementById('mainDateSearch').value);
-    console.log('Sending occuDate to server:', occuDate); // 콘솔에 occuDate 값 로그 출력
+    // console.log('Sending occuDate to server:', occuDate); // 콘솔에 occuDate 값 로그 출력
 
     $.ajax({
         url: '/rushHourDateChange',
         type: 'GET',
         data: { occuDate: occuDate },
         success: function (response) {
-            console.log('Data sent successfully to server!');
-            console.log('response : ',response);
+            // console.log('Data sent successfully to server!');
+            // console.log('response : ',response);
 
             
             var rushHourDateChangeList = response.rushHourDateChangeList;
@@ -54,9 +54,9 @@ function sendToServer() {
                 
                 
                 // currentItem의 속성에 접근 확인
-                console.log(gimpoInChange);
-                console.log(gochonChange);
-                console.log(pungmuChange);
+                // console.log(gimpoInChange);
+                // console.log(gochonChange);
+                // console.log(pungmuChange);
 
 
                     // 인파계수 실시간 누적 집계도 
@@ -220,7 +220,7 @@ function sendToServer() {
 
         /*************인파계수 실시간 누적 count시작*************/
             var rushHourChangeTotalCount = response.rushHourChangeTotalCount;
-            console.log('rushHourChangeTotalCount', rushHourChangeTotalCount);
+            // console.log('rushHourChangeTotalCount', rushHourChangeTotalCount);
 
             var gimpoInChangeCount = rushHourChangeTotalCount[0].gimpoInChangeCount;
             var gimpoOutChangeCount = rushHourChangeTotalCount[0].gimpoOutChangeCount;
@@ -230,12 +230,12 @@ function sendToServer() {
             var pungmuChangeCount = rushHourChangeTotalCount[0].pungmuChangeCount;
 
 
-            console.log('gimpoInChangeCount', gimpoInChangeCount);
-            console.log('gimpoOutChangeCount', gimpoOutChangeCount);
-            console.log('gochonChangeCount', gochonChangeCount);
-            console.log('gochon1_ChangeCount', gochon1_ChangeCount);
-            console.log('gochon2_ChangeCount', gochon2_ChangeCount);
-            console.log('pungmuChangeCount', pungmuChangeCount);
+            // console.log('gimpoInChangeCount', gimpoInChangeCount);
+            // console.log('gimpoOutChangeCount', gimpoOutChangeCount);
+            // console.log('gochonChangeCount', gochonChangeCount);
+            // console.log('gochon1_ChangeCount', gochon1_ChangeCount);
+            // console.log('gochon2_ChangeCount', gochon2_ChangeCount);
+            // console.log('pungmuChangeCount', pungmuChangeCount);
 
             var gimpoOutCount = document.getElementById('gimpoOutCount');
             gimpoOutCount.innerText = formatNumber(gimpoInChangeCount);

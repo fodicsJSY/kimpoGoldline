@@ -28,15 +28,15 @@ document.getElementById('normalModeSearchBtn').addEventListener('click', functio
 /* 전역변수 보내기 시작???? */
 function sendToServer() {
     occuDate = formatToYYYYMMDD(document.getElementById('normalDateSearch').value);
-    console.log('Sending occuDate to server:', occuDate); // 콘솔에 occuDate 값 로그 출력
+    // console.log('Sending occuDate to server:', occuDate); // 콘솔에 occuDate 값 로그 출력
 
     $.ajax({
         url: '/normalDateChange',
         type: 'GET',
         data: { occuDate: occuDate },
         success: function (response) {
-            console.log('Data sent successfully to server!');
-            console.log('response : ',response);
+            // console.log('Data sent successfully to server!');
+            // console.log('response : ',response);
 
             /*************인파계수 실시간 누적 집계도 시작************ */
             var normalDateChangeList = response.normalDateChangeList;
@@ -203,7 +203,7 @@ function sendToServer() {
 
             /*************인파계수 실시간 누적 count시작************ */
             var normalDateChangeCount = response.normalDateChangeCount;
-            console.log('normalDateChangeCount', normalDateChangeCount);
+            // console.log('normalDateChangeCount', normalDateChangeCount);
 
             var gimpoIn24ChangeCount = normalDateChangeCount[0].gimpoIn24ChangeCount;
             var gimpoOut24ChangeCount = normalDateChangeCount[0].gimpoOut24ChangeCount;
@@ -213,12 +213,12 @@ function sendToServer() {
             var pungmu24ChangeCount = normalDateChangeCount[0].pungmu24ChangeCount;
 
 
-            console.log('gimpoIn24ChangeCount', gimpoIn24ChangeCount);
-            console.log('gimpoOut24ChangeCount', gimpoOut24ChangeCount);
-            console.log('gochon24ChangeCount', gochon24ChangeCount);
-            console.log('gochon1_24ChangeCount', gochon1_24ChangeCount);
-            console.log('gochon2_24ChangeCount', gochon2_24ChangeCount);
-            console.log('pungmu24ChangeCount', pungmu24ChangeCount);
+            // console.log('gimpoIn24ChangeCount', gimpoIn24ChangeCount);
+            // console.log('gimpoOut24ChangeCount', gimpoOut24ChangeCount);
+            // console.log('gochon24ChangeCount', gochon24ChangeCount);
+            // console.log('gochon1_24ChangeCount', gochon1_24ChangeCount);
+            // console.log('gochon2_24ChangeCount', gochon2_24ChangeCount);
+            // console.log('pungmu24ChangeCount', pungmu24ChangeCount);
 
 
 

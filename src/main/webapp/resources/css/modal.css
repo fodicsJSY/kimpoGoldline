@@ -27,7 +27,7 @@
 }
 
 /* 완성 후 삭제 */
-section{
+/* section{
     border: 1px solid red;
 }
 
@@ -39,7 +39,7 @@ section{
 
 .contentGrid{
     border: 1px solid blue;
-}
+} */
 /* 완성 후 삭제 */
 
 .section1{
@@ -177,6 +177,15 @@ section{
     margin: 0 3px;
 }
 
+.selectDate input{
+    accent-color: goldenrod;
+}
+
+
+
+
+
+
 .calenderContainer{
     display: flex !important;
     flex-direction: row;
@@ -200,6 +209,11 @@ section{
     /* border-radius: 8px; */
     text-align: center;
     margin: 5px;
+}
+
+
+.calender:hover{
+    cursor: pointer;
 }
 
 #modalDataBtn{
@@ -250,9 +264,31 @@ section{
     margin-bottom: 30px;
 }
 
+
+.dataContainer div:nth-child(2)::-webkit-scrollbar{
+    width: 8px;
+}
+
+.dataContainer div:nth-child(2)::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+}
+
+
+.dataContainer div:nth-child(2)::-webkit-scrollbar-thumb{
+    height: 30%; /* 스크롤바의 길이 */
+    background: #1E1E1E; /* 스크롤바의 색상 */
+    
+    border-radius: 5px;
+}
+
+.dataContainer div:nth-child(2)::-webkit-scrollbar-track{
+    background: #2E313C;  /*스크롤바 뒷 배경 색상*/
+}
+
 .dataTable{
     width: 100%;
     height: 100%;
+    border-collapse: collapse;
 }
 
 

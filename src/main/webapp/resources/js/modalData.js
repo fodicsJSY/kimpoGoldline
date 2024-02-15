@@ -6,6 +6,8 @@ let tableTitle = document.getElementById("table_title");
 
 
 document.getElementById("modalDataBtn").addEventListener("click", ()=>{
+
+  fristTible();
   
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
@@ -25,16 +27,7 @@ document.getElementById("modalDataBtn").addEventListener("click", ()=>{
     selectRadio(comboValue);
   }
 
-  //console.log("클릭");
 });
-
-
-
-
-
-
-
-
 
 
 
@@ -62,8 +55,7 @@ function selectRadio(comboValue){
       type: "POST",
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
       success: function(response){
-
-        console.log("response", response);
+        // console.log("response", response);
         /* 김포 승차 */
         if (response.goToGimpoCSV ) {
           if(response.goToGimpoCSV.length == 0){
@@ -130,12 +122,13 @@ function selectRadio(comboValue){
       bSum = 1;
     }
 
-      $.ajax({
-        url: "/dayUrl", 
-        type: "POST",
-        data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
-        success: function(response){
-           /* 김포 승차 */
+    $.ajax({
+      url: "/dayUrl", 
+      type: "POST",
+      data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+      success: function(response){
+        
+          /* 김포 승차 */
         if (response.goToGimpoCSV ) {
           if(response.goToGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -146,7 +139,6 @@ function selectRadio(comboValue){
           }
         } 
 
-        console.log("response : ", response);
         /* 김포 하차 */
         if (response.getOffGimpoCSV ) {
           if(response.getOffGimpoCSV.length == 0){
@@ -259,8 +251,6 @@ function selectRadio(comboValue){
     });
   }
   /* 기간별 클릭 시 날짜데이터 가져옴 끝*/ 
-
-
 }
 
 

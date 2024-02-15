@@ -290,6 +290,7 @@
     <script src="../../resources/js/ajax.js"></script>
     <script src="../../resources/js/refresh.js"></script>
     <script src="../../resources/js/modal.js"></script> 
+    <script src="../../resources/js/modalTable.js"></script> 
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 
 </body>
