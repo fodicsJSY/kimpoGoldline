@@ -66,11 +66,11 @@
                     if (value === 3) {
                         return '위험';
                         } else if (value === 2) {
-                        return '경고';
+                        return '혼잡';
                         } else if (value === 1) {
                         return '주의';
                         } else if (value === 0) {
-                        return '안전';
+                        return '보통';
                         }
                         return '';
                 }
@@ -83,11 +83,11 @@
                 if (value === 3) {
                     return '위험';
                     } else if (value === 2) {
-                    return '경고';
+                    return '혼잡';
                     } else if (value === 1) {
                     return '주의';
                     } else if (value === 0) {
-                    return '안전';
+                    return '보통';
                     }
                     return '';
             },
@@ -169,11 +169,11 @@
                     if (value === 3) {
                         return '위험';
                         } else if (value === 2) {
-                        return '경고';
+                        return '혼잡';
                         } else if (value === 1) {
                         return '주의';
                         } else if (value === 0) {
-                        return '안전';
+                        return '보통';
                         }
                         return '';
                 }
@@ -186,11 +186,11 @@
                 if (value === 3) {
                     return '위험';
                     } else if (value === 2) {
-                    return '경고';
+                    return '혼잡';
                     } else if (value === 1) {
                     return '주의';
                     } else if (value === 0) {
-                    return '안전';
+                    return '보통';
                     }
                     return '';
             },
@@ -272,11 +272,11 @@
                     if (value === 3) {
                         return '위험';
                         } else if (value === 2) {
-                        return '경고';
+                        return '혼잡';
                         } else if (value === 1) {
                         return '주의';
                         } else if (value === 0) {
-                        return '안전';
+                        return '보통';
                         }
                         return '';
                 }
@@ -289,11 +289,11 @@
                 if (value === 3) {
                     return '위험';
                     } else if (value === 2) {
-                    return '경고';
+                    return '혼잡';
                     } else if (value === 1) {
                     return '주의';
                     } else if (value === 0) {
-                    return '안전';
+                    return '보통';
                     }
                     return '';
             },
@@ -375,11 +375,11 @@
                     if (value === 3) {
                         return '위험';
                         } else if (value === 2) {
-                        return '경고';
+                        return '혼잡';
                         } else if (value === 1) {
                         return '주의';
                         } else if (value === 0) {
-                        return '안전';
+                        return '보통';
                         }
                         return '';
                 }
@@ -392,11 +392,11 @@
                 if (value === 3) {
                     return '위험';
                     } else if (value === 2) {
-                    return '경고';
+                    return '혼잡';
                     } else if (value === 1) {
                     return '주의';
                     } else if (value === 0) {
-                    return '안전';
+                    return '보통';
                     }
                     return '';
             },
