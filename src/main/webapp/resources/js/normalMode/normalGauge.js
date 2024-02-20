@@ -64,7 +64,7 @@
                 rotate: 'tangential',
                 formatter: function (value) {
                     if (value === 3) {
-                        return '위험';
+                        return '심각';
                         } else if (value === 2) {
                         return '혼잡';
                         } else if (value === 1) {
@@ -81,7 +81,7 @@
             valueAnimation: true,
             formatter: function (value) {
                 if (value === 3) {
-                    return '위험';
+                    return '심각';
                     } else if (value === 2) {
                     return '혼잡';
                     } else if (value === 1) {
@@ -167,7 +167,7 @@
                 rotate: 'tangential',
                 formatter: function (value) {
                     if (value === 3) {
-                        return '위험';
+                        return '심각';
                         } else if (value === 2) {
                         return '혼잡';
                         } else if (value === 1) {
@@ -184,7 +184,7 @@
             valueAnimation: true,
             formatter: function (value) {
                 if (value === 3) {
-                    return '위험';
+                    return '심각';
                     } else if (value === 2) {
                     return '혼잡';
                     } else if (value === 1) {
@@ -270,7 +270,7 @@
                 rotate: 'tangential',
                 formatter: function (value) {
                     if (value === 3) {
-                        return '위험';
+                        return '심각';
                         } else if (value === 2) {
                         return '혼잡';
                         } else if (value === 1) {
@@ -287,7 +287,7 @@
             valueAnimation: true,
             formatter: function (value) {
                 if (value === 3) {
-                    return '위험';
+                    return '심각';
                     } else if (value === 2) {
                     return '혼잡';
                     } else if (value === 1) {
@@ -373,7 +373,7 @@
                 rotate: 'tangential',
                 formatter: function (value) {
                     if (value === 3) {
-                        return '위험';
+                        return '심각';
                         } else if (value === 2) {
                         return '혼잡';
                         } else if (value === 1) {
@@ -390,7 +390,7 @@
             valueAnimation: true,
             formatter: function (value) {
                 if (value === 3) {
-                    return '위험';
+                    return '심각';
                     } else if (value === 2) {
                     return '혼잡';
                     } else if (value === 1) {
