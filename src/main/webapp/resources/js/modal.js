@@ -223,7 +223,7 @@ function initializeOnModalClose() {
       var to_date = occuMonth + "31";
         //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
 
-      tableTitle.innerHTML = "김포공항 승차";
+      tableTitle.innerHTML = "김포공항 하선/하차인원";
       fristTible();
 
       // 데이터 가져오기

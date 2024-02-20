@@ -477,13 +477,246 @@ public class MainController {
 			 @RequestBody Map<String, Object> paramMap
 			 ){
 		 	
-//		 	System.out.println("paramMap : " + paramMap);
+		 	System.out.println("paramMap : " + paramMap);
 		 	
 		 	return paramMap;
 	 }
 	 
 	 
 	 
+	 // 모두저장 파일명 데이터
+	 @PostMapping("/fileNameUrl")
+	 @ResponseBody
+	 public Map<String, Object> nameArray(
+			 @RequestBody Map<String, Object> paramMap
+			 ){
+		 	
+		 	System.out.println("paramMap : " + paramMap);
+		 	
+		 	return paramMap;
+	 }
 	 
+	 
+	 //모두저장 월조건
+		// 월 데이터
+	 @PostMapping("/monthAllDataUrl")
+	 @ResponseBody
+	 public Map<String, Object> loadMonthAllData(
+			 @RequestBody Map<String, Object> paramMap
+			 ){
+		 	Map<String, Object> map = new HashMap<>();
+		 	
+
+		 	System.out.println("paramMap"+ paramMap);
+		 	
+		 	
+		 	  // paramMap에서 각 요소를 하나씩 꺼내서 사용
+		    Object from_date = paramMap.get("from_date");
+		    Object to_date = paramMap.get("to_date");
+		    Object bSum = paramMap.get("bSum");
+		 	
+		    
+//		    System.out.println("from_date : "+ from_date);
+//		    System.out.println("to_date : "+ to_date);
+//		    System.out.println("bSum : "+ bSum);
+		    
+		    
+		    
+		 	map.put("parameter1", from_date);
+		 	map.put("parameter2", to_date);
+		 	map.put("parameter3", bSum);
+		 	
+		 	
+		    System.out.println("map : "+ map);
+		 	
+		 	
+		 	//김포승차
+		 		// 김포승차 프로시저 호출
+			 	sql2.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 	
+			 	// csv파일1
+			 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(map);
+			 	map.put("goToGimpoCSV", goToGimpoCSV);
+		 	
+		 	
+		 	
+		 	//김포하차
+		 		// 김포하차 프로시저 호출
+			 	sql2.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+			 	
+			 	// csv파일2
+				 List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(map);
+				 map.put("getOffGimpoCSV", getOffGimpoCSV);
+		 	
+		 	
+		 	
+		 	//풍무 승하차
+		 		// 풍무 프로시저 호출
+			 	sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+			 	
+			 	// csv파일3
+				List<CSV> goToPungmuCSV = service.goToPungmuCSV(map);
+				map.put("goToPungmuCSV", goToPungmuCSV);
+		 	
+		 	
+		 	//고촌 승하차
+		 		// 고촌 프로시저 호출
+			 	sql2.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+			 	
+				// csv파일4
+				List<CSV> goToGochonCSV = service.goToGochonCSV(map);
+				map.put("goToGochonCSV", goToGochonCSV);
+		 	
+		 	
+		 	return map;
+	 }
+	 
+	 
+	 //모두저장 일조건
+		 @PostMapping("/dayAllDataUrl")
+		 @ResponseBody
+		 public Map<String, Object> loadDayAllData(
+				 @RequestBody Map<String, Object> paramMap
+				 ){
+			 	Map<String, Object> map = new HashMap<>();
+			 	
+//			 	System.out.println("paramMap"+ paramMap);
+			 	
+			 	
+			 	  // paramMap에서 각 요소를 하나씩 꺼내서 사용
+			    Object from_date = paramMap.get("from_date");
+			    Object to_date = paramMap.get("to_date");
+			    Object bSum = paramMap.get("bSum");
+			 	
+			    
+//			    System.out.println("from_date : "+ from_date);
+//			    System.out.println("to_date : "+ to_date);
+//			    System.out.println("bSum : "+ bSum);
+			    
+			    
+			    
+			 	map.put("parameter1", from_date);
+			 	map.put("parameter2", to_date);
+			 	map.put("parameter3", bSum);
+			 	
+			 	
+			    System.out.println("map : "+ map);
+			 	
+			 	
+			 	
+			 	//김포승차
+			 		// 김포승차 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GIMPO_OUT_day", map);
+			 	
+				 	// csv파일1
+				 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(map);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);
+			 	
+			 	
+			 	
+			 	//김포하차
+			 		// 김포하차 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GIMPO_IN_day", map);
+				 	
+				 	// csv파일2
+					 List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(map);
+					 map.put("getOffGimpoCSV", getOffGimpoCSV);
+			 	
+			 	
+			 	
+			 	//풍무 승하차
+			 		// 풍무 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_day", map);
+				 	
+				 	// csv파일3
+					List<CSV> goToPungmuCSV = service.goToPungmuCSV(map);
+					map.put("goToPungmuCSV", goToPungmuCSV);
+			 	
+			 	
+			 	//고촌 승하차
+			 		// 고촌 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GOCHON_INOUT_day", map);
+				 	
+					// csv파일4
+					List<CSV> goToGochonCSV = service.goToGochonCSV(map);
+					map.put("goToGochonCSV", goToGochonCSV);
+			 	
+			 	
+			 	return map;
+		 }
+		 
+	 
+	 
+		 //모두저장 기간조건
+		 @PostMapping("/customAllDataUrl")
+		 @ResponseBody
+		 public Map<String, Object> loadCustomAllData(
+				 @RequestBody Map<String, Object> paramMap
+				 ){
+			 	Map<String, Object> map = new HashMap<>();
+			 	
+//			 	System.out.println("paramMap"+ paramMap);
+			 	
+			 	
+			 	  // paramMap에서 각 요소를 하나씩 꺼내서 사용
+			    Object from_date = paramMap.get("from_date");
+			    Object to_date = paramMap.get("to_date");
+			    Object bSum = paramMap.get("bSum");
+			 	
+			    
+//			    System.out.println("from_date : "+ from_date);
+//			    System.out.println("to_date : "+ to_date);
+//			    System.out.println("bSum : "+ bSum);
+			    
+			    
+			    
+			 	map.put("parameter1", from_date);
+			 	map.put("parameter2", to_date);
+			 	map.put("parameter3", bSum);
+			 	
+			 	
+			    System.out.println("map : "+ map);
+			 	
+			 	
+			 	//김포승차
+			 		// 김포승차 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GIMPO_OUT_custom", map);
+			 	
+				 	// csv파일1
+				 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(map);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);
+			 	
+			 	
+			 	
+			 	//김포하차
+			 		// 김포하차 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GIMPO_IN_custom", map);
+				 	
+				 	// csv파일2
+					 List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(map);
+					 map.put("getOffGimpoCSV", getOffGimpoCSV);
+			 	
+			 	
+			 	
+			 	//풍무 승하차
+			 		// 풍무 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_custom", map);
+				 	
+				 	// csv파일3
+					List<CSV> goToPungmuCSV = service.goToPungmuCSV(map);
+					map.put("goToPungmuCSV", goToPungmuCSV);
+			 	
+			 	
+			 	//고촌 승하차
+			 		// 고촌 프로시저 호출
+				 	sql2.selectList("mainMapper.callSP_GOCHON_INOUT_custom", map);
+				 	
+					// csv파일4
+					List<CSV> goToGochonCSV = service.goToGochonCSV(map);
+					map.put("goToGochonCSV", goToGochonCSV);
+					
+					
+			 	return map;
+		 }
 	 
 }

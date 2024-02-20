@@ -159,7 +159,7 @@ function createGoPungTableDaySum() {
 
 
 
-/* 김포 승차 시작 */
+/* 김포공항 하선/하차인원 시작 */
 // tbody 
 function goGimpoTableNotDaySum(data) {
     var dataContainer = document.querySelector(".dataContainer");
@@ -233,11 +233,11 @@ function goGimpoTableDaySum(data) {
         createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
     });
 }
-/* 김포 승차 끝 */
+/* 김포공항 하선/하차인원 끝 */
 
 
 
-/* 김포 하차 시작 */
+/* 김포공항 상선/승차인원 시작 */
 // tbody 
 function getGimpoTableNotDaySum(data) {
     var dataContainer = document.querySelector(".dataContainer");
@@ -311,7 +311,7 @@ function getGimpoTableDaySum(data) {
         createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
     });
 }
-/* 김포 하차 끝 */
+/* 김포공항 상선/승차인원 끝 */
 
 
 

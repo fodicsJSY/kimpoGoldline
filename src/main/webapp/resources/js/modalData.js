@@ -11,11 +11,11 @@ document.getElementById("modalDataBtn").addEventListener("click", ()=>{
   
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
-    tableTitle.innerHTML = "김포공항 승차";
+    tableTitle.innerHTML = "김포공항 하선/하차인원";
     selectRadio(comboValue);
   }
   if(comboValue==="GimIn"){
-    tableTitle.innerHTML = "김포공항 하차";
+    tableTitle.innerHTML = "김포공항 상선/승차인원";
     selectRadio(comboValue);
   }
   if(comboValue==="PungInOut"){
@@ -56,7 +56,7 @@ function selectRadio(comboValue){
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
       success: function(response){
         // console.log("response", response);
-        /* 김포 승차 */
+        /* 김포공항 하선/하차인원 */
         if (response.goToGimpoCSV ) {
           if(response.goToGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -67,7 +67,7 @@ function selectRadio(comboValue){
           }
         } 
 
-        /* 김포 하차 */
+        /* 김포공항 상선/승차인원 */
         if (response.getOffGimpoCSV ) {
           if(response.getOffGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -128,7 +128,7 @@ function selectRadio(comboValue){
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
       success: function(response){
         
-          /* 김포 승차 */
+          /* 김포공항 하선/하차인원 */
         if (response.goToGimpoCSV ) {
           if(response.goToGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -139,7 +139,7 @@ function selectRadio(comboValue){
           }
         } 
 
-        /* 김포 하차 */
+        /* 김포공항 상선/승차인원 */
         if (response.getOffGimpoCSV ) {
           if(response.getOffGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -204,7 +204,7 @@ function selectRadio(comboValue){
       type: "POST",
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
       success: function(response){
-         /* 김포 승차 */
+         /* 김포공항 하선/하차인원 */
         if (response.goToGimpoCSV ) {
           if(response.goToGimpoCSV.length == 0){
             renderNoDataMessage();
@@ -215,7 +215,7 @@ function selectRadio(comboValue){
           }
         } 
 
-        /* 김포 하차 */
+        /* 김포공항 상선/승차인원 */
         if (response.getOffGimpoCSV ) {
           if(response.getOffGimpoCSV.length == 0){
             renderNoDataMessage();

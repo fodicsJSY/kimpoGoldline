@@ -227,8 +227,8 @@
                         <div class="selectOptionBox">
                             <div class="comboBoxContainer">
                                 <select name="플랫폼1" class="selectBox" id="selectCombo" >
-                                    <option class="selectOption" value="GimOut">김포공항역 승차</option>
-                                    <option class="selectOption" value="GimIn">김포공항역 하차</option>
+                                    <option class="selectOption" value="GimOut">김포공항 하선/하차인원</option>
+                                    <option class="selectOption" value="GimIn">김포공항 상선/승차인원</option>
                                     <option class="selectOption" value="PungInOut">풍무역 승/하차</option>
                                     <option class="selectOption" value="GoInOut">고촌역 승/하차</option>
                                 </select>
@@ -251,7 +251,10 @@
                     <div class="contentGrid">
                         <div class="titleBox">
                             <div class="tableTitle" id="table_title"></div>
-                            <div><button class="btn" id="dataSaveBtn">저장</button></div>
+                            <div class="btnBox">
+                                <div><button class="btn" id="dataAllSaveBtn">모두 저장</button></div>
+                                <div><button class="btn" id="dataSaveBtn">저장</button></div>
+                            </div>
                         </div>
                         <div class="dataContainer">
                         </div>
@@ -283,5 +286,6 @@
     <script src="../../resources/js/modalTable.js"></script> 
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 
+    <script src="../../resources/js/allDataSave.js"></script> 
 </body>
 </html>
