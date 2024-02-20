@@ -32,11 +32,11 @@ async function getAllDataFileName() {
     const { value: getoffGimpoFileName } = await Swal.fire({
         title: "김포공항 상선/승차인원 데이터를 저장할 파일의 이름을 입력해주세요.",
         input: "text",
-        inputLabel: "김포공항 하선/하차인원 데이터를 저장할 파일의 이름을 입력해주세요.",
+        inputLabel: "김포공항 상선/승차인원 데이터를 저장할 파일의 이름을 입력해주세요.",
         showCancelButton: true,
         inputValidator: (value) => {
             if (!value) {
-                return "김포공항 하선/하차인원 데이터를 저장할 파일의 이름을 입력해주세요.";
+                return "김포공항 상선/승차인원 데이터를 저장할 파일의 이름을 입력해주세요.";
             }
         }
     });
@@ -74,7 +74,7 @@ async function getAllDataFileName() {
     return nameArray;
 }
 
-
+// 비동기로 파일명 가져오기
 async function fetchNameData(){
 
     // 파일명 가져오기
@@ -121,6 +121,7 @@ async function fetchNameData(){
 }
 
 
+// 파일명 받아서 저장하기
 function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonName){
 
     if(selectMonth.checked){

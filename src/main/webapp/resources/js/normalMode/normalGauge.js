@@ -309,7 +309,7 @@
     
     var pungmuPlatformNormal2 = echarts.init(document.getElementById("pungmuPlatformNormal2"));
 
-     option = {
+    option = {
         series: [
         {
             type: 'gauge',
