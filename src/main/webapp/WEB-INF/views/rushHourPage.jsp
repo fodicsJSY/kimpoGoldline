@@ -107,7 +107,7 @@
                     <div class="throngChartContents">
                         <div class="throngChartBox">
                             <div class="throngChartTitle">
-                                플랫폼2
+                                플랫폼1
                             </div>
                             <div class="throngChartContainer" id="gochonPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
