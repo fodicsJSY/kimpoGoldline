@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import fodics.jsy.dashboard.main.model.dao.MainDAO;
 import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.Data;
+import fodics.jsy.dashboard.main.model.dto.FileData;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -128,7 +129,7 @@ public class MainServiceImpl implements MainService{
 	 *csv파일1
 	 */
 	@Override
-	public List<CSV> goToGimpoCSV(Map<String, Object> map) {
+	public List<FileData> goToGimpoCSV(Map<String, Object> map) {
 		return dao.goToGimpoCSV(map);
 	}
 	
@@ -137,7 +138,7 @@ public class MainServiceImpl implements MainService{
 	 * csv파일2
 	 */
 	@Override
-	public List<CSV> getOffGimpoCSV(Map<String, Object> map) {
+	public List<FileData> getOffGimpoCSV(Map<String, Object> map) {
 		return dao.getOffGimpoCSV(map);
 	}
 	
@@ -145,7 +146,7 @@ public class MainServiceImpl implements MainService{
 	 *csv파일3
 	 */
 	@Override
-	public List<CSV> goToPungmuCSV(Map<String, Object>  map) {
+	public List<FileData> goToPungmuCSV(Map<String, Object>  map) {
 		return dao.goToPungmuCSV(map);
 	}
 	
@@ -153,7 +154,7 @@ public class MainServiceImpl implements MainService{
 	 *csv파일4
 	 */
 	@Override
-	public List<CSV> goToGochonCSV(Map<String, Object>  map) {
+	public List<FileData> goToGochonCSV(Map<String, Object>  map) {
 		return dao.goToGochonCSV(map);
 	}
 	

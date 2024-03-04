@@ -7,31 +7,84 @@
 
 
 
+
+	<!-- 김포 -->
+<!-- 
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://10.20.10.203:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
+		<property name="username" value="sa" />
+		<property name="password" value="j$b!c&amp;1" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="initialSize" value="10" /> 
+		<property name="maxTotal" value="500" /> 
+		<property name="maxIdle" value="100" /> 
+		<property name="minIdle" value="10" /> 
+		<property name="maxWaitMillis" value="-1" /> 
+	</bean>
 	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ -->
+	 
+	 
+	 
+	<!-- 군중 -->
+	<bean id="dataSource1"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://172.16.111.50:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
+		<property name="username" value="sa" />
+		<property name="password" value="j$b!c&amp;1" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="initialSize" value="10" /> 
+		<property name="maxTotal" value="500" /> 
+		<property name="maxIdle" value="100" /> 
+		<property name="minIdle" value="10" /> 
+		<property name="maxWaitMillis" value="-1" /> 
+	</bean>
+	
+	<bean id="sqlSessionFactoryBean1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource1" />
+	</bean>
+	
+	<bean id="sqlSessionTemplate1" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean1" />
+	</bean>
+	
+	<bean id="transactionManager1" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource1" />
+	</bean>
+	 
+	 
 	<!-- 카운팅 -->
 	<bean id="dataSource2"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<!-- 김포골드라인 DB -->
-		<!-- <property name="url" value="jdbc:sqlserver://10.20.10.203:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" /> -->
 		<property name="url" value="jdbc:sqlserver://172.16.111.45:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
-		<!-- <property name="databaseName" value="FdcVmsDB" /> -->
 		<property name="username" value="sa" />
 		<property name="password" value="j$b!c&amp;1" />
-		<!-- defaultAutoCommit: SQL 수행 후 자동 COMMIT 설정. (기본값 : true) -->
 		<property name="defaultAutoCommit" value="false" />
-			<!-- <property name="encrypt" value="false" />
-		<property name="trustServerCertificate" value="false" />
-		<property name="sslProtocol" value="TLSv1" /> -->
-
-		<!-- 커넥션 풀 설정 -->
-		<property name="initialSize" value="10" /> <!-- 초기 커넥션 수, 기본 0 -->
-		<property name="maxTotal" value="500" /> <!-- 최대 커넥션 수, 기본 8 -->
-		<property name="maxIdle" value="100" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최대 수, 기본 8 -->
-		<property name="minIdle" value="10" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최소 수, 기본 0 -->
-		<property name="maxWaitMillis" value="-1" /> <!-- 예외 발생 전 커넥션이 반환 될 때 까지 대기하는 최대 시간(ms), 기본 -1(무기한) -->
+		<property name="initialSize" value="10" /> 
+		<property name="maxTotal" value="500" /> 
+		<property name="maxIdle" value="100" /> 
+		<property name="minIdle" value="10" /> 
+		<property name="maxWaitMillis" value="-1" /> 
 	</bean>
 
 	<bean id="sqlSessionFactoryBean2" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -47,46 +100,8 @@
 		<property name="dataSource" ref="dataSource2" />
 	</bean>
 	
-
 	
-	<!-- 군중 -->
-	<bean id="dataSource1"
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<!-- 김포골드라인 DB -->
-		<!-- <property name="url" value="jdbc:sqlserver://10.20.10.204:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" /> -->
-		<property name="url" value="jdbc:sqlserver://172.16.111.50:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
-		<!-- <property name="databaseName" value="FdcVmsDB" /> -->
-		<property name="username" value="sa" />
-		<property name="password" value="j$b!c&amp;1" />
-		<!-- defaultAutoCommit: SQL 수행 후 자동 COMMIT 설정. (기본값 : true) -->
-		<property name="defaultAutoCommit" value="false" />
-			<!-- <property name="encrypt" value="false" />
-		<property name="trustServerCertificate" value="false" />
-		<property name="sslProtocol" value="TLSv1" /> -->
-
-		<!-- 커넥션 풀 설정 -->
-		<property name="initialSize" value="10" /> <!-- 초기 커넥션 수, 기본 0 -->
-		<property name="maxTotal" value="500" /> <!-- 최대 커넥션 수, 기본 8 -->
-		<property name="maxIdle" value="100" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최대 수, 기본 8 -->
-		<property name="minIdle" value="10" /> <!-- 유휴 상태로 존재할 수 있는 커넥션 최소 수, 기본 0 -->
-		<property name="maxWaitMillis" value="-1" /> <!-- 예외 발생 전 커넥션이 반환 될 때 까지 대기하는 최대 시간(ms), 기본 -1(무기한) -->
-	</bean>
 	
-	<bean id="sqlSessionFactoryBean1" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
-		<property name="dataSource" ref="dataSource1" />
-	</bean>
 	
-	<bean id="sqlSessionTemplate1" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactoryBean1" />
-	</bean>
-	
-	<bean id="transactionManager1" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource1" />
-	</bean>
-	
-
 	
 </beans>

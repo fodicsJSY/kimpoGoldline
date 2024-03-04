@@ -259,6 +259,23 @@
                         <div class="dataContainer">
                         </div>
                     </div>
+                    <div id="progressDiv" class="position-absolute top-0 start-0 w-100 h-100 z-3 d-none" style="background-color:#808080ab;">
+                        <div class="row w-75 bg-white d-flex p-0 progress-box-shadow" style="height:150px; margin-top: 10px; margin-left: 90px; padding:5px;">
+                            <div class="row w-100 d-flex p-0 m-0 mt-5 mb-3 text-center">
+                                <p class="upload_txt01">데이터 조회</p>
+                            </div>
+                            <div class="row w-100 d-flex p-0 m-0 mb-3 text-center">
+                                <p class="upload_txt02">데이터 조회가 진행 중 입니다.</p>
+                            </div>
+                            <div class="row w-100 d-flex p-0 m-0">
+                                <div class="progressContainer">
+                                    <div class="progress progressTotal"></div>
+                                    <div class="progress progressNow"></div>
+                                    <div class="progress progressPer">0 %</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -287,5 +304,6 @@
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 
     <script src="../../resources/js/allDataSave.js"></script> 
+    <script src="../../resources/js/progress.js"></script> 
 </body>
 </html>

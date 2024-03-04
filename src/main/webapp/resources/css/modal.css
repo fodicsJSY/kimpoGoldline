@@ -551,3 +551,25 @@
 #searchDataBtn{
     margin-left: 10px;
 }
+
+
+
+
+/* 프로그래스 바 스타일 */
+.progressBar {
+    width: 50%;
+    height:  30%;
+    background-color: #202020;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.progress {
+    width: 0;
+    height: 30px;
+    background-color: #4caf50;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}

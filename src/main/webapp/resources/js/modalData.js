@@ -6,26 +6,28 @@ let tableTitle = document.getElementById("table_title");
 
 
 document.getElementById("modalDataBtn").addEventListener("click", ()=>{
-
+  // console.log("클릭");
+  document.getElementById('progressDiv').style.display = 'block';
   fristTible();
-  
+
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
-    tableTitle.innerHTML = "김포공항 하선/하차인원";
-    selectRadio(comboValue);
+      tableTitle.innerHTML = "김포공항 하선/하차인원";
+      selectRadio(comboValue);
   }
   if(comboValue==="GimIn"){
-    tableTitle.innerHTML = "김포공항 상선/승차인원";
-    selectRadio(comboValue);
+      tableTitle.innerHTML = "김포공항 상선/승차인원";
+      selectRadio(comboValue);
   }
   if(comboValue==="PungInOut"){
-    tableTitle.innerHTML = "풍무역 승/하차";
-    selectRadio(comboValue);
+      tableTitle.innerHTML = "풍무역 승/하차";
+      selectRadio(comboValue);
   }
   if(comboValue==="GoInOut"){
-    tableTitle.innerHTML = "고촌역 승/하차";
-    selectRadio(comboValue);
+      tableTitle.innerHTML = "고촌역 승/하차";
+      selectRadio(comboValue);
   }
+  
 
 });
 
@@ -36,11 +38,11 @@ function selectRadio(comboValue){
   /* 월별 클릭 시 날짜데이터 가져옴 시작*/ 
   if(selectMonth.checked){
     var monthSearch = document.getElementById("monthSearch");
-    //console.log("monthSearch", monthSearch.value);
+    // console.log("monthSearch", monthSearch.value);
     var occuMonth = formatToYYYYMM(monthSearch.value);
     var from_date = occuMonth + "01";
     var to_date = occuMonth + "31";
-      //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+      // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
 
     if(daySumCheckbox.checked === false ){
       bSum = 0;
@@ -48,61 +50,78 @@ function selectRadio(comboValue){
     if(daySumCheckbox.checked === true){
       bSum = 1;
     }
-    //console.log("bSum", bSum);
+    // console.log("bSum", bSum);
+
+    let per
 
     $.ajax({
       url: "/monthUrl", 
       type: "POST",
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+      timeout: 3000000, // milliseconds (3000 seconds)
+      beforeSend: function() {
+        // 500ms(0.5초) 후에 프로그래스 바를 보여줍니다.
+        setTimeout(function() {
+            per = 0;
+            document.getElementById('progressDiv').style.display = 'block';
+        }, 500);
+      },
+      xhr: function(){
+        var xhr = $.ajaxSettings.xhr();
+        xhr.upload.onprogress = function(e){
+            var per = e.loaded * 100 / e.total;
+            progressBar(per);
+        };
+        return xhr;
+      },
       success: function(response){
+
         // console.log("response", response);
-        /* 김포공항 하선/하차인원 */
-        if (response.goToGimpoCSV ) {
-          if(response.goToGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            goGimpoTableNotDaySum(response.goToGimpoCSV);
+
+           /* 김포공항 하선/하차인원 */
+        if (response.goToGimpoCSVList.length > 0 ) {
+          if(response.parameter3 == 0){
+            goGimpoTableNotDaySum(response.goToGimpoCSVList)
           }else{
-            goGimpoTableDaySum(response.goToGimpoCSV);
+            goGimpoTableDaySum(response.goToGimpoCSVList);
           }
         } 
 
+
         /* 김포공항 상선/승차인원 */
-        if (response.getOffGimpoCSV ) {
-          if(response.getOffGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            getGimpoTableNotDaySum(response.getOffGimpoCSV);
+        if (response.getOffGimpoCSVList.length > 0 ) {
+          if(response.parameter3 == 0){
+            getGimpoTableNotDaySum(response.getOffGimpoCSVList);
           }else{
-            getGimpoTableDaySum(response.getOffGimpoCSV);
+            getGimpoTableDaySum(response.getOffGimpoCSVList);
           }
         } 
 
         /* 풍무 승하차 */
-        if (response.goToPungmuCSV ) {
-          if(response.goToPungmuCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            pungmoTableNotDaySum(response.goToPungmuCSV);
+        if (response.goToPungmuCSVList.length > 0 ) {
+          if(response.parameter3 == 0){
+            pungmoTableNotDaySum(response.goToPungmuCSVList);
           }else{
-            pungmoTableDaySum(response.goToPungmuCSV);
+            pungmoTableDaySum(response.goToPungmuCSVList);
           }
         } 
 
         /* 고촌 승하차 */
-        if (response.goToGochonCSV ) {
-          if(response.goToGochonCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            gochonTableNotDaySum(response.goToGochonCSV);
+        if (response.goToGochonCSVList.length > 0 ) {
+          if(response.parameter3 == 0){
+            gochonTableNotDaySum(response.goToGochonCSVList);
           }else{
-            gochonTableDaySum(response.goToGochonCSV);
+            gochonTableDaySum(response.goToGochonCSVList);
           }
         } 
-      }
+      },
+      complete: function() {
+        document.getElementById('progressDiv').style.display = 'none';
+      },
     });
   }
   /* 월별 클릭 시 날짜데이터 가져옴 끝*/ 
+
 
 
   /* 일별 클릭 시 날짜데이터 가져옴 시작*/ 
@@ -113,7 +132,7 @@ function selectRadio(comboValue){
     var from_date = occuDay;
     var to_date = occuDay;
 
-      //console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+      // console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
 
     if(daySumCheckbox.checked === false ){
       bSum = 0;
@@ -122,61 +141,76 @@ function selectRadio(comboValue){
       bSum = 1;
     }
 
+    // console.log("bSum", bSum);
+
+
     $.ajax({
       url: "/dayUrl", 
       type: "POST",
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+      timeout: 3000000, // milliseconds (3000 seconds)
+      beforeSend: function() {
+        // 500ms(0.5초) 후에 프로그래스 바를 보여줍니다.
+        setTimeout(function() {
+            per = 0;
+            document.getElementById('progressDiv').style.display = 'block';
+        }, 500);
+      },
+      xhr: function(){
+        var xhr = $.ajaxSettings.xhr();
+        xhr.upload.onprogress = function(e){
+            var per = e.loaded * 100 / e.total;
+            progressBar(per);
+        };
+        return xhr;
+      },
       success: function(response){
-        
+        // console.log("response", response);
           /* 김포공항 하선/하차인원 */
-        if (response.goToGimpoCSV ) {
-          if(response.goToGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            goGimpoTableNotDaySum(response.goToGimpoCSV);
-          }else{
-            goGimpoTableDaySum(response.goToGimpoCSV);
-          }
-        } 
-
-        /* 김포공항 상선/승차인원 */
-        if (response.getOffGimpoCSV ) {
-          if(response.getOffGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            getGimpoTableNotDaySum(response.getOffGimpoCSV);
-          }else{
-            getGimpoTableDaySum(response.getOffGimpoCSV);
-          }
-        } 
-
-
-        /* 풍무 승하차 */
-        if (response.goToPungmuCSV ) {
-          if(response.goToPungmuCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            pungmoTableNotDaySum(response.goToPungmuCSV);
-          }else{
-            pungmoTableDaySum(response.goToPungmuCSV);
-          }
-        } 
-
-
-        /* 고촌 승하차 */
-        if (response.goToGochonCSV ) {
-          if(response.goToGochonCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            gochonTableNotDaySum(response.goToGochonCSV);
-          }else{
-            gochonTableDaySum(response.goToGochonCSV);
-          }
-        } 
-      }
+          if (response.goToGimpoCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              goGimpoTableNotDaySum(response.goToGimpoCSVList);
+            }else{
+              goGimpoTableDaySum(response.goToGimpoCSVList);
+            }
+          } 
+  
+  
+          /* 김포공항 상선/승차인원 */
+          if (response.getOffGimpoCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              getGimpoTableNotDaySum(response.getOffGimpoCSVList);
+            }else{
+              getGimpoTableDaySum(response.getOffGimpoCSVList);
+            }
+          } 
+  
+          /* 풍무 승하차 */
+          if (response.goToPungmuCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              pungmoTableNotDaySum(response.goToPungmuCSVList);
+            }else{
+              pungmoTableDaySum(response.goToPungmuCSVList);
+            }
+          } 
+  
+          /* 고촌 승하차 */
+          if (response.goToGochonCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              gochonTableNotDaySum(response.goToGochonCSVList);
+            }else{
+              gochonTableDaySum(response.goToGochonCSVList);
+            }
+          } 
+      },
+      complete: function() {
+        document.getElementById('progressDiv').style.display = 'none';
+      },
     });
   }
   /* 일별 클릭 시 날짜데이터 가져옴 끝*/ 
+
+
 
 
   /* 기간별 클릭 시 날짜데이터 가져옴 시작*/ 
@@ -189,8 +223,8 @@ function selectRadio(comboValue){
     var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
     var from_date = customDate1;
     var to_date = customDate2;
-      //console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
-      //console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
+      // console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
+      // console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
 
     if(daySumCheckbox.checked === false ){
       bSum = 0;
@@ -203,54 +237,69 @@ function selectRadio(comboValue){
       url: "/customUrl", 
       type: "POST",
       data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+      timeout: 3000000, // milliseconds (3000 seconds)
+      beforeSend: function() {
+        // 500ms(0.5초) 후에 프로그래스 바를 보여줍니다.
+        setTimeout(function() {
+            document.getElementById('progressDiv').style.display = 'block';
+        }, 500);
+      },
+      xhr: function(){
+        var xhr = $.ajaxSettings.xhr();
+        xhr.upload.onprogress = function(e){
+            var per = e.loaded * 100 / e.total;
+            progressBar(per);
+        };
+        return xhr;
+      },
       success: function(response){
-         /* 김포공항 하선/하차인원 */
-        if (response.goToGimpoCSV ) {
-          if(response.goToGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            goGimpoTableNotDaySum(response.goToGimpoCSV);
-          }else{
-            goGimpoTableDaySum(response.goToGimpoCSV);
-          }
-        } 
+        // console.log("response", response);
 
-        /* 김포공항 상선/승차인원 */
-        if (response.getOffGimpoCSV ) {
-          if(response.getOffGimpoCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            getGimpoTableNotDaySum(response.getOffGimpoCSV);
-          }else{
-            getGimpoTableDaySum(response.getOffGimpoCSV);
-          }
-        } 
 
-        /* 풍무 승하차 */
-        if (response.goToPungmuCSV ) {
-          if(response.goToPungmuCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            pungmoTableNotDaySum(response.goToPungmuCSV);
-          }else{
-            pungmoTableDaySum(response.goToPungmuCSV);
-          }
-        } 
-
-        /* 고촌 승하차 */
-        if (response.goToGochonCSV ) {
-          if(response.goToGochonCSV.length == 0){
-            renderNoDataMessage();
-          }else if(response.parameter3 == 0){
-            gochonTableNotDaySum(response.goToGochonCSV);
-          }else{
-            gochonTableDaySum(response.goToGochonCSV);
-          }
-        } 
-      }
+          /* 김포공항 하선/하차인원 */
+          if (response.goToGimpoCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              goGimpoTableNotDaySum(response.goToGimpoCSVList);
+            }else{
+              goGimpoTableDaySum(response.goToGimpoCSVList);
+            }
+          } 
+  
+  
+          /* 김포공항 상선/승차인원 */
+          if (response.getOffGimpoCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              getGimpoTableNotDaySum(response.getOffGimpoCSVList);
+            }else{
+              getGimpoTableDaySum(response.getOffGimpoCSVList);
+            }
+          } 
+  
+          /* 풍무 승하차 */
+          if (response.goToPungmuCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              pungmoTableNotDaySum(response.goToPungmuCSVList);
+            }else{
+              pungmoTableDaySum(response.goToPungmuCSVList);
+            }
+          } 
+  
+          /* 고촌 승하차 */
+          if (response.goToGochonCSVList.length > 0 ) {
+            if(response.parameter3 == 0){
+              gochonTableNotDaySum(response.goToGochonCSVList);
+            }else{
+              gochonTableDaySum(response.goToGochonCSVList);
+            }
+          } 
+      },
+      complete: function() {
+        document.getElementById('progressDiv').style.display = 'none';
+      },
     });
   }
   /* 기간별 클릭 시 날짜데이터 가져옴 끝*/ 
+
 }
 
 

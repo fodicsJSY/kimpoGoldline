@@ -12,6 +12,7 @@
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/rushHourMode-style.css">
     <link rel="stylesheet" href="../../resources/css/modal.css">
+    <link rel="stylesheet" href="../../resources/css/progress.css">
 
     <%-- echarts --%>
 	<script src="../../resources/js/echart/echart.min.js"></script>
@@ -21,6 +22,8 @@
 
     <%-- sweetalert2 --%>
     <script src="../../resources/js/sweetalert2.js"></script>
+
+
 
     <style>
         .dateInput{
@@ -243,8 +246,8 @@
                                     <option class="selectOption" value="GoInOut">고촌역 승/하차</option>
                                 </select>
                             </div>
-                            <div class="selectDate"><input type="radio" name="selectDate" id="selectMonth" checked> <label for="selectMonth">월별</label></div>
-                            <div class="selectDate"><input type="radio" name="selectDate" id="selectDay"> <label for="selectDay">일별</label></div>
+                            <div class="selectDate"><input type="radio" name="selectDate" id="selectMonth"> <label for="selectMonth">월별</label></div>
+                            <div class="selectDate"><input type="radio" name="selectDate" id="selectDay" checked> <label for="selectDay">일별</label></div>
                             <div class="customBox">
                                 <div class="selectDate"><input type="radio" name="selectDate" id="selectCustom"> <label for="selectCustom">기간별</label></div>
                                 <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" ><label for="daySumCheckbox"> 일합계</label></div>
@@ -266,6 +269,23 @@
                             </div>
                         </div>
                         <div class="dataContainer">
+                        </div>
+                    </div>
+                    <div id="progressDiv" class="position-absolute top-0 start-0 w-100 h-100 z-3 d-none" style="background-color:#808080ab;">
+                        <div class="row w-75 bg-white d-flex p-0 progress-box-shadow" style="height:150px; margin-top: 10px; margin-left: 25px; padding:5px;">
+                            <div class="row w-100 d-flex p-0 m-0 mt-5 mb-3 text-center">
+                                <p class="upload_txt01">데이터 조회</p>
+                            </div>
+                            <div class="row w-100 d-flex p-0 m-0 mb-3 text-center">
+                                <p class="upload_txt02">데이터 조회가 진행 중 입니다.</p>
+                            </div>
+                            <div class="row w-100 d-flex p-0 m-0">
+                                <div class="progressContainer">
+                                    <div class="progress progressTotal"></div>
+                                    <div class="progress progressNow"></div>
+                                    <div class="progress progressPer">0 %</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -297,5 +317,6 @@
     <script src="../../resources/js/modalData.js"></script> 
     <script src="../../resources/js/modalSave.js"></script> 
     <script src="../../resources/js/allDataSave.js"></script> 
+    <script src="../../resources/js/progress.js"></script> 
 </body>
 </html>

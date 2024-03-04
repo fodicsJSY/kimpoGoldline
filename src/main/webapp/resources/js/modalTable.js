@@ -26,7 +26,7 @@ function fristTible() {
     var td = document.createElement("td");
     td.className = "noData";
     tr.appendChild(td);
-    td.innerHTML = "데이터를 불러오고 있습니다.";
+    // td.innerHTML = "데이터를 불러오고 있습니다.";
 }
 
 
@@ -161,7 +161,8 @@ function createGoPungTableDaySum() {
 
 /* 김포공항 하선/하차인원 시작 */
 // tbody 
-function goGimpoTableNotDaySum(data) {
+function goGimpoTableNotDaySum(goToGimpoCSVList) {
+    // console.log("goToGimpoCSVList", goToGimpoCSVList);
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -181,25 +182,30 @@ function goGimpoTableNotDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            var no = index + 1;
 
-        createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
-        createCell(tr, "td", "td_data7", item.occuTime);
-        createCell(tr, "td", "td_data3", item.gimpo_st_out);
-        createCell(tr, "td", "td_data4", item.gimpo_ev_out);
-        createCell(tr, "td", "td_data5", item.gimpo_ec_out);
-        createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
+
+            createCell(tr, "td", "td_data1", no);
+            createCell(tr, "td", "td_data2", data.occuDate);
+            createCell(tr, "td", "td_data7", data.occuTime);
+            createCell(tr, "td", "td_data3", data.gimpo_st_out);
+            createCell(tr, "td", "td_data4", data.gimpo_ev_out);
+            createCell(tr, "td", "td_data5", data.gimpo_ec_out);
+            createCell(tr, "td", "td_data6", data.gimpo_st_out + data.gimpo_ev_out + data.gimpo_ec_out);
+        });
     });
 }
 
 
 // tbody + 일합계
-function goGimpoTableDaySum(data) {
+function goGimpoTableDaySum(goToGimpoCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -219,18 +225,23 @@ function goGimpoTableDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+        item.forEach(function (data, index) {
+
+            var no = index + 1;
+
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
-        createCell(tr, "td", "td_data3", item.gimpo_st_out);
-        createCell(tr, "td", "td_data4", item.gimpo_ev_out);
-        createCell(tr, "td", "td_data5", item.gimpo_ec_out);
-        createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
+        createCell(tr, "td", "td_data2", data.occuDate);
+        createCell(tr, "td", "td_data3", data.gimpo_st_out);
+        createCell(tr, "td", "td_data4", data.gimpo_ev_out);
+        createCell(tr, "td", "td_data5", data.gimpo_ec_out);
+        createCell(tr, "td", "td_data6", data.gimpo_st_out + data.gimpo_ev_out + data.gimpo_ec_out);
+    });
     });
 }
 /* 김포공항 하선/하차인원 끝 */
@@ -239,7 +250,7 @@ function goGimpoTableDaySum(data) {
 
 /* 김포공항 상선/승차인원 시작 */
 // tbody 
-function getGimpoTableNotDaySum(data) {
+function getGimpoTableNotDaySum(getOffGimpoCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -259,25 +270,30 @@ function getGimpoTableNotDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    getOffGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+        item.forEach(function (data, index) {
+
+            var no = index + 1;
+
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
-        createCell(tr, "td", "td_data7", item.occuTime);
-        createCell(tr, "td", "td_data3", item.gimpo_st_in);
-        createCell(tr, "td", "td_data4", item.gimpo_ev_in);
-        createCell(tr, "td", "td_data5", item.gimpo_ec_in);
-        createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
+        createCell(tr, "td", "td_data2", data.occuDate);
+        createCell(tr, "td", "td_data7", data.occuTime);
+        createCell(tr, "td", "td_data3", data.gimpo_st_in);
+        createCell(tr, "td", "td_data4", data.gimpo_ev_in);
+        createCell(tr, "td", "td_data5", data.gimpo_ec_in);
+        createCell(tr, "td", "td_data6", data.gimpo_st_in + data.gimpo_ev_in + data.gimpo_ec_in);
+    });
     });
 }
 
 
 // tbody + 일합계
-function getGimpoTableDaySum(data) {
+function getGimpoTableDaySum(getOffGimpoCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -297,18 +313,21 @@ function getGimpoTableDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    getOffGimpoCSVList.forEach(function (item) {
+        
+        item.forEach(function (data, index) {
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+            var no = index + 1;
 
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
-        createCell(tr, "td", "td_data3", item.gimpo_st_in);
-        createCell(tr, "td", "td_data4", item.gimpo_ev_in);
-        createCell(tr, "td", "td_data5", item.gimpo_ec_in);
-        createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
+        createCell(tr, "td", "td_data2", data.occuDate);
+        createCell(tr, "td", "td_data3", data.gimpo_st_in);
+        createCell(tr, "td", "td_data4", data.gimpo_ev_in);
+        createCell(tr, "td", "td_data5", data.gimpo_ec_in);
+        createCell(tr, "td", "td_data6", data.gimpo_st_in + data.gimpo_ev_in + data.gimpo_ec_in);
+    });
     });
 }
 /* 김포공항 상선/승차인원 끝 */
@@ -319,7 +338,7 @@ function getGimpoTableDaySum(data) {
 
 /* 풍무 승하차 시작 */
 // tbody 
-function pungmoTableNotDaySum(data) {
+function pungmoTableNotDaySum(goToPungmuCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -339,23 +358,26 @@ function pungmoTableNotDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToPungmuCSVList.forEach(function (item) {
+        item.forEach(function (data, index) {
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+            var no = index + 1;
+
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
 
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
-        createCell(tr, "td", "goPung_td_data5", item.occuTime);
-        createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
-        createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
+        createCell(tr, "td", "goPung_td_data2", data.occuDate);
+        createCell(tr, "td", "goPung_td_data5", data.occuTime);
+        createCell(tr, "td", "goPung_td_data3", data.pungmu_in);
+        createCell(tr, "td", "goPung_td_data4", data.pungmu_out);
+    });
     });
 }
 
 
 // tbody + 일합계
-function pungmoTableDaySum(data) {
+function pungmoTableDaySum(goToPungmuCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -375,16 +397,18 @@ function pungmoTableDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToPungmuCSVList.forEach(function (item) {
+        item.forEach(function (data, index) {
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+            var no = index + 1;
 
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
-        createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
-        createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
+        createCell(tr, "td", "goPung_td_data2", data.occuDate);
+        createCell(tr, "td", "goPung_td_data3", data.pungmu_in);
+        createCell(tr, "td", "goPung_td_data4", data.pungmu_out);
+    });
     });
 }
 /* 풍무 승하차 끝 */
@@ -393,7 +417,7 @@ function pungmoTableDaySum(data) {
 
 /* 고촌 승하차 시작 */
 // tbody 
-function gochonTableNotDaySum(data) {
+function gochonTableNotDaySum(goToGochonCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -413,23 +437,25 @@ function gochonTableNotDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToGochonCSVList.forEach(function (item) {
+        item.forEach(function (data, index) {
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+            var no = index + 1;
 
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
-        createCell(tr, "td", "goPung_td_data5", item.occuTime);
-        createCell(tr, "td", "goPung_td_data3", item.gochon_in);
-        createCell(tr, "td", "goPung_td_data4", item.gochon_out);
+        createCell(tr, "td", "goPung_td_data2", data.occuDate);
+        createCell(tr, "td", "goPung_td_data5", data.occuTime);
+        createCell(tr, "td", "goPung_td_data3", data.gochon_in);
+        createCell(tr, "td", "goPung_td_data4", data.gochon_out);
+    });
     });
 }
 
 
 // tbody + 일합계
-function gochonTableDaySum(data) {
+function gochonTableDaySum(goToGochonCSVList) {
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -449,16 +475,19 @@ function gochonTableDaySum(data) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
-    data.forEach(function (item, index) {
-        var no = index + 1;
+    goToGochonCSVList.forEach(function (item) {
+        item.forEach(function (data, index) {
 
-        var tr = document.createElement("tr");
-        dataTbody.appendChild(tr);
+            var no = index + 1;
+
+            var tr = document.createElement("tr");
+            dataTbody.appendChild(tr);
 
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
-        createCell(tr, "td", "goPung_td_data3", item.gochon_in);
-        createCell(tr, "td", "goPung_td_data4", item.gochon_out);
+        createCell(tr, "td", "goPung_td_data2", data.occuDate);
+        createCell(tr, "td", "goPung_td_data3", data.gochon_in);
+        createCell(tr, "td", "goPung_td_data4", data.gochon_out);
+    });
     });
 }
 /* 고촌 승하차 끝 */

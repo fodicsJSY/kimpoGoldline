@@ -17,6 +17,7 @@ scvBtn.addEventListener('click', function() {
   modal.style.display = 'block';
   isModalOpen = true;
   initializeOnModalClose();
+  document.getElementById('progressDiv').style.display = 'none';
   
 });
 
@@ -210,35 +211,21 @@ function initializeOnModalClose() {
           }
       }
 
-      selectMonth.checked=true;
+      selectDay.checked=true;
       daySumCheckbox.checked=false;
-
-      // 월 input창 생성
-      monthClickEvent();
-
-      var monthSearch = document.getElementById("monthSearch");
-      // console.log("monthSearch", monthSearch.value);
-      var occuMonth = formatToYYYYMM(monthSearch.value);
-      var from_date = occuMonth + "01";
-      var to_date = occuMonth + "31";
-        //console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+      
+      // 일 input창 생성
+      dayClickEvent()
+      
+      var daySearch = document.getElementById("daySearch");
+      // console.log("daySearch", daySearch.value);
+      var occuDay = formatToYYYYMMDD(daySearch.value);
+      var from_date = occuDay;
+      var to_date = occuDay;
 
       tableTitle.innerHTML = "김포공항 하선/하차인원";
       fristTible();
 
-      // 데이터 가져오기
-      $.ajax({
-        url: "/monthUrl",
-        type: "POST",
-        data: { from_date: from_date, to_date: to_date, comboValue: "GimOut", bSum: 0 },
-        success: function (response) {
-            if (response.goToGimpoCSV && response.goToGimpoCSV.length > 0) {
-              goGimpoTableNotDaySum(response.goToGimpoCSV);
-            } else {
-              renderNoDataMessage();
-            }
-        }
-      });
   }
 }
 

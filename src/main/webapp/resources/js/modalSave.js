@@ -94,49 +94,44 @@ function saveData(comboValue, filename){
                 // console.log("p3", response.parameter3);
 
                 let p3 = response.parameter3;
-                let resultArray = response.goToGimpoCSV;
                 
-                if(resultArray.length == 0){
-                    Swal.fire("저장하려는 데이터가 없습니다.");
-                }else{
                 
-                    if(response.goToGimpoCSV){
-                        var goToGimpoCSV = response.goToGimpoCSV;
-                        // console.log("goToGimpoCSV", goToGimpoCSV);
-                        // console.log("p3", p3);
-                        if(p3 == 0){
-                            flie_goToGimpoDataSave(goToGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGimpoDataSaveNoTime(goToGimpoCSV, filename);
-                        }
+                if(response.goToGimpoCSVList.length > 0){
+                    var goToGimpoCSVList = response.goToGimpoCSVList;
+                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
+                    // console.log("p3", p3);
+                    if(p3 == 0){
+                        file_goToGimpoDataSave(goToGimpoCSVList, filename);
                     }
-                    if(response.getOffGimpoCSV){
-                        var getOffGimpoCSV = response.getOffGimpoCSV;
-                        if(p3 == 0){
-                            flie_getOffGimpoDataSave(getOffGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_goToGimpoDataSaveNoTime(goToGimpoCSVList, filename);
                     }
-                    if(response.goToGochonCSV){
-                        var goToGochonCSV = response.goToGochonCSV;
-                        if(p3 == 0){
-                            flie_goToGochonDataSave(goToGochonCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGochonDataSaveNoTime(goToGochonCSV, filename);
-                        }
+                }
+                if(response.getOffGimpoCSVList.length > 0){
+                    var getOffGimpoCSVList = response.getOffGimpoCSVList;
+                    if(p3 == 0){
+                        file_getOffGimpoDataSave(getOffGimpoCSVList, filename);
                     }
-                    if(response.goToPungmuCSV){
-                        var goToPungmuCSV = response.goToPungmuCSV;
-                        if(p3 == 0){
-                            flie_goToPungmuDataSave(goToPungmuCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_getOffGimpoDataSaveNoTime(getOffGimpoCSVList, filename);
+                    }
+                }
+                if(response.goToPungmuCSVList.length > 0){
+                    var goToPungmuCSVList = response.goToPungmuCSVList;
+                    if(p3 == 0){
+                        file_goToGochonDataSave(goToPungmuCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToGochonDataSaveNoTime(goToPungmuCSVList, filename);
+                    }
+                }
+                if(response.goToGochonCSVList.length > 0){
+                    var goToGochonCSVList = response.goToGochonCSVList;
+                    if(p3 == 0){
+                        file_goToPungmuDataSave(goToGochonCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToPungmuDataSaveNoTime(goToGochonCSVList, filename);
                     }
                 }
             }
@@ -166,48 +161,43 @@ function saveData(comboValue, filename){
             success: function(response){
                 //console.log("response", response);
                 let p3 = response.parameter3;
-                let resultArray = response.goToGimpoCSV;
                 
-                if(resultArray.length == 0){
-                    Swal.fire("저장하려는 데이터가 없습니다.");
-                }else{
-                    if(response.goToGimpoCSV){
-                        var goToGimpoCSV = response.goToGimpoCSV;
-                        // console.log("goToGimpoCSV", goToGimpoCSV);
-                        // console.log("p3", p3);
-                        if(p3 == 0){
-                            flie_goToGimpoDataSave(goToGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGimpoDataSaveNoTime(goToGimpoCSV, filename);
-                        }
+                if(response.goToGimpoCSVList){
+                    var goToGimpoCSVList = response.goToGimpoCSVList;
+                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
+                    // console.log("p3", p3);
+                    if(p3 == 0){
+                        file_goToGimpoDataSave(goToGimpoCSVList, filename);
                     }
-                    if(response.getOffGimpoCSV){
-                        var getOffGimpoCSV = response.getOffGimpoCSV;
-                        if(p3 == 0){
-                            flie_getOffGimpoDataSave(getOffGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_goToGimpoDataSaveNoTime(goToGimpoCSVList, filename);
                     }
-                    if(response.goToGochonCSV){
-                        var goToGochonCSV = response.goToGochonCSV;
-                        if(p3 == 0){
-                            flie_goToGochonDataSave(goToGochonCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGochonDataSaveNoTime(goToGochonCSV, filename);
-                        }
+                }
+                if(response.getOffGimpoCSVList){
+                    var getOffGimpoCSVList = response.getOffGimpoCSVList;
+                    if(p3 == 0){
+                        file_getOffGimpoDataSave(getOffGimpoCSVList, filename);
                     }
-                    if(response.goToPungmuCSV){
-                        var goToPungmuCSV = response.goToPungmuCSV;
-                        if(p3 == 0){
-                            flie_goToPungmuDataSave(goToPungmuCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_getOffGimpoDataSaveNoTime(getOffGimpoCSVList, filename);
+                    }
+                }
+                if(response.goToPungmuCSVList){
+                    var goToPungmuCSVList = response.goToPungmuCSVList;
+                    if(p3 == 0){
+                        file_goToGochonDataSave(goToPungmuCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToGochonDataSaveNoTime(goToPungmuCSVList, filename);
+                    }
+                }
+                if(response.goToGochonCSVList){
+                    var goToGochonCSVList = response.goToGochonCSVList;
+                    if(p3 == 0){
+                        file_goToPungmuDataSave(goToGochonCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToPungmuDataSaveNoTime(goToGochonCSVList, filename);
                     }
                 }
             }
@@ -240,49 +230,43 @@ function saveData(comboValue, filename){
             success: function(response){
                 // console.log("response", response);
                 let p3 = response.parameter3;
-                let resultArray = response.goToGimpoCSV;
                 
-                if(resultArray.length == 0){
-                    Swal.fire("저장하려는 데이터가 없습니다.");
-                }else{
-
-                    if(response.goToGimpoCSV){
-                        var goToGimpoCSV = response.goToGimpoCSV;
-                        // console.log("goToGimpoCSV", goToGimpoCSV);
-                        // console.log("p3", p3);
-                        if(p3 == 0){
-                            flie_goToGimpoDataSave(goToGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGimpoDataSaveNoTime(goToGimpoCSV, filename);
-                        }
+                if(response.goToGimpoCSVList){
+                    var goToGimpoCSVList = response.goToGimpoCSVList;
+                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
+                    // console.log("p3", p3);
+                    if(p3 == 0){
+                        file_goToGimpoDataSave(goToGimpoCSVList, filename);
                     }
-                    if(response.getOffGimpoCSV){
-                        var getOffGimpoCSV = response.getOffGimpoCSV;
-                        if(p3 == 0){
-                            flie_getOffGimpoDataSave(getOffGimpoCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_goToGimpoDataSaveNoTime(goToGimpoCSVList, filename);
                     }
-                    if(response.goToGochonCSV){
-                        var goToGochonCSV = response.goToGochonCSV;
-                        if(p3 == 0){
-                            flie_goToGochonDataSave(goToGochonCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToGochonDataSaveNoTime(goToGochonCSV, filename);
-                        }
+                }
+                if(response.getOffGimpoCSVList){
+                    var getOffGimpoCSVList = response.getOffGimpoCSVList;
+                    if(p3 == 0){
+                        file_getOffGimpoDataSave(getOffGimpoCSVList, filename);
                     }
-                    if(response.goToPungmuCSV){
-                        var goToPungmuCSV = response.goToPungmuCSV;
-                        if(p3 == 0){
-                            flie_goToPungmuDataSave(goToPungmuCSV, filename);
-                        }
-                        if(p3 == 1){
-                            flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename);
-                        }
+                    if(p3 == 1){
+                        file_getOffGimpoDataSaveNoTime(getOffGimpoCSVList, filename);
+                    }
+                }
+                if(response.goToPungmuCSVList){
+                    var goToPungmuCSVList = response.goToPungmuCSVList;
+                    if(p3 == 0){
+                        file_goToGochonDataSave(goToPungmuCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToGochonDataSaveNoTime(goToPungmuCSVList, filename);
+                    }
+                }
+                if(response.goToGochonCSVList){
+                    var goToGochonCSVList = response.goToGochonCSVList;
+                    if(p3 == 0){
+                        file_goToPungmuDataSave(goToGochonCSVList, filename);
+                    }
+                    if(p3 == 1){
+                        file_goToPungmuDataSaveNoTime(goToGochonCSVList, filename);
                     }
                 }    
             }
@@ -291,17 +275,21 @@ function saveData(comboValue, filename){
 
 
     // CSV파일1 생성 시작-----------------------------------------------
-    function flie_goToGimpoDataSave(goToGimpoCSV, filename) {
-
+    function file_goToGimpoDataSave(goToGimpoCSVList, filename) {
+        // console.log("goToGimpoCSVList", goToGimpoCSVList);
         // CSV 헤더 생성
         let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
     
         // CSV 데이터 추가
-        for (let i = 0; i < goToGimpoCSV.length; i++) {
-            var currentItem = goToGimpoCSV[i];
-            let row = `${i+1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
-            csvContent += row;
-        }
+        goToGimpoCSVList.forEach(function (item) {
+            // console.log("item", item);
+    
+            item.forEach(function (data, index) {
+                // console.log("data", data);
+                let row = `${index+1},${data.occuDate},${data.occuTime},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+                csvContent += row;
+            });
+        });
 
         const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8;' });
     
@@ -328,16 +316,20 @@ function saveData(comboValue, filename){
 
 
     // CSV파일2 생성 시작-----------------------------------------------
-    function flie_goToGimpoDataSaveNoTime(goToGimpoCSV, filename) {
+    function file_goToGimpoDataSaveNoTime(goToGimpoCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGimpoCSV.length; i++) {
-        var currentItem = goToGimpoCSV[i];
-        let row = `${i+1},${currentItem.occuDate},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
-        csvContent += row;
-    }
+    goToGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -361,16 +353,20 @@ function saveData(comboValue, filename){
 
 
 // CSV파일3 생성 시작-----------------------------------------------
-function flie_getOffGimpoDataSave(getOffGimpoCSV, filename) {
+function file_getOffGimpoDataSave(getOffGimpoCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < getOffGimpoCSV.length; i++) {
-        var currentItem = getOffGimpoCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
-        csvContent += row;
-    }
+    getOffGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.occuTime},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -394,16 +390,20 @@ function flie_getOffGimpoDataSave(getOffGimpoCSV, filename) {
 
 
 // CSV파일4 생성 시작-----------------------------------------------
-function flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
+function file_getOffGimpoDataSaveNoTime(getOffGimpoCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < getOffGimpoCSV.length; i++) {
-        var currentItem = getOffGimpoCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
-        csvContent += row;
-    }
+    getOffGimpoCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -428,16 +428,20 @@ function flie_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
 
 
 // CSV파일5 생성 시작-----------------------------------------------
-function flie_goToGochonDataSave(goToGochonCSV, filename) {
+function file_goToGochonDataSave(goToGochonCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,시간,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGochonCSV.length; i++) {
-        var currentItem = goToGochonCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
-        csvContent += row;
-    }
+    goToGochonCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.occuTime},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -462,16 +466,20 @@ function flie_goToGochonDataSave(goToGochonCSV, filename) {
 
 
 // CSV파일6 생성 시작-----------------------------------------------
-function flie_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
+function file_goToGochonDataSaveNoTime(goToGochonCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToGochonCSV.length; i++) {
-        var currentItem = goToGochonCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
-        csvContent += row;
-    }
+    goToGochonCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -496,16 +504,20 @@ function flie_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
 
 
 // CSV파일7 생성 시작-----------------------------------------------
-function flie_goToPungmuDataSave(goToPungmuCSV, filename) {
+function file_goToPungmuDataSave(goToPungmuCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,시간,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToPungmuCSV.length; i++) {
-        var currentItem = goToPungmuCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
-        csvContent += row;
-    }
+    goToPungmuCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.occuTime},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
@@ -531,16 +543,20 @@ function flie_goToPungmuDataSave(goToPungmuCSV, filename) {
 
 
 // CSV파일8 생성 시작-----------------------------------------------
-function flie_goToPungmuDataSaveNoTime(goToPungmuCSV, filename) {
+function file_goToPungmuDataSaveNoTime(goToPungmuCSVList, filename) {
     // CSV 헤더 생성
     let csvContent = "순번,날짜,승차,하차\n";
 
     // CSV 데이터 추가
-    for (let i = 0; i < goToPungmuCSV.length; i++) {
-        var currentItem = goToPungmuCSV[i];
-        let row = `${i + 1},${currentItem.occuDate},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
-        csvContent += row;
-    }
+    goToPungmuCSVList.forEach(function (item) {
+        // console.log("item", item);
+
+        item.forEach(function (data, index) {
+            // console.log("data", data);
+            let row = `${index+1},${data.occuDate},${data.gimpo_st_out},${data.gimpo_ev_out},${data.gimpo_ec_out}, ${data.gimpo_st_out+data.gimpo_ev_out+data.gimpo_ec_out}\n`;
+            csvContent += row;
+        });
+    });
 
     // UTF-8로 변환
     // const encoder = new TextEncoder();
