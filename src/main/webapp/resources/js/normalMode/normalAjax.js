@@ -41,10 +41,8 @@ $(function(){
                 
                     var normalChart = echarts.init(document.getElementById("normalChart"));
                     // console.log('occuHour2 : ', occuHourList);
-            
                 
-    
-                const colors = ['#5470C6', '#91CC75', '#EE6666', '#F7A221'];
+                    const colors = ['#5470C6', '#91CC75', '#EE6666', '#F7A221'];
                 option = {
                 color: colors,
                 tooltip: {
@@ -55,14 +53,15 @@ $(function(){
                 },
                 grid: {
                     tooltip: {
-                        show: false
+                        show: true
                     }
                 },
                 toolbox: {
                     feature: {
-                    dataView: { show: true, readOnly: false },
-                    restore: { show: true },
-                    saveAsImage: { show: true }
+                        dataView: { show: true, readOnly: false },
+                        magicType: { show: true, type: ['bar'] },
+                        restore: { show: true },
+                        saveAsImage: { show: true }
                     }
                 },
                 legend: {
