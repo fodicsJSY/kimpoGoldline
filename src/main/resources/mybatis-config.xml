@@ -15,7 +15,6 @@
 	<typeAliases>
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.Data" alias="Data" /> 
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.CSV" alias="CSV" /> 
-		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.File" alias="File" /> 
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.FileData" alias="FileData" /> 
 	</typeAliases>
 	

@@ -6,3 +6,4 @@ function progressBar(per){
     $(".progressPer").text(per+" %");
     $(".progressNow").css("width", "calc(" + per + "% - 20px)");
 }
+

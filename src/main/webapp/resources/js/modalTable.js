@@ -1,4 +1,6 @@
 
+let no =0;
+
 //테이블 초기화
 function fristTible() {
     var dataContainer = document.querySelector(".dataContainer");
@@ -182,12 +184,13 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     goToGimpoCSVList.forEach(function (item) {
         // console.log("item", item);
 
-        item.forEach(function (data, index) {
+        item.forEach(function (data) {
             // console.log("data", data);
-            var no = index + 1;
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -225,12 +228,12 @@ function goGimpoTableDaySum(goToGimpoCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     goToGimpoCSVList.forEach(function (item) {
         // console.log("item", item);
 
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -270,12 +273,12 @@ function getGimpoTableNotDaySum(getOffGimpoCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     getOffGimpoCSVList.forEach(function (item) {
         // console.log("item", item);
 
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -313,11 +316,11 @@ function getGimpoTableDaySum(getOffGimpoCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     getOffGimpoCSVList.forEach(function (item) {
         
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -358,10 +361,10 @@ function pungmoTableNotDaySum(goToPungmuCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     goToPungmuCSVList.forEach(function (item) {
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -397,10 +400,10 @@ function pungmoTableDaySum(goToPungmuCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0
     goToPungmuCSVList.forEach(function (item) {
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -437,10 +440,10 @@ function gochonTableNotDaySum(goToGochonCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     goToGochonCSVList.forEach(function (item) {
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);
@@ -475,10 +478,10 @@ function gochonTableDaySum(goToGochonCSVList) {
     dataTbody.className = "dataTbody";
     dataTable2.appendChild(dataTbody);
 
+    no =0;
     goToGochonCSVList.forEach(function (item) {
-        item.forEach(function (data, index) {
-
-            var no = index + 1;
+        item.forEach(function (data) {
+            no++;
 
             var tr = document.createElement("tr");
             dataTbody.appendChild(tr);

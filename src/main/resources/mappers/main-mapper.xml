@@ -70,24 +70,8 @@
       	<result property="occuDate" column="occu_date" />
 	</resultMap>
 	
-	<resultMap type="File" id="_file">
-      	<result property="date_time" column="DATE_TIME" />
-      	<result property="gimpo_st_out" column="GIMPO_ST_OUT" />
-      	<result property="gimpo_ev_out" column="GIMPO_EV_OUT" />
-      	<result property="gimpo_ec_out" column="GIMPO_EC_OUT" />
-      	<result property="gimpo_total_out" column="GIMPO_TOTAL_OUT" />
-      	<result property="gimpo_st_in" column="GIMPO_ST_IN" />
-      	<result property="gimpo_ev_in" column="GIMPO_EV_IN" />
-      	<result property="gimpo_ec_in" column="GIMPO_EC_IN" />
-      	<result property="pungmu_in" column="PUNGMU_IN" />
-      	<result property="pungmu_out" column="PUNGMU_OUT" />
-      	<result property="gochon_in" column="GOCHON_IN" />
-      	<result property="gochon_out" column="GOCHON_OUT" />
-      	<result property="occuTime" column="occu_time" />
-      	<result property="occuDate" column="occu_date" />
-	</resultMap>
 	
-		<resultMap type="FileData" id="_fileData">
+	<resultMap type="FileData" id="_fileData">
       	<result property="date_time" column="DATE_TIME" />
       	<result property="gimpo_st_out" column="GIMPO_ST_OUT" />
       	<result property="gimpo_ev_out" column="GIMPO_EV_OUT" />
@@ -453,7 +437,7 @@
 	  
 	  
 	  	  
-    <!-- csv파일4 -->
+    <!-- csv파일4프로시저 -->
 	<select id="callSP_GOCHON_INOUT" resultMap="_fileData">
 		{call SP_GOCHON_INOUT(
 	        #{parameter, mode=IN, jdbcType=VARCHAR}
