@@ -365,10 +365,10 @@ function file_getOffGimpoDataSave(getOffGimpoCSVList, filename) {
     no =0;
     // CSV 데이터 추가
     getOffGimpoCSVList.forEach(function (item) {
-        console.log("item", item);
+        // console.log("item", item);
 
         item.forEach(function (data) {
-            console.log("data", data);
+            // console.log("data", data);
             let row = `${no},${data.occuDate},${data.occuTime},${data.gimpo_st_in},${data.gimpo_ev_in},${data.gimpo_ec_in}, ${data.gimpo_st_in+data.gimpo_ev_in+data.gimpo_ec_in}\n`;
             csvContent += row;
         });
@@ -517,18 +517,18 @@ function file_goToGochonDataSaveNoTime(goToGochonCSVList, filename) {
 
 // CSV파일7 생성 시작-----------------------------------------------
 function file_goToPungmuDataSave(goToPungmuCSVList, filename) {
-    console.log("goToPungmuCSVList : ", goToPungmuCSVList);
+    // console.log("goToPungmuCSVList : ", goToPungmuCSVList);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,시간,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
     goToPungmuCSVList.forEach(function (item) {
-        console.log("item", item);
+        // console.log("item", item);
 
         item.forEach(function (data) {
             no++;
-            console.log("data", data);
+            // console.log("data", data);
             let row = `${no},${data.occuDate},${data.occuTime},${data.pungmu_in},${data.pungmu_out}\n`;
             csvContent += row;
         });
