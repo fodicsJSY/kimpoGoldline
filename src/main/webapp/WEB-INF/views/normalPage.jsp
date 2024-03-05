@@ -13,6 +13,7 @@
     <%-- css --%>
     <link rel="stylesheet" href="../../resources/css/normalMode-style.css">
     <link rel="stylesheet" href="../../resources/css/modal.css">
+    <link rel="stylesheet" href="../../resources/css/progress.css">
 
     <%-- echarts --%>
 	<script src="../../resources/js/echart/echart.min.js"></script>
@@ -260,7 +261,7 @@
                         </div>
                     </div>
                     <div id="progressDiv" class="position-absolute top-0 start-0 w-100 h-100 z-3 d-none" style="background-color:#808080ab;">
-                        <div class="row w-75 bg-white d-flex p-0 progress-box-shadow" style="height:150px; margin-top: 10px; margin-left: 90px; padding:5px;">
+                        <div class="row w-75 bg-white d-flex p-0 progress-box-shadow" style="height:150px; margin-top: 10px; margin-left: 25px; padding:5px;">
                             <div class="row w-100 d-flex p-0 m-0 mt-5 mb-3 text-center">
                                 <p class="upload_txt01">데이터 조회</p>
                             </div>
@@ -294,9 +295,9 @@
 
 
     <script src="../../resources/js/clock.js"></script>
+    <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalChart.js"></script>
     <script src="../../resources/js/normalMode/normalGauge.js"></script>
-    <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
     <script src="../../resources/js/refresh.js"></script> 
     <script src="../../resources/js/modal.js"></script> 
