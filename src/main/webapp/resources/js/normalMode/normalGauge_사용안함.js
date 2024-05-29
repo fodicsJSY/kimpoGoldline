@@ -93,7 +93,7 @@
             },
             color: 'inherit'
             },
-            data: [selectPungmuPlatform1]
+            data: [selectGochonPlatform1]
         }
         ],
     };
@@ -196,7 +196,7 @@
             },
             color: 'inherit'
             },
-            data: [selectPungmuPlatform2]
+            data: [selectGochonPlatform2]
         }
         ],
     };
@@ -299,7 +299,13 @@
             },
             color: 'inherit'
             },
-            data: [selectGochonPlatform1]
+            data: [
+                {
+                    value: selectPungmuPlatform1,
+                    name: selectPungmuPlatform1
+                }
+
+            ]
         }
         ],
     };
@@ -402,7 +408,7 @@
             },
             color: 'inherit'
             },
-            data: [selectGochonPlatform2]
+            data: [selectPungmuPlatform2]
         }
         ],
         

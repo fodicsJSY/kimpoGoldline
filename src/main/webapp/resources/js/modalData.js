@@ -74,7 +74,6 @@ function selectRadio(comboValue){
         return xhr;
       },
       success: function(response){
-
         // console.log("response", response);
 
            /* 김포공항 하선/하차인원 */
@@ -252,7 +251,6 @@ function selectRadio(comboValue){
             goGimpoTableDaySum(response.goToGimpoCSVList);
           }
         } 
-
 
         /* 김포공항 상선/승차인원 */
         if (response.getOffGimpoCSVList.length > 0 ) {

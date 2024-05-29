@@ -23,13 +23,13 @@
       	<result property="gimpoOut24Change" column="GIMPO_OUT_24CHANGE" />
       	<result property="gochon24Change" column="GOCHON24CHANGE" />
       	<result property="pungmu24Change" column="PUNGMU24CHANGE" />
+      	          <result property="objectClass" column="object_class" />
       	<result property="gimpoIn24ChangeCount" column="GIMPO_IN_24_CHANGE_COUNT" />
       	<result property="gimpoOut24ChangeCount" column="GIMPO_OUT_24_CHANGE_COUNT" />
       	<result property="gochon24ChangeCount" column="GOCHON24_CHANGE_COUNT" />
       	<result property="gochon1_24ChangeCount" column="GOCHON1_24_CHANGE_COUNT" />
       	<result property="gochon2_24ChangeCount" column="GOCHON2_24_CHANGE_COUNT" />
       	<result property="pungmu24ChangeCount" column="PUNGMU24_CHANGE_COUNT" />
-      	<result property="objectClass" column="object_class" />
 	</resultMap> 
   
   <resultMap id="_int" type="java.lang.Integer"/>

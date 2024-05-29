@@ -102,6 +102,7 @@ public class Data {
 	
 	// 군중밀집도
 	private int objectClass;
+	private String grade;
 	
 	// csv파일 생성
 	private int goToGimpoST;

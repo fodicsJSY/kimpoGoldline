@@ -3,6 +3,7 @@ package fodics.jsy.dashboard.main.model.service;
 import java.util.List;
 import java.util.Map;
 
+import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
@@ -37,16 +38,16 @@ public interface MainService {
 	List<Data> normalDateChangeCount(String occuDate);
 
 	// 풍무역 플랫폼1 군중밀집도
-	int selectPungmuPlatform1();
+	List<CongestionRate> selectPungmuPlatform1();
 
 	// 풍무역 플랫폼2 군중밀집도
-	int selectPungmuPlatform2();
+	List<CongestionRate> selectPungmuPlatform2();
 
 	// 고촌역 플랫폼1 군중밀집도
-	int selectGochonPlatform1();
+	List<CongestionRate> selectGochonPlatform1();
 
 	// 고촌역 플랫폼2 군중밀집도
-	int selectGochonPlatform2();
+	List<CongestionRate> selectGochonPlatform2();
 
 	//csv파일1
 	List<FileData> goToGimpoCSV(Map<String, Object>  map);
@@ -59,6 +60,10 @@ public interface MainService {
 
 	// csv파일4
 	List<FileData> goToGochonCSV(Map<String, Object>  map);
+
+	
+	// 풍무역 플랫폼1 군중밀집도 진짜진짜
+	List<Data> gaugeData_P1_list();
 
 
 

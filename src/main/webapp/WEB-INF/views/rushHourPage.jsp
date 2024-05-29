@@ -49,11 +49,9 @@
     
 </head>
 <body>
+
 <c:set var="rushHourTotalList" value="${rushHourTotalList}"/>
-<c:set var="selectPungmuPlatform1" value="${selectPungmuPlatform1}"/>
-<c:set var="selectPungmuPlatform2" value="${selectPungmuPlatform2}"/>
-<c:set var="selectGochonPlatform1" value="${selectGochonPlatform1}"/>
-<c:set var="selectGochonPlatform2" value="${selectGochonPlatform2}"/>
+
     <main>
     <section>
         <div class="gridBox gridBox1">
@@ -297,11 +295,10 @@
     
     <%-- 전역변수 시작 --%>
     <script>
-        var selectPungmuPlatform1 = ${selectPungmuPlatform1 != null ? selectPungmuPlatform1: 0 };
-        var selectPungmuPlatform2 = ${selectPungmuPlatform2 != null ? selectPungmuPlatform2: 0 };
-        var selectGochonPlatform1 = ${selectGochonPlatform1 != null ? selectGochonPlatform1: 0 };
-        var selectGochonPlatform2 = ${selectGochonPlatform2 != null ? selectGochonPlatform2: 0 };
-    </script>
+
+
+
+    // </script>
     <%-- 전역변수 끝 --%>
 
 
@@ -310,6 +307,7 @@
     <script src="../../resources/js/rushHourSearch.js"></script>
     <script src="../../resources/js/rushHourChart.js"></script>
     <script src="../../resources/js/gauge.js"></script>
+    <script src="../../resources/js/gaugeData.js"></script>
     <script src="../../resources/js/ajax.js"></script>
     <script src="../../resources/js/refresh.js"></script>
     <script src="../../resources/js/modal.js"></script> 

@@ -9,12 +9,12 @@
 
 
 	<!-- 김포 -->
-<!-- 
+
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value="jdbc:sqlserver://10.20.10.203:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
+		<property name="url" value="jdbc:sqlserver://172.16.88.8:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
 		<property name="username" value="sa" />
 		<property name="password" value="j$b!c&amp;1" />
 		<property name="defaultAutoCommit" value="false" />
@@ -37,11 +37,12 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
- -->
+
 	 
 	 
 	 
 	<!-- 군중 -->
+<!-- 
 	<bean id="dataSource1"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
@@ -69,9 +70,12 @@
 	<bean id="transactionManager1" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource1" />
 	</bean>
+ -->
+
 	 
 	 
 	<!-- 카운팅 -->
+<!-- 
 	<bean id="dataSource2"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
@@ -99,6 +103,8 @@
 	<bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource2" />
 	</bean>
+ -->
+
 	
 	
 	

@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var formattedDate = today.toISOString().substring(0, 10);
     document.getElementById('mainDateSearch').value = formattedDate;
     forDate = formattedDate; // forDate 초기화
+
+
+    gaugeData();
 });
 /* 오늘 날짜로 초기화 끝*/
 

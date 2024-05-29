@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 import fodics.jsy.dashboard.main.model.service.MainService;
@@ -33,12 +34,12 @@ public class MainController {
 	@Autowired
 	private MainService service;
 	
-	@Autowired
-	@Resource(name="sqlSessionTemplate2")
-	private SqlSessionTemplate sql2;
-
 //	@Autowired
-//	private SqlSessionTemplate sql;
+//	@Resource(name="sqlSessionTemplate2")
+//	private SqlSessionTemplate sql2;
+
+	@Autowired
+	private SqlSessionTemplate sql;
 
 	
 	@GetMapping("/")
@@ -49,42 +50,59 @@ public class MainController {
 		//출근대 김포공항역, 고촌역, 풍무역 승하차 누적 수
 		List<Data> rushHourTotalList = service.rushHourTotalCount();
 		model.addAttribute("rushHourTotalList", rushHourTotalList);
-		
-		// 풍무역 플랫폼1 군중밀집도
-		int selectPungmuPlatform1 = service.selectPungmuPlatform1();
-		model.addAttribute("selectPungmuPlatform1", selectPungmuPlatform1);
-
-		// 풍무역 플랫폼2 군중밀집도
-		int selectPungmuPlatform2 = service.selectPungmuPlatform2();
-		model.addAttribute("selectPungmuPlatform2", selectPungmuPlatform2);
-		
-		// 고촌역 플랫폼1 군중밀집도
-		int selectGochonPlatform1 = service.selectGochonPlatform1();
-		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
-		
-		// 고촌역 플랫폼2 군중밀집도
-		int selectGochonPlatform2 = service.selectGochonPlatform2();
-		model.addAttribute("selectGochonPlatform2", selectGochonPlatform2);
-		
 //		System.out.println("rushHourTotalList : " + rushHourTotalList);
+		
+//		System.out.println("model : " + model);
 		
 		return "rushHourPage";
 	}
 	
 	
+	
+	 
+	 // 군중밀집도
+	 @PostMapping("/gaugeData")
+	 @ResponseBody
+	 public Map<String, Object> gaugeData(
+			 ){
+		 Map<String, Object> map = new HashMap<>();
+		 
+		// 풍무역 플랫폼1 군중밀집도
+		List<CongestionRate> selectPungmuPlatform1 = service.selectPungmuPlatform1();
+		map.put("selectPungmuPlatform1", selectPungmuPlatform1);
+//		System.out.println("selectPungmuPlatform1 : " + selectPungmuPlatform1);
+
+		// 풍무역 플랫폼2 군중밀집도
+		List<CongestionRate> selectPungmuPlatform2 = service.selectPungmuPlatform2();
+		map.put("selectPungmuPlatform2", selectPungmuPlatform2);
+//		System.out.println("selectPungmuPlatform2 : " + selectPungmuPlatform2);
+		
+		// 고촌역 플랫폼1 군중밀집도
+		List<CongestionRate> selectGochonPlatform1 = service.selectGochonPlatform1();
+		map.put("selectGochonPlatform1", selectGochonPlatform1);
+//		System.out.println("selectGochonPlatform1 : " + selectGochonPlatform1);
+		
+		// 고촌역 플랫폼2 군중밀집도
+		List<CongestionRate> selectGochonPlatform2 = service.selectGochonPlatform2();
+		map.put("selectGochonPlatform2", selectGochonPlatform2);
+//		System.out.println("selectGochonPlatform2 : " + selectGochonPlatform2);
+		 
+		 return map;
+	 }
+	 
+	
+	 
+	 
 	// 차트데이터 ajax(금일)
 	 @GetMapping("/rushHourChartData")
 	 @ResponseBody
 	 public Map<String, Object> rushHourDaliyData(
 			 ){
 		 Map<String, Object> map = new HashMap<>();
-		 
-		
 
 		// 김포공항 & 풍무역 & 고산역 출근대 승하차 수
 		List<Data> rushHourCountList = service.rushHourCountList();
 		map.put("rushHourCountList", rushHourCountList);
-		 
 		 
 //		 System.out.println("map : "+map);
 		 
@@ -116,6 +134,8 @@ public class MainController {
 	 }
 
 	 
+	 
+	 
 	@GetMapping("/normalPage")
 	public String normalModeForward(
 			Model model
@@ -125,26 +145,12 @@ public class MainController {
 		List<Data> total24CountList = service.total24Count();
 		model.addAttribute("total24CountList", total24CountList);
 		
-		// 풍무역 플랫폼1 군중밀집도
-		int selectPungmuPlatform1 = service.selectPungmuPlatform1();
-		model.addAttribute("selectPungmuPlatform1", selectPungmuPlatform1);
-
-		// 풍무역 플랫폼2 군중밀집도
-		int selectPungmuPlatform2 = service.selectPungmuPlatform2();
-		model.addAttribute("selectPungmuPlatform2", selectPungmuPlatform2);
-		
-		// 고촌역 플랫폼1 군중밀집도
-		int selectGochonPlatform1 = service.selectGochonPlatform1();
-		model.addAttribute("selectGochonPlatform1", selectGochonPlatform1);
-				
-		// 고촌역 플랫폼2 군중밀집도
-		int selectGochonPlatform2 = service.selectGochonPlatform2();
-		model.addAttribute("selectGochonPlatform2", selectGochonPlatform2);
-		
 //		System.out.println("total24CountList : " + total24CountList);
 		
 		return "normalPage";
 	}
+	
+	
 	
 	
 	// 차트데이터 ajax(금일)
@@ -153,16 +159,15 @@ public class MainController {
 	 public Map<String, Object> normalDaliyData(
 			 ){
 		 Map<String, Object> map = new HashMap<>();
-		 
 		
 		//24시간 김포공항역, 고촌역, 풍무역 승하차 수
 		 List<Data> normal24List = service.normal24CountList();
 		 map.put("normal24List", normal24List);
-		 
 
 		 return map;
 	 }
 	
+
 	 
 	 
 		// 차트데이터 ajax(날짜 변경)
@@ -187,6 +192,8 @@ public class MainController {
 	 }
 	 
 	
+	 
+	 
 	 // 출근길 csv
 	 //@PostMapping("/loadRushHourCSV")
 	 //@ResponseBody
@@ -246,11 +253,15 @@ public class MainController {
 */
 
 	 
+	 
+	 
 	// 팝업 페이지로 이동
 	@GetMapping("/popUp")
 	public String openPopUp() {
 		return "/popUp";
 	}
+	
+	
 	
 	// 월 데이터
 	 @PostMapping("/monthUrl")
@@ -272,8 +283,6 @@ public class MainController {
 			
 //			System.out.println("map1 :" +map);
 			
-			
-			
 		    List<List<FileData>> goToGimpoCSVList = new ArrayList<>();
 		    List<List<FileData>> getOffGimpoCSVList = new ArrayList<>();
 		    List<List<FileData>> goToPungmuCSVList = new ArrayList<>();
@@ -281,11 +290,10 @@ public class MainController {
 			
 		    int chunkSize = 1;
 		    
-		    
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
 		 		
-		 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -304,7 +312,7 @@ public class MainController {
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
 			 	
 			 	// csv파일2
 				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -322,7 +330,7 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -339,7 +347,7 @@ public class MainController {
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -403,7 +411,7 @@ public class MainController {
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
 		 		
-		 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -422,7 +430,7 @@ public class MainController {
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
 			 	
 			 	// csv파일2
 				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -440,7 +448,7 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -457,7 +465,7 @@ public class MainController {
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -516,7 +524,7 @@ public class MainController {
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
 		 		
-		 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -537,7 +545,7 @@ public class MainController {
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
 			 	
 			 	// csv파일2
 				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -557,7 +565,7 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -575,7 +583,7 @@ public class MainController {
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -667,7 +675,7 @@ public class MainController {
 		 	
 		 	//김포승차
 		 		// 김포승차 프로시저 호출
-		 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 	sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
 		 	
 			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -677,7 +685,7 @@ public class MainController {
 		 	
 		 	//김포하차
 		 		// 김포하차 프로시저 호출
-			 	sql2.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
 			 	
 			 	// csv파일2
 				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -687,7 +695,7 @@ public class MainController {
 		 	
 		 	//풍무 승하차
 		 		// 풍무 프로시저 호출
-				 sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+				 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -696,7 +704,7 @@ public class MainController {
 		 	
 		 	//고촌 승하차
 		 		// 고촌 프로시저 호출
-				sql2.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+				sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -741,7 +749,7 @@ public class MainController {
 			 	
 			 	//김포승차
 			 		// 김포승차 프로시저 호출
-			 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_day", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_OUT_day", map);
 			 	
 				 	// csv파일1
 				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -751,7 +759,7 @@ public class MainController {
 			 	
 			 	//김포하차
 			 		// 김포하차 프로시저 호출
-				 	sql2.selectList("mainMapper.callSP_GIMPO_IN_day", map);
+				 	sql.selectList("mainMapper.callSP_GIMPO_IN_day", map);
 				 	
 				 	// csv파일2
 					 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -761,7 +769,7 @@ public class MainController {
 			 	
 			 	//풍무 승하차
 			 		// 풍무 프로시저 호출
-					 sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_day", map);
+					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_day", map);
 				 	
 				 	// csv파일3
 					List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -770,7 +778,7 @@ public class MainController {
 			 	
 			 	//고촌 승하차
 			 		// 고촌 프로시저 호출
-					sql2.selectList("mainMapper.callSP_GOCHON_INOUT_day", map);
+					sql.selectList("mainMapper.callSP_GOCHON_INOUT_day", map);
 				 	
 					// csv파일4
 					List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -815,7 +823,7 @@ public class MainController {
 			 	
 			 	//김포승차
 			 		// 김포승차 프로시저 호출
-			 		sql2.selectList("mainMapper.callSP_GIMPO_OUT_custom", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_OUT_custom", map);
 			 	
 				 	// csv파일1
 				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -825,7 +833,7 @@ public class MainController {
 			 	
 			 	//김포하차
 			 		// 김포하차 프로시저 호출
-				 	sql2.selectList("mainMapper.callSP_GIMPO_IN_custom", map);
+				 	sql.selectList("mainMapper.callSP_GIMPO_IN_custom", map);
 				 	
 				 	// csv파일2
 					 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -835,7 +843,7 @@ public class MainController {
 			 	
 			 	//풍무 승하차
 			 		// 풍무 프로시저 호출
-					 sql2.selectList("mainMapper.callSP_PUNGMU_INOUT_custom", map);
+					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_custom", map);
 				 	
 				 	// csv파일3
 					List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -844,7 +852,7 @@ public class MainController {
 			 	
 			 	//고촌 승하차
 			 		// 고촌 프로시저 호출
-					sql2.selectList("mainMapper.callSP_GOCHON_INOUT_custom", map);
+					sql.selectList("mainMapper.callSP_GOCHON_INOUT_custom", map);
 				 	
 					// csv파일4
 					List<FileData> goToGochonCSV = service.goToGochonCSV(map);

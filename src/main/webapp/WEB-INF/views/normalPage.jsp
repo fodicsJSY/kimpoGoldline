@@ -100,7 +100,7 @@
                             <div class="throngChartTitle">
                                 플랫폼1
                             </div>
-                            <div class="throngChartContainer" id="gochonPlatformNormal1">
+                            <div class="throngChartContainer" id="gochonPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                             <div class="throngChartTitle">
                                 플랫폼2
                             </div>
-                            <div class="throngChartContainer" id="gochonPlatformNormal2">
+                            <div class="throngChartContainer" id="gochonPlatform2">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                             <div class="throngChartTitle">
                                 플랫폼1
                             </div>
-                            <div class="throngChartContainer" id="pungmuPlatformNormal1">
+                            <div class="throngChartContainer" id="pungmuPlatform1">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                             <div class="throngChartTitle">
                                 플랫폼2
                             </div>
-                            <div class="throngChartContainer" id="pungmuPlatformNormal2">
+                            <div class="throngChartContainer" id="pungmuPlatform2">
                                 <%-- 게이지차트 캔버스 --%>
                             </div>
                         </div>
@@ -286,10 +286,8 @@
 
     <%-- 전역변수 시작 --%>
     <script>
-        var selectPungmuPlatform1 = ${selectPungmuPlatform1 != null ? selectPungmuPlatform1: 0 };
-        var selectPungmuPlatform2 = ${selectPungmuPlatform2 != null ? selectPungmuPlatform2: 0 };
-        var selectGochonPlatform1 = ${selectGochonPlatform1 != null ? selectGochonPlatform1: 0 };
-        var selectGochonPlatform2 = ${selectGochonPlatform2 != null ? selectGochonPlatform2: 0 };
+
+
     </script>
     <%-- 전역변수 끝 --%>
 
@@ -297,7 +295,8 @@
     <script src="../../resources/js/clock.js"></script>
     <script src="../../resources/js/normalMode/normalSearch.js"></script>
     <script src="../../resources/js/normalMode/normalChart.js"></script>
-    <script src="../../resources/js/normalMode/normalGauge.js"></script>
+    <script src="../../resources/js/gaugeData.js"></script>
+    <script src="../../resources/js/gauge.js"></script>
     <script src="../../resources/js/normalMode/normalAjax.js"></script>
     <script src="../../resources/js/refresh.js"></script> 
     <script src="../../resources/js/modal.js"></script> 

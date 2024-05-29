@@ -28,10 +28,12 @@
       	<result property="gochon1_ChangeCount" column="GOCHON1_CHANGE_COUNT" />
       	<result property="gochon2_ChangeCount" column="GOCHON2_CHANGE_COUNT" />
       	<result property="pungmuChangeCount" column="PUNGMU_CHANGE_COUNT" />
-      	<result property="objectClass" column="object_class" />
       	<result property="goToGimpoST" column="GO_TO_GIMPO_ST" />
       	<result property="goToGimpoEV" column="GO_TO_GIMPO_EV" />
       	<result property="goToGimpoEC" column="GO_TO_GIMPO_EC" />
+      	
+          <result property="objectClass" column="object_class" />
+          <result property="grade" column="tracker_id" />
       	
       	<result property="getOffGimpoST" column="GET_OFF_GIMPO_ST" />
       	<result property="getOffGimpoEV" column="GET_OFF_GIMPO_EV" />
@@ -87,6 +89,14 @@
       	<result property="occuTime" column="occu_time" />
       	<result property="occuDate" column="occu_date" />
 	</resultMap>
+	
+	
+	<resultMap type="CongestionRate" id="_congestionRate">
+      	<result property="ObjectClass" column="object_class" />
+      	<result property="grade" column="tracker_id" />
+	</resultMap>
+	
+
   
   <resultMap id="_int" type="java.lang.Integer"/>
   
@@ -330,66 +340,33 @@
   
   
     <!-- 풍무역 플랫폼1 군중밀집도 -->
-	  <select id="selectPungmuPlatform1" resultMap="_int">
-	  	<![CDATA[  
-			SELECT TOP 1 object_class
-			FROM TB_CROWD_DASHBOARD_SUMMARY H
-			JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-			WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-			AND R.role_name LIKE '%풍무%'
-			AND(R.role_name LIKE '%군중%'
-			OR R.role_name LIKE '%밀집%'
-			OR R.role_name LIKE '%crowd%')
-			AND R.role_name LIKE '%1'
-			ORDER BY occu_time DESC
-		]]>
+   	 <select id="selectPungmuPlatform1" resultMap="_congestionRate">
+	   SELECT TOP 1 object_class, tracker_id 
+    FROM TB_EVENT_HIST_DL
 	  </select>
+	  
+
   
     <!-- 풍무역 플랫폼2 군중밀집도 -->
-	  <select id="selectPungmuPlatform2" resultMap="_int">
-	  <![CDATA[  
-		 SELECT TOP 1 object_class
-		  FROM TB_CROWD_DASHBOARD_SUMMARY H
-		  JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		  WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		  AND R.role_name LIKE '%풍무%'
-		AND(R.role_name LIKE '%군중%'
-		OR R.role_name LIKE '%밀집%'
-		OR R.role_name LIKE '%crowd%')
-		AND R.role_name LIKE '%2'
-		  ORDER BY occu_time DESC
-		   ]]>
+	  <select id="selectPungmuPlatform2" resultMap="_congestionRate">
+	     SELECT TOP 1 object_class, tracker_id 
+    FROM TB_EVENT_HIST_DL
 	  </select>
+
   
     <!-- 고촌역 플랫폼1 군중밀집도 -->
-	  <select id="selectGochonPlatform1" resultMap="_int">
-	  <![CDATA[ 
-		 SELECT TOP 1 object_class
-		FROM TB_CROWD_DASHBOARD_SUMMARY H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND R.role_name LIKE '%고촌%'
-		AND(R.role_name LIKE '%군중%'
-		OR R.role_name LIKE '%밀집%'
-		OR R.role_name LIKE '%crowd%')
-		AND R.role_name LIKE '%1'
-		ORDER BY occu_time DESC
-		   ]]>
+	  <select id="selectGochonPlatform1" resultMap="_congestionRate">
+	     SELECT TOP 1 object_class, tracker_id 
+    FROM TB_EVENT_HIST_DL
 	  </select>
   
     <!-- 고촌역 플랫폼2 군중밀집도 -->
-	   <select id="selectGochonPlatform2" resultMap="_int">
-	  <![CDATA[ 
-		 SELECT TOP 1 object_class
-		FROM TB_CROWD_DASHBOARD_SUMMARY H
-		JOIN TB_EVENT_ROLE_DL R ON H.role_code = R.role_code
-		WHERE OCCU_TIME < CONVERT(varchar, GETDATE(), 112) + REPLACE(CONVERT(varchar, GETDATE(), 108), ':', '')
-		AND R.role_name LIKE '%고촌%'
-		AND(R.role_name LIKE '%군중%' OR R.role_name LIKE '%밀집%' OR R.role_name LIKE '%crowd%')
-		AND R.role_name LIKE '%2'
-		ORDER BY occu_time DESC
-		  ]]>
+	   <select id="selectGochonPlatform2" resultMap="_congestionRate">
+	     SELECT TOP 1 object_class, tracker_id 
+    FROM TB_EVENT_HIST_DL
 	  </select>
+	  
+	  
 	  
   	  
 	<!-- csv파일1프로시저 -->

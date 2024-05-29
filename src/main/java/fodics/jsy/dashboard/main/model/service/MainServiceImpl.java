@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fodics.jsy.dashboard.main.model.dao.MainDAO;
 import fodics.jsy.dashboard.main.model.dto.CSV;
+import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
@@ -92,7 +93,7 @@ public class MainServiceImpl implements MainService{
 	 * 풍무역 플랫폼1 군중밀집도
 	 */
 	@Override
-	public int selectPungmuPlatform1() {
+	public List<CongestionRate> selectPungmuPlatform1() {
 		return dao.selectPungmuPlatform1();
 	}
 	
@@ -101,7 +102,7 @@ public class MainServiceImpl implements MainService{
 	 * 풍무역 플랫폼2 군중밀집도
 	 */
 	@Override
-	public int selectPungmuPlatform2() {
+	public List<CongestionRate> selectPungmuPlatform2() {
 		return dao.selectPungmuPlatform2();
 	}
 	
@@ -110,7 +111,7 @@ public class MainServiceImpl implements MainService{
 	 *  고촌역 플랫폼1 군중밀집도
 	 */
 	@Override
-	public int selectGochonPlatform1() {
+	public List<CongestionRate> selectGochonPlatform1() {
 		return dao.selectGochonPlatform1();
 	}
 	
@@ -118,8 +119,7 @@ public class MainServiceImpl implements MainService{
 	/**
 	 * 고촌역 플랫폼2 군중밀집도
 	 */
-	@Override
-	public int selectGochonPlatform2() {
+	public List<CongestionRate> selectGochonPlatform2() {
 		return dao.selectGochonPlatform2();
 	}
 	
@@ -159,6 +159,14 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	
+	/**
+	 * 	// 풍무역 플랫폼1 군중밀집도 진짜진짜
+	 */
+	@Override
+	public List<Data> gaugeData_P1_list() {
+
+		return dao.gaugeData_P1_list();
+	}
 
 	
 }

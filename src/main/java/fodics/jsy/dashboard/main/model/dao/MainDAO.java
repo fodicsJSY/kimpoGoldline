@@ -10,23 +10,24 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
 @Repository
 public class MainDAO {
 	
-	@Autowired
-	@Resource(name="sqlSessionTemplate1")
-	private SqlSessionTemplate sql;
-	
-	
-	@Autowired
-	@Resource(name="sqlSessionTemplate2")
-	private SqlSessionTemplate sql2;
-
 //	@Autowired
+//	@Resource(name="sqlSessionTemplate1")
 //	private SqlSessionTemplate sql;
+	
+	
+//	@Autowired
+//	@Resource(name="sqlSessionTemplate2")
+//	private SqlSessionTemplate sql2;
+
+	@Autowired
+	private SqlSessionTemplate sql;
 	
 	
 
@@ -35,7 +36,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> rushHourCountList() {
-		return sql2.selectList("mainMapper.rushHourCountList");
+		return sql.selectList("mainMapper.rushHourCountList");
 	}
 
 
@@ -45,7 +46,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> rushHourTotalCount() {
-		return sql2.selectList("mainMapper.rushHourTotalCount");
+		return sql.selectList("mainMapper.rushHourTotalCount");
 	}
 	
 	
@@ -56,7 +57,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> rushHourDateChangeList(String occuDate) {
-		return sql2.selectList("mainMapper.rushHourDateChangeList", occuDate);
+		return sql.selectList("mainMapper.rushHourDateChangeList", occuDate);
 	}
 	
 	
@@ -66,7 +67,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> rushHourChangeTotalCount(String occuDate) {
-		return sql2.selectList("mainMapper.rushHourChangeTotalCount", occuDate);
+		return sql.selectList("mainMapper.rushHourChangeTotalCount", occuDate);
 	}
 
 
@@ -77,7 +78,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> normal24CountList() {
-		return sql2.selectList("normalMapper.normal24CountList");
+		return sql.selectList("normalMapper.normal24CountList");
 	}
 
 	/** 24시간 김포공항역, 고촌역, 풍무역 승하차 누적 수
@@ -85,7 +86,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> total24Count() {
-		return  sql2.selectList("normalMapper.total24Count");
+		return  sql.selectList("normalMapper.total24Count");
 	}
 
 
@@ -96,7 +97,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> normalDateChangeList(String occuDate) {
-		return  sql2.selectList("normalMapper.normalDateChangeList", occuDate);
+		return  sql.selectList("normalMapper.normalDateChangeList", occuDate);
 	}
 
 	/** 24시간 김포공항역, 고촌역, 풍무역 누적 수(날짜변경 시)
@@ -105,7 +106,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<Data> normalDateChangeCount(String occuDate) {
-		return sql2.selectList("normalMapper.normalDateChangeCount", occuDate);
+		return sql.selectList("normalMapper.normalDateChangeCount", occuDate);
 	}
 
 
@@ -113,8 +114,8 @@ public class MainDAO {
 	/** 풍무역 플랫폼1 군중밀집도 
 	 * @return 
 	 */
-	public int selectPungmuPlatform1() {
-		return sql.selectOne("mainMapper.selectPungmuPlatform1");
+	public List<CongestionRate> selectPungmuPlatform1() {
+		return sql.selectList("mainMapper.selectPungmuPlatform1");
 	}
 
 
@@ -122,8 +123,8 @@ public class MainDAO {
 	/** 풍무역 플랫폼2 군중밀집도
 	 * @return
 	 */
-	public int selectPungmuPlatform2() {
-		return sql.selectOne("mainMapper.selectPungmuPlatform2");
+	public List<CongestionRate> selectPungmuPlatform2() {
+		return sql.selectList("mainMapper.selectPungmuPlatform2");
 	}
 
 
@@ -131,8 +132,8 @@ public class MainDAO {
 	/** 고촌역 플랫폼1 군중밀집도
 	 * @return
 	 */
-	public int selectGochonPlatform1() {
-		return sql.selectOne("mainMapper.selectGochonPlatform1");
+	public List<CongestionRate> selectGochonPlatform1() {
+		return sql.selectList("mainMapper.selectGochonPlatform1");
 	}
 
 
@@ -140,8 +141,8 @@ public class MainDAO {
 	/** 고촌역 플랫폼2 군중밀집도 
 	 * @return
 	 */
-	public int selectGochonPlatform2() {
-		return sql.selectOne("mainMapper.selectGochonPlatform2");
+	public List<CongestionRate> selectGochonPlatform2() {
+		return sql.selectList("mainMapper.selectGochonPlatform2");
 	}
 
 
@@ -152,7 +153,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<FileData> goToGimpoCSV(Map<String, Object> map) {
-		return sql2.selectList("mainMapper.goToGimpoCSV", map);
+		return sql.selectList("mainMapper.goToGimpoCSV", map);
 	}
 
 
@@ -163,7 +164,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<FileData> getOffGimpoCSV(Map<String, Object> map) {
-		return sql2.selectList("mainMapper.getOffGimpoCSV", map);
+		return sql.selectList("mainMapper.getOffGimpoCSV", map);
 	}
 
 
@@ -174,7 +175,7 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<FileData> goToPungmuCSV(Map<String, Object> map) {
-		return sql2.selectList("mainMapper.goToPungmuCSV", map);
+		return sql.selectList("mainMapper.goToPungmuCSV", map);
 	}
 
 
@@ -185,7 +186,13 @@ public class MainDAO {
 	 * sql2
 	 */
 	public List<FileData> goToGochonCSV(Map<String, Object> map) {
-		return sql2.selectList("mainMapper.goToGochonCSV", map);
+		return sql.selectList("mainMapper.goToGochonCSV", map);
+	}
+
+
+
+	public List<Data> gaugeData_P1_list() {
+		return sql.selectList("mainMapper.gaugeData_P1_list");
 	}
 
 
