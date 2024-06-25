@@ -369,187 +369,66 @@
 	  
 	  
   	  
-	<!-- csv파일1프로시저 -->
+
+	
+
+	
+  	<!-- 시작-->
+	<!-- 김포 승차 프로시저 -->
 	<select id="callSP_GIMPO_OUT" statementType="CALLABLE" resultMap="_fileData">
 	    {call SP_GIMPO_OUT(
-	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	        #{parameter1, mode=IN, jdbcType=VARCHAR},
+	        #{parameter2, mode=IN, jdbcType=VARCHAR},
+	        #{parameter3, mode=IN, jdbcType=VARCHAR}
 	    )}
 	</select>
 	  
-    <!-- csv파일1 -->
-	   <select id="goToGimpoCSV" resultMap="_fileData">
+	<select id="goToGimpoCSV" resultMap="_fileData">
 		   	SELECT * FROM TB_TEMP_GIMPO_OUT
 	  </select>
-
-  
-  	  
-	<!-- csv파일2프로시저 -->
+	
+	
+	<!-- 김포 하차 프로시저 -->
 	<select id="callSP_GIMPO_IN" statementType="CALLABLE" resultMap="_fileData">
 	    {call SP_GIMPO_IN(
-	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	        #{parameter1, mode=IN, jdbcType=VARCHAR},
+	        #{parameter2, mode=IN, jdbcType=VARCHAR},
+	        #{parameter3, mode=IN, jdbcType=VARCHAR}
 	    )}
 	</select>
-
-    <!-- csv파일2 -->
-	   <select id="getOffGimpoCSV" resultMap="_fileData">
+	
+	<select id="getOffGimpoCSV" resultMap="_fileData">
 	   	SELECT * FROM TB_TEMP_GIMPO_IN;
 	  </select>
-  
-  	
-  
-  	  
-     	  
-	<!-- csv파일3프로시저 -->
+	  
+	<!-- 풍무 승하차 프로시저 -->
 	<select id="callSP_PUNGMU_INOUT" statementType="CALLABLE" resultMap="_fileData">
 	    {call SP_PUNGMU_INOUT(
-	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	        #{parameter1, mode=IN, jdbcType=VARCHAR},
+	        #{parameter2, mode=IN, jdbcType=VARCHAR},
+	        #{parameter3, mode=IN, jdbcType=VARCHAR}
 	    )}
 	</select>
 	
-	
-    <!-- csv파일3 -->
-	   <select id="goToPungmuCSV" resultMap="_fileData">
+	<select id="goToPungmuCSV" resultMap="_fileData">
 	   		SELECT * FROM TB_TEMP_PUNGMU_INOUT;
 	  </select>
-	  
-	  
-	  	  
-    <!-- csv파일4프로시저 -->
-	<select id="callSP_GOCHON_INOUT" resultMap="_fileData">
+	
+	<!-- 고촌 승하차 프로시저 -->
+	<select id="callSP_GOCHON_INOUT" statementType="CALLABLE" resultMap="_fileData">
 		{call SP_GOCHON_INOUT(
-	        #{parameter, mode=IN, jdbcType=VARCHAR}
+	       	#{parameter1, mode=IN, jdbcType=VARCHAR},
+	        #{parameter2, mode=IN, jdbcType=VARCHAR},
+	        #{parameter3, mode=IN, jdbcType=VARCHAR}
 	    )}
 	</select>
-  
-    <!-- csv파일4 -->
+	
 	<select id="goToGochonCSV" resultMap="_fileData">
 	 	SELECT * FROM TB_TEMP_GOCHON_INOUT;
 	</select>
+	<!-- 끝-->
 	
 	
-	<!-- 월 시작-->
-	<!-- 김포 승차 프로시저 -->
-	<select id="callSP_GIMPO_OUT_month" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_OUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	  
-	
-	<!-- 김포 하차 프로시저 -->
-	<select id="callSP_GIMPO_IN_month" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_IN(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	
-	<!-- 풍무 승하차 프로시저 -->
-	<select id="callSP_PUNGMU_INOUT_month" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_PUNGMU_INOUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	<!-- 고촌 승하차 프로시저 -->
-	<select id="callSP_GOCHON_INOUT_month" statementType="CALLABLE" resultMap="_fileData">
-		{call SP_GOCHON_INOUT(
-	       	#{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	<!-- 월 끝-->
-	
-  	<!-- 일 시작-->
-	<!-- 김포 승차 프로시저 -->
-	<select id="callSP_GIMPO_OUT_day" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_OUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	  
-	
-	<!-- 김포 하차 프로시저 -->
-	<select id="callSP_GIMPO_IN_day" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_IN(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	
-	<!-- 풍무 승하차 프로시저 -->
-	<select id="callSP_PUNGMU_INOUT_day" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_PUNGMU_INOUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	<!-- 고촌 승하차 프로시저 -->
-	<select id="callSP_GOCHON_INOUT_day" statementType="CALLABLE" resultMap="_fileData">
-		{call SP_GOCHON_INOUT(
-	       	#{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	<!-- 일 끝-->
-	
-	
-	
-	<!-- 기간 시작-->
-	<!-- 김포 승차 프로시저 -->
-	<select id="callSP_GIMPO_OUT_custom" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_OUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	  
-	
-	<!-- 김포 하차 프로시저 -->
-	<select id="callSP_GIMPO_IN_custom" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_IN(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	
-	<!-- 풍무 승하차 프로시저 -->
-	<select id="callSP_PUNGMU_INOUT_custom" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_PUNGMU_INOUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
-	<!-- 고촌 승하차 프로시저 -->
-	<select id="callSP_GOCHON_INOUT_custom" statementType="CALLABLE" resultMap="_fileData">
-		{call SP_GOCHON_INOUT(
-	       	#{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	<!-- 기간 끝-->
-  
   
   
   

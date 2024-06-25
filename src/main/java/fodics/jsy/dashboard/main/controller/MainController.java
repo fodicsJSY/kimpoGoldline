@@ -194,64 +194,7 @@ public class MainController {
 	
 	 
 	 
-	 // 출근길 csv
-	 //@PostMapping("/loadRushHourCSV")
-	 //@ResponseBody
-	 /*
-	 public Map<String, Object> loadRushHourCSV(
-			 @RequestParam(value="occuDate") String occuDate,
-			 Model model
-			 ){
-		 	Map<String, Object> map = new HashMap<>();
-
-		 	
-		 	// csv파일1 프로시저 호출
-		 	map.put("parameter", occuDate);
-		 	
-		 	sql2.selectList("mainMapper.callSP_GIMPO_OUT", map);
-		 	
-		 
-		 	// csv파일1
-//		 	List<CSV> goToGimpoCSV = service.goToGimpoCSV(map);
-//		 	map.put("goToGimpoCSV", goToGimpoCSV);
-		 	
-		 	
-		 	
-		 	// csv파일2 프로시저 호출
-//		 	map.put("parameter", occuDate);
-		 	sql2.selectList("mainMapper.callSP_GIMPO_IN", map);
-	        
-			 // csv파일2
-//			 List<CSV> getOffGimpoCSV = service.getOffGimpoCSV(map);
-//			 map.put("getOffGimpoCSV", getOffGimpoCSV);
-			 
-		 	
-		 	// csv파일3 프로시저 호출
-//		 	map.put("parameter", occuDate);
-		 	sql2.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
-		 	
-			 
-			 // csv파일3
-//			 List<CSV> goToPungmuCSV = service.goToPungmuCSV(map);
-//			 map.put("goToPungmuCSV", goToPungmuCSV);
-			 
-			 
-			 
-			// csv파일4 프로시저 호출
-//		 	map.put("parameter", occuDate);
-		 	sql2.selectList("mainMapper.callSP_GOCHON_INOUT", map);
-			 
-			// csv파일4
-//			List<CSV> goToGochonCSV = service.goToGochonCSV(map);
-//			map.put("goToGochonCSV", goToGochonCSV);
-			 
-//		 System.out.println("map : "+ map);
-		 
 	
-		 return map;
-	 }
-*/
-
 	 
 	 
 	 
@@ -277,52 +220,43 @@ public class MainController {
 		 	
 		 	Map<String, Object> map = new HashMap<>();
 		 	
+//		 	System.out.println("from_date :" +from_date);
+//		 	System.out.println("to_date :" +to_date);
+//		 	System.out.println("comboValue:" +comboValue);
+//		 	System.out.println("bSum :" +bSum);
+		 	
 			map.put("parameter1", from_date);
 			map.put("parameter2", to_date);
 			map.put("parameter3", bSum);
 			
-//			System.out.println("map1 :" +map);
-			
-		    List<List<FileData>> goToGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> getOffGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> goToPungmuCSVList = new ArrayList<>();
-		    List<List<FileData>> goToGochonCSVList = new ArrayList<>();
-			
-		    int chunkSize = 1;
+//			System.out.println("month map :" +map);
+
 		    
 		 	// 김포승차
-		 	if("GimOut".equals(comboValue)) {
+			if("GimOut".equals(comboValue)) {
+//				System.out.println("month comboValue :" +comboValue);
 		 		
-		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+				sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
-//			 	System.out.println("goToGimpoCSV"+goToGimpoCSV);
-			 	
-			    for (int i = 0; i <= goToGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGimpoCSV.subList(i, end);
-			        goToGimpoCSVList.add(subList);
-//			        System.out.println("goToGimpoCSVList : " + goToGimpoCSVList);
-				}
+//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	map.put("goToGimpoCSV", goToGimpoCSV);	
 		 	}
+		 	
 		 	
 		 	
 		 	
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
-			 	
-			 	// csv파일2
-				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
+//		 		System.out.println("comboValue : "+comboValue);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 
-			    for (int i = 0; i <= getOffGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(getOffGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = getOffGimpoCSV.subList(i, end);
-			        getOffGimpoCSVList.add(subList);
-//			        System.out.println("getOffGimpoCSVList : " + getOffGimpoCSVList);
-				}
+			 	// csv파일2
+				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
+//				System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 		 	}
 		 	
 		 	
@@ -330,52 +264,30 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
-
-			    for (int i = 0; i <= goToPungmuCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToPungmuCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToPungmuCSV.subList(i, end);
-			        goToPungmuCSVList.add(subList);
-//			        System.out.println("goToPungmuCSVList : " + goToPungmuCSVList);
-				}
+//				System.out.println("goToPungmuCSV"+goToPungmuCSV);
+				map.put("goToPungmuCSV", goToPungmuCSV);	
 		 	}
 		 	
 		 	
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
-				
-				for (int i = 0; i <= goToGochonCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGochonCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGochonCSV.subList(i, end);
-			        goToGochonCSVList.add(subList);
-//			        System.out.println("goToGochonCSVList : " + goToGochonCSVList);
-				}
+//				System.out.println("goToGochonCSV"+goToGochonCSV);
+				map.put("goToGochonCSV", goToGochonCSV);	
 		 	}
 		 	
-				
-				
-			map.put("goToGimpoCSVList", goToGimpoCSVList);	
-			map.put("getOffGimpoCSVList", getOffGimpoCSVList);	
-			map.put("goToPungmuCSVList", goToPungmuCSVList);	
-			map.put("goToGochonCSVList", goToGochonCSVList);	
 //		 	System.out.println("map"+ map);
 		 	
 		 	return map;
 	 }
-	 
-	 
-	 
-
-	 
-	 
 	 
 	 
 	// 일 데이터
@@ -399,30 +311,17 @@ public class MainController {
 		 	map.put("parameter2", to_date);
 		 	map.put("parameter3", bSum);
 		 	
-		 	
-		    List<List<FileData>> goToGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> getOffGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> goToPungmuCSVList = new ArrayList<>();
-		    List<List<FileData>> goToGochonCSVList = new ArrayList<>();
-			
-		    int chunkSize = 7;
-		    
+//		 	System.out.println("day map"+ map);
 		    
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
-		 		
-		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+//				System.out.println("day comboValue :" +comboValue);
+		 		sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
-			 	
-			    for (int i = 0; i <= goToGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGimpoCSV.subList(i, end);
-			        goToGimpoCSVList.add(subList);
-//			        System.out.println("goToGimpoCSVList : " + goToGimpoCSVList);
-				}
-			 	
+//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	map.put("goToGimpoCSV", goToGimpoCSV);	
 		 	}
 		 	
 		 	
@@ -430,17 +329,12 @@ public class MainController {
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 			 	
 			 	// csv파일2
-				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
-
-			    for (int i = 0; i <= getOffGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(getOffGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = getOffGimpoCSV.subList(i, end);
-			        getOffGimpoCSVList.add(subList);
-//			        System.out.println("getOffGimpoCSVList : " + getOffGimpoCSVList);
-				}
+				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
+//				System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
+				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 		 	}
 		 	
 		 	
@@ -448,42 +342,27 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
-
-			    for (int i = 0; i <= goToPungmuCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToPungmuCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToPungmuCSV.subList(i, end);
-			        goToPungmuCSVList.add(subList);
-//			        System.out.println("goToPungmuCSVList : " + goToPungmuCSVList);
-				}
+//				System.out.println("goToPungmuCSV : " + goToPungmuCSV);
+			 	map.put("goToPungmuCSV", goToPungmuCSV);	
 		 	}
 		 	
 		 	
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
-				
-				for (int i = 0; i <= goToGochonCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGochonCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGochonCSV.subList(i, end);
-			        goToGochonCSVList.add(subList);
-//			        System.out.println("goToGochonCSVList : " + goToGochonCSVList);
-				}
+//				System.out.println("goToGochonCSV : " + goToGochonCSV);
+			 	map.put("goToGochonCSV", goToGochonCSV);	
 		 	}
 		 	
 				
-				
-			map.put("goToGimpoCSVList", goToGimpoCSVList);	
-			map.put("getOffGimpoCSVList", getOffGimpoCSVList);	
-			map.put("goToPungmuCSVList", goToPungmuCSVList);	
-			map.put("goToGochonCSVList", goToGochonCSVList);	
 //			 System.out.println("map : "+ map);
 		 	
 		 	return map;
@@ -506,37 +385,26 @@ public class MainController {
 		 	
 //		 	System.out.println("comboValue"+ comboValue);
 //		 	System.out.println("from_date"+ from_date);
+//		 	System.out.println("to_date"+ to_date);
 //		 	System.out.println("bSum"+ bSum);
 		 	
 		 	map.put("parameter1", from_date);
 		 	map.put("parameter2", to_date);
 		 	map.put("parameter3", bSum);
 		 	
-		 	
-		    List<List<FileData>> goToGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> getOffGimpoCSVList = new ArrayList<>();
-		    List<List<FileData>> goToPungmuCSVList = new ArrayList<>();
-		    List<List<FileData>> goToGochonCSVList = new ArrayList<>();
-			
-		    int chunkSize = 1;
+		 
 		    
 		    
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
 		 		
-		 		sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
 			 	
-			    for (int i = 0; i <= goToGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGimpoCSV.subList(i, end);
-			        goToGimpoCSVList.add(subList);
-//			        System.out.println("goToGimpoCSVList : " + goToGimpoCSVList);
-			        
-			        
-				}
+//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+				map.put("goToGimpoCSV", goToGimpoCSV);	
 			 	
 		 	}
 		 	
@@ -545,19 +413,14 @@ public class MainController {
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
 		 		// 김포하차 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+		 		sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 			 	
 			 	// csv파일2
-				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
+				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
 
-			    for (int i = 0; i <= getOffGimpoCSV.size(); i += chunkSize) {
-			        int end = Math.min(getOffGimpoCSV.size(), i + chunkSize);
-			        List<FileData> subList = getOffGimpoCSV.subList(i, end);
-			        getOffGimpoCSVList.add(subList);
-//			        System.out.println("getOffGimpoCSVList : " + getOffGimpoCSVList);
+//		        System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
+				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 			        
-			        
-				}
 		 	}
 		 	
 		 	
@@ -565,46 +428,29 @@ public class MainController {
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
 		 		// 풍무 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
 
-			    for (int i = 0; i <= goToPungmuCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToPungmuCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToPungmuCSV.subList(i, end);
-			        goToPungmuCSVList.add(subList);
-//			        System.out.println("goToPungmuCSVList : " + goToPungmuCSVList);
-			        
-				}
+//				System.out.println("goToPungmuCSV : " + goToPungmuCSV);
+				map.put("goToPungmuCSV", goToPungmuCSV);	
 		 	}
 		 	
 		 	
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
 		 		// 고촌 프로시저 호출
-		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+		 		sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
 				
-				for (int i = 0; i <= goToGochonCSV.size(); i += chunkSize) {
-			        int end = Math.min(goToGochonCSV.size(), i + chunkSize);
-			        List<FileData> subList = goToGochonCSV.subList(i, end);
-			        goToGochonCSVList.add(subList);
-//			        System.out.println("goToGochonCSVList : " + goToGochonCSVList);
+//		        System.out.println("goToGochonCSV : " + goToGochonCSV);
+				map.put("goToGochonCSV", goToGochonCSV);	
 			        
-				}
 		 	}
 		 	
-				
-				
-			map.put("goToGimpoCSVList", goToGimpoCSVList);	
-			map.put("getOffGimpoCSVList", getOffGimpoCSVList);	
-			map.put("goToPungmuCSVList", goToPungmuCSVList);	
-			map.put("goToGochonCSVList", goToGochonCSVList);	
-//			 System.out.println("map : "+ map);
-			
 		 	return map;
 	 }
 	 
@@ -675,40 +521,44 @@ public class MainController {
 		 	
 		 	//김포승차
 		 		// 김포승차 프로시저 호출
-		 	sql.selectList("mainMapper.callSP_GIMPO_OUT_month", map);
+		 	sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 		 	
 			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
 			 	map.put("goToGimpoCSV", goToGimpoCSV);
+//			 	System.out.println("goToGimpoCSV"+ goToGimpoCSV);
 		 	
 		 	
 		 	
 		 	//김포하차
 		 		// 김포하차 프로시저 호출
-			 	sql.selectList("mainMapper.callSP_GIMPO_IN_month", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 			 	
 			 	// csv파일2
 				 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
 				 map.put("getOffGimpoCSV", getOffGimpoCSV);
+//				 System.out.println("getOffGimpoCSV"+ getOffGimpoCSV);
 		 	
 		 	
 		 	
 		 	//풍무 승하차
 		 		// 풍무 프로시저 호출
-				 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_month", map);
+				 sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 			 	
 			 	// csv파일3
 				List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
 				map.put("goToPungmuCSV", goToPungmuCSV);
+//				System.out.println("goToPungmuCSV"+ goToPungmuCSV);
 		 	
 		 	
 		 	//고촌 승하차
 		 		// 고촌 프로시저 호출
-				sql.selectList("mainMapper.callSP_GOCHON_INOUT_month", map);
+				sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 			 	
 				// csv파일4
 				List<FileData> goToGochonCSV = service.goToGochonCSV(map);
 				map.put("goToGochonCSV", goToGochonCSV);
+//				System.out.println("goToGochonCSV"+ goToGochonCSV);
 		 	
 		 	
 		 	return map;
@@ -749,7 +599,7 @@ public class MainController {
 			 	
 			 	//김포승차
 			 		// 김포승차 프로시저 호출
-			 	sql.selectList("mainMapper.callSP_GIMPO_OUT_day", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 			 	
 				 	// csv파일1
 				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -759,7 +609,7 @@ public class MainController {
 			 	
 			 	//김포하차
 			 		// 김포하차 프로시저 호출
-				 	sql.selectList("mainMapper.callSP_GIMPO_IN_day", map);
+				 	sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 				 	
 				 	// csv파일2
 					 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -769,7 +619,7 @@ public class MainController {
 			 	
 			 	//풍무 승하차
 			 		// 풍무 프로시저 호출
-					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_day", map);
+					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 				 	
 				 	// csv파일3
 					List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -778,7 +628,7 @@ public class MainController {
 			 	
 			 	//고촌 승하차
 			 		// 고촌 프로시저 호출
-					sql.selectList("mainMapper.callSP_GOCHON_INOUT_day", map);
+					sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 				 	
 					// csv파일4
 					List<FileData> goToGochonCSV = service.goToGochonCSV(map);
@@ -823,7 +673,7 @@ public class MainController {
 			 	
 			 	//김포승차
 			 		// 김포승차 프로시저 호출
-			 	sql.selectList("mainMapper.callSP_GIMPO_OUT_custom", map);
+			 	sql.selectList("mainMapper.callSP_GIMPO_OUT", map);
 			 	
 				 	// csv파일1
 				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
@@ -833,7 +683,7 @@ public class MainController {
 			 	
 			 	//김포하차
 			 		// 김포하차 프로시저 호출
-				 	sql.selectList("mainMapper.callSP_GIMPO_IN_custom", map);
+				 	sql.selectList("mainMapper.callSP_GIMPO_IN", map);
 				 	
 				 	// csv파일2
 					 List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
@@ -843,7 +693,7 @@ public class MainController {
 			 	
 			 	//풍무 승하차
 			 		// 풍무 프로시저 호출
-					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT_custom", map);
+					 sql.selectList("mainMapper.callSP_PUNGMU_INOUT", map);
 				 	
 				 	// csv파일3
 					List<FileData> goToPungmuCSV = service.goToPungmuCSV(map);
@@ -852,7 +702,7 @@ public class MainController {
 			 	
 			 	//고촌 승하차
 			 		// 고촌 프로시저 호출
-					sql.selectList("mainMapper.callSP_GOCHON_INOUT_custom", map);
+					sql.selectList("mainMapper.callSP_GOCHON_INOUT", map);
 				 	
 					// csv파일4
 					List<FileData> goToGochonCSV = service.goToGochonCSV(map);
