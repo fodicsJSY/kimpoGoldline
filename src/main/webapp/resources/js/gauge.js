@@ -1,13 +1,26 @@
     function gauge_g1(result){
-        console.log("gauge_g1 result", result );
+        // console.log("gauge_g1 result", result );
         
         var gaugeData_g1 = result.selectGochonPlatform1;
-        console.log("gauge_g1 gaugeData_g1", gaugeData_g1 );
+        // console.log("gauge_g1 gaugeData_g1", gaugeData_g1 );
         
-        var g1_objectClass = gaugeData_g1[0].objectClass;
-        console.log("gauge_g1 g1_objectClass", g1_objectClass );
-        var g1_grade = gaugeData_g1[0].grade;
-        console.log("gauge_g1 g1_grade", g1_grade );
+        var g1_bbox_y = gaugeData_g1[0].bbox_y;
+        // console.log("gauge_g1 g1_bbox_y", g1_bbox_y );
+        var g1_bbox_w = gaugeData_g1[0].bbox_w;
+        // console.log("gauge_g1 g1_bbox_w", g1_bbox_w );
+
+        let grade;
+        if(g1_bbox_y == 0){
+            grade = '보통'
+        }else if(g1_bbox_y == 1){
+            grade = '주의'
+        }else if(g1_bbox_y == 2){
+            grade = '혼잡'
+        }else if(g1_bbox_y == 3){
+            grade = '심각'
+        }else{
+            grade = ''
+        }
 
 
         var gochonPlatform1 = echarts.init(document.getElementById("gochonPlatform1"));
@@ -70,8 +83,8 @@
         },
             title: {
                 offsetCenter: [0, '-40%'],
-            fontSize: 25,
-            color: 'inherit'
+                fontSize: 25,
+                color: 'inherit'
             },
             detail: {
                 fontSize: 30,
@@ -84,8 +97,8 @@
             },
             data: [
                 {
-                    name: g1_grade, // 등급
-                    value: g1_objectClass, // %값
+                    name: grade, // 등급
+                    value: g1_bbox_w, // %값
                 }
             ]
         }
@@ -101,15 +114,30 @@ gochonPlatform1.setOption(option)
 /***************************************************************/
     
     function gauge_g2(result){
-        console.log("gauge_g1 result", result );
+        // console.log("gauge_g1 result", result );
         
         var gaugeData_g2 = result.selectGochonPlatform2;
-        console.log("gauge_g2 gaugeData_g2", gaugeData_g2 );
+        // console.log("gauge_g2 gaugeData_g2", gaugeData_g2 );
         
-        var g2_objectClass = gaugeData_g2[0].objectClass;
-        console.log("gauge_g2 g2_objectClass", g2_objectClass );
-        var g2_grade = gaugeData_g2[0].grade;
-        console.log("gauge_g2 g2_grade", g2_grade );
+        var g2_bbox_y = gaugeData_g2[0].bbox_y;
+        // console.log("gauge_g2 g2_bbox_y", g2_bbox_y );
+        var g2_bbox_w = gaugeData_g2[0].bbox_w;
+        // console.log("gauge_g2 g2_bbox_w", g2_bbox_w );
+
+        
+        let grade;
+        if(g2_bbox_y == 0){
+            grade = '보통'
+        }else if(g2_bbox_y == 1){
+            grade = '주의'
+        }else if(g2_bbox_y == 2){
+            grade = '혼잡'
+        }else if(g2_bbox_y == 3){
+            grade = '심각'
+        }else{
+            grade = ''
+        }
+
 
 
     var gochonPlatform2 = echarts.init(document.getElementById("gochonPlatform2"));
@@ -186,8 +214,8 @@ gochonPlatform1.setOption(option)
             },
             data: [
             {
-                name: g2_grade, // 등급
-                value: g2_objectClass, // %값
+                name: grade, // 등급
+                value: g2_bbox_w, // %값
             }
             ]
         }
@@ -201,15 +229,29 @@ gochonPlatform1.setOption(option)
     }
     /***************************************************************/        
     function gauge_p1(result){
-        console.log("gauge_p1 result", result );
+        // console.log("gauge_p1 result", result );
         
         var gaugeData_p1 = result.selectPungmuPlatform1;
-        console.log("gauge_p1 gaugeData_p1", gaugeData_p1 );
+        // console.log("gauge_p1 gaugeData_p1", gaugeData_p1 );
         
-        var p1_objectClass = gaugeData_p1[0].objectClass;
-        console.log("gauge_p1 p1_objectClass", p1_objectClass );
-        var p1_grade = gaugeData_p1[0].grade;
-        console.log("gauge_p1 p1_grade", p1_grade );
+        var p1_bbox_y = gaugeData_p1[0].bbox_y;
+        // console.log("gauge_p1 p1_bbox_y", p1_bbox_y );
+        var p1_bbox_w = gaugeData_p1[0].bbox_w;
+        // console.log("gauge_p1 p1_bbox_w", p1_bbox_w );
+
+
+        let grade;
+        if(p1_bbox_y == 0){
+            grade = '보통'
+        }else if(p1_bbox_y == 1){
+            grade = '주의'
+        }else if(p1_bbox_y == 2){
+            grade = '혼잡'
+        }else if(p1_bbox_y == 3){
+            grade = '심각'
+        }else{
+            grade = ''
+        }
     
     var pungmuPlatform1 = echarts.init(document.getElementById("pungmuPlatform1"));
 
@@ -285,8 +327,8 @@ gochonPlatform1.setOption(option)
             },
             data: [
             {
-                name: p1_grade, // 등급
-                value: p1_objectClass, // %값
+                name: grade, // 등급
+                value: p1_bbox_w, // %값
             }
             ]
         }
@@ -300,15 +342,30 @@ gochonPlatform1.setOption(option)
     /***************************************************************/
 
     function gauge_p2(result){
-        console.log("gauge_p2 result", result );
+        // console.log("gauge_p2 result", result );
         
         var gaugeData_p2 = result.selectPungmuPlatform2;
-        console.log("gauge_p2 gaugeData_p2", gaugeData_p2 );
+        // console.log("gauge_p2 gaugeData_p2", gaugeData_p2 );
         
-        var p2_objectClass = gaugeData_p2[0].objectClass;
-        console.log("gauge_p2 p2_objectClass", p2_objectClass );
-        var p2_grade = gaugeData_p2[0].grade;
-        console.log("gauge_p2 p2_grade", p2_grade );
+        var p2_bbox_y = gaugeData_p2[0].bbox_y;
+        // console.log("gauge_p2 p2_bbox_y", p2_bbox_y );
+        var p2_bbox_w = gaugeData_p2[0].bbox_w;
+        // console.log("gauge_p2 p2_bbox_w", p2_bbox_w );
+
+        
+        let grade;
+        if(p2_bbox_y == 0){
+            grade = '보통'
+        }else if(p2_bbox_y == 1){
+            grade = '주의'
+        }else if(p2_bbox_y == 2){
+            grade = '혼잡'
+        }else if(p2_bbox_y == 3){
+            grade = '심각'
+        }else{
+            grade = ''
+        }
+    
     
         var pungmuPlatform2 = echarts.init(document.getElementById("pungmuPlatform2"));
 
@@ -384,8 +441,8 @@ gochonPlatform1.setOption(option)
             },
             data: [
             {
-                name: p2_grade, // 등급
-                value: p2_objectClass, // %값
+                name: grade, // 등급
+                value: p2_bbox_w, // %값
             }
             ]
         }

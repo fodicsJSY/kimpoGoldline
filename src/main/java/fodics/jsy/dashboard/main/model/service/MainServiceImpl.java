@@ -119,6 +119,7 @@ public class MainServiceImpl implements MainService{
 	/**
 	 * 고촌역 플랫폼2 군중밀집도
 	 */
+	@Override
 	public List<CongestionRate> selectGochonPlatform2() {
 		return dao.selectGochonPlatform2();
 	}

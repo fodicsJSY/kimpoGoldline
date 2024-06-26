@@ -10,8 +10,8 @@ var progressDiv = document.getElementById('progressDiv');
 
 document.getElementById("modalDataBtn").addEventListener("click", ()=>{
   // console.log("클릭");
+  progressDiv.style.display = 'block';
   // fristTible();
-  initialization();
 
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
@@ -34,15 +34,7 @@ document.getElementById("modalDataBtn").addEventListener("click", ()=>{
 
 });
 
-  function ajaxStart(){
-    var dataContainer = document.querySelector(".dataContainer");
-    dataContainer.innerHTML = ""; // Clear previous data
-    progressDiv.style.display = 'block';
-    document.querySelector(".progressNow").style.width = 0 + "%";
-    document.querySelector(".progressPer").textContent = 0 + " %";
-    var dataContainer = document.querySelector(".dataContainer");
-    dataContainer.innerHTML = ""; // Clear previous data
-  }
+
 
 
 function selectRadio(comboValue){
@@ -74,8 +66,6 @@ function selectRadio(comboValue){
       bSum = 1;
     }
     // console.log("bSum", bSum);
-
-    ajaxStart();
 
     let per
 
@@ -159,10 +149,8 @@ function selectRadio(comboValue){
       bSum = 1;
     }
 
-      ajaxStart();
-
     // console.log("bSum", bSum);
-  
+
     $.ajax({
       url: "/dayUrl", 
       type: "POST",
@@ -273,7 +261,7 @@ function selectRadio(comboValue){
       // console.log("bSum1", bSum);
     }
 
-    ajaxStart();
+
 
 
 
@@ -361,18 +349,20 @@ function selectRadio(comboValue){
           let listNum = 0;
           let daysum = 0;
       
-          ajaxStart();
-
+      
           var processedItems = 0;
           // console.log("processedItems", processedItems);
-
+      
+          document.querySelector(".progressNow").style.width = 0 + "%";
+          document.querySelector(".progressPer").textContent = 0 + " %";
           
       
       
-
+          var dataContainer = document.querySelector(".dataContainer");
+          dataContainer.innerHTML = ""; // Clear previous data
       
           
-
+      
       
           for(let i=0 ; i<=days; i++){
       

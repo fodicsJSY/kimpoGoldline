@@ -11,7 +11,13 @@ import lombok.ToString;
 @ToString
 public class CongestionRate {
 	
-	private int ObjectClass; // 밀집률
-	private String grade; // 등급
+	private int bbox_x; // 사람수
+	private int bbox_y; // 단계
+	private int bbox_w; // 혼잡도
+	private String occuTime;
+	private String roleCode;
+	private String roleName;
+	
+
 
 }

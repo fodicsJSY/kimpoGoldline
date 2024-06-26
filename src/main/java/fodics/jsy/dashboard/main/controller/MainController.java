@@ -229,7 +229,7 @@ public class MainController {
 			map.put("parameter2", to_date);
 			map.put("parameter3", bSum);
 			
-//			System.out.println("month map :" +map);
+			System.out.println("month map :" +map);
 
 		    
 		 	// 김포승차
@@ -240,7 +240,7 @@ public class MainController {
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
-//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
 			 	map.put("goToGimpoCSV", goToGimpoCSV);	
 		 	}
 		 	
@@ -255,7 +255,7 @@ public class MainController {
 
 			 	// csv파일2
 				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
-//				System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+				System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
 				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 		 	}
 		 	
@@ -311,7 +311,7 @@ public class MainController {
 		 	map.put("parameter2", to_date);
 		 	map.put("parameter3", bSum);
 		 	
-//		 	System.out.println("day map"+ map);
+		 	System.out.println("day map"+ map);
 		    
 		 	// 김포승차
 		 	if("GimOut".equals(comboValue)) {
@@ -320,7 +320,7 @@ public class MainController {
 			 	
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
-//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
 			 	map.put("goToGimpoCSV", goToGimpoCSV);	
 		 	}
 		 	
@@ -333,7 +333,7 @@ public class MainController {
 			 	
 			 	// csv파일2
 				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
-//				System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
+				System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
 				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 		 	}
 		 	
@@ -383,10 +383,10 @@ public class MainController {
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
 		 	
-//		 	System.out.println("comboValue"+ comboValue);
-//		 	System.out.println("from_date"+ from_date);
-//		 	System.out.println("to_date"+ to_date);
-//		 	System.out.println("bSum"+ bSum);
+		 	System.out.println("comboValue"+ comboValue);
+		 	System.out.println("from_date"+ from_date);
+		 	System.out.println("to_date"+ to_date);
+		 	System.out.println("bSum"+ bSum);
 		 	
 		 	map.put("parameter1", from_date);
 		 	map.put("parameter2", to_date);
@@ -403,7 +403,7 @@ public class MainController {
 //			 	// csv파일1
 			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(map);
 			 	
-//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
 				map.put("goToGimpoCSV", goToGimpoCSV);	
 			 	
 		 	}
@@ -418,7 +418,7 @@ public class MainController {
 			 	// csv파일2
 				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(map);
 
-//		        System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
+		        System.out.println("getOffGimpoCSV : " + getOffGimpoCSV);
 				map.put("getOffGimpoCSV", getOffGimpoCSV);	
 			        
 		 	}

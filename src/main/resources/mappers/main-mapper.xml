@@ -32,8 +32,6 @@
       	<result property="goToGimpoEV" column="GO_TO_GIMPO_EV" />
       	<result property="goToGimpoEC" column="GO_TO_GIMPO_EC" />
       	
-          <result property="objectClass" column="object_class" />
-          <result property="grade" column="tracker_id" />
       	
       	<result property="getOffGimpoST" column="GET_OFF_GIMPO_ST" />
       	<result property="getOffGimpoEV" column="GET_OFF_GIMPO_EV" />
@@ -92,13 +90,63 @@
 	
 	
 	<resultMap type="CongestionRate" id="_congestionRate">
-      	<result property="ObjectClass" column="object_class" />
-      	<result property="grade" column="tracker_id" />
+      	<result property="bbox_x" column="bbox_x" />
+      	<result property="bbox_y" column="bbox_y" />
+      	<result property="bbox_w" column="bbox_w" />
+      	<result property="occuTime" column="occu_time" />
+      	<result property="roleCode" column="role_code" />
+      	<result property="roleName" column="role_name" />
+
+
 	</resultMap>
 	
 
   
   <resultMap id="_int" type="java.lang.Integer"/>
+  
+  
+      <!-- 풍무역 플랫폼1 군중밀집도 -->
+   	 <select id="selectPungmuPlatform1" resultMap="_congestionRate">
+		SELECT TOP 1 '풍무-군중1' AS role_name, HIST.occu_time, ROLE.role_name, HIST.bbox_x, HIST.bbox_y, HIST.bbox_w
+		FROM TB_EVENT_HIST_DL HIST
+		LEFT OUTER JOIN TB_EVENT_ROLE_DL ROLE ON ROLE.role_code = HIST.role_code
+		WHERE SUBSTRING(HIST.occu_time, 1, 8) = CONVERT(varchar,  GETDATE(), 112)
+		AND ROLE.role_name = '풍무-군중1'
+		ORDER BY occu_time DESC
+	 </select>
+	  
+	  
+	  
+    <!-- 풍무역 플랫폼2 군중밀집도 -->
+	  <select id="selectPungmuPlatform2" resultMap="_congestionRate">
+		SELECT TOP 1 '풍무-군중2' AS role_name, HIST.occu_time, ROLE.role_name, HIST.bbox_x, HIST.bbox_y, HIST.bbox_w
+		FROM TB_EVENT_HIST_DL HIST
+		LEFT OUTER JOIN TB_EVENT_ROLE_DL ROLE ON ROLE.role_code = HIST.role_code
+		WHERE SUBSTRING(HIST.occu_time, 1, 8) = CONVERT(varchar,  GETDATE(), 112)
+		AND ROLE.role_name = '풍무-군중2'
+		ORDER BY occu_time DESC
+	  </select>
+
+  
+    <!-- 고촌역 플랫폼1 군중밀집도 -->
+	  <select id="selectGochonPlatform1" resultMap="_congestionRate">
+		SELECT TOP 1 '고촌-군중1' AS role_name, HIST.occu_time, ROLE.role_name, HIST.bbox_x, HIST.bbox_y, HIST.bbox_w
+		FROM TB_EVENT_HIST_DL HIST
+		LEFT OUTER JOIN TB_EVENT_ROLE_DL ROLE ON ROLE.role_code = HIST.role_code
+		WHERE SUBSTRING(HIST.occu_time, 1, 8) = CONVERT(varchar,  GETDATE(), 112)
+		AND ROLE.role_name = '고촌-군중1'
+		ORDER BY occu_time DESC
+	  </select>
+  
+    <!-- 고촌역 플랫폼2 군중밀집도 -->
+	  <select id="selectGochonPlatform2" resultMap="_congestionRate">
+		SELECT TOP 1 '고촌-군중2' AS role_name, HIST.occu_time, ROLE.role_name, HIST.bbox_x, HIST.bbox_y, HIST.bbox_w
+		FROM TB_EVENT_HIST_DL HIST
+		LEFT OUTER JOIN TB_EVENT_ROLE_DL ROLE ON ROLE.role_code = HIST.role_code
+		WHERE SUBSTRING(HIST.occu_time, 1, 8) = CONVERT(varchar,  GETDATE(), 112)
+		AND ROLE.role_name = '고촌-군중2'
+		ORDER BY occu_time DESC
+	 	</select>
   
   
 	<!-- 김포공항 & 풍무역 & 고산역 출근대 승하차 수 -->
@@ -337,38 +385,6 @@
 		) LAST
 	  </select>
   
-  
-  
-    <!-- 풍무역 플랫폼1 군중밀집도 -->
-   	 <select id="selectPungmuPlatform1" resultMap="_congestionRate">
-	   SELECT TOP 1 object_class, tracker_id 
-    FROM TB_EVENT_HIST_DL
-	  </select>
-	  
-
-  
-    <!-- 풍무역 플랫폼2 군중밀집도 -->
-	  <select id="selectPungmuPlatform2" resultMap="_congestionRate">
-	     SELECT TOP 1 object_class, tracker_id 
-    FROM TB_EVENT_HIST_DL
-	  </select>
-
-  
-    <!-- 고촌역 플랫폼1 군중밀집도 -->
-	  <select id="selectGochonPlatform1" resultMap="_congestionRate">
-	     SELECT TOP 1 object_class, tracker_id 
-    FROM TB_EVENT_HIST_DL
-	  </select>
-  
-    <!-- 고촌역 플랫폼2 군중밀집도 -->
-	   <select id="selectGochonPlatform2" resultMap="_congestionRate">
-	     SELECT TOP 1 object_class, tracker_id 
-    FROM TB_EVENT_HIST_DL
-	  </select>
-	  
-	  
-	  
-  	  
 
 	
 

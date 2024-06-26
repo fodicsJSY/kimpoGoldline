@@ -101,8 +101,6 @@ public class Data {
 	private int pungmu24ChangeCount;
 	
 	// 군중밀집도
-	private int objectClass;
-	private String grade;
 	
 	// csv파일 생성
 	private int goToGimpoST;

@@ -4,7 +4,9 @@
 .progressTotal{background: #b4b4b4; border-radius: 20px;}
 .progressNow{width: calc(0% - 20px); background: #000; border-radius: 20px;}
 
-
+.progressDiv {
+    display: none;
+}
 
 .progressPer{background: transparent; text-align:center; color:#ffff; padding: 0 0 0 7px;}
 .point-none {pointer-events: none;}

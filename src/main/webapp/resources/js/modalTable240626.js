@@ -3,40 +3,34 @@ let no =0;
 
 //테이블 초기화
 function fristTible() {
-
-    initialization();
- 
-}
-
-
-function initialization(){
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
-    progressDiv.style.display = 'none';
-    let div01 = document.createElement("div");
-    dataContainer.appendChild(div01);
-    let div02 = document.createElement("div");
-    dataContainer.appendChild(div02);
 
-    var dataTable1 = createGimpoTableNotDaySum();
-    dataTable1.className = "dataTable";
-    div01.appendChild(dataTable1);
 
-    var dataTable2 = document.createElement("table");
-    dataTable2.className = "dataTable";
-    div02.appendChild(dataTable2);
+    var daySearch = document.getElementById("daySearch");
+    // console.log("daySearch", daySearch.value);
+    var occuDay = formatToYYYYMMDD(daySearch.value);
+    var from_date = occuDay;
+    var to_date = occuDay;
 
-    var dataTbody = document.createElement("tbody");
-    dataTbody.className = "dataTbody";
-    dataTable2.appendChild(dataTbody);
+      // console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+    var comboValue = 'GimOut';
+    var bSum = 0;
 
-    var tr = document.createElement("tr");
-    dataTbody.appendChild(tr);
+    // console.log("bSum", bSum);
 
-    var td = document.createElement("td");
-    td.className = "noData";
-    tr.appendChild(td);
-  }
+    $.ajax({
+        url: "/dayUrl", 
+        type: "POST",
+        data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+        timeout: 3000000, // milliseconds (3000 seconds)
+        success: function(response){
+            // console.log("response", response);
+            /* 김포공항 하선/하차인원 */
+            goGimpoTableNotDaySum(response.goToGimpoCSV);
+        }
+    });
+}
 
 
 
@@ -203,7 +197,7 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
     // var totalItems = goToGimpoCSVList.reduce((sum, item) => sum + item.length, 0);
     // console.log("totalItems", totalItems);
     var processedItems = 0;
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
     
@@ -234,41 +228,16 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
 }
 
 
-
-// function updateProgressBar(processed, total) {
-//     var percent = Math.round((processed / total) * 100);
-//     console.log("percent", percent);
-//     document.querySelector(".progressNow").style.width = percent + "%";
-//     document.querySelector(".progressPer").textContent = percent + " %";
-
-
-
-//     if(percent == 100){
-//         progressDiv.style.display = 'none';
-//     }
-// }
-
-
-
 function updateProgressBar(processed, total) {
-    var progressNow = document.querySelector("#progressDiv .progressNow");
-    var progressPer = document.querySelector("#progressDiv .progressPer");
-    
     var percent = Math.round((processed / total ) * 100);
-    setTimeout(function() {
-    progressNow.style.width = percent + "%";
-    progressPer.innerHTML = percent + " %";
-        }, 500); // 작업 완료 시간 조정 (밀리초)
-    console.log("percent:", percent);
+    // console.log("percent", percent);
+    document.querySelector(".progressNow").style.width = percent + "%";
+    document.querySelector(".progressPer").textContent = percent + " %";
 
-    // 작업이 완료되면 프로그래스 바를 숨김
-    if(percent >= 100){
-        setTimeout(function() {
-            document.getElementById("progressDiv").style.display = 'none';
-        }, 500); // 작업 완료 시간 조정 (밀리초)
+    if(percent == 100){
+        progressDiv.style.display = 'none';
     }
 }
-
 
 
 // tbody + 일합계
@@ -296,7 +265,7 @@ function goGimpoTableDaySum(goToGimpoCSVList) {
     // var totalItems = goToGimpoCSVList.reduce((sum, item) => sum + item.length, 0);
     // console.log("totalItems", totalItems);
     var processedItems = 0;
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
     
@@ -349,7 +318,7 @@ function getGimpoTableNotDaySum(getOffGimpoCSVList) {
     // var totalItems = getOffGimpoCSVList.reduce((sum, item) => sum + item.length, 0);
     // console.log("totalItems", totalItems);
     var processedItems = 0;
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -402,7 +371,7 @@ function getGimpoTableDaySum(getOffGimpoCSVList) {
     // var totalItems = getOffGimpoCSVList.reduce((sum, item) => sum + item.length, 0);
     // console.log("totalItems", totalItems);
     var processedItems = 0;
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -458,7 +427,7 @@ function pungmoTableNotDaySum(goToPungmuCSVList) {
     // console.log("totalItems", totalItems);
     var processedItems = 0;
 
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -511,7 +480,7 @@ function pungmoTableDaySum(goToPungmuCSVList) {
     // var totalItems = goToPungmuCSVList.reduce((sum, item) => sum + item.length, 0);
     // console.log("totalItems", totalItems);
     var processedItems = 0;
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -564,7 +533,7 @@ function gochonTableNotDaySum(goToGochonCSVList) {
     // console.log("totalItems", totalItems);
     var processedItems = 0;
 
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -615,7 +584,7 @@ function gochonTableDaySum(goToGochonCSVList) {
     // console.log("totalItems", totalItems);
     var processedItems = 0;
 
-    progressDiv.style.display = 'block';
+
     document.querySelector(".progressNow").style.width = 0 + "%";
     document.querySelector(".progressPer").textContent = 0 + " %";
 
@@ -707,6 +676,20 @@ function goGimpoNotDaySum(goToGimpoCSVList) {
 
 
     });
+}
+
+
+function updateProgressBar(processed, total) {
+    var percent = Math.round((processed / total) * 100);
+    // console.log("percent", percent);
+    document.querySelector(".progressNow").style.width = percent + "%";
+    document.querySelector(".progressPer").textContent = percent + " %";
+
+
+
+    if(percent == 100){
+        progressDiv.style.display = 'none';
+    }
 }
 
 
