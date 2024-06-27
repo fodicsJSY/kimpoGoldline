@@ -5,7 +5,7 @@ let no =0;
 function fristTible() {
 
     initialization();
- 
+
 }
 
 
@@ -36,7 +36,7 @@ function initialization(){
     var td = document.createElement("td");
     td.className = "noData";
     tr.appendChild(td);
-  }
+}
 
 
 
@@ -200,8 +200,6 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
         dataTable2.appendChild(dataTbody);
 
     no =0;
-    // var totalItems = goToGimpoCSVList.reduce((sum, item) => sum + item.length, 0);
-    // console.log("totalItems", totalItems);
     var processedItems = 0;
     progressDiv.style.display = 'block';
     document.querySelector(".progressNow").style.width = 0 + "%";
@@ -228,7 +226,7 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
         createCell(tr, "td", "td_data5", item.gimpo_ec_out);
         createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
 
-        updateProgressBar(processedItems, goToGimpoCSVList.length);
+        updateProgressBar01(processedItems, goToGimpoCSVList.length);
 
     });
 }
@@ -247,27 +245,6 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
 //         progressDiv.style.display = 'none';
 //     }
 // }
-
-
-
-function updateProgressBar(processed, total) {
-    var progressNow = document.querySelector("#progressDiv .progressNow");
-    var progressPer = document.querySelector("#progressDiv .progressPer");
-    
-    var percent = Math.round((processed / total ) * 100);
-    setTimeout(function() {
-    progressNow.style.width = percent + "%";
-    progressPer.innerHTML = percent + " %";
-        }, 500); // 작업 완료 시간 조정 (밀리초)
-    console.log("percent:", percent);
-
-    // 작업이 완료되면 프로그래스 바를 숨김
-    if(percent >= 100){
-        setTimeout(function() {
-            document.getElementById("progressDiv").style.display = 'none';
-        }, 500); // 작업 완료 시간 조정 (밀리초)
-    }
-}
 
 
 
@@ -304,7 +281,7 @@ function goGimpoTableDaySum(goToGimpoCSVList) {
         // console.log("item", item);
         no++;
         processedItems++;
-        
+        // console.log("processedItems", processedItems);
 
         var tr = document.createElement("tr");
         dataTbody.appendChild(tr);
@@ -316,7 +293,7 @@ function goGimpoTableDaySum(goToGimpoCSVList) {
         createCell(tr, "td", "td_data5", item.gimpo_ec_out);
         createCell(tr, "td", "td_data6", item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out);
 
-        updateProgressBar(processedItems, goToGimpoCSVList.length);
+        updateProgressBar01(processedItems, goToGimpoCSVList.length);
     });
 }
 /* 김포공항 하선/하차인원 끝 */
@@ -326,6 +303,8 @@ function goGimpoTableDaySum(goToGimpoCSVList) {
 /* 김포공항 상선/승차인원 시작 */
 // tbody 
 function getGimpoTableNotDaySum(getOffGimpoCSVList) {
+    // console.log("getOffGimpoCSVList", getOffGimpoCSVList);
+    // console.log("getOffGimpoCSVList_length", getOffGimpoCSVList.length);
     var dataContainer = document.querySelector(".dataContainer");
     dataContainer.innerHTML = ""; // Clear previous data
     let div01 = document.createElement("div");
@@ -372,7 +351,7 @@ function getGimpoTableNotDaySum(getOffGimpoCSVList) {
         createCell(tr, "td", "td_data5", item.gimpo_ec_in);
         createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
 
-        updateProgressBar(processedItems, getOffGimpoCSVList.length);
+        updateProgressBar01(processedItems, getOffGimpoCSVList.length);
     });
 }
 
@@ -422,7 +401,7 @@ function getGimpoTableDaySum(getOffGimpoCSVList) {
         createCell(tr, "td", "td_data5", item.gimpo_ec_in);
         createCell(tr, "td", "td_data6", item.gimpo_st_in + item.gimpo_ev_in + item.gimpo_ec_in);
 
-        updateProgressBar(processedItems, getOffGimpoCSVList.length);
+        updateProgressBar01(processedItems, getOffGimpoCSVList.length);
     });
 }
 /* 김포공항 상선/승차인원 끝 */
@@ -480,7 +459,7 @@ function pungmoTableNotDaySum(goToPungmuCSVList) {
         createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
         createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
 
-        updateProgressBar(processedItems, goToPungmuCSVList.length);
+        updateProgressBar01(processedItems, goToPungmuCSVList.length);
     });
 }
 
@@ -530,7 +509,7 @@ function pungmoTableDaySum(goToPungmuCSVList) {
         createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
         createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
 
-        updateProgressBar(processedItems, goToPungmuCSVList.length);
+        updateProgressBar01(processedItems, goToPungmuCSVList.length);
     });
 }
 /* 풍무 승하차 끝 */
@@ -584,7 +563,7 @@ function gochonTableNotDaySum(goToGochonCSVList) {
         createCell(tr, "td", "goPung_td_data3", item.gochon_in);
         createCell(tr, "td", "goPung_td_data4", item.gochon_out);
 
-        updateProgressBar(processedItems, goToGochonCSVList.length);
+        updateProgressBar01(processedItems, goToGochonCSVList.length);
     });
 }
 
@@ -635,7 +614,7 @@ function gochonTableDaySum(goToGochonCSVList) {
         createCell(tr, "td", "goPung_td_data3", item.gochon_in);
         createCell(tr, "td", "goPung_td_data4", item.gochon_out);
 
-        updateProgressBar(processedItems, goToGochonCSVList.length);
+        updateProgressBar01(processedItems, goToGochonCSVList.length);
     });
 }
 /* 고촌 승하차 끝 */
@@ -761,6 +740,9 @@ function goGimpoDaySum(goToGimpoCSVList) {
 /* 김포공항 상선/승차인원 시작 */
 // tbody 
 function getGimpoNotDaySum(getOffGimpoCSVList) {
+    console.log("getOffGimpoCSVList", getOffGimpoCSVList);
+    console.log("getOffGimpoCSVList_length", getOffGimpoCSVList.length);
+
     var dataContainer = document.querySelector(".dataContainer");
     // dataContainer.innerHTML = ""; // Clear previous data
 
@@ -938,7 +920,7 @@ function pungmuDaySum(goToPungmuCSVList) {
     no =0
 
     goToPungmuCSVList.forEach(function (item) {
-        // console.log("item", item);
+        console.log("item", item);
 
         no = dataTbody.children.length + 1;
         // console.log("no", no);
@@ -1087,4 +1069,57 @@ function renderNoDataMessage() {
     td.className = "noData";
     tr.appendChild(td);
     td.innerHTML = "데이터를 찾을 수 없습니다.";
+}
+
+
+
+
+
+function updateProgressBar(processed, total) {
+    // console.log("processed:", processed);
+    // console.log("total :", total);
+    var progressNow = document.querySelector("#progressDiv .progressNow");
+    var progressPer = document.querySelector("#progressDiv .progressPer");
+    
+    var percent = Math.round((processed / total ) * 100);
+    setTimeout(function() {
+    progressNow.style.width = percent + "%";
+    progressPer.innerHTML = percent + " %";
+        }, 500); // 작업 완료 시간 조정 (밀리초)
+    // console.log("percent:", percent);
+
+    // 작업이 완료되면 프로그래스 바를 숨김
+    if(percent >= 100){
+        setTimeout(function() {
+            document.getElementById("progressDiv").style.display = 'none';
+        }, 500); // 작업 완료 시간 조정 (밀리초)
+    }
+}
+
+
+function updateProgressBar01(processed, total) {
+    // console.log("processed:", processed);
+    // console.log("total :", total);
+    var progressNow = document.querySelector("#progressDiv .progressNow");
+    var progressPer = document.querySelector("#progressDiv .progressPer");
+    
+    var percent = Math.round((processed / total) * 100);
+    var currentWidth = parseInt(progressNow.style.width, 10) || 0;
+    
+    var interval = setInterval(function() {
+        if (currentWidth < percent) {
+            currentWidth++;
+            progressNow.style.width = currentWidth + "%";
+            progressPer.innerHTML = currentWidth + " %";
+        } else {
+            clearInterval(interval);
+            if (currentWidth >= 100) {
+                setTimeout(function() {
+                    document.getElementById("progressDiv").style.display = 'none';
+                }, 500); // 작업 완료 시간 조정 (밀리초)
+            }
+        }
+    }, 10); // 게이지가 차오르는 속도 (밀리초)
+
+    // console.log("percent:", percent);
 }
