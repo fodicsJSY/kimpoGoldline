@@ -72,8 +72,8 @@ function saveData(comboValue, filename){
     if(selectMonth.checked){
         var monthSearch = document.getElementById("monthSearch");
         // console.log("monthSearch", monthSearch.value);
-        var occuMonth = formatToYYYYMM(monthSearch.value);
-        var from_date = occuMonth + "01";
+        // var occuMonth = formatToYYYYMM(monthSearch.value);
+        // var from_date = occuMonth + "01";
         let monthValue = monthSearch.value;
         // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
         var monthDate = monthValue + "-" + "01";
@@ -82,10 +82,11 @@ function saveData(comboValue, filename){
         let lastDate = new Date(monthDate);
         // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
         
+        var from_date = monthValue + "-01";
+        console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
         
         let to_date = formatToLastDay(lastDate);
-        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
-
+          console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
         if(daySumCheckbox.checked === false ){
         bSum = 0;
         }
@@ -150,10 +151,12 @@ function saveData(comboValue, filename){
         var daySearch = document.getElementById("daySearch");
         // console.log("daySearch", daySearch.value);
         var occuDay = formatToYYYYMMDD(daySearch.value);
-        var from_date = occuDay;
-        var to_date = occuDay;
+        console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+        var from_date = daySearch.value;
+        console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        var to_date = daySearch.value;
+          console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
     
-        //console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
     
         if(daySumCheckbox.checked === false ){
             bSum = 0;
@@ -221,10 +224,10 @@ function saveData(comboValue, filename){
         // console.log("customDaySearch2", customDaySearch2.value);
         var customDate1 = formatToYYYYMMDD(customDaySearch1.value);
         var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
-        var from_date = customDate1;
-        var to_date = customDate2;
-        //console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
-        //console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
+        var from_date = customDaySearch1.value;
+        var to_date = customDaySearch2.value;
+        console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
+        console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
 
         if(daySumCheckbox.checked === false ){
             bSum = 0;
@@ -288,7 +291,8 @@ function saveData(comboValue, filename){
     function file_goToGimpoDataSave(goToGimpoCSV, filename) {
         // console.log("goToGimpoCSV", goToGimpoCSV);
         // CSV 헤더 생성
-        let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
+        // let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
+        // let csvContent = "순번, 시간,계단,엘리베이터,에스컬레이터,합계\n";
         
         
         no =0;
@@ -297,7 +301,8 @@ function saveData(comboValue, filename){
             // console.log("item", item);
 
             no++;
-            let row = `${no},${item.occuDate},${item.occuTime},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out}\n`;
+            let row = `${no},${item.occuTime},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out}\n`;
+            // let row = `${no},${item.occuDate},${item.occuTime},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out}\n`;
             csvContent += row;
             
         });
@@ -368,7 +373,8 @@ function saveData(comboValue, filename){
 function file_getOffGimpoDataSave(getOffGimpoCSV, filename) {
     // console.log("getOffGimpoCSV", getOffGimpoCSV);
     // CSV 헤더 생성
-    let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
+    let csvContent = "순번,시간,계단,엘리베이터,에스컬레이터,합계\n";
+    // let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
 
     no =0;
     // CSV 데이터 추가
@@ -376,7 +382,8 @@ function file_getOffGimpoDataSave(getOffGimpoCSV, filename) {
         // console.log("item", item);
 
         // console.log("data", data);
-        let row = `${no},${item.occuDate},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
+        let row = `${no},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
+        // let row = `${no},${item.occuDate},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
         csvContent += row;
     });
 
@@ -444,7 +451,8 @@ function file_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
 function file_goToGochonDataSave(goToGochonCSV, filename) {
     // console.log("goToGochonCSV", goToGochonCSV);
     // CSV 헤더 생성
-    let csvContent = "순번,날짜,시간,승차,하차\n";
+    let csvContent = "순번,시간,승차,하차\n";
+    // let csvContent = "순번,날짜,시간,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
@@ -453,7 +461,8 @@ function file_goToGochonDataSave(goToGochonCSV, filename) {
 
         no++;
         // console.log("data", data);
-        let row = `${no},${item.occuDate},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
+        // let row = `${no},${item.occuDate},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
+        let row = `${no},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
         csvContent += row;
     });
 
@@ -522,7 +531,8 @@ function file_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
 function file_goToPungmuDataSave(goToPungmuCSV, filename) {
     // console.log("goToPungmuCSV", goToPungmuCSV);
     // CSV 헤더 생성
-    let csvContent = "순번,날짜,시간,승차,하차\n";
+    // let csvContent = "순번,날짜,시간,승차,하차\n";
+    let csvContent = "순번,시간,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
@@ -530,7 +540,8 @@ function file_goToPungmuDataSave(goToPungmuCSV, filename) {
         // console.log("item", item);
 
         no++;
-        let row = `${no},${item.occuDate},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
+        let row = `${no},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
+        // let row = `${no},${item.occuDate},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
         csvContent += row;
     });
 

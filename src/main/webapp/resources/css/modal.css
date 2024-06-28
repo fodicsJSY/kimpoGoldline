@@ -385,9 +385,9 @@
 .th1{
     width: 50px;
 }
-.th2{
+/* .th2{
     width: 120px;
-}
+} */
 .th3{
     width: 120px;
 }
@@ -401,7 +401,9 @@
     width: 100px;
 }
 .th7{
-    width: 90px;
+    width: 210px;
+    /* width: 90px; */
+
 }
 
 
@@ -411,10 +413,10 @@
     width: 50px;
     text-align: center;
 }
-.td_data2{
+/* .td_data2{
     width: 120px;
     text-align: center;
-}
+} */
 .td_data3{
     width: 120px;
     text-align: center;
@@ -432,7 +434,8 @@
     text-align: center;
 }
 .td_data7{
-    width: 90px;
+    /* width: 90px; */
+    width: 210px;
     text-align: center;
 }
 /* 김포 일합계 체크안함 끝 */
@@ -494,7 +497,8 @@
     width: 235px;
 }
 .goPung_th5{
-    width: 120px;
+    /* width: 120px; */
+    width: 355px;
 }
 
 
@@ -518,7 +522,8 @@
     text-align: center;
 }
 .goPung_td_data5{
-    width: 120px;
+    /* width: 120px; */
+    width: 355px;
     text-align: center;
 }
 

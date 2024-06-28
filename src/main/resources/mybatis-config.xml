@@ -17,6 +17,7 @@
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.CSV" alias="CSV" /> 
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.FileData" alias="FileData" /> 
 		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.CongestionRate" alias="CongestionRate" /> 
+		 <typeAlias type="fodics.jsy.dashboard.main.model.dto.DateParameter" alias="DateParameter" /> 
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->

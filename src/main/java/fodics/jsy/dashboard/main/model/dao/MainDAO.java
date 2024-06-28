@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
+import fodics.jsy.dashboard.main.model.dto.DateParameter;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
 @Repository
@@ -152,8 +153,8 @@ public class MainDAO {
 	 * @return
 	 * sql2
 	 */
-	public List<FileData> goToGimpoCSV(Map<String, Object> map) {
-		return sql.selectList("mainMapper.goToGimpoCSV", map);
+	public List<FileData> goToGimpoCSV(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGimpoCSV", dateParameter);
 	}
 
 
@@ -163,8 +164,8 @@ public class MainDAO {
 	 * @return
 	 * sql2
 	 */
-	public List<FileData> getOffGimpoCSV(Map<String, Object> map) {
-		return sql.selectList("mainMapper.getOffGimpoCSV", map);
+	public List<FileData> getOffGimpoCSV(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.getOffGimpoCSV", dateParameter);
 	}
 
 
@@ -174,8 +175,8 @@ public class MainDAO {
 	 * @return
 	 * sql2
 	 */
-	public List<FileData> goToPungmuCSV(Map<String, Object> map) {
-		return sql.selectList("mainMapper.goToPungmuCSV", map);
+	public List<FileData> goToPungmuCSV(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToPungmuCSV", dateParameter);
 	}
 
 
@@ -185,8 +186,8 @@ public class MainDAO {
 	 * @return
 	 * sql2
 	 */
-	public List<FileData> goToGochonCSV(Map<String, Object> map) {
-		return sql.selectList("mainMapper.goToGochonCSV", map);
+	public List<FileData> goToGochonCSV(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGochonCSV", dateParameter);
 	}
 
 

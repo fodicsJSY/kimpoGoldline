@@ -390,57 +390,65 @@
 
 	
   	<!-- 시작-->
-	<!-- 김포 승차 프로시저 -->
-	<select id="callSP_GIMPO_OUT" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_OUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	  
+	<!-- 김포 승차 -->
 	<select id="goToGimpoCSV" resultMap="_fileData">
-		   	SELECT * FROM TB_TEMP_GIMPO_OUT
+		SELECT
+			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+			ELSE cnt_date END			AS cnt_date
+			, CASE WHEN GROUPING(cnt_date) = 1 THEN '-'
+			WHEN GROUPING(cnt_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gimpo_st_out)		AS gimpo_st_out
+			, SUM(gimpo_ev_out)		AS gimpo_st_out
+			, SUM(gimpo_ec_out)		AS gimpo_ev_out
+			, SUM(gimpo_out_total)	AS gimpo_out_total
+		FROM TB_STATS_GIMPO_OUT WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(cnt_date, occu_time)
 	  </select>
 	
 	
-	<!-- 김포 하차 프로시저 -->
-	<select id="callSP_GIMPO_IN" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_GIMPO_IN(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
+	<!-- 김포 하차 -->
 	<select id="getOffGimpoCSV" resultMap="_fileData">
-	   	SELECT * FROM TB_TEMP_GIMPO_IN;
+	   	SELECT
+			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+			ELSE cnt_date END			AS cnt_date
+			, CASE WHEN GROUPING(cnt_date) = 1 THEN '-'
+			WHEN GROUPING(cnt_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gimpo_st_in)		AS gimpo_st_in
+			, SUM(gimpo_ev_in)		AS gimpo_ev_in
+			, SUM(gimpo_ec_in)		AS gimpo_ec_in
+			, SUM(gimpo_in_total)	AS gimpo_in_total
+		FROM TB_STATS_GIMPO_IN WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(cnt_date, occu_time)
 	  </select>
 	  
-	<!-- 풍무 승하차 프로시저 -->
-	<select id="callSP_PUNGMU_INOUT" statementType="CALLABLE" resultMap="_fileData">
-	    {call SP_PUNGMU_INOUT(
-	        #{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
+	<!-- 풍무 승하차 -->
 	<select id="goToPungmuCSV" resultMap="_fileData">
-	   		SELECT * FROM TB_TEMP_PUNGMU_INOUT;
+		SELECT
+			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+			ELSE occu_date END		AS occu_date
+			, CASE WHEN GROUPING(occu_date) = 1 THEN '-'
+			WHEN GROUPING(occu_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(pungmu_in)			AS pungmu_in
+			, SUM(pungmu_out)			AS pungmu_out
+		FROM TB_STATS_PUNGMU_INOUT WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(occu_date, occu_time)
 	  </select>
 	
-	<!-- 고촌 승하차 프로시저 -->
-	<select id="callSP_GOCHON_INOUT" statementType="CALLABLE" resultMap="_fileData">
-		{call SP_GOCHON_INOUT(
-	       	#{parameter1, mode=IN, jdbcType=VARCHAR},
-	        #{parameter2, mode=IN, jdbcType=VARCHAR},
-	        #{parameter3, mode=IN, jdbcType=VARCHAR}
-	    )}
-	</select>
-	
+	<!-- 고촌 승하차 -->
 	<select id="goToGochonCSV" resultMap="_fileData">
-	 	SELECT * FROM TB_TEMP_GOCHON_INOUT;
+		SELECT
+			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+			ELSE occu_date END		AS occu_date
+			, CASE WHEN GROUPING(occu_date) = 1 THEN '-'
+			WHEN GROUPING(occu_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gochon_in)			AS gochon_in
+			, SUM(gochon_out)			AS gochon_out
+		FROM TB_STATS_GOCHON_INOUT WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(occu_date, occu_time)
 	</select>
 	<!-- 끝-->
 	

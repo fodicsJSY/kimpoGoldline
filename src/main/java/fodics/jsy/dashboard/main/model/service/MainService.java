@@ -5,6 +5,7 @@ import java.util.Map;
 
 import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
+import fodics.jsy.dashboard.main.model.dto.DateParameter;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
 public interface MainService {
@@ -50,16 +51,16 @@ public interface MainService {
 	List<CongestionRate> selectGochonPlatform2();
 
 	//csv파일1
-	List<FileData> goToGimpoCSV(Map<String, Object>  map);
+	List<FileData> goToGimpoCSV(DateParameter  dateParameter);
 
 	//csv파일2
-	List<FileData> getOffGimpoCSV(Map<String, Object>  map);
+	List<FileData> getOffGimpoCSV(DateParameter  dateParameter);
 
 	// csv파일3
-	List<FileData> goToPungmuCSV(Map<String, Object>  map);
+	List<FileData> goToPungmuCSV(DateParameter  dateParameter);
 
 	// csv파일4
-	List<FileData> goToGochonCSV(Map<String, Object>  map);
+	List<FileData> goToGochonCSV(DateParameter dateParameter);
 
 	
 	// 풍무역 플랫폼1 군중밀집도 진짜진짜

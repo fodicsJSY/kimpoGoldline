@@ -239,7 +239,6 @@
                             <div class="customBox">
                                 <div class="selectDate"><input type="radio" name="selectDate" id="selectCustom"> <label for="selectCustom">기간별</label></div>
                                 <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" ><label for="daySumCheckbox"> 일합계</label></div>
-                                <%-- <div class="selectDate"><input type="checkBox" name="daySum" id="daySumCheckbox" disabled><label for="daySum"> 일합계</label></div> --%>
                             </div>
                         </div>
                         <div class="selectOptionBox">

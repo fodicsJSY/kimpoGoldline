@@ -14,7 +14,7 @@
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value="jdbc:sqlserver://192.168.0.97:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
+		<property name="url" value="jdbc:sqlserver://172.16.110.77:1433;databaseName=FdcVmsDB;integratedSecurity=false;encrypt=false;trustServerCertificate=false;sslProtocol=TLSv1.2;" />
 		<property name="username" value="sa" />
 		<property name="password" value="j$b!c&amp;1" />
 		<property name="defaultAutoCommit" value="false" />

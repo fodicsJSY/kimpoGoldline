@@ -51,7 +51,7 @@ function createGimpoTableNotDaySum() {
     var tr = document.createElement("tr");
     thead.appendChild(tr);
 
-    ["순번", "날짜", "시간", "계단", "엘리베이터", "에스컬레이터", "합계"].forEach(function (title) {
+    ["순번", /*"날짜",*/ "시간", "계단", "엘리베이터", "에스컬레이터", "합계"].forEach(function (title) {
         var th = document.createElement("th");
         th.innerHTML = title;
         if (title === "순번") {
@@ -118,14 +118,14 @@ function createGoPungTableNotDaySum() {
     var tr = document.createElement("tr");
     thead.appendChild(tr);
 
-    ["순번", "날짜", "시간", "승차", "하차"].forEach(function (title) {
+    ["순번", "시간", /*"날짜",*/ "승차", "하차"].forEach(function (title) {
         var th = document.createElement("th");
         th.innerHTML = title;
         if (title === "순번") {
             th.classList.add("goPung_th1");
-        } else if (title === "날짜") {
-            th.classList.add("goPung_th2");
         } else if (title === "시간") {
+            th.classList.add("goPung_th2");
+        } else if (title === "날짜") {
             th.classList.add("goPung_th5");
         } else if (title === "승차") {
             th.classList.add("goPung_th3");
@@ -173,7 +173,7 @@ function createGoPungTableDaySum() {
 /* 김포공항 하선/하차인원 시작 */
 // tbody 
 function goGimpoTableNotDaySum(goToGimpoCSVList) {
-    // console.log("goToGimpoCSVList", goToGimpoCSVList);
+    console.log("goToGimpoCSVList", goToGimpoCSVList);
     // console.log("goToGimpoCSVList_length", goToGimpoCSVList.length);
 
     // var dataTbody = document.getElementById("dataTbody");
@@ -219,7 +219,7 @@ function goGimpoTableNotDaySum(goToGimpoCSVList) {
         dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
+        // createCell(tr, "td", "td_data2", item.occuDate);
         createCell(tr, "td", "td_data7", item.occuTime);
         createCell(tr, "td", "td_data3", item.gimpo_st_out);
         createCell(tr, "td", "td_data4", item.gimpo_ev_out);
@@ -344,7 +344,7 @@ function getGimpoTableNotDaySum(getOffGimpoCSVList) {
         dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
+        // createCell(tr, "td", "td_data2", item.occuDate);
         createCell(tr, "td", "td_data7", item.occuTime);
         createCell(tr, "td", "td_data3", item.gimpo_st_in);
         createCell(tr, "td", "td_data4", item.gimpo_ev_in);
@@ -454,7 +454,7 @@ function pungmoTableNotDaySum(goToPungmuCSVList) {
         dataTbody.appendChild(tr);
 
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
+        // createCell(tr, "td", "goPung_td_data2", item.occuDate);
         createCell(tr, "td", "goPung_td_data5", item.occuTime);
         createCell(tr, "td", "goPung_td_data3", item.pungmu_in);
         createCell(tr, "td", "goPung_td_data4", item.pungmu_out);
@@ -558,7 +558,7 @@ function gochonTableNotDaySum(goToGochonCSVList) {
         var tr = document.createElement("tr");
         dataTbody.appendChild(tr);
         createCell(tr, "td", "goPung_td_data1", no);
-        createCell(tr, "td", "goPung_td_data2", item.occuDate);
+        // createCell(tr, "td", "goPung_td_data2", item.occuDate);
         createCell(tr, "td", "goPung_td_data5", item.occuTime);
         createCell(tr, "td", "goPung_td_data3", item.gochon_in);
         createCell(tr, "td", "goPung_td_data4", item.gochon_out);
@@ -677,7 +677,7 @@ function goGimpoNotDaySum(goToGimpoCSVList) {
         dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
+        // createCell(tr, "td", "td_data2", item.occuDate);
         createCell(tr, "td", "td_data7", item.occuTime);
         createCell(tr, "td", "td_data3", item.gimpo_st_out);
         createCell(tr, "td", "td_data4", item.gimpo_ev_out);
@@ -780,7 +780,7 @@ function getGimpoNotDaySum(getOffGimpoCSVList) {
         dataTbody.appendChild(tr);
 
         createCell(tr, "td", "td_data1", no);
-        createCell(tr, "td", "td_data2", item.occuDate);
+        // createCell(tr, "td", "td_data2", item.occuDate);
         createCell(tr, "td", "td_data7", item.occuTime);
         createCell(tr, "td", "td_data3", item.gimpo_st_in);
         createCell(tr, "td", "td_data4", item.gimpo_ev_in);

@@ -9,6 +9,7 @@ import fodics.jsy.dashboard.main.model.dao.MainDAO;
 import fodics.jsy.dashboard.main.model.dto.CSV;
 import fodics.jsy.dashboard.main.model.dto.CongestionRate;
 import fodics.jsy.dashboard.main.model.dto.Data;
+import fodics.jsy.dashboard.main.model.dto.DateParameter;
 import fodics.jsy.dashboard.main.model.dto.FileData;
 
 @Service
@@ -130,8 +131,8 @@ public class MainServiceImpl implements MainService{
 	 *csv파일1
 	 */
 	@Override
-	public List<FileData> goToGimpoCSV(Map<String, Object> map) {
-		return dao.goToGimpoCSV(map);
+	public List<FileData> goToGimpoCSV(DateParameter dateParameter) {
+		return dao.goToGimpoCSV(dateParameter);
 	}
 	
 	
@@ -139,24 +140,24 @@ public class MainServiceImpl implements MainService{
 	 * csv파일2
 	 */
 	@Override
-	public List<FileData> getOffGimpoCSV(Map<String, Object> map) {
-		return dao.getOffGimpoCSV(map);
+	public List<FileData> getOffGimpoCSV(DateParameter dateParameter) {
+		return dao.getOffGimpoCSV(dateParameter);
 	}
 	
 	/**
 	 *csv파일3
 	 */
 	@Override
-	public List<FileData> goToPungmuCSV(Map<String, Object>  map) {
-		return dao.goToPungmuCSV(map);
+	public List<FileData> goToPungmuCSV(DateParameter  dateParameter) {
+		return dao.goToPungmuCSV(dateParameter);
 	}
 	
 	/**
 	 *csv파일4
 	 */
 	@Override
-	public List<FileData> goToGochonCSV(Map<String, Object>  map) {
-		return dao.goToGochonCSV(map);
+	public List<FileData> goToGochonCSV(DateParameter dateParameter) {
+		return dao.goToGochonCSV(dateParameter);
 	}
 	
 	

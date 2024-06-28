@@ -11,7 +11,7 @@ var progressDiv = document.getElementById('progressDiv');
 document.getElementById("modalDataBtn").addEventListener("click", ()=>{
   // console.log("클릭");
   // fristTible();
-  
+  ajaxStart();
 
   let comboValue = selectCombo.value;
   if(comboValue==="GimOut"){
@@ -50,23 +50,24 @@ function selectRadio(comboValue){
   /* 월별 클릭 시 날짜데이터 가져옴 시작*/ 
   if(selectMonth.checked){
     var monthSearch = document.getElementById("monthSearch");
-    // console.log("monthSearch", monthSearch.value);
+    console.log("monthSearch", monthSearch.value);
     var occuMonth = formatToYYYYMM(monthSearch.value);
-    var from_date = occuMonth + "01";
     // var to_date = occuMonth + "31";
-      // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
-      
-      let monthValue = monthSearch.value;
-      // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
-      var monthDate = monthValue + "-" + "01";
-      // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
-      
-      let lastDate = new Date(monthDate);
-      // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
-      
+    
+    let monthValue = monthSearch.value;
+    console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
+
+    var monthDate = monthValue + "-" + "01";
+    // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
+
+    let lastDate = new Date(monthDate);
+    console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
+    
+    var from_date = monthValue + "-01";
+    console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
       
       let to_date = formatToLastDay(lastDate);
-      // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+      console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
 
     if(daySumCheckbox.checked === false ){
       bSum = 0;
@@ -96,7 +97,7 @@ function selectRadio(comboValue){
       //   return xhr;
       // },
       success: function(response){
-        // console.log("response", response);
+        console.log("response", response);
 
            /* 김포공항 하선/하차인원 */
         if (response.goToGimpoCSV) {
@@ -146,12 +147,13 @@ function selectRadio(comboValue){
   /* 일별 클릭 시 날짜데이터 가져옴 시작*/ 
   if(selectDay.checked){
     var daySearch = document.getElementById("daySearch");
-    // console.log("daySearch", daySearch.value);
+    console.log("daySearch", daySearch.value);
     var occuDay = formatToYYYYMMDD(daySearch.value);
-    var from_date = occuDay;
-    var to_date = occuDay;
-
-      // console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+    console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+    var from_date = daySearch.value;
+    console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+    var to_date = daySearch.value;
+      console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
 
     if(daySumCheckbox.checked === false ){
       bSum = 0;
@@ -181,7 +183,7 @@ function selectRadio(comboValue){
       //   return xhr;
       // },
       success: function(response){
-        // console.log("response", response);
+        console.log("response", response);
         // console.log("response.goToGimpoCSV", response.goToGimpoCSV);
         /* 김포공항 하선/하차인원 */
         if (response.goToGimpoCSV) {
@@ -248,21 +250,23 @@ function selectRadio(comboValue){
 
   /* 기간별 클릭 시 날짜데이터 가져옴 시작*/ 
   if(selectCustom.checked){
-
+    ajaxStart();
 
     var customDaySearch1 = document.getElementById("customDaySearch1");
     var customDaySearch2 = document.getElementById("customDaySearch2");
-    // console.log("customDaySearch1", customDaySearch1.value);
-    // console.log("customDaySearch2", customDaySearch2.value);
+    console.log("customDaySearch1", customDaySearch1.value);
+    console.log("customDaySearch2", customDaySearch2.value);
     var customDate1 = formatToYYYYMMDD(customDaySearch1.value);
+    console.log("customDate1", customDate1.value);
     var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
+    console.log("customDate2", customDate2.value);
     var from_date = customDate1;
     var to_date = customDate2;
-      // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
-      // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+      console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+      console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
 
-    var days = calculateDaysBetween(from_date, to_date);;
-      // console.log('days:', days); // 콘솔에 occuDate 값 로그 출력
+    var days = calculateDaysBetween(from_date, to_date);
+      console.log('days:', days); // 콘솔에 occuDate 값 로그 출력
 
 
     if(daySumCheckbox.checked === false ){
@@ -274,7 +278,16 @@ function selectRadio(comboValue){
       // console.log("bSum1 :", bSum);
     }
 
-    ajaxStart();
+
+    let dateValue = customDaySearch1.value;
+    console.log("dateValue", dateValue);
+
+    let fromdate = new Date(dateValue);
+    console.log("fromdate", fromdate);
+
+
+    let setDate = formatToYYYY_MM_DD(fromdate);
+    console.log(" setDate1: ", setDate);
 
 
 
@@ -287,7 +300,7 @@ function selectRadio(comboValue){
       $.ajax({
         url: "/dayUrl", 
         type: "POST",
-        data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+        data: { from_date:setDate, to_date:setDate, comboValue:comboValue, bSum:bSum},
         timeout: 3000000, // milliseconds (3000 seconds)
         // beforeSend: function() {
         //       per = 0;
@@ -348,16 +361,7 @@ function selectRadio(comboValue){
     }else{
 
       
-          let dateValue = customDaySearch1.value;
-          // console.log("dateValue", dateValue);
-      
-          let fromdate = new Date(dateValue);
-          // console.log("fromdate", fromdate);
-      
-      
-          let setDate = formatToYYYY_MM_DD(fromdate);
-          // console.log(" setDate1: ", setDate);
-      
+        
           let dataList = [];
       
           let listNum = 0;
@@ -386,6 +390,8 @@ function selectRadio(comboValue){
       
       
             (function(i){
+              updateProgressBar(processedItems, days);
+              processedItems++;
               $.ajax({
                 url: "/customUrl", 
                 async: false,	
@@ -406,7 +412,7 @@ function selectRadio(comboValue){
                 success: function(response){
                   // console.log("response : ", response);
                   // console.log("response.parameter3 :", response.parameter3);
-      
+
                   if (response.goToGimpoCSV) {
                     listNum = 0;
                     // dataList.push(response.goToGimpoCSV);
@@ -457,10 +463,10 @@ function selectRadio(comboValue){
                   }
                 }
               });
-              updateProgressBar(processedItems, days);
+
             })(i);
       
-            processedItems++;
+    
       
             fromdate.setDate(fromdate.getDate() + 1);
             // console.log(" fromdate: ", fromdate);
@@ -494,7 +500,7 @@ function formatToYYYYMMDD(dateString) {
   var year = dateString.substring(0, 4);
   var month = dateString.substring(5, 7);
   var day = dateString.substring(8, 10);
-  return year + month + day;
+  return year + "-" + month + "-" + day;
 }
 
 /* 날짜 형식화 함수 */
@@ -505,7 +511,7 @@ function formatToYYYY_MM_DD(dateString) {
   let monthValue = month < 10 ? "0" + month : month.toString();
   let day = dateString.getDate();
   let dayValue = day < 10 ? "0" + day : day.toString();
-  return year+monthValue+dayValue;
+  return year+"-"+monthValue+"-"+dayValue;
 }
 
 /* 날짜 형식화 함수 */
@@ -519,5 +525,5 @@ function formatToLastDay(dateString) {
 
   let lastday = lastDate.getDate();
   let lastdayValue = lastday < 10 ? "0" + lastday : lastday.toString();
-  return year+monthValue+lastdayValue;
+  return year+"-"+monthValue+"-"+lastdayValue;
 }
