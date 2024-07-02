@@ -29,6 +29,7 @@ public class FileData {
 	
 	private String occuTime;
 	private String occuDate;
+	private String cntDate;
 	
 	
 	private int pungmu_in;

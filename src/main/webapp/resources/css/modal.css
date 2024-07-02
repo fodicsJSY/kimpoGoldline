@@ -334,16 +334,16 @@
     width: 100px;
 }
 .th2{
-    width: 130px;
+    width: 240px;
 }
 .th3{
-    width: 150px;
+    width: 130px;
 }
 .th4{
-    width: 150px;
+    width: 130px;
 }
 .th5{
-    width: 150px;
+    width: 130px;
 }
 .th6{
     width: 100px;
@@ -355,19 +355,19 @@
     text-align: center;
 }
 .td_data2{
-    width: 130px;
+    width: 240px;
     text-align: center;
 }
 .td_data3{
-    width: 150px;
+    width: 130px;
     text-align: center;
 }
 .td_data4{
-    width: 150px;
+    width: 130px;
     text-align: center;
 }
 .td_data5{
-    width: 150px;
+    width: 130px;
     text-align: center;
 }
 .td_data6{
@@ -385,9 +385,9 @@
 .th1{
     width: 50px;
 }
-/* .th2{
+.th2{
     width: 120px;
-} */
+}
 .th3{
     width: 120px;
 }
@@ -401,11 +401,13 @@
     width: 100px;
 }
 .th7{
+    width: 90px;
+    
+}
+.th8{
     width: 210px;
-    /* width: 90px; */
 
 }
-
 
 
 
@@ -413,10 +415,10 @@
     width: 50px;
     text-align: center;
 }
-/* .td_data2{
+.td_data2{
     width: 120px;
     text-align: center;
-} */
+}
 .td_data3{
     width: 120px;
     text-align: center;
@@ -434,7 +436,10 @@
     text-align: center;
 }
 .td_data7{
-    /* width: 90px; */
+    width: 90px;
+    text-align: center;
+}
+.td_data8{
     width: 210px;
     text-align: center;
 }

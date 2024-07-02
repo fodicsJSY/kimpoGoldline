@@ -14,7 +14,7 @@ async function getFileName() {
         inputLabel: "파일명을 입력해주세요.",
         showCancelButton: true,
         inputValidator: (value) => {
-            //console.log("value : ", value);
+            //// console.log("value : ", value);
             if (!value) {
                 return getFileName();
             }
@@ -37,7 +37,7 @@ async function fetchData() {
         })
         .then(resp => resp.json()) // 요청에 대한 응답 객체(response)를 필요한 형태로 파싱
         .then((result) => {
-            // console.log("result : ", result);
+            // // console.log("result : ", result);
 
             let filename = result.fname;
 
@@ -57,7 +57,7 @@ async function fetchData() {
 
         }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
         .catch( err => {
-            // console.log("err : ", err);
+            // // console.log("err : ", err);
             Swal.fire("파일을 다운로드 할 수 없습니다.");
         }); // 예외 발생 시 처리할 내용을 작성
     }
@@ -71,146 +71,144 @@ function saveData(comboValue, filename){
 
     if(selectMonth.checked){
         var monthSearch = document.getElementById("monthSearch");
-        // console.log("monthSearch", monthSearch.value);
+        // // console.log("monthSearch", monthSearch.value);
         // var occuMonth = formatToYYYYMM(monthSearch.value);
         // var from_date = occuMonth + "01";
         let monthValue = monthSearch.value;
-        // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
         var monthDate = monthValue + "-" + "01";
-        // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
         
         let lastDate = new Date(monthDate);
-        // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
         
         var from_date = monthValue + "-01";
-        console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
         
         let to_date = formatToLastDay(lastDate);
-          console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+          // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+
+        
         if(daySumCheckbox.checked === false ){
-        bSum = 0;
+            bSum = 0;
+            // // console.log("bSum0 :", bSum);
         }
         if(daySumCheckbox.checked === true){
-        bSum = 1;
+            bSum = 1;
+            // // console.log("bSum1 :", bSum);
         }
-        // console.log("bSum", bSum);
+    
 
         $.ajax({
             url: "/monthUrl", 
             type: "POST",
-            data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+            data: { "from_date":from_date, "to_date":to_date, "comboValue":comboValue, "bSum":bSum},
             success: function(response){
-                // console.log("response", response);
-                // console.log("p3", response.parameter3);
+                // // console.log("response", response);
+                /* 김포공항 하선/하차인원 */
+                if (response.goToGimpoCSV) {
+                    file_goToGimpoDataSave(response.goToGimpoCSV, filename);
+                }
+                // 일합계
+                if(response.goToGimpoCSV_daySum){
+                    file_goToGimpoDataSaveNoTime(response.goToGimpoCSV_daySum, filename);
+                }
 
-                let p3 = response.parameter3;
-                
-                if(response.goToGimpoCSV){
-                    // var goToGimpoCSVList = response.goToGimpoCSVList;
-                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
-                    // console.log("p3", p3);
-                    if(p3 == 0){
-                        file_goToGimpoDataSave(response.goToGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGimpoDataSaveNoTime(response.goToGimpoCSV, filename);
-                    }
+
+                /* 김포공항 상선/승차인원 */
+                if (response.getOffGimpoCSV) {
+                    file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
                 }
-                if(response.getOffGimpoCSV){
-                    // var getOffGimpoCSVList = response.getOffGimpoCSVList;
-                    if(p3 == 0){
-                        file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV, filename);
-                    }
+                // 일합계
+                if(response.getOffGimpoCSV_daySum){
+                    file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV_daySum, filename);
                 }
-                if(response.goToPungmuCSV){
-                    // var goToPungmuCSVList = response.goToPungmuCSVList;
-                    if(p3 == 0){
-                        file_goToPungmuDataSave(response.goToPungmuCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToPungmuDataSaveNoTime(response.goToPungmuCSV, filename);
-                    }
+
+                /* 풍무 승하차 */
+                if (response.goToPungmuCSV) {
+                    file_goToPungmuDataSave(response.goToPungmuCSV, filename);
                 }
-                if(response.goToGochonCSV){
-                    // var goToGochonCSVList = response.goToGochonCSVList;
-                    if(p3 == 0){
-                        file_goToGochonDataSave(response.goToGochonCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGochonDataSaveNoTime(response.goToGochonCSV, filename);
-                    }
+                // 일합계
+                if(response.goToPungmuCSV_daySum){
+                    file_goToPungmuDataSaveNoTime(response.goToPungmuCSV_daySum, filename);
                 } 
+
+                /* 고촌 승하차 */
+                if (response.goToGochonCSV) {
+                    file_goToGochonDataSave(response.goToGochonCSV, filename);
+                }
+                // 일합계
+                if(response.goToGochonCSV_daySum){
+                    file_goToGochonDataSaveNoTime(response.goToGochonCSV_daySum, filename);
+                }
             }
         });
     }
 
     if(selectDay.checked){
         var daySearch = document.getElementById("daySearch");
-        // console.log("daySearch", daySearch.value);
+        // // console.log("daySearch", daySearch.value);
         var occuDay = formatToYYYYMMDD(daySearch.value);
-        console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+        // console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
         var from_date = daySearch.value;
-        console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
         var to_date = daySearch.value;
-          console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
-    
-    
+          // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+        
+        
         if(daySumCheckbox.checked === false ){
             bSum = 0;
+            // // console.log("bSum0 :", bSum);
         }
         if(daySumCheckbox.checked === true){
             bSum = 1;
+            // // console.log("bSum1 :", bSum);
         }
+    
 
         $.ajax({
             url: "/dayUrl", 
             type: "POST",
-            data: { from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+            data: { "from_date":from_date, "to_date":to_date, "comboValue":comboValue, "bSum":bSum},
             success: function(response){
-                // console.log("response", response);
-                let p3 = response.parameter3;
+                // // console.log("response", response);
                 
-                if(response.goToGimpoCSV){
-                    // var goToGimpoCSVList = response.goToGimpoCSVList;
-                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
-                    // console.log("p3", p3);
-                    if(p3 == 0){
-                        file_goToGimpoDataSave(response.goToGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGimpoDataSaveNoTime(response.goToGimpoCSV, filename);
-                    }
+                 /* 김포공항 하선/하차인원 */
+                if (response.goToGimpoCSV) {
+                    file_goToGimpoDataSave(response.goToGimpoCSV, filename);
                 }
-                if(response.getOffGimpoCSV){
-                    // var getOffGimpoCSVList = response.getOffGimpoCSVList;
-                    if(p3 == 0){
-                        file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV, filename);
-                    }
+                // 일합계
+                if(response.goToGimpoCSV_daySum){
+                    file_goToGimpoDataSaveNoTime(response.goToGimpoCSV_daySum, filename);
                 }
-                if(response.goToPungmuCSV){
-                    // var goToPungmuCSVList = response.goToPungmuCSVList;
-                    if(p3 == 0){
-                        file_goToPungmuDataSave(response.goToPungmuCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToPungmuDataSaveNoTime(response.goToPungmuCSV, filename);
-                    }
+
+
+                /* 김포공항 상선/승차인원 */
+                if (response.getOffGimpoCSV) {
+                    file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
                 }
-                if(response.goToGochonCSV){
-                    // var goToGochonCSVList = response.goToGochonCSVList;
-                    if(p3 == 0){
-                        file_goToGochonDataSave(response.goToGochonCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGochonDataSaveNoTime(response.goToGochonCSV, filename);
-                    }
+                // 일합계
+                if(response.getOffGimpoCSV_daySum){
+                    file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV_daySum, filename);
+                }
+
+                /* 풍무 승하차 */
+                if (response.goToPungmuCSV) {
+                    file_goToPungmuDataSave(response.goToPungmuCSV, filename);
+                }
+                // 일합계
+                if(response.goToPungmuCSV_daySum){
+                    file_goToPungmuDataSaveNoTime(response.goToPungmuCSV_daySum, filename);
                 } 
+
+                /* 고촌 승하차 */
+                if (response.goToGochonCSV) {
+                    file_goToGochonDataSave(response.goToGochonCSV, filename);
+                }
+                // 일합계
+                if(response.goToGochonCSV_daySum){
+                    file_goToGochonDataSaveNoTime(response.goToGochonCSV_daySum, filename);
+                }
             }
         });
     }
@@ -220,68 +218,67 @@ function saveData(comboValue, filename){
     if(selectCustom.checked){
         var customDaySearch1 = document.getElementById("customDaySearch1");
         var customDaySearch2 = document.getElementById("customDaySearch2");
-        // console.log("customDaySearch1", customDaySearch1.value);
-        // console.log("customDaySearch2", customDaySearch2.value);
+        // // console.log("customDaySearch1", customDaySearch1.value);
+        // // console.log("customDaySearch2", customDaySearch2.value);
         var customDate1 = formatToYYYYMMDD(customDaySearch1.value);
         var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
         var from_date = customDaySearch1.value;
         var to_date = customDaySearch2.value;
-        console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
-        console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
-
+        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
+        
         if(daySumCheckbox.checked === false ){
             bSum = 0;
+            // // console.log("bSum0 :", bSum);
         }
         if(daySumCheckbox.checked === true){
             bSum = 1;
+            // // console.log("bSum1 :", bSum);
         }
 
         $.ajax({
-            url: "/customUrl", 
+            url: "/customSaveUrl", 
             type: "POST",
-            data: {from_date:from_date, to_date:to_date, comboValue:comboValue, bSum:bSum},
+            data: {"from_date":from_date, "to_date":to_date, "comboValue":comboValue, "bSum":bSum},
             success: function(response){
-                // console.log("response", response);
-                let p3 = response.parameter3;
+                // // console.log("response", response);
                 
-                if(response.goToGimpoCSV){
-                    // var goToGimpoCSVList = response.goToGimpoCSVList;
-                    // console.log("goToGimpoCSVList", goToGimpoCSVList);
-                    // console.log("p3", p3);
-                    if(p3 == 0){
-                        file_goToGimpoDataSave(response.goToGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGimpoDataSaveNoTime(response.goToGimpoCSV, filename);
-                    }
+                  /* 김포공항 하선/하차인원 */
+                if (response.goToGimpoCSV) {
+                    file_goToGimpoDataSave(response.goToGimpoCSV, filename);
                 }
-                if(response.getOffGimpoCSV){
-                    // var getOffGimpoCSVList = response.getOffGimpoCSVList;
-                    if(p3 == 0){
-                        file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV, filename);
-                    }
+                // 일합계
+                if(response.goToGimpoCSV_daySum){
+                    file_goToGimpoDataSaveNoTime(response.goToGimpoCSV_daySum, filename);
                 }
-                if(response.goToPungmuCSV){
-                    // var goToPungmuCSVList = response.goToPungmuCSVList;
-                    if(p3 == 0){
-                        file_goToPungmuDataSave(response.goToPungmuCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToPungmuDataSaveNoTime(response.goToPungmuCSV, filename);
-                    }
+
+
+                /* 김포공항 상선/승차인원 */
+                if (response.getOffGimpoCSV) {
+                    file_getOffGimpoDataSave(response.getOffGimpoCSV, filename);
                 }
-                if(response.goToGochonCSV){
-                    // var goToGochonCSVList = response.goToGochonCSVList;
-                    if(p3 == 0){
-                        file_goToGochonDataSave(response.goToGochonCSV, filename);
-                    }
-                    if(p3 == 1){
-                        file_goToGochonDataSaveNoTime(response.goToGochonCSV, filename);
-                    }
-                }    
+                // 일합계
+                if(response.getOffGimpoCSV_daySum){
+                    file_getOffGimpoDataSaveNoTime(response.getOffGimpoCSV_daySum, filename);
+                }
+
+                /* 풍무 승하차 */
+                if (response.goToPungmuCSV) {
+                    file_goToPungmuDataSave(response.goToPungmuCSV, filename);
+                }
+                // 일합계
+                if(response.goToPungmuCSV_daySum){
+                    file_goToPungmuDataSaveNoTime(response.goToPungmuCSV_daySum, filename);
+                } 
+
+                /* 고촌 승하차 */
+                if (response.goToGochonCSV) {
+                    file_goToGochonDataSave(response.goToGochonCSV, filename);
+                }
+                // 일합계
+                if(response.goToGochonCSV_daySum){
+                    file_goToGochonDataSaveNoTime(response.goToGochonCSV_daySum, filename);
+                }
             }
         });
     }
@@ -289,16 +286,16 @@ function saveData(comboValue, filename){
 
     // CSV파일1 생성 시작-----------------------------------------------
     function file_goToGimpoDataSave(goToGimpoCSV, filename) {
-        // console.log("goToGimpoCSV", goToGimpoCSV);
+        // // console.log("goToGimpoCSV", goToGimpoCSV);
         // CSV 헤더 생성
         // let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
-        // let csvContent = "순번, 시간,계단,엘리베이터,에스컬레이터,합계\n";
+        let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
         
         
         no =0;
         // CSV 데이터 추가
         goToGimpoCSV.forEach(function (item) {
-            // console.log("item", item);
+            // // console.log("item", item);
 
             no++;
             let row = `${no},${item.occuTime},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out + item.gimpo_ev_out + item.gimpo_ec_out}\n`;
@@ -332,19 +329,19 @@ function saveData(comboValue, filename){
 
 
     // CSV파일2 생성 시작-----------------------------------------------
-    function file_goToGimpoDataSaveNoTime(goToGimpoCSV, filename) {
-        // console.log("goToGimpoCSV", goToGimpoCSV);
+    function file_goToGimpoDataSaveNoTime(goToGimpoCSV_daySum, filename) {
+        // // console.log("goToGimpoCSV_daySum", goToGimpoCSV_daySum);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     no =0;
     // CSV 데이터 추가
-    goToGimpoCSV.forEach(function (item) {
-        // console.log("item", item);
+    goToGimpoCSV_daySum.forEach(function (item) {
+        // // console.log("item", item);
 
         no++;
-        // console.log("data", data);
-        let row = `${no},${item.occuDate},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out+item.gimpo_ev_out+item.gimpo_ec_out}\n`;
+        // // console.log("data", data);
+        let row = `${no},${item.cntDate},${item.gimpo_st_out},${item.gimpo_ev_out},${item.gimpo_ec_out}, ${item.gimpo_st_out+item.gimpo_ev_out+item.gimpo_ec_out}\n`;
         csvContent += row;
     });
 
@@ -371,19 +368,19 @@ function saveData(comboValue, filename){
 
 // CSV파일3 생성 시작-----------------------------------------------
 function file_getOffGimpoDataSave(getOffGimpoCSV, filename) {
-    // console.log("getOffGimpoCSV", getOffGimpoCSV);
+    // // console.log("getOffGimpoCSV", getOffGimpoCSV);
     // CSV 헤더 생성
-    let csvContent = "순번,시간,계단,엘리베이터,에스컬레이터,합계\n";
-    // let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
+    // let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
+    let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
 
     no =0;
     // CSV 데이터 추가
     getOffGimpoCSV.forEach(function (item) {
-        // console.log("item", item);
+        // // console.log("item", item);
 
-        // console.log("data", data);
-        let row = `${no},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
-        // let row = `${no},${item.occuDate},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
+        // // console.log("data", data);
+        // let row = `${no},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
+        let row = `${no},${item.cntDate},${item.occuTime},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
         csvContent += row;
     });
 
@@ -409,19 +406,19 @@ function file_getOffGimpoDataSave(getOffGimpoCSV, filename) {
 
 
 // CSV파일4 생성 시작-----------------------------------------------
-function file_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
-    // console.log("getOffGimpoCSV", getOffGimpoCSV);
+function file_getOffGimpoDataSaveNoTime(getOffGimpoCSV_daySum, filename) {
+    // // console.log("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     no =0;
     // CSV 데이터 추가
-    getOffGimpoCSV.forEach(function (item) {
-        // console.log("item", item);
+    getOffGimpoCSV_daySum.forEach(function (item) {
+        // // console.log("item", item);
 
         no++;
-        // console.log("data", data);
-        let row = `${no},${item.occuDate},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
+        // // console.log("data", data);
+        let row = `${no},${item.cntDate},${item.gimpo_st_in},${item.gimpo_ev_in},${item.gimpo_ec_in}, ${item.gimpo_st_in+item.gimpo_ev_in+item.gimpo_ec_in}\n`;
         csvContent += row;
     });
 
@@ -449,20 +446,20 @@ function file_getOffGimpoDataSaveNoTime(getOffGimpoCSV, filename) {
 
 // CSV파일5 생성 시작-----------------------------------------------
 function file_goToGochonDataSave(goToGochonCSV, filename) {
-    // console.log("goToGochonCSV", goToGochonCSV);
+    // // console.log("goToGochonCSV", goToGochonCSV);
     // CSV 헤더 생성
-    let csvContent = "순번,시간,승차,하차\n";
-    // let csvContent = "순번,날짜,시간,승차,하차\n";
+    // let csvContent = "순번,날짜,승차,하차\n";
+    let csvContent = "순번,날짜,시간,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
     goToGochonCSV.forEach(function (item) {
-        // console.log("item", item);
+        // // console.log("item", item);
 
         no++;
-        // console.log("data", data);
-        // let row = `${no},${item.occuDate},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
-        let row = `${no},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
+        // // console.log("data", data);
+        let row = `${no},${item.occuDate},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
+        // let row = `${no},${item.occuTime},${item.gochon_in},${item.gochon_out}\n`;
         csvContent += row;
     });
 
@@ -489,18 +486,18 @@ function file_goToGochonDataSave(goToGochonCSV, filename) {
 
 
 // CSV파일6 생성 시작-----------------------------------------------
-function file_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
-    // console.log("goToGochonCSV", goToGochonCSV);
+function file_goToGochonDataSaveNoTime(goToGochonCSV_daySum, filename) {
+    // // console.log("goToGochonCSV_daySum", goToGochonCSV_daySum);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
-    goToGochonCSV.forEach(function (item) {
-        // console.log("item", item);
+    goToGochonCSV_daySum.forEach(function (item) {
+        // // console.log("item", item);
 
         no++;
-        // console.log("data", data);
+        // // console.log("data", data);
         let row = `${no},${item.occuDate},${item.gochon_in},${item.gochon_out}\n`;
         csvContent += row;
     });
@@ -529,19 +526,19 @@ function file_goToGochonDataSaveNoTime(goToGochonCSV, filename) {
 
 // CSV파일7 생성 시작-----------------------------------------------
 function file_goToPungmuDataSave(goToPungmuCSV, filename) {
-    // console.log("goToPungmuCSV", goToPungmuCSV);
+    // // console.log("goToPungmuCSV", goToPungmuCSV);
     // CSV 헤더 생성
-    // let csvContent = "순번,날짜,시간,승차,하차\n";
-    let csvContent = "순번,시간,승차,하차\n";
+    let csvContent = "순번,날짜,시간,승차,하차\n";
+    // let csvContent = "순번,날짜,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
     goToPungmuCSV.forEach(function (item) {
-        // console.log("item", item);
+        // // console.log("item", item);
 
         no++;
-        let row = `${no},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
-        // let row = `${no},${item.occuDate},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
+        // let row = `${no},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
+        let row = `${no},${item.occuDate},${item.occuTime},${item.pungmu_in},${item.pungmu_out}\n`;
         csvContent += row;
     });
 
@@ -569,15 +566,15 @@ function file_goToPungmuDataSave(goToPungmuCSV, filename) {
 
 
 // CSV파일8 생성 시작-----------------------------------------------
-function file_goToPungmuDataSaveNoTime(goToPungmuCSV, filename) {
-    // console.log("goToPungmuCSV", goToPungmuCSV);
+function file_goToPungmuDataSaveNoTime(goToPungmuCSV_daySum, filename) {
+    // // console.log("goToPungmuCSV_daySum", goToPungmuCSV_daySum);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,승차,하차\n";
 
     no =0;
     // CSV 데이터 추가
-    goToPungmuCSV.forEach(function (item) {
-        // console.log("item", item);
+    goToPungmuCSV_daySum.forEach(function (item) {
+        // // console.log("item", item);
 
         no++;
         let row = `${no},${item.occuDate},${item.pungmu_in},${item.pungmu_out}\n`;

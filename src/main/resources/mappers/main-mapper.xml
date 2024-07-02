@@ -86,6 +86,7 @@
       	<result property="gochon_out" column="GOCHON_OUT" />
       	<result property="occuTime" column="occu_time" />
       	<result property="occuDate" column="occu_date" />
+      	<result property="cntDate" column="cnt_date" />
 	</resultMap>
 	
 	
@@ -390,7 +391,7 @@
 
 	
   	<!-- 시작-->
-	<!-- 김포 승차 -->
+	<!-- 김포승차 통계조회 -->
 	<select id="goToGimpoCSV" resultMap="_fileData">
 		SELECT
 			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
@@ -399,15 +400,15 @@
 			WHEN GROUPING(cnt_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
 			ELSE occu_time END		AS occu_time
 			, SUM(gimpo_st_out)		AS gimpo_st_out
-			, SUM(gimpo_ev_out)		AS gimpo_st_out
-			, SUM(gimpo_ec_out)		AS gimpo_ev_out
+			, SUM(gimpo_ev_out)		AS gimpo_ev_out
+			, SUM(gimpo_ec_out)		AS gimpo_ec_out
 			, SUM(gimpo_out_total)	AS gimpo_out_total
 		FROM TB_STATS_GIMPO_OUT WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
 		GROUP BY ROLLUP(cnt_date, occu_time)
 	  </select>
 	
 	
-	<!-- 김포 하차 -->
+	<!-- 김포하차 통계조회 -->
 	<select id="getOffGimpoCSV" resultMap="_fileData">
 	   	SELECT
 			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
@@ -423,7 +424,7 @@
 		GROUP BY ROLLUP(cnt_date, occu_time)
 	  </select>
 	  
-	<!-- 풍무 승하차 -->
+	<!-- 풍무승하차 통계조회 -->
 	<select id="goToPungmuCSV" resultMap="_fileData">
 		SELECT
 			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
@@ -437,7 +438,7 @@
 		GROUP BY ROLLUP(occu_date, occu_time)
 	  </select>
 	
-	<!-- 고촌 승하차 -->
+	<!-- 고촌승하차 통계조회 -->
 	<select id="goToGochonCSV" resultMap="_fileData">
 		SELECT
 			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
@@ -451,6 +452,219 @@
 		GROUP BY ROLLUP(occu_date, occu_time)
 	</select>
 	<!-- 끝-->
+	
+	<!-- 기간별 시작 -->
+	<!-- 김포승차 통계조회 -->
+	<select id="goToGimpoCSV_custom" resultMap="_fileData">
+		SELECT
+			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+			ELSE cnt_date END			AS cnt_date
+			, CASE WHEN GROUPING(cnt_date) = 1 THEN '-'
+			WHEN GROUPING(cnt_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gimpo_st_out)		AS gimpo_st_out
+			, SUM(gimpo_ev_out)		AS gimpo_ev_out
+			, SUM(gimpo_ec_out)		AS gimpo_ec_out
+			, SUM(gimpo_out_total)	AS gimpo_out_total
+		FROM TB_STATS_GIMPO_OUT WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY cnt_date, ROLLUP(occu_time)
+	  </select>
+	
+	
+	<!-- 김포하차 통계조회 -->
+	<select id="getOffGimpoCSV_custom" resultMap="_fileData">
+		SELECT
+			CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+			ELSE cnt_date END			AS cnt_date
+			, CASE WHEN GROUPING(cnt_date) = 1 THEN '-'
+			WHEN GROUPING(cnt_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gimpo_st_in)		AS gimpo_st_in
+			, SUM(gimpo_ev_in)		AS gimpo_ev_in
+			, SUM(gimpo_ec_in)		AS gimpo_ec_in
+			, SUM(gimpo_in_total)	AS gimpo_in_total
+		FROM TB_STATS_GIMPO_IN WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY cnt_date, ROLLUP(occu_time)
+	  </select>
+	  
+	<!-- 풍무승하차 통계조회 -->
+	<select id="goToPungmuCSV_custom" resultMap="_fileData">
+		SELECT
+			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+			ELSE occu_date END		AS occu_date
+			, CASE WHEN GROUPING(occu_date) = 1 THEN '-'
+			WHEN GROUPING(occu_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(pungmu_in)			AS pungmu_in
+			, SUM(pungmu_out)			AS pungmu_out
+		FROM TB_STATS_PUNGMU_INOUT WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY occu_date, ROLLUP(occu_time)
+	  </select>
+	
+	<!-- 고촌승하차 통계조회 -->
+	<select id="goToGochonCSV_custom" resultMap="_fileData">
+		SELECT
+			CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+			ELSE occu_date END		AS occu_date
+			, CASE WHEN GROUPING(occu_date) = 1 THEN '-'
+			WHEN GROUPING(occu_date) = 0 AND GROUPING(occu_time) = 1 THEN 'Total'
+			ELSE occu_time END		AS occu_time
+			, SUM(gochon_in)			AS gochon_in
+			, SUM(gochon_out)			AS gochon_out
+		FROM TB_STATS_GOCHON_INOUT WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY occu_date, ROLLUP(occu_time)
+	</select>
+	<!-- 기간별 끝 -->
+	
+	
+	<!-- 일합계 시작-->
+	<!-- 김포승차 통계조회 일합계 -->
+	  <select id="goToGimpoCSV_daySum" resultMap="_fileData">
+		SELECT CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+         ELSE cnt_date END AS cnt_date,
+		    SUM(gimpo_st_out) AS gimpo_st_out,
+		    SUM(gimpo_ev_out) AS gimpo_ev_out,
+		    SUM(gimpo_ec_out) AS gimpo_ec_out,
+		    SUM(gimpo_out_total) AS gimpo_out_total
+		FROM TB_STATS_GIMPO_OUT
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(cnt_date)
+	  </select>
+	
+	 <!-- 김포하차 통계조회 일합계 -->
+	 <select id="getOffGimpoCSV_daySum" resultMap="_fileData">
+	   	SELECT     
+	   	 CASE WHEN GROUPING(cnt_date) = 1 THEN 'Total'
+         ELSE cnt_date END AS cnt_date,
+		    SUM(gimpo_st_in) AS gimpo_st_in,
+		    SUM(gimpo_ev_in) AS gimpo_ev_in,
+		    SUM(gimpo_ec_in) AS gimpo_ec_in,
+		    SUM(gimpo_in_total) AS gimpo_in_total
+		FROM TB_STATS_GIMPO_IN
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(cnt_date)
+	  </select>
+	
+	 <!-- 풍무승하차 통계조회 일합계 -->
+	  <select id="goToPungmuCSV_daySum" resultMap="_fileData">
+		SELECT     
+		 CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+         ELSE occu_date END AS occu_date
+		 , SUM(pungmu_in)   AS pungmu_in
+		 , SUM(pungmu_out)   AS pungmu_out
+		FROM TB_STATS_PUNGMU_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(occu_date)
+	  </select>
+	
+	<!-- 고촌승하차 통계조회 일합계 -->
+	<select id="goToGochonCSV_daySum" resultMap="_fileData">
+		SELECT     
+		 CASE WHEN GROUPING(occu_date) = 1 THEN 'Total'
+         ELSE occu_date END AS occu_date
+		 , SUM(gochon_in)   AS gochon_in
+		 , SUM(gochon_out)   AS gochon_out
+		FROM TB_STATS_GOCHON_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY ROLLUP(occu_date)
+	</select>
+	<!-- 일합계 끝-->
+	
+	
+	<!-- 기간별 일합계 시작-->
+	<!-- 김포승차 통계조회 일합계 -->
+	  <select id="goToGimpoCSV_custom_daySum" resultMap="_fileData">
+		SELECT cnt_date,
+		    SUM(gimpo_st_out) AS gimpo_st_out,
+		    SUM(gimpo_ev_out) AS gimpo_ev_out,
+		    SUM(gimpo_ec_out) AS gimpo_ec_out,
+		    SUM(gimpo_out_total) AS gimpo_out_total
+		FROM TB_STATS_GIMPO_OUT
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY cnt_date
+	  </select>
+	
+	 <!-- 김포하차 통계조회 일합계 -->
+	 <select id="getOffGimpoCSV_custom_daySum" resultMap="_fileData">
+	   	SELECT cnt_date,
+		    SUM(gimpo_st_in) AS gimpo_st_in,
+		    SUM(gimpo_ev_in) AS gimpo_ev_in,
+		    SUM(gimpo_ec_in) AS gimpo_ec_in,
+		    SUM(gimpo_in_total) AS gimpo_in_total
+		FROM TB_STATS_GIMPO_IN
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY cnt_date
+	  </select>
+	
+	 <!-- 풍무승하차 통계조회 일합계 -->
+	  <select id="goToPungmuCSV_custom_daySum" resultMap="_fileData">
+		SELECT occu_date
+		 , SUM(pungmu_in)   AS pungmu_in
+		 , SUM(pungmu_out)   AS pungmu_out
+		FROM TB_STATS_PUNGMU_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY occu_date
+	  </select>
+	
+	<!-- 고촌승하차 통계조회 일합계 -->
+	<select id="goToGochonCSV_custom_daySum" resultMap="_fileData">
+		SELECT occu_date
+		 , SUM(gochon_in)   AS gochon_in
+		 , SUM(gochon_out)   AS gochon_out
+		FROM TB_STATS_GOCHON_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+		GROUP BY occu_date
+	</select>
+	<!-- 기간별 일합계 끝-->
+	
+	
+	
+	
+	<!-- 기간별 일합계 total 시작-->
+	<!-- 김포승차 통계조회 일합계 total-->
+	  <select id="goToGimpoCSV_custom_total" resultMap="_fileData">
+		SELECT
+		    '-' AS cnt_date,
+		    SUM(gimpo_st_out) AS gimpo_st_out,
+		    SUM(gimpo_ev_out) AS gimpo_ev_out,
+		    SUM(gimpo_ec_out) AS gimpo_ec_out,
+		    SUM(gimpo_out_total) AS gimpo_out_total
+		FROM TB_STATS_GIMPO_OUT
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+	  </select>
+	
+	 <!-- 김포하차 통계조회 일합계 total-->
+	 <select id="getOffGimpoCSV_custom_total" resultMap="_fileData">
+	   SELECT
+		    '-' AS cnt_date,
+		    SUM(gimpo_st_in) AS gimpo_st_in,
+		    SUM(gimpo_ev_in) AS gimpo_ev_in,
+		    SUM(gimpo_ec_in) AS gimpo_ec_in,
+		    SUM(gimpo_in_total) AS gimpo_in_total
+		FROM TB_STATS_GIMPO_IN
+		WHERE cnt_date BETWEEN #{from_date} AND #{to_date}
+	  </select>
+	
+	 <!-- 풍무승하차 통계조회 일합계 total-->
+	  <select id="goToPungmuCSV_custom_total" resultMap="_fileData">
+		SELECT
+		    '-' AS occu_date,
+		    SUM(pungmu_in) AS pungmu_in,
+		    SUM(pungmu_out) AS pungmu_out
+		FROM TB_STATS_PUNGMU_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+	  </select>
+	
+	<!-- 고촌승하차 통계조회 일합계 total-->
+	<select id="goToGochonCSV_custom_total" resultMap="_fileData">
+		SELECT
+		    '-' AS occu_date,
+		    SUM(gochon_in) AS gochon_in,
+		    SUM(gochon_out) AS gochon_out
+		FROM TB_STATS_GOCHON_INOUT
+		WHERE occu_date BETWEEN #{from_date} AND #{to_date}
+	</select>
+	<!-- 기간별 일합계 끝-->
 	
 	
   

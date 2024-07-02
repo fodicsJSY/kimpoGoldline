@@ -4,7 +4,7 @@ document.getElementById("dataAllSaveBtn").addEventListener("click", ()=>{
 
     nameArray = [];
 
-    //console.log("클릭");
+    //// console.log("클릭");
     fetchNameData();
     
 });
@@ -70,7 +70,7 @@ async function getAllDataFileName() {
     });
     nameArray.push(goToGochonFileName);
 
-    // console.log(" nameArray : ", nameArray);
+    // // console.log(" nameArray : ", nameArray);
     return nameArray;
 }
 
@@ -81,13 +81,13 @@ async function fetchNameData(){
     const nameArray = await getAllDataFileName();
 
     let goToGimpoName = nameArray[0];
-    // console.log("goToGimpoName", goToGimpoName);
+    // // console.log("goToGimpoName", goToGimpoName);
     let getOffGimpoName = nameArray[1];
-    // console.log("getOffGimpoName", getOffGimpoName);
+    // // console.log("getOffGimpoName", getOffGimpoName);
     let goToPungmuName = nameArray[2];
-    // console.log("goToPungmuName", goToPungmuName);
+    // // console.log("goToPungmuName", goToPungmuName);
     let goToGochonName = nameArray[3];
-    // console.log("goToGochonName", goToGochonName);
+    // // console.log("goToGochonName", goToGochonName);
 
     if (nameArray) {
         fetch("fileNameUrl", { 
@@ -97,23 +97,23 @@ async function fetchNameData(){
         })
         .then(resp => resp.json()) // 요청에 대한 응답 객체(response)를 필요한 형태로 파싱
         .then((result) => {
-            // console.log("result : ", result);
+            // // console.log("result : ", result);
 
-            // console.log("result", result);
+            // // console.log("result", result);
             let goToGimpoName = result.goToGimpoName;
-            // console.log("result goToGimpoName", goToGimpoName);
+            // // console.log("result goToGimpoName", goToGimpoName);
             let getOffGimpoName = result.getOffGimpoName;
-            // console.log("result getOffGimpoName", getOffGimpoName);
+            // // console.log("result getOffGimpoName", getOffGimpoName);
             let goToPungmuName = result.goToPungmuName;
-            // console.log("result goToPungmuName", goToPungmuName);
+            // // console.log("result goToPungmuName", goToPungmuName);
             let goToGochonName = result.goToGochonName;
-            // console.log("result goToGochonName", goToGochonName);
+            // // console.log("result goToGochonName", goToGochonName);
 
             saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonName);
 
         }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
         .catch( err => {
-            // console.log("err : ", err);
+            // // console.log("err : ", err);
             Swal.fire("파일을 다운로드 할 수 없습니다.");
         }); // 예외 발생 시 처리할 내용을 작성
     }
@@ -126,20 +126,22 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
 
     if(selectMonth.checked){
         var monthSearch = document.getElementById("monthSearch");
-        // console.log("monthSearch", monthSearch.value);
-        var occuMonth = formatToYYYYMM(monthSearch.value);
-        var from_date = occuMonth + "01";
+        // // console.log("monthSearch", monthSearch.value);
+        // var occuMonth = formatToYYYYMM(monthSearch.value);
+        // var from_date = occuMonth + "01";
         let monthValue = monthSearch.value;
-        // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('monthValue:', monthValue); // 콘솔에 occuDate 값 로그 출력
         var monthDate = monthValue + "-" + "01";
-        // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('monthDate:', monthDate); // 콘솔에 occuDate 값 로그 출력
         
         let lastDate = new Date(monthDate);
-        // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('lastDate:', lastDate); // 콘솔에 occuDate 값 로그 출력
         
+        var from_date = monthValue + "-01";
+        // // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
         
         let to_date = formatToLastDay(lastDate);
-        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        // // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
 
         if(daySumCheckbox.checked === false ){
         bSum = 0;
@@ -155,17 +157,17 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
         })
         .then(resp => resp.json()) // 요청에 대한 응답 객체(response)를 필요한 형태로 파싱
         .then((result) => {
-            // console.log("result : ", result);
+            // // console.log("result : ", result);
 
             let p3 = result.parameter3;
-            // console.log("p3 : ", p3);
+            // // console.log("p3 : ", p3);
 
-            var goToGimpoCSV = result.goToGimpoCSV;
-            var getOffGimpoCSV = result.getOffGimpoCSV;
-            var goToGochonCSV = result.goToGochonCSV;
-            var goToPungmuCSV = result.goToPungmuCSV;
-
+            
             if(p3 == 0){
+                var goToGimpoCSV = result.goToGimpoCSV;
+                var getOffGimpoCSV = result.getOffGimpoCSV;
+                var goToGochonCSV = result.goToGochonCSV;
+                var goToPungmuCSV = result.goToPungmuCSV;
                 flie_goToGimpoAllDataSave(goToGimpoCSV, goToGimpoName);
                 flie_getOffGimpoAllDataSave(getOffGimpoCSV, getOffGimpoName);
                 flie_goToGochonAllDataSave(goToGochonCSV, goToGochonName);
@@ -173,15 +175,19 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
             if(p3 == 1){
-                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV, goToGimpoName);
-                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV, getOffGimpoName);
-                flie_goToGochonAllDataSaveNoTime(goToGochonCSV, goToGochonName);
-                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV, goToPungmuName);
+                var goToGimpoCSV_daySum = result.goToGimpoCSV_daySum;
+                var getOffGimpoCSV_daySum = result.getOffGimpoCSV_daySum;
+                var goToPungmuCSV_daySum = result.goToPungmuCSV_daySum;
+                var goToGochonCSV_daySum = result.goToGochonCSV_daySum;
+                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV_daySum, goToGimpoName);
+                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV_daySum, getOffGimpoName);
+                flie_goToGochonAllDataSaveNoTime(goToGochonCSV_daySum, goToGochonName);
+                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV_daySum, goToPungmuName);
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
         }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
         .catch( err => {
-            // console.log("err : ", err);
+            // // console.log("err : ", err);
             Swal.fire("파일을 다운로드 할 수 없습니다.");
         }); // 예외 발생 시 처리할 내용을 작성
     }
@@ -190,12 +196,14 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
 
     if(selectDay.checked){
         var daySearch = document.getElementById("daySearch");
-        // console.log("daySearch", daySearch.value);
-        var occuDay = formatToYYYYMMDD(daySearch.value);
-        var from_date = occuDay;
-        var to_date = occuDay;
+        // // console.log("daySearch", daySearch.value);
+        // var occuDay = formatToYYYYMMDD(daySearch.value);
+        //// console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
+        var from_date = daySearch.value;
+        // console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        var to_date = daySearch.value;
+        // console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
     
-        //console.log('occuDay:', occuDay); // 콘솔에 occuDate 값 로그 출력
     
         if(daySumCheckbox.checked === false ){
             bSum = 0;
@@ -214,14 +222,14 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
             // console.log("result : ", result);
 
             let p3 = result.parameter3;
-            // console.log("p3 : ", p3);
+            // // console.log("p3 : ", p3);
 
-            var goToGimpoCSV = result.goToGimpoCSV;
-            var getOffGimpoCSV = result.getOffGimpoCSV;
-            var goToGochonCSV = result.goToGochonCSV;
-            var goToPungmuCSV = result.goToPungmuCSV;
-
+            
             if(p3 == 0){
+                var goToGimpoCSV = result.goToGimpoCSV;
+                var getOffGimpoCSV = result.getOffGimpoCSV;
+                var goToGochonCSV = result.goToGochonCSV;
+                var goToPungmuCSV = result.goToPungmuCSV;
                 flie_goToGimpoAllDataSave(goToGimpoCSV, goToGimpoName);
                 flie_getOffGimpoAllDataSave(getOffGimpoCSV, getOffGimpoName);
                 flie_goToGochonAllDataSave(goToGochonCSV, goToGochonName);
@@ -229,33 +237,38 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
             if(p3 == 1){
-                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV, goToGimpoName);
-                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV, getOffGimpoName);
-                flie_goToGochonAllDataSaveNoTime(goToGochonCSV, goToGochonName);
-                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV, goToPungmuName);
+                var goToGimpoCSV_daySum = result.goToGimpoCSV_daySum;
+                var getOffGimpoCSV_daySum = result.getOffGimpoCSV_daySum;
+                var goToPungmuCSV_daySum = result.goToPungmuCSV_daySum;
+                var goToGochonCSV_daySum = result.goToGochonCSV_daySum;
+                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV_daySum, goToGimpoName);
+                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV_daySum, getOffGimpoName);
+                flie_goToGochonAllDataSaveNoTime(goToGochonCSV_daySum, goToGochonName);
+                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV_daySum, goToPungmuName);
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
 
         }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
         .catch( err => {
-            // console.log("err : ", err);
+            // // console.log("err : ", err);
             Swal.fire("파일을 다운로드 할 수 없습니다.");
         }); // 예외 발생 시 처리할 내용을 작성
     }
-
     
     
     if(selectCustom.checked){
         var customDaySearch1 = document.getElementById("customDaySearch1");
         var customDaySearch2 = document.getElementById("customDaySearch2");
-        // console.log("customDaySearch1", customDaySearch1.value);
-        // console.log("customDaySearch2", customDaySearch2.value);
-        var customDate1 = formatToYYYYMMDD(customDaySearch1.value);
-        var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
-        var from_date = customDate1;
-        var to_date = customDate2;
-        //console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
-        //console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
+        // // console.log("customDaySearch1", customDaySearch1.value);
+        // // console.log("customDaySearch2", customDaySearch2.value);
+        // var customDate1 = formatToYYYYMMDD(customDaySearch1.value);
+        // var customDate2 = formatToYYYYMMDD(customDaySearch2.value);
+        //// console.log('customDate1:', customDate1); // 콘솔에 occuDate 값 로그 출력
+        //// console.log('customDate2:', customDate2); // 콘솔에 occuDate 값 로그 출력
+        var from_date = customDaySearch1.value;
+        var to_date = customDaySearch2.value;
+        //// console.log('from_date:', from_date); // 콘솔에 occuDate 값 로그 출력
+        //// console.log('to_date:', to_date); // 콘솔에 occuDate 값 로그 출력
 
         if(daySumCheckbox.checked === false ){
             bSum = 0;
@@ -271,17 +284,16 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
         })
         .then(resp => resp.json()) // 요청에 대한 응답 객체(response)를 필요한 형태로 파싱
         .then((result) => {
-            // console.log("result : ", result);
+            // // console.log("result : ", result);
 
             let p3 = result.parameter3;
-            // console.log("p3 : ", p3);
-
-            var goToGimpoCSV = result.goToGimpoCSV;
-            var getOffGimpoCSV = result.getOffGimpoCSV;
-            var goToGochonCSV = result.goToGochonCSV;
-            var goToPungmuCSV = result.goToPungmuCSV;
-
+            // // console.log("p3 : ", p3);
+            
             if(p3 == 0){
+                var goToGimpoCSV = result.goToGimpoCSV;
+                var getOffGimpoCSV = result.getOffGimpoCSV;
+                var goToGochonCSV = result.goToGochonCSV;
+                var goToPungmuCSV = result.goToPungmuCSV;
                 flie_goToGimpoAllDataSave(goToGimpoCSV, goToGimpoName);
                 flie_getOffGimpoAllDataSave(getOffGimpoCSV, getOffGimpoName);
                 flie_goToGochonAllDataSave(goToGochonCSV, goToGochonName);
@@ -289,16 +301,20 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
             if(p3 == 1){
-                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV, goToGimpoName);
-                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV, getOffGimpoName);
-                flie_goToGochonAllDataSaveNoTime(goToGochonCSV, goToGochonName);
-                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV, goToPungmuName);
+                var goToGimpoCSV_daySum = result.goToGimpoCSV_daySum;
+                var getOffGimpoCSV_daySum = result.getOffGimpoCSV_daySum;
+                var goToPungmuCSV_daySum = result.goToPungmuCSV_daySum;
+                var goToGochonCSV_daySum = result.goToGochonCSV_daySum;
+                flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV_daySum, goToGimpoName);
+                flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV_daySum, getOffGimpoName);
+                flie_goToGochonAllDataSaveNoTime(goToGochonCSV_daySum, goToGochonName);
+                flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV_daySum, goToPungmuName);
                 Swal.fire(`${goToGimpoName}, ${getOffGimpoName}, ${goToGochonName}, ${goToPungmuName}가 다운로드 되었습니다.`);
             }
 
         }) // 첫 번째 then에서 파싱한 데이터를 이용한 동작 작성
         .catch( err => {
-            // console.log("err : ", err);
+            // // console.log("err : ", err);
             Swal.fire("파일을 다운로드 할 수 없습니다.");
         }); // 예외 발생 시 처리할 내용을 작성
     }
@@ -308,16 +324,16 @@ function saveAllData(goToGimpoName, getOffGimpoName, goToPungmuName, goToGochonN
 
  // CSV파일1 모두 생성 시작-----------------------------------------------
 function flie_goToGimpoAllDataSave(goToGimpoCSV, goToGimpoName) {
-    // console.log("goToGimpoCSV", goToGimpoCSV);
+    // // console.log("goToGimpoCSV", goToGimpoCSV);
 
     // CSV 헤더 생성
-    let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
+    let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
     // CSV 데이터 추가
     for (let i = 0; i < goToGimpoCSV.length; i++) {
         var currentItem = goToGimpoCSV[i];
-        // console.log("goToGimpoCSV currentItem", currentItem);
-        let row = `${i+1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
+        // // console.log("goToGimpoCSV currentItem", currentItem);
+        let row = `${i+1},${currentItem.occuTime},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
         csvContent += row;
     }
 
@@ -345,16 +361,16 @@ function flie_goToGimpoAllDataSave(goToGimpoCSV, goToGimpoName) {
 
 
 // CSV파일2 모두 생성 시작-----------------------------------------------
-function flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV, goToGimpoName) {
-    // console.log("goToGimpoCSV", goToGimpoCSV);
+function flie_goToGimpoAllDataSaveNoTime(goToGimpoCSV_daySum, goToGimpoName) {
+    // // console.log("goToGimpoCSV_daySum", goToGimpoCSV_daySum);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
 // CSV 데이터 추가
-for (let i = 0; i < goToGimpoCSV.length; i++) {
-    var currentItem = goToGimpoCSV[i];
-    // console.log("goToGimpoCSVSUM currentItem", currentItem);
-    let row = `${i+1},${currentItem.occuDate},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
+for (let i = 0; i < goToGimpoCSV_daySum.length; i++) {
+    var currentItem = goToGimpoCSV_daySum[i];
+    // // console.log("goToGimpoCSV_daySum currentItem", currentItem);
+    let row = `${i+1},${currentItem.cntDate},${currentItem.gimpo_st_out},${currentItem.gimpo_ev_out},${currentItem.gimpo_ec_out}, ${currentItem.gimpo_st_out+currentItem.gimpo_ev_out+currentItem.gimpo_ec_out}\n`;
     csvContent += row;
 }
 
@@ -380,15 +396,15 @@ document.body.removeChild(link);
 
 // CSV파일3 모두 생성 시작-----------------------------------------------
 function flie_getOffGimpoAllDataSave(getOffGimpoCSV, getOffGimpoName) {
-    // console.log("getOffGimpoCSV", getOffGimpoCSV);
+    // // console.log("getOffGimpoCSV", getOffGimpoCSV);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,시간,계단,엘리베이터,에스컬레이터,합계\n";
 
 // CSV 데이터 추가
 for (let i = 0; i < getOffGimpoCSV.length; i++) {
     var currentItem = getOffGimpoCSV[i];
-    // console.log("getOffGimpoCSV currentItem", currentItem);
-    let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
+    // // console.log("getOffGimpoCSV currentItem", currentItem);
+    let row = `${i + 1},${currentItem.cntDate},${currentItem.occuTime},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
     csvContent += row;
 }
 
@@ -413,16 +429,16 @@ document.body.removeChild(link);
 
 
 // CSV파일4 모두 생성 시작-----------------------------------------------
-function flie_getOffGimpoAllDataSaveNoTime(getOffGimpoCSV, getOffGimpoName) {
-    // console.log("getOffGimpoCSV", getOffGimpoCSV);
+function flie_getOffGimpoAllDataSaveNoTime(goToGochonCSV_daySum, getOffGimpoName) {
+    // // console.log("goToGochonCSV_daySum", goToGochonCSV_daySum);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,계단,엘리베이터,에스컬레이터,합계\n";
 
 // CSV 데이터 추가
-for (let i = 0; i < getOffGimpoCSV.length; i++) {
-    var currentItem = getOffGimpoCSV[i];
-    // console.log("getOffGimpoCSVSUM currentItem", currentItem);
-    let row = `${i + 1},${currentItem.occuDate},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
+for (let i = 0; i < goToGochonCSV_daySum.length; i++) {
+    var currentItem = goToGochonCSV_daySum[i];
+    // // console.log("goToGochonCSV_daySum currentItem", currentItem);
+    let row = `${i + 1},${currentItem.cntDate},${currentItem.gimpo_st_in},${currentItem.gimpo_ev_in},${currentItem.gimpo_ec_in}, ${currentItem.gimpo_st_in + currentItem.gimpo_ev_in + currentItem.gimpo_ec_in}\n`;
     csvContent += row;
 }
 
@@ -449,14 +465,14 @@ document.body.removeChild(link);
 
 // CSV파일5 모두 생성 시작-----------------------------------------------
 function flie_goToGochonAllDataSave(goToGochonCSV, goToGochonName) {
-    // console.log("goToGochonCSV", goToGochonCSV);
+    // // console.log("goToGochonCSV", goToGochonCSV);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,시간,승차,하차\n";
 
 // CSV 데이터 추가
 for (let i = 0; i < goToGochonCSV.length; i++) {
     var currentItem = goToGochonCSV[i];
-    // console.log("goToGochonCSV currentItem", currentItem);
+    // // console.log("goToGochonCSV currentItem", currentItem);
     let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
     csvContent += row;
 }
@@ -483,16 +499,16 @@ document.body.removeChild(link);
 
 
 // CSV파일6 모두 생성 시작-----------------------------------------------
-function flie_goToGochonAllDataSaveNoTime(goToGochonCSV, goToGochonName) {
-    // console.log("goToGochonCSV", goToGochonCSV);
+function flie_goToGochonAllDataSaveNoTime(goToGochonCSV_daySum, goToGochonName) {
+    // // console.log("goToGochonCSV_daySum", goToGochonCSV_daySum);
     // CSV 헤더 생성
     let csvContent = "순번,날짜,승차,하차\n";
     
     // CSV 데이터 추가
-    for (let i = 0; i < goToGochonCSV.length; i++) {
-        var currentItem = goToGochonCSV[i];
-        // console.log("goToGochonCSVSUM currentItem", currentItem);
-        // console.log("currentItem", currentItem);
+    for (let i = 0; i < goToGochonCSV_daySum.length; i++) {
+        var currentItem = goToGochonCSV_daySum[i];
+        // // console.log("goToGochonCSV_daySum currentItem", currentItem);
+        // // console.log("currentItem", currentItem);
     let row = `${i + 1},${currentItem.occuDate},${currentItem.gochon_in},${currentItem.gochon_out}\n`;
     csvContent += row;
 }
@@ -520,14 +536,14 @@ document.body.removeChild(link);
 
 // CSV파일7 모두 생성 시작-----------------------------------------------
 function flie_goToPungmuAllDataSave(goToPungmuCSV, goToPungmuName) {
-    // console.log("goToPungmuCSV", goToPungmuCSV);
+    // // console.log("goToPungmuCSV", goToPungmuCSV);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,시간,승차,하차\n";
 
 // CSV 데이터 추가
 for (let i = 0; i < goToPungmuCSV.length; i++) {
     var currentItem = goToPungmuCSV[i];
-    // console.log("goToPungmuCSV currentItem", currentItem);
+    // // console.log("goToPungmuCSV currentItem", currentItem);
     let row = `${i + 1},${currentItem.occuDate},${currentItem.occuTime},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
     csvContent += row;
 }
@@ -555,15 +571,15 @@ document.body.removeChild(link);
 
 
 // CSV파일8 모두 생성 시작-----------------------------------------------
-function flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV, goToPungmuName) {
-    // console.log("goToPungmuCSV", goToPungmuCSV);
+function flie_goToPungmuAllDataSaveNoTime(goToPungmuCSV_daySum, goToPungmuName) {
+    // // console.log("goToPungmuCSV_daySum", goToPungmuCSV_daySum);
 // CSV 헤더 생성
 let csvContent = "순번,날짜,승차,하차\n";
 
 // CSV 데이터 추가
-for (let i = 0; i < goToPungmuCSV.length; i++) {
-    var currentItem = goToPungmuCSV[i];
-    // console.log("goToPungmuCSVSUM currentItem", currentItem);
+for (let i = 0; i < goToPungmuCSV_daySum.length; i++) {
+    var currentItem = goToPungmuCSV_daySum[i];
+    // // console.log("goToPungmuCSVSUM currentItem", currentItem);
     let row = `${i + 1},${currentItem.occuDate},${currentItem.pungmu_in},${currentItem.pungmu_out}\n`;
     csvContent += row;
 }

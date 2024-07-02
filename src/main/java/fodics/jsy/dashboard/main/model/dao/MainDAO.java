@@ -148,10 +148,9 @@ public class MainDAO {
 
 
 
-	/**
+	/** 김포승차 통계조회
 	 * @param map
 	 * @return
-	 * sql2
 	 */
 	public List<FileData> goToGimpoCSV(DateParameter dateParameter) {
 		return sql.selectList("mainMapper.goToGimpoCSV", dateParameter);
@@ -159,10 +158,9 @@ public class MainDAO {
 
 
 
-	/**
+	/** 김포하차 통계조회
 	 * @param map
 	 * @return
-	 * sql2
 	 */
 	public List<FileData> getOffGimpoCSV(DateParameter dateParameter) {
 		return sql.selectList("mainMapper.getOffGimpoCSV", dateParameter);
@@ -170,10 +168,9 @@ public class MainDAO {
 
 
 
-	/**
+	/** 풍무승하차 통계조회
 	 * @param map
 	 * @return
-	 * sql2
 	 */
 	public List<FileData> goToPungmuCSV(DateParameter dateParameter) {
 		return sql.selectList("mainMapper.goToPungmuCSV", dateParameter);
@@ -181,10 +178,9 @@ public class MainDAO {
 
 
 
-	/**
+	/** 고촌승하차 통계조회
 	 * @param map
 	 * @return
-	 * sql2
 	 */
 	public List<FileData> goToGochonCSV(DateParameter dateParameter) {
 		return sql.selectList("mainMapper.goToGochonCSV", dateParameter);
@@ -194,6 +190,126 @@ public class MainDAO {
 
 	public List<Data> gaugeData_P1_list() {
 		return sql.selectList("mainMapper.gaugeData_P1_list");
+	}
+
+
+
+	/** 김포승차 통계조회 일합계
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> getOffGimpoCSV_daySum(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.getOffGimpoCSV_daySum", dateParameter);
+	}
+
+
+
+	/** 김포하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToGimpoCSV_daySum(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGimpoCSV_daySum", dateParameter);
+	}
+
+
+
+	/** 풍무승하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToGochonCSV_daySum(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGochonCSV_daySum", dateParameter);
+	}
+
+
+
+	/** 고촌승하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToPungmuCSV_daySum(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToPungmuCSV_daySum", dateParameter);
+	}
+
+
+
+	/** 기간별 김포승차 통계조회
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToGimpoCSV_custom(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGimpoCSV_custom", dateParameter);
+	}
+
+
+
+	/** 기간별 김포하차 통계조회
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> getOffGimpoCSV_custom(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.getOffGimpoCSV_custom", dateParameter);
+	}
+
+
+
+	/** 기간별 풍무승하차 통계조회
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToPungmuCSV_custom(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToPungmuCSV_custom", dateParameter);
+	}
+
+
+
+	/** 기간별 고촌승하차 통계조회
+	 * @param dateParameter
+	 * @return list
+	 */
+	public List<FileData> goToGochonCSV_custom(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGochonCSV_custom", dateParameter);
+	}
+
+
+
+	/** 기간별 김포승차 통계조회 일합계
+	 * @param dateParameter
+	 * @return  list
+	 */
+	public List<FileData> goToGimpoCSV_custom_total(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGimpoCSV_custom_total", dateParameter);
+	}
+
+
+
+	/** 기간별 김포하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return  list
+	 */
+	public List<FileData> getOffGimpoCSV_custom_total(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.getOffGimpoCSV_custom_total", dateParameter);
+	}
+
+
+
+	/** 기간별 풍무승하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return  list
+	 */
+	public List<FileData> goToPungmuCSV_custom_total(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToPungmuCSV_custom_total", dateParameter);
+	}
+
+
+
+	/** 기간별 고촌승하차 통계조회 일합계
+	 * @param dateParameter
+	 * @return  list
+	 */
+	public List<FileData> goToGochonCSV_custom_total(DateParameter dateParameter) {
+		return sql.selectList("mainMapper.goToGochonCSV_custom_total", dateParameter);
 	}
 
 

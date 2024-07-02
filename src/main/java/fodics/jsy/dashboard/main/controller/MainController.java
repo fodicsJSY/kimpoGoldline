@@ -224,48 +224,83 @@ public class MainController {
 			 ){
 		 	
 		 	Map<String, Object> map = new HashMap<>();
-            map.put("parameter3", bSum);
 		 	
 		 	DateParameter dateParameter = new DateParameter();
 		 	dateParameter.setFrom_date(from_date);
 		 	dateParameter.setTo_date(to_date);
 		 
-		 	// 김포승차
-			if("GimOut".equals(comboValue)) {
-//			 	// csv파일1
-			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-//			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-			 	map.put("goToGimpoCSV", goToGimpoCSV);	
-		 	}
-		 	
-		 	
-		 	
-		 	//김포하차
-		 	if("GimIn".equals(comboValue)) {
-			 	// csv파일2
-				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-//				System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-				map.put("getOffGimpoCSV", getOffGimpoCSV);	
-		 	}
-		 	
-		 	
-		 	
-		 	//풍무 승하차
-		 	if("PungInOut".equals(comboValue)) {
-			 	// csv파일3
-				List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-//				System.out.println("goToPungmuCSV"+goToPungmuCSV);
-				map.put("goToPungmuCSV", goToPungmuCSV);	
-		 	}
-		 	
-		 	
-		 	//고촌 승하차
-		 	if("GoInOut".equals(comboValue)) {
-				// csv파일4
-				List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-//				System.out.println("goToGochonCSV"+goToGochonCSV);
-				map.put("goToGochonCSV", goToGochonCSV);	
-		 	}
+		 // 김포승차
+ 			if("GimOut".equals(comboValue)) {
+ 				if("0".equals(bSum)) {
+// 					System.out.println("bSum : " + bSum);
+ 					//김포승차 통계조회
+ 				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+// 				 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+ 				 	map.put("goToGimpoCSV", goToGimpoCSV);	
+ 				}
+ 				if("1".equals(bSum)) {
+ 					//김포승차 통계조회 일합계
+// 					System.out.println("bSum : " + bSum);
+ 					List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+// 				 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+ 				 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+ 				}
+ 		 	}
+ 		 	
+ 		 	
+ 		 	
+ 		 	//김포하차
+ 		 	if("GimIn".equals(comboValue)) {
+ 		 		if("0".equals(bSum)) {
+ 		 			// 김포하차 통계조회
+ 					List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+// 					System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+ 					map.put("getOffGimpoCSV", getOffGimpoCSV);	
+ 		 		}
+ 		 		if("1".equals(bSum)) {
+ 		 			// 김포하차 통계조회 일합계
+ 		 			List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+// 		 			System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+ 		 			map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);			 			
+ 		 		}
+ 		 		
+ 		 	}
+ 		 		
+ 		 	
+ 		 	
+ 		 	
+ 		 	//풍무 승하차
+ 		 	if("PungInOut".equals(comboValue)) {
+ 		 		if("0".equals(bSum)) {
+ 		 			// 풍무승하차 통계조회
+ 					List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+// 					System.out.println("goToPungmuCSV"+goToPungmuCSV);
+ 					map.put("goToPungmuCSV", goToPungmuCSV);	
+ 		 		}
+ 		 		if("1".equals(bSum)) {
+ 		 			// 풍무승하차 통계조회 일합계
+ 		 			List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+// 		 			System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+ 		 			map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);			 			
+ 		 		}
+ 		 	}
+ 		 	
+ 		 	
+ 		 	//고촌 승하차
+ 		 	if("GoInOut".equals(comboValue)) {
+ 		 		if("0".equals(bSum)) {
+ 		 			//고촌승하차 통계조회
+ 					List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+// 					System.out.println("goToGochonCSV"+goToGochonCSV);
+ 					map.put("goToGochonCSV", goToGochonCSV);	
+ 		 		}
+ 		 		if("1".equals(bSum)) {
+ 		 			//고촌승하차 통계조회 일합계
+ 		 			List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+// 		 			System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+ 		 			map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+ 		 		}
+ 		 	}
 		 	
 //		 	System.out.println("map"+ map);
 		 	
@@ -284,51 +319,85 @@ public class MainController {
 			 Model model
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
-		 	
-            map.put("parameter3", bSum);
-		 	
 
 		 	DateParameter dateParameter = new DateParameter();
 		 	dateParameter.setFrom_date(from_date);
 		 	dateParameter.setTo_date(to_date);
-		 	System.out.println("dateParameter : " + dateParameter);
+//		 	System.out.println("dateParameter : " + dateParameter);
+//		 	System.out.println("bSum : " + bSum);
 		 	
 		 
 		 	// 김포승차
 			if("GimOut".equals(comboValue)) {
-//			 	// csv파일1
-			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-			 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-			 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				if("0".equals(bSum)) {
+//					System.out.println("bSum : " + bSum);
+					//김포승차 통계조회
+				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+//				 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				}
+				if("1".equals(bSum)) {
+					//김포승차 통계조회 일합계
+//					System.out.println("bSum : " + bSum);
+					List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+//				 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+				 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+				}
 		 	}
 		 	
 		 	
 		 	
 		 	//김포하차
 		 	if("GimIn".equals(comboValue)) {
-			 	// csv파일2
-				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-				System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-				map.put("getOffGimpoCSV", getOffGimpoCSV);	
+		 		if("0".equals(bSum)) {
+		 			// 김포하차 통계조회
+					List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+//					System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+					map.put("getOffGimpoCSV", getOffGimpoCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 김포하차 통계조회 일합계
+		 			List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+		 			System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+//		 			map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);			 			
+		 		}
+		 		
 		 	}
+		 		
 		 	
 		 	
 		 	
 		 	//풍무 승하차
 		 	if("PungInOut".equals(comboValue)) {
-			 	// csv파일3
-				List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-				System.out.println("goToPungmuCSV"+goToPungmuCSV);
-				map.put("goToPungmuCSV", goToPungmuCSV);	
+		 		if("0".equals(bSum)) {
+		 			// 풍무승하차 통계조회
+					List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+//					System.out.println("goToPungmuCSV"+goToPungmuCSV);
+					map.put("goToPungmuCSV", goToPungmuCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 풍무승하차 통계조회 일합계
+		 			List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+//		 			System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+		 			map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);			 			
+		 		}
 		 	}
 		 	
 		 	
 		 	//고촌 승하차
 		 	if("GoInOut".equals(comboValue)) {
-				// csv파일4
-				List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-				System.out.println("goToGochonCSV"+goToGochonCSV);
-				map.put("goToGochonCSV", goToGochonCSV);	
+		 		if("0".equals(bSum)) {
+		 			//고촌승하차 통계조회
+					List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+//					System.out.println("goToGochonCSV"+goToGochonCSV);
+					map.put("goToGochonCSV", goToGochonCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			//고촌승하차 통계조회 일합계
+		 			List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+//		 			System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+		 			map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+		 		}
 		 	}
 		 	
 //		 	System.out.println("map"+ map);
@@ -350,54 +419,155 @@ public class MainController {
 			 Model model
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
-            map.put("parameter3", bSum);
-		
 			DateParameter dateParameter = new DateParameter();
 			dateParameter.setFrom_date(from_date);
 			dateParameter.setTo_date(to_date);
+			
 		
 			// 김포승차
 			if("GimOut".equals(comboValue)) {
-		// 	// csv파일1
-		 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-		// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-		 	map.put("goToGimpoCSV", goToGimpoCSV);	
-			}
-			
-			
-			
-			//김포하차
-			if("GimIn".equals(comboValue)) {
-		 	// csv파일2
-			List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-		//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-			map.put("getOffGimpoCSV", getOffGimpoCSV);	
-			}
-			
-			
-			
-			//풍무 승하차
-			if("PungInOut".equals(comboValue)) {
-		 	// csv파일3
-			List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-		//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
-			map.put("goToPungmuCSV", goToPungmuCSV);	
-			}
-			
-			
-			//고촌 승하차
-			if("GoInOut".equals(comboValue)) {
-			// csv파일4
-			List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-		//	System.out.println("goToGochonCSV"+goToGochonCSV);
-			map.put("goToGochonCSV", goToGochonCSV);	
-			}
+				if("0".equals(bSum)) {
+//					System.out.println("bSum : " + bSum);
+					//김포승차 통계조회
+				 	List<FileData> goToGimpoCSV_custom = service.goToGimpoCSV_custom(dateParameter);
+//				 	System.out.println("goToGimpoCSV_custom : " + goToGimpoCSV_custom);
+				 	map.put("goToGimpoCSV_custom", goToGimpoCSV_custom);	
+				}
+				if("1".equals(bSum)) {
+					//김포승차 통계조회 일합계
+//					System.out.println("bSum : " + bSum);
+					List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+//				 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+				 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+				}
+		 	}
+		 	
+		 	
+		 	
+		 	//김포하차
+		 	if("GimIn".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			// 김포하차 통계조회
+					List<FileData> getOffGimpoCSV_custom = service.getOffGimpoCSV_custom(dateParameter);
+//					System.out.println("getOffGimpoCSV_custom"+getOffGimpoCSV_custom);
+					map.put("getOffGimpoCSV_custom", getOffGimpoCSV_custom);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 김포하차 통계조회 일합계
+		 			List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+//		 			System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+		 			map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);			 			
+		 		}
+		 		
+		 	}
+		 		
+		 	
+		 	
+		 	
+		 	//풍무 승하차
+		 	if("PungInOut".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			// 풍무승하차 통계조회
+					List<FileData> goToPungmuCSV_custom = service.goToPungmuCSV_custom(dateParameter);
+//					System.out.println("goToPungmuCSV_custom"+goToPungmuCSV_custom);
+					map.put("goToPungmuCSV_custom", goToPungmuCSV_custom);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 풍무승하차 통계조회 일합계
+		 			List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+//		 			System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+		 			map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);			 			
+		 		}
+		 	}
+		 	
+		 	
+		 	//고촌 승하차
+		 	if("GoInOut".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			//고촌승하차 통계조회
+					List<FileData> goToGochonCSV_custom = service.goToGochonCSV_custom(dateParameter);
+//					System.out.println("goToGochonCSV_custom"+goToGochonCSV_custom);
+					map.put("goToGochonCSV_custom", goToGochonCSV_custom);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			//고촌승하차 통계조회 일합계
+		 			List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+//		 			System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+		 			map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+		 		}
+		 	}
 			
 		//	System.out.println("map"+ map);
 			
 			return map;
 				 	
 
+	 }
+	 
+	 
+	 
+	 
+	 // 기간 일합계 total 데이터
+	 @PostMapping("/customUrl_total")
+	 @ResponseBody
+	 public Map<String, Object> loadCustomTotalData(
+			 @RequestParam(value="from_date") String from_date,
+			 @RequestParam(value="to_date") String to_date,
+			 @RequestParam(value="comboValue") String comboValue,
+			 Model model
+			 ){
+		 Map<String, Object> map = new HashMap<>();
+		 DateParameter dateParameter = new DateParameter();
+		 dateParameter.setFrom_date(from_date);
+		 dateParameter.setTo_date(to_date);
+		 
+		 System.out.println("from_date : " + from_date);
+		 System.out.println("to_date : " + to_date);
+		 
+		 // 김포승차
+		 if("GimOut".equals(comboValue)) {
+			 
+			 //김포승차 통계조회 일합계
+			 List<FileData> goToGimpoCSV_custom_total = service.goToGimpoCSV_custom_total(dateParameter);
+			 System.out.println("goToGimpoCSV_custom_total : " + goToGimpoCSV_custom_total);
+			 map.put("goToGimpoCSV_custom_total", goToGimpoCSV_custom_total);	
+		 }
+		 
+		 
+		 
+		 //김포하차
+		 if("GimIn".equals(comboValue)) {
+			 // 김포하차 통계조회 일합계
+			 List<FileData> getOffGimpoCSV_custom_total = service.getOffGimpoCSV_custom_total(dateParameter);
+			 System.out.println("getOffGimpoCSV_custom_total"+getOffGimpoCSV_custom_total);
+			 map.put("getOffGimpoCSV_custom_total", getOffGimpoCSV_custom_total);			 			
+		 }
+		 
+		 
+		 
+		 
+		 //풍무 승하차
+		 if("PungInOut".equals(comboValue)) {
+			 // 풍무승하차 통계조회 일합계
+			 List<FileData> goToPungmuCSV_custom_total = service.goToPungmuCSV_custom_total(dateParameter);
+			 System.out.println("goToPungmuCSV_custom_total"+goToPungmuCSV_custom_total);
+			 map.put("goToPungmuCSV_custom_total", goToPungmuCSV_custom_total);			 			
+		 }
+		 
+		 
+		 //고촌 승하차
+		 if("GoInOut".equals(comboValue)) {
+			 //고촌승하차 통계조회 일합계
+			 List<FileData> goToGochonCSV_custom_total = service.goToGochonCSV_custom_total(dateParameter);
+			 System.out.println("goToGochonCSV_custom_total"+goToGochonCSV_custom_total);
+			 map.put("goToGochonCSV_custom_total", goToGochonCSV_custom_total);	
+		 }
+		 
+		 //	System.out.println("map"+ map);
+		 
+		 return map;
+		 
+		 
 	 }
 	 
 	 
@@ -419,6 +589,103 @@ public class MainController {
 	 
 	 
 	 
+
+	 
+	 // 기간 데이터 저장
+	 @PostMapping("/customSaveUrl")
+	 @ResponseBody
+	 public Map<String, Object> customDataSave(
+			 @RequestParam(value="from_date") String from_date,
+			 @RequestParam(value="to_date") String to_date,
+			 @RequestParam(value="comboValue") String comboValue,
+			 @RequestParam(value="bSum") String bSum,
+			 Model model
+			 ){
+		 	Map<String, Object> map = new HashMap<>();
+			DateParameter dateParameter = new DateParameter();
+			dateParameter.setFrom_date(from_date);
+			dateParameter.setTo_date(to_date);
+			
+			// 김포승차
+			if("GimOut".equals(comboValue)) {
+				if("0".equals(bSum)) {
+//					System.out.println("bSum : " + bSum);
+					//김포승차 통계조회
+				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+//				 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				}
+				if("1".equals(bSum)) {
+					//김포승차 통계조회 일합계
+//					System.out.println("bSum : " + bSum);
+					List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+//				 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+				 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+				}
+		 	}
+		 	
+		 	//김포하차
+		 	if("GimIn".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			// 김포하차 통계조회
+					List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+//					System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+					map.put("getOffGimpoCSV", getOffGimpoCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 김포하차 통계조회 일합계
+		 			List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+//		 			System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+		 			map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);			 			
+		 		}
+		 	}
+		 	
+		 	
+		 	//풍무 승하차
+		 	if("PungInOut".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			// 풍무승하차 통계조회
+					List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+//					System.out.println("goToPungmuCSV"+goToPungmuCSV);
+					map.put("goToPungmuCSV", goToPungmuCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			// 풍무승하차 통계조회 일합계
+		 			List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+//		 			System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+		 			map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);			 			
+		 		}
+		 	}
+		 	
+		 	
+		 	//고촌 승하차
+		 	if("GoInOut".equals(comboValue)) {
+		 		if("0".equals(bSum)) {
+		 			//고촌승하차 통계조회
+					List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+//					System.out.println("goToGochonCSV"+goToGochonCSV);
+					map.put("goToGochonCSV", goToGochonCSV);	
+		 		}
+		 		if("1".equals(bSum)) {
+		 			//고촌승하차 통계조회 일합계
+		 			List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+//		 			System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+		 			map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+		 		}
+		 	}
+			
+		//	System.out.println("map"+ map);
+			
+			return map;
+				 	
+
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
 	 // 모두저장 파일명 데이터
 	 @PostMapping("/fileNameUrl")
 	 @ResponseBody
@@ -426,7 +693,7 @@ public class MainController {
 			 @RequestBody Map<String, Object> paramMap
 			 ){
 		 	
-//		 	System.out.println("paramMap : " + paramMap);
+		 	System.out.println("paramMap : " + paramMap);
 		 	
 		 	return paramMap;
 	 }
@@ -437,46 +704,91 @@ public class MainController {
 	 @PostMapping("/monthAllDataUrl")
 	 @ResponseBody
 	 public Map<String, Object> loadMonthAllData(
-			 @RequestParam(value="from_date") String from_date,
-			 @RequestParam(value="to_date") String to_date,
-			 @RequestParam(value="bSum") String bSum
+			 @RequestBody Map<String, Object> req
 			 ){
 		 	Map<String, Object> map = new HashMap<>();
+		 	
+//		 	System.out.println("req"+ req);
+		 	
+		 	String from_date = (String) req.get("from_date");
+		    String to_date = (String) req.get("to_date");
+		    int bSum = (int) req.get("bSum");
+
+//		    System.out.println("from_date"+ from_date);
+//		    System.out.println("to_date"+ to_date);
+//		    System.out.println("bSum"+ bSum);
 		 	
             map.put("parameter3", bSum);
 			
 			DateParameter dateParameter = new DateParameter();
 			dateParameter.setFrom_date(from_date);
 			dateParameter.setTo_date(to_date);
-		
-			// 김포승차
-		// 	// csv파일1
-		 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-		// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-		 	map.put("goToGimpoCSV", goToGimpoCSV);	
 			
 			
+			if(bSum ==0) {
 			
-			//김포하차
-		 	// csv파일2
-			List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-		//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-			map.put("getOffGimpoCSV", getOffGimpoCSV);	
+				// 김포승차
+			// 	// csv파일1
+			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+			// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+			 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				
+				
+				
+				//김포하차
+			 	// csv파일2
+				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+			//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+				map.put("getOffGimpoCSV", getOffGimpoCSV);	
+				
+				
+				
+				//풍무 승하차
+			 	// csv파일3
+				List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+			//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
+				map.put("goToPungmuCSV", goToPungmuCSV);	
+				
+				
+				//고촌 승하차
+				// csv파일4
+				List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+			//	System.out.println("goToGochonCSV"+goToGochonCSV);
+				map.put("goToGochonCSV", goToGochonCSV);	
 			
+			}
 			
-			
-			//풍무 승하차
-		 	// csv파일3
-			List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-		//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
-			map.put("goToPungmuCSV", goToPungmuCSV);	
-			
-			
-			//고촌 승하차
-			// csv파일4
-			List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-		//	System.out.println("goToGochonCSV"+goToGochonCSV);
-			map.put("goToGochonCSV", goToGochonCSV);	
+			if(bSum == 1) {
+				// 김포승차
+				// 	// csv파일1
+				 	List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+				// 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+				 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+					
+					
+					
+					//김포하차
+				 	// csv파일2
+					List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+				//	System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+					map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);	
+					
+					
+					
+					//풍무 승하차
+				 	// csv파일3
+					List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+				//	System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+					map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);	
+					
+					
+					//고촌 승하차
+					// csv파일4
+					List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+				//	System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+					map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+				
+			}
 			
 		//	System.out.println("map"+ map);
 			
@@ -490,11 +802,20 @@ public class MainController {
 		 @PostMapping("/dayAllDataUrl")
 		 @ResponseBody
 		 public Map<String, Object> loadDayAllData(
-				 @RequestParam(value="from_date") String from_date,
-				 @RequestParam(value="to_date") String to_date,
-				 @RequestParam(value="bSum") String bSum
+				 @RequestBody Map<String, Object> req
 				 ){
 			 	Map<String, Object> map = new HashMap<>();
+			 	
+//			 	System.out.println("req"+ req);
+			 	
+			 	String from_date = (String) req.get("from_date");
+			    String to_date = (String) req.get("to_date");
+			    int bSum = (int) req.get("bSum");
+
+//			    System.out.println("from_date"+ from_date);
+//			    System.out.println("to_date"+ to_date);
+//			    System.out.println("bSum"+ bSum);
+			 	
 			 	
 	            map.put("parameter3", bSum);
 				
@@ -502,37 +823,72 @@ public class MainController {
 				dateParameter.setFrom_date(from_date);
 				dateParameter.setTo_date(to_date);
 			
-				// 김포승차
-			// 	// csv파일1
-			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-			// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-			 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				if(bSum == 0) {
+					
+					// 김포승차
+				// 	// csv파일1
+				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+				// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);	
+					
+					
+					
+					//김포하차
+				 	// csv파일2
+					List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+				//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+					map.put("getOffGimpoCSV", getOffGimpoCSV);	
+					
+					
+					
+					//풍무 승하차
+				 	// csv파일3
+					List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+				//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
+					map.put("goToPungmuCSV", goToPungmuCSV);	
+					
+					
+					//고촌 승하차
+					// csv파일4
+					List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+				//	System.out.println("goToGochonCSV"+goToGochonCSV);
+					map.put("goToGochonCSV", goToGochonCSV);	
 				
+				}
 				
+				if(bSum == 1) {
+					// 김포승차
+					// 	// csv파일1
+					 	List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+					// 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+					 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+						
+						
+						
+						//김포하차
+					 	// csv파일2
+						List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+					//	System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+						map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);	
+						
+						
+						
+						//풍무 승하차
+					 	// csv파일3
+						List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+					//	System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+						map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);	
+						
+						
+						//고촌 승하차
+						// csv파일4
+						List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+					//	System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+						map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+					
+				}
 				
-				//김포하차
-			 	// csv파일2
-				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-			//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-				map.put("getOffGimpoCSV", getOffGimpoCSV);	
-				
-				
-				
-				//풍무 승하차
-			 	// csv파일3
-				List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-			//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
-				map.put("goToPungmuCSV", goToPungmuCSV);	
-				
-				
-				//고촌 승하차
-				// csv파일4
-				List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-			//	System.out.println("goToGochonCSV"+goToGochonCSV);
-				map.put("goToGochonCSV", goToGochonCSV);	
-				
-			//	System.out.println("map"+ map);
-				
+				//	System.out.println("map"+ map);
 				return map;
 					 	
 
@@ -544,11 +900,20 @@ public class MainController {
 		 @PostMapping("/customAllDataUrl")
 		 @ResponseBody
 		 public Map<String, Object> loadCustomAllData(
-				 @RequestParam(value="from_date") String from_date,
-				 @RequestParam(value="to_date") String to_date,
-				 @RequestParam(value="bSum") String bSum
+				 @RequestBody Map<String, Object> req
 				 ){
 			 	Map<String, Object> map = new HashMap<>();
+			 	
+//			 	System.out.println("req"+ req);
+			 	
+			 	String from_date = (String) req.get("from_date");
+			    String to_date = (String) req.get("to_date");
+			    int bSum = (int) req.get("bSum");
+
+//			    System.out.println("from_date"+ from_date);
+//			    System.out.println("to_date"+ to_date);
+//			    System.out.println("bSum"+ bSum);
+			 	
 			 	
 	            map.put("parameter3", bSum);
 				
@@ -556,34 +921,71 @@ public class MainController {
 				dateParameter.setFrom_date(from_date);
 				dateParameter.setTo_date(to_date);
 			
-				// 김포승차
-			// 	// csv파일1
-			 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
-			// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
-			 	map.put("goToGimpoCSV", goToGimpoCSV);	
+				if(bSum == 0) {
+					
+					// 김포승차
+				// 	// csv파일1
+				 	List<FileData> goToGimpoCSV = service.goToGimpoCSV(dateParameter);
+				// 	System.out.println("goToGimpoCSV : " + goToGimpoCSV);
+				 	map.put("goToGimpoCSV", goToGimpoCSV);	
+					
+					
+					
+					//김포하차
+				 	// csv파일2
+					List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
+				//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
+					map.put("getOffGimpoCSV", getOffGimpoCSV);	
+					
+					
+					
+					//풍무 승하차
+				 	// csv파일3
+					List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
+				//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
+					map.put("goToPungmuCSV", goToPungmuCSV);	
+					
+					
+					//고촌 승하차
+					// csv파일4
+					List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
+				//	System.out.println("goToGochonCSV"+goToGochonCSV);
+					map.put("goToGochonCSV", goToGochonCSV);	
 				
+				}
 				
+				if(bSum == 1) {
+					// 김포승차
+					// 	// csv파일1
+					 	List<FileData> goToGimpoCSV_daySum = service.goToGimpoCSV_daySum(dateParameter);
+					// 	System.out.println("goToGimpoCSV_daySum : " + goToGimpoCSV_daySum);
+					 	map.put("goToGimpoCSV_daySum", goToGimpoCSV_daySum);	
+						
+						
+						
+						//김포하차
+					 	// csv파일2
+						List<FileData> getOffGimpoCSV_daySum = service.getOffGimpoCSV_daySum(dateParameter);
+					//	System.out.println("getOffGimpoCSV_daySum"+getOffGimpoCSV_daySum);
+						map.put("getOffGimpoCSV_daySum", getOffGimpoCSV_daySum);	
+						
+						
+						
+						//풍무 승하차
+					 	// csv파일3
+						List<FileData> goToPungmuCSV_daySum = service.goToPungmuCSV_daySum(dateParameter);
+					//	System.out.println("goToPungmuCSV_daySum"+goToPungmuCSV_daySum);
+						map.put("goToPungmuCSV_daySum", goToPungmuCSV_daySum);	
+						
+						
+						//고촌 승하차
+						// csv파일4
+						List<FileData> goToGochonCSV_daySum = service.goToGochonCSV_daySum(dateParameter);
+					//	System.out.println("goToGochonCSV_daySum"+goToGochonCSV_daySum);
+						map.put("goToGochonCSV_daySum", goToGochonCSV_daySum);	
+					
+				}
 				
-				//김포하차
-			 	// csv파일2
-				List<FileData> getOffGimpoCSV = service.getOffGimpoCSV(dateParameter);
-			//	System.out.println("getOffGimpoCSV"+getOffGimpoCSV);
-				map.put("getOffGimpoCSV", getOffGimpoCSV);	
-				
-				
-				
-				//풍무 승하차
-			 	// csv파일3
-				List<FileData> goToPungmuCSV = service.goToPungmuCSV(dateParameter);
-			//	System.out.println("goToPungmuCSV"+goToPungmuCSV);
-				map.put("goToPungmuCSV", goToPungmuCSV);	
-				
-				
-				//고촌 승하차
-				// csv파일4
-				List<FileData> goToGochonCSV = service.goToGochonCSV(dateParameter);
-			//	System.out.println("goToGochonCSV"+goToGochonCSV);
-				map.put("goToGochonCSV", goToGochonCSV);	
 				
 			//	System.out.println("map"+ map);
 				

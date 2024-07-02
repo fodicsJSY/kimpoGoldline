@@ -50,21 +50,57 @@ public interface MainService {
 	// 고촌역 플랫폼2 군중밀집도
 	List<CongestionRate> selectGochonPlatform2();
 
-	//csv파일1
+	//김포승차 통계조회
 	List<FileData> goToGimpoCSV(DateParameter  dateParameter);
 
-	//csv파일2
+	//김포하차 통계조회
 	List<FileData> getOffGimpoCSV(DateParameter  dateParameter);
 
-	// csv파일3
+	//풍무승하차 통계조회
 	List<FileData> goToPungmuCSV(DateParameter  dateParameter);
 
-	// csv파일4
+	// 고촌승하차 통계조회
 	List<FileData> goToGochonCSV(DateParameter dateParameter);
 
 	
 	// 풍무역 플랫폼1 군중밀집도 진짜진짜
 	List<Data> gaugeData_P1_list();
+
+	//김포승차 통계조회 일합계
+	List<FileData> goToGimpoCSV_daySum(DateParameter dateParameter);
+
+	//김포하차 통계조회 일합계
+	List<FileData> getOffGimpoCSV_daySum(DateParameter dateParameter);
+
+	//풍무승하차 통계조회 일합계
+	List<FileData> goToPungmuCSV_daySum(DateParameter dateParameter);
+
+	//고촌승하차 통계조회 일합계
+	List<FileData> goToGochonCSV_daySum(DateParameter dateParameter);
+
+	// 기간별 김포승차 통계조회
+	List<FileData> goToGimpoCSV_custom(DateParameter dateParameter);
+	
+	// 기간별 김포하차 통계조회
+	List<FileData> getOffGimpoCSV_custom(DateParameter dateParameter);
+	
+	// 기간별 풍무승하차 통계조회
+	List<FileData> goToPungmuCSV_custom(DateParameter dateParameter);
+	
+	// 기간별 고촌승하차 통계조회
+	List<FileData> goToGochonCSV_custom(DateParameter dateParameter);
+
+	// 기간별 김포승차 통계조회 일합계
+	List<FileData> goToGimpoCSV_custom_total(DateParameter dateParameter);
+
+	// 기간별 김포하차 통계조회 일합계
+	List<FileData> getOffGimpoCSV_custom_total(DateParameter dateParameter);
+
+	// 기간별 풍무승하차 통계조회 일합계
+	List<FileData> goToPungmuCSV_custom_total(DateParameter dateParameter);
+
+	// 기간별 고촌승하차 통계조회 일합계
+	List<FileData> goToGochonCSV_custom_total(DateParameter dateParameter);
 
 
 

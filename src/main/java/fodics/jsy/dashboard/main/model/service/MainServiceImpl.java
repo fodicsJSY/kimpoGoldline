@@ -128,7 +128,7 @@ public class MainServiceImpl implements MainService{
 	
 	
 	/**
-	 *csv파일1
+	 * 김포승차 통계조회
 	 */
 	@Override
 	public List<FileData> goToGimpoCSV(DateParameter dateParameter) {
@@ -137,7 +137,7 @@ public class MainServiceImpl implements MainService{
 	
 	
 	/**
-	 * csv파일2
+	 * 김포하차 통계조회
 	 */
 	@Override
 	public List<FileData> getOffGimpoCSV(DateParameter dateParameter) {
@@ -145,7 +145,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	/**
-	 *csv파일3
+	 * 풍무승하차 통계조회
 	 */
 	@Override
 	public List<FileData> goToPungmuCSV(DateParameter  dateParameter) {
@@ -153,7 +153,7 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	/**
-	 *csv파일4
+	 * 고촌승하차 통계조회
 	 */
 	@Override
 	public List<FileData> goToGochonCSV(DateParameter dateParameter) {
@@ -169,6 +169,117 @@ public class MainServiceImpl implements MainService{
 
 		return dao.gaugeData_P1_list();
 	}
+	
+	
+	/**
+	 * 김포승차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> getOffGimpoCSV_daySum(DateParameter dateParameter) {
+		return dao.getOffGimpoCSV_daySum(dateParameter);
+	}
+	
+	
+	/**
+	 * 김포하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToGimpoCSV_daySum(DateParameter dateParameter) {
+		return dao.goToGimpoCSV_daySum(dateParameter);
+	}
 
+
+	/**
+	 * 풍무승하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToGochonCSV_daySum(DateParameter dateParameter) {
+		return dao.goToGochonCSV_daySum(dateParameter);
+	}
+	
+	
+	/**
+	 * 고촌승하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToPungmuCSV_daySum(DateParameter dateParameter) {
+		return dao.goToPungmuCSV_daySum(dateParameter);
+	}
+	
+	
+	/**
+	 * 기간별 김포승차 통계조회 
+	 */
+	@Override
+	public List<FileData> goToGimpoCSV_custom(DateParameter dateParameter) {
+		return dao.goToGimpoCSV_custom(dateParameter);
+	}
+	
+	
+	/**
+	 * 기간별 김포하차 통계조회
+	 */
+	@Override
+	public List<FileData> getOffGimpoCSV_custom(DateParameter dateParameter) {
+		return dao.getOffGimpoCSV_custom(dateParameter);
+	}
+	
+	
+	
+	/**
+	 * 기간별 풍무승하차 통계조회
+	 */
+	@Override
+	public List<FileData> goToPungmuCSV_custom(DateParameter dateParameter) {
+		return dao.goToPungmuCSV_custom(dateParameter);
+	}
+	
+	
+	/**
+	 * 기간별 고촌승하차 통계조회
+	 */
+	@Override
+	public List<FileData> goToGochonCSV_custom(DateParameter dateParameter) {
+		return dao.goToGochonCSV_custom(dateParameter);
+	}
+	
+	
+	/**
+	 * 기간별 김포승차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToGimpoCSV_custom_total(DateParameter dateParameter) {
+		return dao.goToGimpoCSV_custom_total(dateParameter);
+	}
+	
+	
+	/**
+	 * 기간별 김포하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> getOffGimpoCSV_custom_total(DateParameter dateParameter) {
+		return dao.getOffGimpoCSV_custom_total(dateParameter);
+	}
+	
+	
+	
+	/**
+	 * 기간별 풍무승하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToPungmuCSV_custom_total(DateParameter dateParameter) {
+		return dao.goToPungmuCSV_custom_total(dateParameter);
+	}
+	
+	
+	
+	/**
+	 * 기간별 고촌승하차 통계조회 일합계
+	 */
+	@Override
+	public List<FileData> goToGochonCSV_custom_total(DateParameter dateParameter) {
+		return dao.goToGochonCSV_custom_total(dateParameter);
+	}
+	
 	
 }
